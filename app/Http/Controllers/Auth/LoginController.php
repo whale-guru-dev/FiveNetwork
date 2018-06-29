@@ -71,21 +71,21 @@ class LoginController extends Controller
             // $cregion = $this->ip_info("Visitor","region");
             // $co = $this->ip_info("Visitor", "country"); // India
             // $cc = $this->ip_info("Visitor", "countrycode"); // IN
-            // $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
-            $long = $this->ip_info("Visitor","longitude");
-            $lat = $this->ip_info("Visitor","latitude");
+            $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
+            $long = $this->ip_info_longlat($ip,"longitude");
+            $lat = $this->ip_info_longlat($ip,"latitude");
 
-            // $loc = "$ca";
+            $loc = "$ca";
 
-            // $logins = MemberLogin::create([
-            //     'usid' => $user->id,
-            //     'ip_addr' => $ip,
-            //     'location' => $loc,
-            //     'device' => $device_details,
-            //     'is_active' => 1,
-            //     'long' => $long,
-            //     'lat'  => $lat
-            // ]);
+            $logins = MemberLogin::create([
+                'usid' => $user->id,
+                'ip_addr' => $ip,
+                'location' => $loc,
+                'device' => $device_details,
+                'is_active' => 1,
+                'long' => $long,
+                'lat'  => $lat
+            ]);
 
             return $this->sendLoginResponse($request);
         }
@@ -156,6 +156,23 @@ class LoginController extends Controller
 
     }
 
+    public function ip_info_longlat($ip = NULL, $purpose) {
+        
+            $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+
+            switch ($purpose) {
+                
+                case "longitude":
+                    $output = $ipdat->geoplugin_longitude;
+                    break;
+                case "latitude":
+                    $output = $ipdat->geoplugin_latitude;
+                    break;
+            }
+        }
+        return $output;
+    }
+
     public function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
         $output = NULL;
         if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
@@ -180,7 +197,7 @@ class LoginController extends Controller
         );
         if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
             $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-            echo $purpose;exit;
+
             if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
                 switch ($purpose) {
                     case "location":
