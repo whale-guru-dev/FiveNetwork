@@ -43,15 +43,9 @@ class LoginController extends Controller
 
         // Attempt to log the user in
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
-          $admin = Admin::where('username',$request->username)->first();
+          // $admin = Admin::where('username',$request->username)->first();
           // if successful, then redirect to their intended location
-          $sid = md5(time().$admin->username);
-          $admin->sid = $sid;
-          $admin->save();
-          // Session::put('sid',$sid);
-          session(['sid' => $sid]);
-          return redirect('/admin');
-          // return $this->sendLoginResponse($request);
+          return $this->sendLoginResponse($request);
         }
         // if unsuccessful, then redirect back to the login with the form data
         // return redirect()->back()->withInput($request->only('username', 'remember'));
