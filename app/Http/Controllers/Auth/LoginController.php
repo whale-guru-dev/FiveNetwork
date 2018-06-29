@@ -72,7 +72,7 @@ class LoginController extends Controller
             $co = $this->ip_info("Visitor", "country"); // India
             $cc = $this->ip_info("Visitor", "countrycode"); // IN
             $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
-            $long = $this->ip_info("Visitor","longitude");
+            $long = $this->ip_info("Visitor","longitude"); echo $long;exit;
             $lat = $this->ip_info("Visitor","latitude");
 
             $loc = "$ca";
@@ -180,7 +180,6 @@ class LoginController extends Controller
         );
         if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
             $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
-            var_dump($ipdat->geoplugin_latitude);exit;
             if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
                 switch ($purpose) {
                     case "location":
