@@ -85,6 +85,44 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <a href="#" class="btn btn-block btn-outline-info">Submit co-investment opportunity</a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-6">
+                            <a href="{{route('member.refer-member-view')}}" class="btn btn-block btn-outline-info">Refer a Family to the FIVE Network</a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <a href="{{route('member.profile')}}" class="btn btn-block btn-outline-info">Edit Profile</a>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-6">
+                            <a href="#" class="btn btn-block btn-outline-info">My FIVE Verified Opportunities</a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <a href="{{route('member.faq')}}" class="btn btn-block btn-outline-info">Frequently Asked Questions</a>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-6">
+                            <a href="#" class="btn btn-block btn-outline-info">Dealroom</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
                     <h4 class="card-title">Analytics</h4>
                     <h6 class="card-subtitle">List of opportunities opend by you</h6>
                     <div class="row m-t-40">
@@ -140,13 +178,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>127.0.0.1</td>
-                                    <td>America Media 1212 Sixth Ave, 11th Floor New York, NY 10036 USA</td>
-                                    <td>Chrome on Windows 10</td>
-                                    <td>2018-06-26 14:49:49</td>
-                                </tr>
                                 @foreach($logins as $login)
                                 <tr>
                                     <td>{{$i++}}</td>
