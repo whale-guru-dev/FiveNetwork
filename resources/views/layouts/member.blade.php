@@ -32,6 +32,22 @@
 .sidebar-nav>ul>li>a.active {
     background: #e5eeff;
 }
+.sweet-alert {
+  background-color: white;
+  } 
+
+.sweet-alert h2 {
+color: #575757;
+}
+.sweet-alert p {
+color: #797979;
+}
+.sweet-alert .sa-icon.sa-success::before, .sweet-alert .sa-icon.sa-success::after {
+    background: white;
+}
+.sweet-alert .sa-icon.sa-success .sa-fix {
+    background-color: white; 
+}
 </style>
 
 <body class="fix-header card-no-border logo-center">
