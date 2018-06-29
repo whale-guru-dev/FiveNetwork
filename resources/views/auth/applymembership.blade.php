@@ -1192,8 +1192,9 @@
                         </div>
                     </div>
                 </div>
-
+                
             </div>
+            <!-- <div id="particles-js" style="background-color: #2164fb;height: 100vh;"></div> -->
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -1255,6 +1256,11 @@
 
     <script src="{{asset('assets/dashboard/admin/js/intlTelInput.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/self-custom.js')}}"></script> 
+
+    <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
+    <script type="text/javascript">
+        particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
+    </script>
     
     @if(Session::get('msg'))
         @if(Session::get('msg')[2] == 'success')

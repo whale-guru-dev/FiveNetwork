@@ -35,7 +35,35 @@
 
 <![endif]-->
 </head>
+<style type="text/css">
+    .login-register{
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        height: 100%;
+        width: 100%;
+        padding: 5% 0;
+        z-index: 100;
+        position: fixed;
+    }
 
+    #particles-js{
+        background-color: #2164fb;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+
+    .login-box{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+</style>
 <body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -74,6 +102,7 @@
                 </div>
             </div>
         </div>
+        <div id="particles-js" style="background-color: #2164fb;height: 100vh;"></div>
     </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -103,6 +132,11 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
+
+    <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
+    <script type="text/javascript">
+        particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
+    </script>
 
     @if(Session::get('msg'))
     <script type="text/javascript">

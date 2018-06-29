@@ -26,14 +26,42 @@
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/member/css/custom.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/member/css/custom.css')}}"> -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
 <![endif]-->
 </head>
+<style type="text/css">
+    .login-register{
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        height: 100%;
+        width: 100%;
+        padding: 5% 0;
+        z-index: 100;
+        position: fixed;
+    }
 
+    #particles-js{
+        background-color: #2164fb;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+
+    .login-box{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+</style>
 <body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -45,6 +73,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
+
     <section id="wrapper">
         <div class="login-register">
             <div class="login-box card">
@@ -99,6 +128,7 @@
                 </div>
             </div>
         </div>
+        <div id="particles-js" style="background-color: #2164fb;height: 100vh;"></div>
     </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -111,20 +141,27 @@
     <script src="{{asset('assets/dashboard/plugins/bootstrap/js/popper.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="{{asset('assets/dashboard/admin/js/jquery.slimscroll.js')}}"></script>
+    <script src="{{asset('assets/dashboard/member/js/jquery.slimscroll.js')}}"></script>
     <!--Wave Effects -->
-    <script src="{{asset('assets/dashboard/admin/js/waves.js')}}"></script>
+    <script src="{{asset('assets/dashboard/member/js/waves.js')}}"></script>
     <!--Menu sidebar -->
-    <script src="{{asset('assets/dashboard/admin/js/sidebarmenu.js')}}"></script>
+    <script src="{{asset('assets/dashboard/member/js/sidebarmenu.js')}}"></script>
     <!--stickey kit -->
     <script src="{{asset('assets/dashboard/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!--Custom JavaScript -->
-    <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/member/js/custom.min.js')}}"></script>
     <!-- ============================================================== -->
+
+    
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
+    
+    <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
+    <script type="text/javascript">
+        particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
+    </script>
 </body>
 
 </html>
