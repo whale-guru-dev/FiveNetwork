@@ -66,11 +66,11 @@ class LoginController extends Controller
             $ip = $this->getRealIpAddr(); 
             $ua = $_SERVER['HTTP_USER_AGENT'];
 
-            $ccity = $this->ip_info("Visitor","city");
-            $cstate = $this->ip_info("Visitor","state");
-            $cregion = $this->ip_info("Visitor","region");
-            $co = $this->ip_info("Visitor", "country"); // India
-            $cc = $this->ip_info("Visitor", "countrycode"); // IN
+            // $ccity = $this->ip_info("Visitor","city");
+            // $cstate = $this->ip_info("Visitor","state");
+            // $cregion = $this->ip_info("Visitor","region");
+            // $co = $this->ip_info("Visitor", "country"); // India
+            // $cc = $this->ip_info("Visitor", "countrycode"); // IN
             $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
             $long = $this->ip_info("Visitor","longitude"); echo $long;exit;
             $lat = $this->ip_info("Visitor","latitude");
@@ -202,21 +202,21 @@ class LoginController extends Controller
                             $address[] = $ipdat->geoplugin_city;
                         $output = implode(", ", array_reverse($address));
                         break;
-                    case "city":
-                        $output = @$ipdat->geoplugin_city;
-                        break;
-                    case "state":
-                        $output = @$ipdat->geoplugin_regionName;
-                        break;
-                    case "region":
-                        $output = @$ipdat->geoplugin_regionName;
-                        break;
-                    case "country":
-                        $output = @$ipdat->geoplugin_countryName;
-                        break;
-                    case "countrycode":
-                        $output = @$ipdat->geoplugin_countryCode;
-                        break;
+                    // case "city":
+                    //     $output = @$ipdat->geoplugin_city;
+                    //     break;
+                    // case "state":
+                    //     $output = @$ipdat->geoplugin_regionName;
+                    //     break;
+                    // case "region":
+                    //     $output = @$ipdat->geoplugin_regionName;
+                    //     break;
+                    // case "country":
+                    //     $output = @$ipdat->geoplugin_countryName;
+                    //     break;
+                    // case "countrycode":
+                    //     $output = @$ipdat->geoplugin_countryCode;
+                    //     break;
                     case "longitude":
                         $output = @$ipdat->geoplugin_longitude;
                         break;
