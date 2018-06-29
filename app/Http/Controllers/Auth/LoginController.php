@@ -72,7 +72,7 @@ class LoginController extends Controller
             // $co = $this->ip_info("Visitor", "country"); // India
             // $cc = $this->ip_info("Visitor", "countrycode"); // IN
             $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
-            $long = $this->ip_info("Visitor","longitude");
+            $long = $this->ip_info("Visitor","longitude"); echo $long;exit;
             $lat = $this->ip_info("Visitor","latitude");
 
             $loc = "$ca";
