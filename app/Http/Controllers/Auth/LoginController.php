@@ -158,18 +158,18 @@ class LoginController extends Controller
 
     public function ip_info_longlat($ip = NULL, $purpose) {
         
-            $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
 
-            switch ($purpose) {
-                
-                case "longitude":
-                    $output = $ipdat->geoplugin_longitude;
-                    break;
-                case "latitude":
-                    $output = $ipdat->geoplugin_latitude;
-                    break;
-            }
+        switch ($purpose) {
+            
+            case "longitude":
+                $output = $ipdat->geoplugin_longitude;
+                break;
+            case "latitude":
+                $output = $ipdat->geoplugin_latitude;
+                break;
         }
+
         return $output;
     }
 
