@@ -41,14 +41,14 @@
     <link href="{{asset('assets/dashboard/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('assets/dashboard/plugins/wizard/steps.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{{asset('assets/dashboard/admin/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/dashboard/member/css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="{{asset('assets/dashboard/admin/css/colors/blue-dark.css')}}" id="theme" rel="stylesheet">
+    <link href="{{asset('assets/dashboard/member/css/colors/blue-dark.css')}}" id="theme" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/admin/css/custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/member/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/dashboard/admin/css/intlTelInput.css')}}">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
