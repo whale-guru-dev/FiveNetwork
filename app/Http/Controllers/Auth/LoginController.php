@@ -75,8 +75,8 @@ class LoginController extends Controller
             $long = $this->ip_info("Visitor","longitude");
             $lat = $this->ip_info("Visitor","latitude");
 
-            $loc = "$ca $ccity $cstate $co";
-
+            $loc = "$ca $ccity";
+            
             $logins = MemberLogin::create([
                 'usid' => $user->id,
                 'ip_addr' => $ip,
