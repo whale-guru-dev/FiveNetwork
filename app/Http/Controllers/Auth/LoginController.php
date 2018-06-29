@@ -72,7 +72,7 @@ class LoginController extends Controller
             // $co = $this->ip_info("Visitor", "country"); // India
             // $cc = $this->ip_info("Visitor", "countrycode"); // IN
             $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
-            $long = $this->ip_info("Visitor","longitude"); echo $long;exit;
+            $long = $this->ip_info("Visitor","longitude");
             $lat = $this->ip_info("Visitor","latitude");
 
             $loc = "$ca";
@@ -218,10 +218,10 @@ class LoginController extends Controller
                     //     $output = @$ipdat->geoplugin_countryCode;
                     //     break;
                     case "longitude":
-                        $output = @$ipdat->geoplugin_longitude;
+                        $output = $ipdat->geoplugin_longitude;
                         break;
                     case "latitude":
-                        $output = @$ipdat->geoplugin_latitude;
+                        $output = $ipdat->geoplugin_latitude;
                         break;
                 }
             }
