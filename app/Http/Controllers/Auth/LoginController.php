@@ -75,17 +75,17 @@ class LoginController extends Controller
             $long = $this->ip_info("Visitor","longitude");
             $lat = $this->ip_info("Visitor","latitude");
 
-            $loc = "$ca";
+            // $loc = "$ca";
 
-            $logins = MemberLogin::create([
-                'usid' => $user->id,
-                'ip_addr' => $ip,
-                'location' => $loc,
-                'device' => $device_details,
-                'is_active' => 1,
-                'long' => $long,
-                'lat'  => $lat
-            ]);
+            // $logins = MemberLogin::create([
+            //     'usid' => $user->id,
+            //     'ip_addr' => $ip,
+            //     'location' => $loc,
+            //     'device' => $device_details,
+            //     'is_active' => 1,
+            //     'long' => $long,
+            //     'lat'  => $lat
+            // ]);
 
             return $this->sendLoginResponse($request);
         }
