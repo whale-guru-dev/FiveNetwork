@@ -217,6 +217,12 @@ class LoginController extends Controller
                     case "countrycode":
                         $output = @$ipdat->geoplugin_countryCode;
                         break;
+                    case "longitude":
+                        $output = @$ipdat->geoplugin_longitude;
+                        break;
+                    case "latitude":
+                        $output = @$ipdat->geoplugin_latitude;
+                        break;
                 }
             }
         }
