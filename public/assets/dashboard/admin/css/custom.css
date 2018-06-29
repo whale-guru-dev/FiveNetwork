@@ -1,0 +1,36 @@
+/*auth page style    */
+.login-register{
+    background-color: #272c33;
+}
+
+.login-box {
+	box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);
+}
+
+.apply-box {
+	box-shadow: 0 6px 6px -3px rgba(0,0,0,.2), 0 10px 14px 1px rgba(0,0,0,.14), 0 4px 18px 3px rgba(0,0,0,.12);
+}
+
+.page-wrapper-apply {
+  background: #383f48;
+}
+
+.page-wrapper-apply .container{
+	height: 100vh;
+}
+
+@media (min-width: 768px) {
+	#validation{
+	    padding-top: 150px;
+	}
+}
+
+@media (max-width: 1023px) {
+  .page-wrapper-apply {
+    -webkit-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in; 
+	}
+ }
+
+/*end*/

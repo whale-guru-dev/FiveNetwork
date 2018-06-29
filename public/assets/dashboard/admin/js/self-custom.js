@@ -1,0 +1,98 @@
+$(function () {
+    "use strict";
+
+    // ============================================================== 
+    // Theme options
+    // ==============================================================   
+
+
+    $("#aware_method").change(function() {    
+
+         if($(this).val() == 1){
+            $("#aware_who").show();
+            $("#aware_who").addClass("show");
+            $("#aware_how").hide();
+            $("#aware_how").removeClass("show");
+         }else if($(this).val() == 0){
+            $("#aware_how").show();
+            $("#aware_how").addClass("show");
+            $("#aware_who").hide();
+            $("#aware_who").removeClass("show");
+         }else if($(this).val() == "-1"){
+            $("#aware_how").hide();
+            $("#aware_who").hide();
+         }
+
+     });
+
+    $('#mdate').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
+
+    $("#phone_mobile").intlTelInput({
+        geoIpLookup: function(callback) {
+           $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+             var countryCode = (resp && resp.country) ? resp.country : "";
+             callback(countryCode);
+           });
+        },
+
+
+        initialCountry: "us",
+
+        separateDialCode: true
+        // utilsScript: "./utils.js"
+    });
+
+    $("#apply-form").submit(function() {
+        $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
+    });
+
+    $(".select2").select2();
+
+    $('.dropify').dropify();
+
+    $("#plan_use_network").change(function() {    
+
+         if($(this).val() == 0){
+            $("#no_plan_use_network").show();
+         }else{
+            $("#no_plan_use_network").hide();
+         }
+
+     });
+
+    // $("#aware_method").on('click', function () {
+    //     if ($("body").hasClass("mini-sidebar")) {
+    //         $("body").trigger("resize");
+    //         $(".scroll-sidebar, .slimScrollDiv").css("overflow", "hidden").parent().css("overflow", "visible");
+    //         $("body").removeClass("mini-sidebar");
+    //         $('.navbar-brand span').show();
+    //         //$(".sidebartoggler i").addClass("ti-menu");
+    //     }
+    //     else {
+    //         $("body").trigger("resize");
+    //         $(".scroll-sidebar, .slimScrollDiv").css("overflow-x", "visible").parent().css("overflow", "visible");
+    //         $("body").addClass("mini-sidebar");
+    //         $('.navbar-brand span').hide();
+    //         //$(".sidebartoggler i").removeClass("ti-menu");
+    //     }
+    // });
+
+    
+    
+    // this is for close icon when navigation open in mobile view
+    $(".nav-toggler").click(function () {
+        $("body").toggleClass("show-sidebar");
+        $(".nav-toggler i").toggleClass("mdi mdi-menu");
+        $(".nav-toggler i").addClass("mdi mdi-close");
+    });
+    
+    // ============================================================== 
+    // Login and Recover Password 
+    // ============================================================== 
+    $('#to-recover').on("click", function () {
+        $("#loginform").slideUp();
+        $("#recoverform").fadeIn();
+    });
+        
+    
+});

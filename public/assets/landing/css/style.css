@@ -1,0 +1,101 @@
+
+
+#email::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
+#email:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+}
+
+#email::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+}
+
+#email{
+	height: 35px;
+  width: 260px;
+  background: transparent;
+  color: white;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    background-color: transparent !important;
+    -webkit-text-fill-color: black !important;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+}
+
+
+
+.upper-text{
+	text-transform: uppercase;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.alert-light {
+    color: white;
+    background-color: transparent;
+    border-color: #fdfdfe;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+/*landing page brand heading*/
+@media (min-width: 768px){
+  .masthead .intro-body .brand-heading {
+      font-size: 60px !important; 
+  }
+}
+
+/*===*/
+
+/*Parallex style*/
+.parallax {
+    /*background-image: url(../img/downloads-bg.jpg);*/
+    /*background: url(../img/downloads-bg.jpg) ;*/
+    /*height: 50%; */
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*==*/
+
+/*grayscale style*/
+/*.grayscale:before {
+    content: "";
+    display: block;
+    background-color: #000;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0.5;
+    z-index: 1;
+}*/
+
+.container{
+-webkit-backdrop-filter: blur(5px);
+backdrop-filter: blur(5px);
+}

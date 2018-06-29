@@ -1,0 +1,86 @@
+@extends('layouts.member')
+@section('member-css')
+
+@endsection
+
+
+@section('member-content')
+
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Faqs</h3>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item active">Faqs</li>
+        </ol>
+    </div>
+
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<?php $i=1;?>
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Faqs</h4>
+                    
+                    <div id="accordion2" role="tablist" class="minimal-faq" aria-multiselectable="true">
+                        @if($faqs->count()>0)
+                            @foreach($faqs as $faq)
+                            <div class="card m-b-0">
+                                <div class="card-header" role="tab" id="{{'headingOne'.$i}}">
+                                    <h5 class="mb-0">
+                                    <a class="link" data-toggle="collapse" data-parent="#accordion2" href="{{'#collapseOne'.$i}}" aria-expanded="true" aria-controls="{{'collapseOne'.$i}}">
+                                      {{'Q'.$i}} {{$faq->question}}
+                                    </a>
+                                  </h5>
+                                </div>
+                                <div id="{{'collapseOne'.$i}}" class="collapse show" role="tabpanel" aria-labelledby="{{'headingOne'.$i++}}">
+                                    <div class="card-body">
+                                        {{$faq->answer}}
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
+
+@endsection
+
+@section('member-js')
+
+@endsection
