@@ -606,20 +606,24 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
         			<h4>Allow User</h4>
         			<h6 class="card-subtitle">You can allow this user as a member.</h6> 
         			@if($user->is_allowed == 0)
-        			<form action="{{route('admin.allow-user-membership')}}" method="post">
-        				@csrf
-        				<input type="hidden" name="usid" value="{{$user->id}}">
+        				
         				<div class="form-actions col-md-6 offset-md-3">
-                            <button type="submit" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Allow</button>
+                            <button type="submit" id="allow" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Allow</button>
+                            <button type="submit" id="deny" class="btn btn-danger btn-sm btn-block text-uppercase waves-effect waves-light">Deny</button>
                         </div>
-        			</form>
-        			@else
+        			
+        			@elseif($user->is_allowed == 1)
         			<div class="row">
         				<div class="col-sm-2 col-md-4 offset-md-4">
 	                        <button type="button" class="btn btn-rounded btn-block btn-success">Allowed</button>
 	                    </div>
         			</div>
-        			
+        			@else
+                    <div class="row">
+                        <div class="col-sm-2 col-md-4 offset-md-4">
+                            <button type="button" class="btn btn-rounded btn-block btn-danger">Denied</button>
+                        </div>
+                    </div>
         			@endif
         		</div>
         	</div>
@@ -630,7 +634,15 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
     <!-- ============================================================== -->
 
 </div>
+<form action="{{route('admin.allow-user-membership')}}" id="allow-membership" method="post">
+    @csrf
+    <input type="hidden" name="usid" value="{{$user->id}}">
+</form>
 
+<form action="{{route('admin.deny-user-membership')}}" id="deny-membership" method="post">
+    @csrf
+    <input type="hidden" name="usid" value="{{$user->id}}">
+</form>
 @endsection
 
 @section('admin-js')
@@ -643,6 +655,15 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
 <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
 <script src="{{asset('assets/dashboard/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js')}}"></script>
+<script type="text/javascript">
+    $(document).on("click","#allow",function(){
+        $("#allow-membership").submit();
+    });
+
+    $(document).on("click","#deny",function(){
+        $("#deny-membership").submit();
+    });
+</script>
 @if(Session::get('msg'))
 <script type="text/javascript">
   swal({   

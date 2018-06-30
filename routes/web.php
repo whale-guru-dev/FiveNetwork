@@ -64,9 +64,12 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::get('check-membership','HomeController@checkmembershipview')->name('admin.check-membership');
 	Route::get('user-membership-detail/{id}','HomeController@membershipdetailview')->name('admin.membership-detail');
 	Route::post('allow-user-membership','HomeController@allowusermembership')->name('admin.allow-user-membership');
+	Route::post('deny-user-membership',"HomeController@denyusermembership")->name('admin.deny-user-membership');
 
 	Route::get('allow-apply-membership', "HomeController@allowapplymembershipview")->name('admin.allow-apply-membership');
 	Route::post('allow-apply-membership',"HomeController@allowapplymembership")->name('admin.allow.apply');
+	Route::post('deny-apply-membership',"HomeController@denyapplymembership")->name('admin.deny.apply');
+
 
 	Route::get('edit-faq','EditController@faqview')->name('admin.edit-faq-view');
 	Route::post('edit-faq','EditController@faqedit')->name('admin.edit-faq');

@@ -131,7 +131,9 @@ class HomeController extends Controller
     public function applymembershipview($code)
     {
         $referer = Preregister::where('code', $code)->first();
-        if($referer){
+        $user = User::where('user_code', $code)->first();
+
+        if(($referer && !$user)||($referer && $user->is_allowed == 2)){
             return view('auth.applymembership')->with(['user' => $referer]);
         }else{
             return redirect('/');
@@ -145,125 +147,271 @@ class HomeController extends Controller
 
         $preregister = Preregister::where('email',$request['email'])->first();
 
-        if($request['email'] != $request['email_confirmation']){
-            $msg = ['Error','You should confirm your email address !','error'];
-            return redirect()->route('apply-membership',['user' => $preregister['email']])->with(['msg' => $msg]);
-        }
+        $user = User::where('email', $request['email'])->first();
 
-        if($request['password'] != $request['conf_password']){
-            $msg = ['Error','You should confirm your password !','error'];
-            return redirect()->route('apply-membership',['user' => $preregister['email']])->with(['msg' => $msg]);
-        }
-        
-        if(isset($request['phone_mobile']) && isset($request['mobilex']))
-            $mobile = $request['mobilex'].$request['phone_mobile'];
-        else
-            $mobile = '';
-        
-       
-        if($request['rank_show_deals'] == $request['rank_see_deals'] || $request['rank_show_deals'] == $request['rank_leverage_due_diligence_capability'] || $request['rank_show_deals'] == $request['rank_network_with_other_family_offices'] ||
-            $request['rank_see_deals'] == $request['rank_leverage_due_diligence_capability'] || $request['rank_see_deals'] == $request['rank_network_with_other_family_offices'] || $request['rank_leverage_due_diligence_capability'] == $request['rank_network_with_other_family_offices']){
-            $msg = ['Error','You input wrong priority of use!','error'];
-            return redirect()->route('apply-membership',['user' => $preregister['email']])->with(['msg' => $msg]);
-        }else
-            $error1 = 0;
-        if($request->hasFile('govern_photo_id')){
-            
-            $govern_photo_id = $request->file('govern_photo_id');
+        if(!$user){
+            if($request['email'] != $request['email_confirmation']){
+                $msg = ['Error','You should confirm your email address !','error'];
+                return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
+            }
 
-            $govern_photo_id_name = $this->generateRandomString().'.'.$govern_photo_id->getClientOriginalExtension();
+            if($request['password'] != $request['conf_password']){
+                $msg = ['Error','You should confirm your password !','error'];
+                return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
+            }
             
-            $destinationPath = public_path('assets/dashboard/profile/id');
+            if(isset($request['phone_mobile']) && isset($request['mobilex']))
+                $mobile = $request['mobilex'].$request['phone_mobile'];
+            else
+                $mobile = '';
             
-            if($govern_photo_id->move($destinationPath, $govern_photo_id_name)){
-                $error2 = 0;
+           
+            if($request['rank_show_deals'] == $request['rank_see_deals'] || $request['rank_show_deals'] == $request['rank_leverage_due_diligence_capability'] || $request['rank_show_deals'] == $request['rank_network_with_other_family_offices'] ||
+                $request['rank_see_deals'] == $request['rank_leverage_due_diligence_capability'] || $request['rank_see_deals'] == $request['rank_network_with_other_family_offices'] || $request['rank_leverage_due_diligence_capability'] == $request['rank_network_with_other_family_offices']){
+                $msg = ['Error','You input wrong priority of use!','error'];
+                return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
+            }else
+                $error1 = 0;
+            if($request->hasFile('govern_photo_id')){
+                
+                $govern_photo_id = $request->file('govern_photo_id');
+
+                $govern_photo_id_name = $this->generateRandomString().'.'.$govern_photo_id->getClientOriginalExtension();
+                
+                $destinationPath = public_path('assets/dashboard/profile/id');
+                
+                if($govern_photo_id->move($destinationPath, $govern_photo_id_name)){
+                    $error2 = 0;
+                }else{
+                    $error2 = 1;
+                    $msg = ['Error','There was an error on uploading your government ID photo! Pleae try again.','error'];
+                    return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
+                }
             }else{
                 $error2 = 1;
-                $msg = ['Error','There was an error on uploading your government ID photo !','error'];
-                return redirect()->route('apply-membership',['user' => $preregister['email']])->with(['msg' => $msg]);
+                $msg = ['Error','You should upload your government ID photo !','error'];
+                return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
             }
+
+            $user = User::create([
+                'apply_type' => $request['apply_type'],
+                'bprinciple' => $request['bprinciple'],
+                'email'      => $request['email'],
+                'password'   => bcrypt($request['password']),
+                'aware_method' => $request['aware_method'],
+                'aware_method_desc' => $request['aware_method_desc'] ? $request['aware_method_desc']:'',
+                'family_office_name' => $request['family_office_name'],
+                'fName'      => $request['fName'],
+                'lName'      => $request['lName'],
+                'title'      => $request['title'],
+                'addr_1'     => $request['addr_1'],
+                'addr_2'     => $request['addr_2'] ? $request['addr_2']:'',
+                'town_city'  => $request['town_city'],
+                'state'      => $request['state'],
+                'postal_code'=> $request['postal_code'],
+                'country'    => $request['country'],
+                'phone_office' => $request['phone_office'],
+                'phone_mobile' => $mobile,
+                'dob'        => $request['dob'],
+                'desired_invest_type' => $request['desired_invest_type'] ? $request['desired_invest_type']:0,
+                'private_investment_number' => $request['private_investment_number'] ? $request['private_investment_number']:0,
+                'additional_capacity' => $request['additional_capacity'] ? $request['additional_capacity']:0,
+                'region'     => $request['region'] ? $request['region']:'',
+                'professional_history_bio' => $request['professional_history_bio'],
+                'family_office_investment_entity' => $request['family_office_investment_entity'],
+                'area_family_investor_expertise'  => $request['area_family_investor_expertise'] ? $request['area_family_investor_expertise']:'',
+                'networth_aum' => $request['networth_aum'] ? $request['networth_aum']:'',
+                'company_website' => $request['company_website'] ? $request['company_website']:'',
+                'linkedIn'   => $request['linkedIn'] ? $request['linkedIn']:'',
+                'corporate_board' => $request['corporate_board'] ? $request['corporate_board']:'',
+                'civic_non_profit_board' => $request['civic_non_profit_board'] ? $request['civic_non_profit_board']:'',
+                'education' => $request['education'] ? $request['education']:'',
+                'high_school' => $request['high_school'] ? $request['high_school']:'',
+                'college'    => $request['college'] ? $request['college']:'',
+                'graduate_school' => $request['graduate_school'] ? $request['graduate_school']:'',
+                'desc_notable_past_investment' => $request['desc_notable_past_investment'] ? $request['desc_notable_past_investment']:'',
+                'rank_show_deals' => $request['rank_show_deals'],
+                'rank_see_deals'  => $request['rank_see_deals'],
+                'rank_leverage_due_diligence_capability' => $request['rank_leverage_due_diligence_capability'],
+                'rank_network_with_other_family_offices' => $request['rank_network_with_other_family_offices'],
+                'govern_photo_id' => $govern_photo_id_name,
+                'pref_contact_form' => $request['pref_contact_form'] ? $request['pref_contact_form']:0,
+                'attest_ai_qp'  => $request['attest_ai_qp'] ? $request['attest_ai_qp']:0,
+                'platform_use_case' => $request['platform_use_case'] ? $request['platform_use_case']:0,
+                'plan_use_network'  => $request['plan_use_network'],
+                'explain_plan_use_network_no' => $request['explain_plan_use_network_no'] ? $request['explain_plan_use_network_no']: '',
+                'understand_agree' => $request['understand_agree'] ? $request['understand_agree']:0,
+                'user_code'  => $preregister->code,
+                'pre_register_id' => $preregister->id,
+                'refer_by' => $preregister->refer_by
+            ]);
+
+            if(isset($request['invest_structure'])){
+                foreach ($request['invest_structure'] as $is) {
+                    $record_is = MemberInvestmentStructure::create([
+                        'member_id' => $user->id,
+                        'type_id' => $is
+                    ]);
+                }
+            }
+                
+
+            if(isset($request['average_investment_size'])){
+                foreach ($request['average_investment_size'] as $ais) {
+                    $record_is = MemberInvestmentSize::create([
+                        'member_id' => $user->id,
+                        'type_id' => $is
+                    ]);
+                }
+            }
+                
+
+            if(isset($request['investment_stage'])){
+                foreach ($request['investment_stage'] as $ist) {
+                    $record_is = MemberInvestmentStage::create([
+                        'member_id' => $user->id,
+                        'type_id' => $is
+                    ]);
+                }
+            }
+                
         }else{
-            $error2 = 1;
-            $msg = ['Error','You should upload your government ID photo !','error'];
-            return redirect()->route('apply-membership',['user' => $preregister['email']])->with(['msg' => $msg]);
+            if($request['email'] != $request['email_confirmation']){
+                $msg = ['Error','You should confirm your email address !','error'];
+                return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
+            }
+
+            if($request['password'] != $request['conf_password']){
+                $msg = ['Error','You should confirm your password !','error'];
+                return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
+            }
+            
+            if(isset($request['phone_mobile']) && isset($request['mobilex']))
+                $mobile = $request['mobilex'].$request['phone_mobile'];
+            else
+                $mobile = '';
+            
+           
+            if($request['rank_show_deals'] == $request['rank_see_deals'] || $request['rank_show_deals'] == $request['rank_leverage_due_diligence_capability'] || $request['rank_show_deals'] == $request['rank_network_with_other_family_offices'] ||
+                $request['rank_see_deals'] == $request['rank_leverage_due_diligence_capability'] || $request['rank_see_deals'] == $request['rank_network_with_other_family_offices'] || $request['rank_leverage_due_diligence_capability'] == $request['rank_network_with_other_family_offices']){
+                $msg = ['Error','You input wrong priority of use!','error'];
+                return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
+            }else
+                $error1 = 0;
+            if($request->hasFile('govern_photo_id')){
+                
+                $govern_photo_id = $request->file('govern_photo_id');
+
+                $govern_photo_id_name = $this->generateRandomString().'.'.$govern_photo_id->getClientOriginalExtension();
+                
+                $destinationPath = public_path('assets/dashboard/profile/id');
+                
+                if($govern_photo_id->move($destinationPath, $govern_photo_id_name)){
+                    $error2 = 0;
+                }else{
+                    $error2 = 1;
+                    $msg = ['Error','There was an error on uploading your government ID photo! Pleae try again.','error'];
+                    return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
+                }
+            }else{
+                $error2 = 1;
+                $msg = ['Error','You should upload your government ID photo !','error'];
+                return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
+            }
+
+            $user = User::update([
+                'apply_type' => $request['apply_type'],
+                'bprinciple' => $request['bprinciple'],
+                'email'      => $request['email'],
+                'password'   => bcrypt($request['password']),
+                'aware_method' => $request['aware_method'],
+                'aware_method_desc' => $request['aware_method_desc'] ? $request['aware_method_desc']:'',
+                'family_office_name' => $request['family_office_name'],
+                'fName'      => $request['fName'],
+                'lName'      => $request['lName'],
+                'title'      => $request['title'],
+                'addr_1'     => $request['addr_1'],
+                'addr_2'     => $request['addr_2'] ? $request['addr_2']:'',
+                'town_city'  => $request['town_city'],
+                'state'      => $request['state'],
+                'postal_code'=> $request['postal_code'],
+                'country'    => $request['country'],
+                'phone_office' => $request['phone_office'],
+                'phone_mobile' => $mobile,
+                'dob'        => $request['dob'],
+                'desired_invest_type' => $request['desired_invest_type'] ? $request['desired_invest_type']:0,
+                'private_investment_number' => $request['private_investment_number'] ? $request['private_investment_number']:0,
+                'additional_capacity' => $request['additional_capacity'] ? $request['additional_capacity']:0,
+                'region'     => $request['region'] ? $request['region']:'',
+                'professional_history_bio' => $request['professional_history_bio'],
+                'family_office_investment_entity' => $request['family_office_investment_entity'],
+                'area_family_investor_expertise'  => $request['area_family_investor_expertise'] ? $request['area_family_investor_expertise']:'',
+                'networth_aum' => $request['networth_aum'] ? $request['networth_aum']:'',
+                'company_website' => $request['company_website'] ? $request['company_website']:'',
+                'linkedIn'   => $request['linkedIn'] ? $request['linkedIn']:'',
+                'corporate_board' => $request['corporate_board'] ? $request['corporate_board']:'',
+                'civic_non_profit_board' => $request['civic_non_profit_board'] ? $request['civic_non_profit_board']:'',
+                'education' => $request['education'] ? $request['education']:'',
+                'high_school' => $request['high_school'] ? $request['high_school']:'',
+                'college'    => $request['college'] ? $request['college']:'',
+                'graduate_school' => $request['graduate_school'] ? $request['graduate_school']:'',
+                'desc_notable_past_investment' => $request['desc_notable_past_investment'] ? $request['desc_notable_past_investment']:'',
+                'rank_show_deals' => $request['rank_show_deals'],
+                'rank_see_deals'  => $request['rank_see_deals'],
+                'rank_leverage_due_diligence_capability' => $request['rank_leverage_due_diligence_capability'],
+                'rank_network_with_other_family_offices' => $request['rank_network_with_other_family_offices'],
+                'govern_photo_id' => $govern_photo_id_name,
+                'pref_contact_form' => $request['pref_contact_form'] ? $request['pref_contact_form']:0,
+                'attest_ai_qp'  => $request['attest_ai_qp'] ? $request['attest_ai_qp']:0,
+                'platform_use_case' => $request['platform_use_case'] ? $request['platform_use_case']:0,
+                'plan_use_network'  => $request['plan_use_network'],
+                'explain_plan_use_network_no' => $request['explain_plan_use_network_no'] ? $request['explain_plan_use_network_no']: '',
+                'understand_agree' => $request['understand_agree'] ? $request['understand_agree']:0,
+                'is_allowed' => 0
+            ]);
+
+            if(isset($request['invest_structure'])){
+                $existing_record = MemberInvestmentStructure::where('member_id',$user->id)->get();
+                foreach($existing_record as $e_r){
+                    $e_r->delete();
+                }
+                foreach ($request['invest_structure'] as $is) {
+                    $record_is = MemberInvestmentStructure::create([
+                        'member_id' => $user->id,
+                        'type_id' => $is
+                    ]);
+                }
+            }
+                
+
+            if(isset($request['average_investment_size'])){
+                $existing_record = MemberInvestmentSize::where('member_id',$user->id)->get();
+                foreach($existing_record as $e_r){
+                    $e_r->delete();
+                }
+                foreach ($request['average_investment_size'] as $ais) {
+                    $record_is = MemberInvestmentSize::create([
+                        'member_id' => $user->id,
+                        'type_id' => $is
+                    ]);
+                }
+            }
+                
+
+            if(isset($request['investment_stage'])){
+                $existing_record = MemberInvestmentStage::where('member_id',$user->id)->get();
+                foreach($existing_record as $e_r){
+                    $e_r->delete();
+                }
+
+                foreach ($request['investment_stage'] as $ist) {
+                    $record_is = MemberInvestmentStage::create([
+                        'member_id' => $user->id,
+                        'type_id' => $is
+                    ]);
+                }
+            }
         }
-
-        $user = User::create([
-            'apply_type' => $request['apply_type'],
-            'bprinciple' => $request['bprinciple'],
-            'email'      => $request['email'],
-            'password'   => bcrypt($request['password']),
-            'aware_method' => $request['aware_method'],
-            'aware_method_desc' => $request['aware_method_desc'] ? $request['aware_method_desc']:'',
-            'family_office_name' => $request['family_office_name'],
-            'fName'      => $request['fName'],
-            'lName'      => $request['lName'],
-            'title'      => $request['title'],
-            'addr_1'     => $request['addr_1'],
-            'addr_2'     => $request['addr_2'] ? $request['addr_2']:'',
-            'town_city'  => $request['town_city'],
-            'state'      => $request['state'],
-            'postal_code'=> $request['postal_code'],
-            'country'    => $request['country'],
-            'phone_office' => $request['phone_office'],
-            'phone_mobile' => $mobile,
-            'dob'        => $request['dob'],
-            'desired_invest_type' => $request['desired_invest_type'] ? $request['desired_invest_type']:0,
-            'private_investment_number' => $request['private_investment_number'] ? $request['private_investment_number']:0,
-            'additional_capacity' => $request['additional_capacity'] ? $request['additional_capacity']:0,
-            'region'     => $request['region'] ? $request['region']:'',
-            'professional_history_bio' => $request['professional_history_bio'],
-            'family_office_investment_entity' => $request['family_office_investment_entity'],
-            'area_family_investor_expertise'  => $request['area_family_investor_expertise'] ? $request['area_family_investor_expertise']:'',
-            'networth_aum' => $request['networth_aum'] ? $request['networth_aum']:'',
-            'company_website' => $request['company_website'] ? $request['company_website']:'',
-            'linkedIn'   => $request['linkedIn'] ? $request['linkedIn']:'',
-            'corporate_board' => $request['corporate_board'] ? $request['corporate_board']:'',
-            'civic_non_profit_board' => $request['civic_non_profit_board'] ? $request['civic_non_profit_board']:'',
-            'education' => $request['education'] ? $request['education']:'',
-            'high_school' => $request['high_school'] ? $request['high_school']:'',
-            'college'    => $request['college'] ? $request['college']:'',
-            'graduate_school' => $request['graduate_school'] ? $request['graduate_school']:'',
-            'desc_notable_past_investment' => $request['desc_notable_past_investment'] ? $request['desc_notable_past_investment']:'',
-            'rank_show_deals' => $request['rank_show_deals'],
-            'rank_see_deals'  => $request['rank_see_deals'],
-            'rank_leverage_due_diligence_capability' => $request['rank_leverage_due_diligence_capability'],
-            'rank_network_with_other_family_offices' => $request['rank_network_with_other_family_offices'],
-            'govern_photo_id' => $govern_photo_id_name,
-            'pref_contact_form' => $request['pref_contact_form'] ? $request['pref_contact_form']:0,
-            'attest_ai_qp'  => $request['attest_ai_qp'] ? $request['attest_ai_qp']:0,
-            'platform_use_case' => $request['platform_use_case'] ? $request['platform_use_case']:0,
-            'plan_use_network'  => $request['plan_use_network'],
-            'explain_plan_use_network_no' => $request['explain_plan_use_network_no'] ? $request['explain_plan_use_network_no']: '',
-            'understand_agree' => $request['understand_agree'] ? $request['understand_agree']:0,
-            'user_code'  => $preregister->code,
-            'pre_register_id' => $preregister->id,
-            'refer_by' => $preregister->refer_by
-        ]);
-
-        if(isset($request['invest_structure']))
-            foreach ($request['invest_structure'] as $is) {
-                $record_is = MemberInvestmentStructure::create([
-                    'member_id' => $user->id,
-                    'type_id' => $is
-                ]);
-            }
-
-        if(isset($request['average_investment_size']))
-            foreach ($request['average_investment_size'] as $ais) {
-                $record_is = MemberInvestmentSize::create([
-                    'member_id' => $user->id,
-                    'type_id' => $is
-                ]);
-            }
-
-        if(isset($request['investment_stage']))
-            foreach ($request['investment_stage'] as $ist) {
-                $record_is = MemberInvestmentStage::create([
-                    'member_id' => $user->id,
-                    'type_id' => $is
-                ]);
-            }
 
         if($error1 == 0 && $error2 == 0){
             $msg = ['Success','We have sent your membership application to administrator, please wait to be allowed by administrator!','success'];

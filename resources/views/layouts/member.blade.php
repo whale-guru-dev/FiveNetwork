@@ -250,6 +250,10 @@ color: #797979;
     <!--Custom JavaScript -->
     <script src="{{asset('assets/dashboard/member/js/custom.min.js')}}"></script>
     <!-- ============================================================== -->
+
+    <script src="{{asset('assets/dashboard/plugins/session-timeout/idle/jquery.idletimeout.js')}}"></script>
+    <script src="{{asset('assets/dashboard/plugins/session-timeout/idle/jquery.idletimer.js')}}"></script>
+    <script src="{{asset('assets/dashboard/plugins/session-timeout/idle/session-timeout-idle-init.js')}}"></script>
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>

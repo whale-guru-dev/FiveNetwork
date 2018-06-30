@@ -52,9 +52,31 @@ class HomeController extends Controller
         // return new Follow($link, $content, $subtitle, $subject);
         // return (new App\Mail\InvoicePaid($link, $content, $subtitle, $subject))->render();
 
-        $msg = ['Success','Successfully Allowed User to login.','success'];
+        $msg = ['Success','Successfully Allowed User as member.','success'];
         return redirect()->route('admin.membership-detail',['id'=>$user->id])->with(['msg'=>$msg]);
     }
+
+    public function denyusermembership(Request $request)
+    {
+        $user = User::find($request['usid']);
+        $user->update(['is_allowed'=>2]);
+        //Mail Function
+        $to = $user->email;
+        $subtitle = 'Your membership application was denied!';
+        $subject = 'Your membership application was denied!';
+        $content = 'Unfortunately , your apply membership request has been declined. Please follow this link to request again';
+        $link = route('apply-membership',['code'=>$user->user_code]);
+        $link_name = 'Go To Apply Membership';
+
+        Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
+        // return new Follow($link, $content, $subtitle, $subject);
+        // return (new App\Mail\InvoicePaid($link, $content, $subtitle, $subject))->render();
+
+        $msg = ['Success','Successfully Denied User as member.','success'];
+        return redirect()->route('admin.membership-detail',['id'=>$user->id])->with(['msg'=>$msg]);
+    }
+
 
     public function allowapplymembershipview()
     {
@@ -69,7 +91,7 @@ class HomeController extends Controller
         $id = $request['id'];
         $user = Preregister::find($id);
 
-        if($user->update(['allowed'=>1,'code'=> $this->generateRandomString(10)])){
+        if($user->update(['allowed'=>1])){
             
             //Mail Function
             $to = $user->email;
@@ -85,11 +107,41 @@ class HomeController extends Controller
             $msg = ['Success','Successfully Allowed User to apply membership.','success'];
             return redirect()->route('admin.allow-apply-membership')->with(['msg'=>$msg]);
         }else{
-            $msg = ['Error','There was an error on Allowe User to apply membership. Please retry later~','error'];
+            $msg = ['Error','There was an error on Allow User to apply membership. Please retry later~','error'];
             return redirect()->route('admin.allow-apply-membership')->with(['msg'=>$msg]);
         }
         
     }
+
+    public function denyapplymembership(Request $request)
+    {
+        
+        $id = $request['id'];
+        $user = Preregister::find($id);
+
+        if($user->update(['allowed'=>2])){
+            
+            //Mail Function
+            $to = $user->email;
+            $subtitle = 'You are denied to apply membership!';
+            $subject = 'Denied Reqeust!';
+            $content = 'You are denied by administrator to apply membership, you can\'t apply right now!';
+            $link = url('/');
+            $link_name = 'Go To Website';
+            Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
+            // return new Follow($link, $content, $subtitle, $subject);
+            // return (new App\Mail\InvoicePaid($link, $content, $subtitle, $subject))->render();
+            $msg = ['Success','Successfully Denied User to apply membership.','success'];
+            return redirect()->route('admin.allow-apply-membership')->with(['msg'=>$msg]);
+        }else{
+            $msg = ['Error','There was an error on Deny User to apply membership. Please retry later~','error'];
+            return redirect()->route('admin.allow-apply-membership')->with(['msg'=>$msg]);
+        }
+        
+    }
+
+    
 
     public function generateRandomString($length = 6) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

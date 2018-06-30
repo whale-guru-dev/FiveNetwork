@@ -59,7 +59,7 @@
                                     <td>{{$i++}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->created_at}}</td>
-                                    <td><button id="btn-allow-apply" data-id="{{$user->id}}" type="submit" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Allow</button></td>
+                                    <td><button id="btn-allow-apply" data-id="{{$user->id}}" type="submit" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Allow</button><br><button id="btn-deny-apply" data-id="{{$user->id}}" type="submit" class="btn btn-danger btn-sm btn-block text-uppercase waves-effect waves-light">Deny</button></td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -75,8 +75,14 @@
     <!-- ============================================================== -->
     <form id="allow-apply-form" action="{{route('admin.allow.apply')}}" method="POST">
         @csrf
-        <input type="hidden" name="id" id="id">
+        <input type="hidden" name="id" id="apply-id">
     </form>
+
+    <form id="deny-apply-form" action="{{route('admin.deny.apply')}}" method="POST">
+        @csrf
+        <input type="hidden" name="id" id="deny-id">
+    </form>
+
 
 </div>
 @endsection
@@ -101,8 +107,13 @@
         ]
     });
     $(document).on("click","#btn-allow-apply",function(){
-        $("#id").val($(this).data('id'));
+        $("#apply-id").val($(this).data('id'));
         $("#allow-apply-form").submit();
+    });
+
+    $(document).on("click","#btn-deny-apply",function(){
+        $("#deny-id").val($(this).data('id'));
+        $("#deny-apply-form").submit();
     });
 
 </script>
