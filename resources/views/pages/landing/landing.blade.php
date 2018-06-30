@@ -10,7 +10,7 @@
     <meta name="keywords"  content="Family Investment Exchange" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Family Investment Exchange | Pre-Register</title>
+    <title>Family Investment Exchange</title>
     <!-- Bootstrap core CSS -->
     <link href="{{asset('assets/landing/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -38,11 +38,11 @@
           <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="{{'request-access'}}">Request Access</a>
+              <a class="nav-link js-scroll-trigger" href="{{route('request-access')}}">Request Access</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="{{'/login'}}">Login</a>
+              <a class="nav-link js-scroll-trigger" href="{{route('login')}}">Login</a>
             </li>
           </ul>
         </div>
@@ -78,7 +78,7 @@
     <script src="{{asset('assets/landing/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
     <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script> -->
 
     <!-- Custom scripts for this template -->
     <script src="{{asset('assets/landing/js/grayscale.min.js')}}"></script>

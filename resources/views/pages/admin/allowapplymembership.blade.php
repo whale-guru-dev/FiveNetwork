@@ -83,7 +83,6 @@
         <input type="hidden" name="id" id="deny-id">
     </form>
 
-
 </div>
 @endsection
 

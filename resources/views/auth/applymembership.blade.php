@@ -17,7 +17,7 @@
     <meta name="keywords"  content="Family Investment Exchange" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Family Investment Exchange | Reset Password</title>
+    <title>Family Investment Exchange | Apply Membership</title>
 
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
 
@@ -48,7 +48,7 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/member/css/custom.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/member/css/custom.css')}}"> -->
     <link rel="stylesheet" href="{{asset('assets/dashboard/admin/css/intlTelInput.css')}}">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -140,14 +140,14 @@
                                                 <div class="form-group">
                                                     <label for="password"> Password : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="password" class="form-control required" id="password" name="password"> 
+                                                    <input type="password" class="form-control required" minlength="8" id="password" name="password"> 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="conf_password"> Confirm Password : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="password" class="form-control required" id="conf_password" name="conf_password"> 
+                                                    <input type="password" class="form-control required" minlength="6" id="conf_password" name="conf_password"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <select class="custom-select form-control required" id="aware_method" name="aware_method">
-                                                        <option value="-1">Select</option>
+                                                        <option value="-1" selected>Select</option>
                                                         <option value="1" {{ old('aware_method') == 1 ? 'selected' : '' }}>Current FIVE Network member</option>
                                                         <option value="0" {{ old('aware_method') == 0 ? 'selected' : '' }}>Other</option>
                                                     </select>
@@ -1259,9 +1259,29 @@
 
     <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
     <script type="text/javascript">
-        particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
+        // particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
     </script>
-    
+    <script type="text/javascript">
+
+        $("#phone_mobile").intlTelInput({
+            geoIpLookup: function(callback) {
+               $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                 var countryCode = (resp && resp.country) ? resp.country : "";
+                 callback(countryCode);
+               });
+            },
+
+
+            initialCountry: "us",
+
+            separateDialCode: true
+            // utilsScript: "./utils.js"
+        });
+
+        $("#apply-form").submit(function() {
+            $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
+        });
+    </script>
     @if(Session::get('msg'))
         @if(Session::get('msg')[2] == 'success')
             <script type="text/javascript">

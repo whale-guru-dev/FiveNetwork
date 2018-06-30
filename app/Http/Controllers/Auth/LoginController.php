@@ -43,59 +43,65 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
         $this->validateLogin($request);
 
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
+        $user = User::where('email',$request['email'])->first();
+        if($user->is_allowed == 1){
+            // If the class is using the ThrottlesLogins trait, we can automatically throttle
+            // the login attempts for this application. We'll key this by the username and
+            // the IP address of the client making these requests into this application.
+            if ($this->hasTooManyLoginAttempts($request)) {
+                $this->fireLockoutEvent($request);
 
-            return $this->sendLockoutResponse($request);
+                return $this->sendLockoutResponse($request);
+            }
+
+            if ($this->attemptLogin($request)) {
+                
+                $user_os        =   $this->getOS();
+                $user_browser   =   $this->getBrowser();
+
+                $device_details =   "".$user_browser." on ".$user_os."";
+
+                
+                // $ip = $_SERVER['REMOTE_ADDR'];
+                $ip = $this->getRealIpAddr(); 
+                $ua = $_SERVER['HTTP_USER_AGENT'];
+
+                // $ccity = $this->ip_info("Visitor","city");
+                // $cstate = $this->ip_info("Visitor","state");
+                // $cregion = $this->ip_info("Visitor","region");
+                // $co = $this->ip_info("Visitor", "country"); // India
+                // $cc = $this->ip_info("Visitor", "countrycode"); // IN
+                $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
+                $long = $this->ip_info_longlat($ip,"longitude");
+                $lat = $this->ip_info_longlat($ip,"latitude");
+
+                $loc = "$ca";
+
+                $logins = MemberLogin::create([
+                    'usid' => $user->id,
+                    'ip_addr' => $ip,
+                    'location' => $loc,
+                    'device' => $device_details,
+                    'is_active' => 1,
+                    'long' => $long,
+                    'lat'  => $lat
+                ]);
+
+                return $this->sendLoginResponse($request);
+            }
+
+            // If the login attempt was unsuccessful we will increment the number of attempts
+            // to login and redirect the user back to the login form. Of course, when this
+            // user surpasses their maximum number of attempts they will get locked out.
+            $this->incrementLoginAttempts($request);
+
+            return $this->sendFailedLoginResponse($request);
         }
 
-        if ($this->attemptLogin($request)) {
-            $user = User::where('email',$request['email'])->first();
-            $user_os        =   $this->getOS();
-            $user_browser   =   $this->getBrowser();
-
-            $device_details =   "".$user_browser." on ".$user_os."";
-
-            
-            // $ip = $_SERVER['REMOTE_ADDR'];
-            $ip = $this->getRealIpAddr(); 
-            $ua = $_SERVER['HTTP_USER_AGENT'];
-
-            // $ccity = $this->ip_info("Visitor","city");
-            // $cstate = $this->ip_info("Visitor","state");
-            // $cregion = $this->ip_info("Visitor","region");
-            // $co = $this->ip_info("Visitor", "country"); // India
-            // $cc = $this->ip_info("Visitor", "countrycode"); // IN
-            $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
-            $long = $this->ip_info_longlat($ip,"longitude");
-            $lat = $this->ip_info_longlat($ip,"latitude");
-
-            $loc = "$ca";
-
-            $logins = MemberLogin::create([
-                'usid' => $user->id,
-                'ip_addr' => $ip,
-                'location' => $loc,
-                'device' => $device_details,
-                'is_active' => 1,
-                'long' => $long,
-                'lat'  => $lat
-            ]);
-
-            return $this->sendLoginResponse($request);
-        }
-
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
-
-        return $this->sendFailedLoginResponse($request);
+        
     }
 
     public function logout(Request $request)

@@ -27,24 +27,7 @@ $(function () {
 
     $('#mdate').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
 
-    $("#phone_mobile").intlTelInput({
-        geoIpLookup: function(callback) {
-           $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-             var countryCode = (resp && resp.country) ? resp.country : "";
-             callback(countryCode);
-           });
-        },
 
-
-        initialCountry: "us",
-
-        separateDialCode: true
-        // utilsScript: "./utils.js"
-    });
-
-    $("#apply-form").submit(function() {
-        $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
-    });
 
     $(".select2").select2();
 

@@ -14,6 +14,7 @@
 <?php
 $private_investment_number = ['1-2','3-4','5-7','8-10','10~'];
 $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Associate'];
+
 ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -307,9 +308,7 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                                 <label class="control-label text-left col-md-3">Average Investment Size:</label>
                                 <div class="col-md-9">
 	                                <select multiple data-role="tagsinput" disabled="">
-	                                	@foreach($user->investmentsize as $isz)
-	                                	<option value="{{$isz->type->type}}">{{$isz->type->type}}</option>
-	                                	@endforeach
+	                                	
 	                                </select>
                                 </div>
                             </div>
