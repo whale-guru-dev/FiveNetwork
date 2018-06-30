@@ -319,7 +319,7 @@ class HomeController extends Controller
                 return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
             }
 
-            $user = User::update([
+            $user->update([
                 'apply_type' => $request['apply_type'],
                 'bprinciple' => $request['bprinciple'],
                 'email'      => $request['email'],
@@ -372,9 +372,11 @@ class HomeController extends Controller
 
             if(isset($request['invest_structure'])){
                 $existing_record = MemberInvestmentStructure::where('member_id',$user->id)->get();
-                foreach($existing_record as $e_r){
-                    $e_r->delete();
-                }
+
+                if($existing_record->count()>0)
+                    foreach($existing_record as $e_r){
+                        $e_r->delete();
+                    }
                 foreach ($request['invest_structure'] as $is) {
                     $record_is = MemberInvestmentStructure::create([
                         'member_id' => $user->id,
@@ -386,9 +388,10 @@ class HomeController extends Controller
 
             if(isset($request['average_investment_size'])){
                 $existing_record = MemberInvestmentSize::where('member_id',$user->id)->get();
-                foreach($existing_record as $e_r){
-                    $e_r->delete();
-                }
+                if($existing_record->count()>0)
+                    foreach($existing_record as $e_r){
+                        $e_r->delete();
+                    }
                 foreach ($request['average_investment_size'] as $ais) {
                     $record_is = MemberInvestmentSize::create([
                         'member_id' => $user->id,
@@ -400,9 +403,10 @@ class HomeController extends Controller
 
             if(isset($request['investment_stage'])){
                 $existing_record = MemberInvestmentStage::where('member_id',$user->id)->get();
-                foreach($existing_record as $e_r){
-                    $e_r->delete();
-                }
+                if($existing_record->count()>0)
+                    foreach($existing_record as $e_r){
+                        $e_r->delete();
+                    }
 
                 foreach ($request['investment_stage'] as $ist) {
                     $record_is = MemberInvestmentStage::create([

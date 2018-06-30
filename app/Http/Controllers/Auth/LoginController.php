@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use App\Model\MemberLogin;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -99,9 +100,18 @@ class LoginController extends Controller
             $this->incrementLoginAttempts($request);
 
             return $this->sendFailedLoginResponse($request);
+        }else{
+            return $this->sendFailedLoginResponseNotAllowed($request);
         }
 
         
+    }
+
+    public function sendFailedLoginResponseNotAllowed(Request $request)
+    {
+        throw ValidationException::withMessages([
+            $this->username() => ['You are not allowed as a member'],
+        ]);
     }
 
     public function logout(Request $request)
