@@ -308,7 +308,9 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                                 <label class="control-label text-left col-md-3">Average Investment Size:</label>
                                 <div class="col-md-9">
 	                                <select multiple data-role="tagsinput" disabled="">
-	                                	
+	                                	@foreach($user->investmentsize as $isz)
+	                                	<option value="{{$isz->type->type}}">{{$isz->type->type}}</option>
+	                                	@endforeach
 	                                </select>
                                 </div>
                             </div>
@@ -326,6 +328,8 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                                 </div>
                             </div>
 	                    </div>
+
+                        
         			</div>
 
         			<div class="row">

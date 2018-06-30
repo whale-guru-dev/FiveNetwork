@@ -14,11 +14,11 @@ class MemberInvestmentSize extends Model
 
     public function type()
     {
-    	return $this->belongsTo('App\Model\MemberInvestmentSizeType','id');
+    	return $this->belongsTo('App\Model\MemberInvestmentSizeType','type_id');
     }
 
     public function user()
     {
-    	return $this->belongsTo('App\User','id');
+    	return $this->belongsTo('App\User');
     }
 }

@@ -55,7 +55,24 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style type="text/css">
+.sweet-alert {
+  background-color: white;
+} 
 
+.sweet-alert h2 {
+color: #575757;
+}
+.sweet-alert p {
+color: #797979;
+}
+.sweet-alert .sa-icon.sa-success::before, .sweet-alert .sa-icon.sa-success::after {
+    background: white;
+}
+.sweet-alert .sa-icon.sa-success .sa-fix {
+    background-color: white; 
+}
+</style>
 <body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->

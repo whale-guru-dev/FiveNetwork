@@ -34,7 +34,7 @@
 }
 .sweet-alert {
   background-color: white;
-  } 
+} 
 
 .sweet-alert h2 {
 color: #575757;

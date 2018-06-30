@@ -260,7 +260,7 @@ class HomeController extends Controller
                 foreach ($request['average_investment_size'] as $ais) {
                     $record_is = MemberInvestmentSize::create([
                         'member_id' => $user->id,
-                        'type_id' => $is
+                        'type_id' => $ais
                     ]);
                 }
             }
@@ -270,7 +270,7 @@ class HomeController extends Controller
                 foreach ($request['investment_stage'] as $ist) {
                     $record_is = MemberInvestmentStage::create([
                         'member_id' => $user->id,
-                        'type_id' => $is
+                        'type_id' => $ist
                     ]);
                 }
             }
@@ -392,7 +392,7 @@ class HomeController extends Controller
                 foreach ($request['average_investment_size'] as $ais) {
                     $record_is = MemberInvestmentSize::create([
                         'member_id' => $user->id,
-                        'type_id' => $is
+                        'type_id' => $ais
                     ]);
                 }
             }
@@ -407,7 +407,7 @@ class HomeController extends Controller
                 foreach ($request['investment_stage'] as $ist) {
                     $record_is = MemberInvestmentStage::create([
                         'member_id' => $user->id,
-                        'type_id' => $is
+                        'type_id' => $ist
                     ]);
                 }
             }
