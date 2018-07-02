@@ -1,6 +1,13 @@
 @extends('layouts.admin')
 @section('admin-css')
-
+<style>
+.card {
+    color: white;
+}
+.card h5 a{
+    color: white;
+}
+</style>
 @endsection
 
 
@@ -33,8 +40,9 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-    <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" class="btn btn-info text-white">+ Create New Faq</a>    
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" class="btn btn-info text-white">+ Create New Faq</a>  
     </div>
+    <br>
     <div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
