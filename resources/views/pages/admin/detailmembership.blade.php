@@ -41,7 +41,19 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
     <!-- ============================================================== -->
     <div class="row">
         <div class="col-12">
-        	<div class="card">
+        	<div class="card  card-outline-info">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="m-b-0 text-white">Membership Info</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-info" id="back-btn"><i class="ti-back-left">Back</i></button>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
         		<div class="card-body">
         			<form class="form-horizontal" role="form">
                         <div class="form-body">
@@ -666,6 +678,11 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
     $(document).on("click","#deny",function(){
         $("#deny-membership").submit();
     });
+
+    $(document).on("click","#back-btn",function(){
+        window.history.back();
+    });
+
 </script>
 @if(Session::get('msg'))
 <script type="text/javascript">
