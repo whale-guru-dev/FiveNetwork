@@ -17,7 +17,6 @@ class LoginController extends Controller
 
     public function __construct()
     {
-	  
       $this->middleware('guest:admin')->except('logout');
     }
 
@@ -45,7 +44,8 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
           // $admin = Admin::where('username',$request->username)->first();
           // if successful, then redirect to their intended location
-          return $this->sendLoginResponse($request);
+        return redirect()->route('admin.dashboard');
+          // return $this->sendLoginResponse($request);
         }
         // if unsuccessful, then redirect back to the login with the form data
         // return redirect()->back()->withInput($request->only('username', 'remember'));
@@ -64,7 +64,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
-        
+        $request->session()->flush();
+        $request->session()->regenerate();
         return redirect()->guest(route( 'admin.login' ));
     }
 }

@@ -19,9 +19,10 @@ class RedirectIfAuthenticated
     {
         
         if (Auth::guard($guard)->check()) {
-          if ($guard == 'admin')
-            return redirect('/admin');
-            return redirect($request->get('redirect_uri', 'member'));
+            if ($guard == 'admin'){
+                return redirect($request->get('redirect_uri', 'admin'));
+            }else
+                return redirect($request->get('redirect_uri', 'member'));
         }
 
         return $next($request);

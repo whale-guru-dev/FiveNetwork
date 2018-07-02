@@ -21,6 +21,11 @@ class HomeController extends Controller
     	return view('pages.admin.dashboard');
     }
 
+    public function dashboardview()
+    {
+        return view('pages.admin.dashboard');
+    }
+
     public function checkmembershipview()
     {
         $users = User::where('is_allowed',0)->get();
