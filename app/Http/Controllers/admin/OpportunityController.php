@@ -28,6 +28,12 @@ class OpportunityController extends Controller
     	return view('pages.admin.detailrequestopportunity')->with(['request' => $request]);
     }
 
+    public function checkallrequest()
+    {
+    	$requests = MemberRequestOpportunity::all();
+    	return view('pages.admin.checkallrequest')->with(['requests' => $requests]);
+    }
+
     public function allowusersumitopportunity(Request $request)
     {
     	$requestopportuniy = MemberRequestOpportunity::where('id', $request['id'])->first();

@@ -146,7 +146,11 @@ class HomeController extends Controller
         
     }
 
-    
+    public function checkallmembership()
+    {
+        $members = User::all();
+        return view('pages.admin.checkallmembership')->with(['members' => $members]);
+    }
 
     public function generateRandomString($length = 6) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

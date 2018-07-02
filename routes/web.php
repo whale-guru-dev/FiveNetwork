@@ -76,12 +76,13 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::get('allow-apply-membership', "HomeController@allowapplymembershipview")->name('admin.allow-apply-membership');
 	Route::post('allow-apply-membership',"HomeController@allowapplymembership")->name('admin.allow.apply');
 	Route::post('deny-apply-membership',"HomeController@denyapplymembership")->name('admin.deny.apply');
-
+	Route::get('check-all-members-membership',"HomeController@checkallmembership")->name('admin.check.membership');
 
 	Route::get('edit-faq','EditController@faqview')->name('admin.edit-faq-view');
 	Route::post('edit-faq','EditController@faqedit')->name('admin.edit-faq');
 
 	Route::get('check-request-opportunity','OpportunityController@checkrequest')->name('admin.check-request-opportunity');
+	Route::get('members-request-opportunity','OpportunityController@checkallrequest')->name('admin.check-allrequest-opportunity');
 	Route::get('request-opportunity-detail/{id}','OpportunityController@detailrequestopportunity')->name('admin.requestopportunity-detail');
 	Route::post('allow-requestopportunity-detail','OpportunityController@allowusersumitopportunity')->name('admin.allow-submit-opportunity');
 	Route::post('deny-requestopportunity-detail','OpportunityController@denyusersumitopportunity')->name('admin.deny-submit-opportunity');

@@ -29,7 +29,11 @@
 <![endif]-->
 </head>
 <style type="text/css">
-    #sidebarnav li, span{
+    #sidebarnav li span{
+        color: white;
+    }
+
+    .sidebar-nav ul li ul li a{
         color: white;
     }
 
@@ -158,24 +162,29 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li>
-                            <a href="{{route('admin.check-membership')}}" aria-expanded="false">
-                                <i class="fa fa-circle"></i>
-                                <span class="hide-menu">Check Membership</span>
+
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true">
+                                <i class="mdi mdi-widgets"></i>
+                                <span class="hide-menu">Membership</span>
                             </a>
-                        </li>    
-                        <li>
-                            <a  href="{{route('admin.allow-apply-membership')}}" aria-expanded="false">
-                                <i class="mdi mdi-map-marker"></i>
-                                <span class="hide-menu">Allow Member To Apply Membership</span>
-                            </a>
+                            <ul aria-expanded="true" class="collapse in" style="">
+                                <li><a href="{{route('admin.allow-apply-membership')}}">Allow Preregisters To Apply Membership</a></li>
+                                <li><a href="{{route('admin.check-membership')}}">Check Newly Applied Membership</a></li>
+                                <li><a href="{{route('admin.check.membership')}}">All Members Membership Info</a></li>
+                            </ul>
                         </li>
 
-                        <li>
-                            <a  href="{{route('admin.check-request-opportunity')}}" aria-expanded="false">
-                                <i class="mdi mdi-map-marker"></i>
-                                <span class="hide-menu">Allow Member To Submit Opportunity</span>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true">
+                                <i class="ti-harddrives"></i>
+                                <span class="hide-menu">Opportunity</span>
                             </a>
+                            <ul aria-expanded="true" class="collapse in" style="">
+                                <li><a href="{{route('admin.check-request-opportunity')}}">Allow Members To Submit Opportunity</a></li>
+                                <li><a href="{{route('admin.check-allrequest-opportunity')}}">All Members' Requests for Opportunity</a></li>
+                                <li><a href="#">All Members Submitted Opportunity</a></li>
+                            </ul>
                         </li>
 
                         <li>

@@ -7,13 +7,13 @@
 @section('admin-content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Allow To User Who Applied Membership</h3>
+        <h3 class="text-themecolor">Check Member's Membership In Detail</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
             <li class="breadcrumb-item">pages</li>
-            <li class="breadcrumb-item active">Allow To User Who Applied Membership</li>
+            <li class="breadcrumb-item active">Check Member's Membership In Detail</li>
         </ol>
     </div>
 </div>
@@ -32,8 +32,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Members Who Applied Membership</h4>
-                    <h6 class="card-subtitle">You can allow members to login the platform.</h6>
+                    <h4 class="card-title">All Members</h4>
+                    <h6 class="card-subtitle">You can check member's Membership in detail.</h6>
                     <div class="table-responsive m-t-40">
                         <table id="allow-apply" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -59,8 +59,8 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @if($users->count()>0)
-                                @foreach($users as $user)
+                                @if($members->count()>0)
+                                @foreach($members as $user)
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$user->family_office_name}}</td>
@@ -107,6 +107,4 @@
     });
 
 </script>
-
-
 @endsection
