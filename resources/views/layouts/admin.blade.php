@@ -32,6 +32,14 @@
     #sidebarnav li, span{
         color: white;
     }
+
+    .card {
+        color: white;
+    }
+    .card h5 a, h6, p{
+        color: white;
+    }
+
 </style>
 
 <body class="fix-header card-no-border">
@@ -142,8 +150,8 @@
                     <div class="profile-img"> <img src="{{asset('assets/dashboard/images/users/1.jpg')}}" alt="user" /> </div>
                     <!-- User profile text-->
                     <div class="profile-text"> 
-                        <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe <span class="caret"></span>
-                        </a>
+                        <!-- <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe <span class="caret"></span>
+                        </a> -->
                     </div>
                 </div>
                 <!-- End User profile text-->

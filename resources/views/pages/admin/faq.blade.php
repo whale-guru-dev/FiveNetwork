@@ -1,13 +1,6 @@
 @extends('layouts.admin')
 @section('admin-css')
-<style>
-.card {
-    color: white;
-}
-.card h5 a{
-    color: white;
-}
-</style>
+
 @endsection
 
 
