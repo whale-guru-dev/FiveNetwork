@@ -173,7 +173,14 @@ color: #797979;
                         <li> 
                             <a class="waves-effect waves-dark" href="{{route('member.refer-member-view')}}" aria-expanded="false">
                                 <i class="mdi mdi-gauge"></i>
-                                <span class="hide-menu">Refer a Family to the FIVE Network</span>
+                                <span class="hide-menu">Refer a Family</span>
+                            </a>
+                        </li>
+
+                        <li> 
+                            <a class="waves-effect waves-dark" href="{{route('member.request-opportunity')}}" aria-expanded="false">
+                                <i class="mdi mdi-gauge"></i>
+                                <span class="hide-menu">Request a opportunity</span>
                             </a>
                         </li>
 
@@ -251,13 +258,37 @@ color: #797979;
     <script src="{{asset('assets/dashboard/member/js/custom.min.js')}}"></script>
     <!-- ============================================================== -->
 
-    <script src="{{asset('assets/dashboard/plugins/session-timeout/idle/jquery.idletimeout.js')}}"></script>
-    <script src="{{asset('assets/dashboard/plugins/session-timeout/idle/jquery.idletimer.js')}}"></script>
-    <script src="{{asset('assets/dashboard/plugins/session-timeout/idle/session-timeout-idle-init.js')}}"></script>
+    <!-- <script src="{{asset('assets/dashboard/plugins/session-timeout/jquery.sessionTimeout.min.js')}}"></script> -->
+    <!-- <script src="{{asset('assets/dashboard/plugins/session-timeout/session-timeout-init.js')}}"></script> -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
-
+<!--     <script type="text/javascript">
+        var SessionTimeout = function() {
+            var i = function() {
+                $.sessionTimeout({
+                    title: "Session Timeout Notification",
+                    message: "Your session is expiring soon.",
+                    redirUrl: "{{route('login')}}",
+                    logoutUrl: "{{route('login')}}",
+                    keepAlive: false,
+                    warnAfter: 11e4,
+                    redirAfter: 12e4,
+                    ignoreUserActivity: !0,
+                    countdownMessage: "Redirecting in {timer} seconds.",
+                    countdownBar: !0
+                })
+            };
+            return {
+                init: function() {
+                    i()
+                }
+            }
+        }();
+        jQuery(document).ready(function() {
+            SessionTimeout.init()
+        });
+    </script> -->
     @yield('member-js')
 </body>
 

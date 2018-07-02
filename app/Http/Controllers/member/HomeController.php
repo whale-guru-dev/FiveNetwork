@@ -34,5 +34,16 @@ class HomeController extends Controller
     	return view('pages.member.profile')->with(['user'=>$user]);
     }
 
+    // public function lockscreen()
+    // {
+    //     $user = Auth::user();
+    //     $email = $user->email;
+    // }
+
+    // public function keepalive()
+    // { 
+    //     $user = Auth::user();
+    // }
+
 
 }

@@ -44,6 +44,14 @@ Route::group(['prefix'=>'member','namespace'=>'member'],function(){
 	Route::post('refer-member','ReferController@refermember')->name('member.refer-member');
 
 	Route::get('dealroom','DealRoomController@dealroomview')->name('member.dealroom');
+
+	Route::get('request-opportunity','OpportunityController@requestview')->name('member.request-opportunity');
+	Route::post('request-opportunity','OpportunityController@request')->name('member.requestopportunity');
+
+	Route::get('submit-opportunity-form/{code}','OpportunityController@submitopportunityformview')->name('member.submit-opportunity-form');
+
+	// Route::get('lock-screen','HomeController@lockscreen')->name('member.lock-screen');
+	// Route::get('keep-alive','HomeController@keepalive')->name('member.keep-alive');
 });
 
 Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
@@ -51,9 +59,7 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::get('/','HomeController@index');
 
 	Route::get('login', 'LoginController@showLoginForm')->name('admin.login');
-
 	Route::post('login', 'LoginController@login')->name('admin.login.submit');
-
 	Route::get('logout', 'LoginController@logout');
 
 	Route::get('password/reset','AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
@@ -74,5 +80,8 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::get('edit-faq','EditController@faqview')->name('admin.edit-faq-view');
 	Route::post('edit-faq','EditController@faqedit')->name('admin.edit-faq');
 
-
+	Route::get('check-request-opportunity','OpportunityController@checkrequest')->name('admin.check-request-opportunity');
+	Route::get('request-opportunity-detail/{id}','OpportunityController@detailrequestopportunity')->name('admin.requestopportunity-detail');
+	Route::post('allow-requestopportunity-detail','OpportunityController@allowusersumitopportunity')->name('admin.allow-submit-opportunity');
+	Route::post('deny-requestopportunity-detail','OpportunityController@denyusersumitopportunity')->name('admin.deny-submit-opportunity');
 });

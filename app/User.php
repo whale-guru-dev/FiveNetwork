@@ -95,4 +95,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Model\MemberInvestmentSize','member_id');
     }
+
+    public function requestopportunity()
+    {
+        return $this->hasMant('App\Model\MemberRequestOpportunity','usid');
+    }
 }

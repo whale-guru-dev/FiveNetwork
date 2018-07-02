@@ -32,8 +32,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Users Who Applied Membership</h4>
-                    <h6 class="card-subtitle">You can allow user to login the platform.</h6>
+                    <h4 class="card-title">Users Who Required</h4>
+                    <h6 class="card-subtitle">You can allow user to submit co-investment opportunity.</h6>
                     <div class="table-responsive m-t-40">
                         <table id="allow-apply" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -43,7 +43,7 @@
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
-                                    <th>Applied Time</th>
+                                    <th>Requested Time</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,16 +59,16 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @if($users->count()>0)
-                                @foreach($users as $user)
+                                @if($requests->count()>0)
+                                @foreach($requests as $request)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{$user->family_office_name}}</td>
-                                    <td>{{$user->fName}}</td>
-                                    <td>{{$user->lName}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->updated_at}}</td>
-                                    <td><a  href="{{route('admin.membership-detail',['id'=>$user->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
+                                    <td>{{$request->user->family_office_name}}</td>
+                                    <td>{{$request->user->fName}}</td>
+                                    <td>{{$request->user->lName}}</td>
+                                    <td>{{$request->user->email}}</td>
+                                    <td>{{$request->user->updated_at}}</td>
+                                    <td><a  href="{{route('admin.requestopportunity-detail',['id'=>$request->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -79,15 +79,9 @@
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End PAge Content -->
-    <!-- ============================================================== -->
-
-</div>
 @endsection
 
 @section('admin-js')
-<!-- This is data table -->
 <script src="{{asset('assets/dashboard/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <!-- start - This is for export functionality only -->
 <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -105,8 +99,5 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
-
 </script>
-
-
 @endsection

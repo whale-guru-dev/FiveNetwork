@@ -309,7 +309,14 @@
                         <li>
                             <a  href="{{route('admin.allow-apply-membership')}}" aria-expanded="false">
                                 <i class="mdi mdi-map-marker"></i>
-                                <span class="hide-menu">Allow User To Apply Membership</span>
+                                <span class="hide-menu">Allow Member To Apply Membership</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a  href="{{route('admin.check-request-opportunity')}}" aria-expanded="false">
+                                <i class="mdi mdi-map-marker"></i>
+                                <span class="hide-menu">Allow Member To Submit Opportunity</span>
                             </a>
                         </li>
 
