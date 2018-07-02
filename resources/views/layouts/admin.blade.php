@@ -189,8 +189,8 @@
 
                         <li>
                             <a  href="{{route('admin.edit-faq-view')}}" aria-expanded="false">
-                                <i class="mdi mdi-map-marker"></i>
-                                <span class="hide-menu">Edit Faq</span>
+                                <i class="icon-question"></i>
+                                <span class="hide-menu">Faq</span>
                             </a>
                         </li>
 
