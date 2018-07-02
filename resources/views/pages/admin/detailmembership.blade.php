@@ -44,15 +44,13 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
         	<div class="card  card-outline-info">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <h4 class="m-b-0 text-white">Membership Info</h4>
                         </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-info" id="back-btn"><i class="ti-back-left">Back</i></button>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-warning" id="back-btn"><i class="ti-back-left">Back</i></button>
                         </div>
                     </div>
-                    
-                    
                 </div>
         		<div class="card-body">
         			<form class="form-horizontal" role="form">
