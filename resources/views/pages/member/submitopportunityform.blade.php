@@ -36,6 +36,7 @@
                     <h6 class="card-subtitle">Please fill Co-Investment opportunity form.</h6>
                     <form class="form p-t-20" action="{{route('member.submit-coinvestment-opportunity')}}" method="POST" id="submit-form">
                         @csrf
+                        <input type="hidden" name="code" value="{{$opportunitymember->code}}">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -51,7 +52,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group collapse" id="remain_anonymous" style="display: none;">
-                                    <label for="name_remain_anonymous"> Name : <span class="danger">*</span> 
+                                    <label for="name_remain_anonymous"> Name : 
                                     </label>
                                     <input type="email" class="form-control " id="name_remain_anonymous" name="name_remain_anonymous"> 
                                 </div>
@@ -73,7 +74,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group collapse" id="alternative" style="display: none;">
-                                    <label for="contact_email"> Contact Email : <span class="danger">*</span> 
+                                    <label for="contact_email"> Contact Email : 
                                     </label>
                                     <input type="email" class="form-control " id="contact_email" name="contact_email"> 
                                 </div>
@@ -133,8 +134,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="invest_structure">Investment Structure :</label>
-                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%;"  data-placeholder="Choose" name="invest_structure[]" id="invest_structure">
+                                    <label for="investment_structureype_id">Investment Structure :</label>
+                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%;"  data-placeholder="Choose" name="investment_structureype_id" id="investment_structureype_id">
                                         <option value="">Select</option>
                                         @foreach($invest_types as $type)
                                         <option value="{{$type->id}}">{{$type->type}}</option>
@@ -173,13 +174,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="amount_seeking_investment"> Amount of Investment Seeking : </label>
+                                    <label for="amount_seeking_investment_val"> Amount of Investment Seeking : </label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control required" name="amount_seeking_investment" id="amount_seeking_investment">
+                                        <input type="hidden" name="amount_seeking_investment" id="amount_seeking_investment" value="">
+                                        <input type="text" class="form-control required" name="amount_seeking_investment_val" id="amount_seeking_investment_val">
                                         <span class="input-group-btn">
                                             <select class="btn" id="money_unit">
-                                                <option>M $</option>
-                                                <option>MM $</option>
+                                                <option value="1">K $</option>
+                                                <option value="2">MM $</option>
                                             </select>
                                         </span>
                                     </div>
@@ -236,7 +238,6 @@
                                 </div>
                             </div>
                         </div>
-
                         
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                         <button type="button" class="btn btn-inverse waves-effect waves-light" id="cancel-btn">Cancel</button>
@@ -265,6 +266,8 @@
             confirmButtonColor:"#1e88e5",
             confirmButtonText: "OK!",   
             closeOnConfirm: false 
+        }, function(){   
+            window.location.href = "{{route('member.submit-opportunity-form',['code' => $opportunitymember->code])}}";
         });
     </script>
     @endif
@@ -274,6 +277,30 @@
 
     $(document).on("click","#cancel-btn",function(){
         document.getElementById("request-form").reset();
+    });
+
+    $("#submit-form").submit(function( event ) {money_unit
+      var amount_seeking_investment_val = $("#amount_seeking_investment_val").val();
+      var money_unit = $("#money_unit").val();
+      var amount_seeking_investment = 0;
+      if(money_unit == 1)
+        amount_seeking_investment = amount_seeking_investment_val * 1000;
+      else if(money_unit == 2)
+        amount_seeking_investment = amount_seeking_investment_val * 1000000;
+      $("#amount_seeking_investment").val(amount_seeking_investment);
+    });
+
+    $( "#bremain_anonymous" ).change(function() {
+        if($( "#bremain_anonymous" ).val() == 0)
+            $("#remain_anonymous").show();
+        else $("#remain_anonymous").hide();
+    });
+
+    $( "#reachout_method" ).change(function() {
+        $("#alternative").show();
+        if($( "#reachout_method" ).val() == 1)
+            $("#alternative").show();
+        else $("#alternative").hide();
     });
 </script>
 @endsection 

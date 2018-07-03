@@ -98,6 +98,11 @@ class User extends Authenticatable
 
     public function requestopportunity()
     {
-        return $this->hasMant('App\Model\MemberRequestOpportunity','usid');
+        return $this->hasMany('App\Model\MemberRequestOpportunity','usid');
+    }
+
+    public function submitopportunityform()
+    {
+        return $this->hasMany('App\Model\MemberOpportunityForm','member_id');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\Model\MemberRequestOpportunity;
 use App\Model\MemberOpportunityForm;
+use App\Model\MemberInvestmentStructure;
 use Mail;
 use App\Mail\Follow;
 
@@ -64,6 +65,40 @@ class OpportunityController extends Controller
 
     public function submitopportunityform(Request $request)
     {
+        $form = MemberOpportunityForm::create([
+            'member_id' => Auth::user()->id,
+            'code' => $request['code'],
+            'bremain_anonymous' => $request['bremain_anonymous'],
+            'name_remain_anonymous' => $request['name_remain_anonymous'],
+            'reachout_method' => $request['reachout_method'],
+            'contact_email' => $request['contact_email'],
+            'project_name' => $request['project_name'],
+            'company_desc' => $request['company_desc'],
+            'headquater_loc' => $request['headquater_loc'],
+            'operation_loc' => $request['operation_loc'],
+            'sector_subsector_specialization' => $request['sector_subsector_specialization'],
+            'investment_structureype_id' => $request['investment_structureype_id'],
+            'independent_sponsor' => $request['independent_sponsor'],
+            'offered_stake' => $request['offered_stake'],
+            'amount_seeking_investment' => $request['amount_seeking_investment'],
+            'revenue' => $request['revenue'],
+            'EBITDA' => $request['EBITDA'],
+            'valuation' => $request['valuation'],
+            'structure_term' => $request['structure_term'],
+            'additional_commentary' => $request['additional_commentary']
+        ]);
 
+        $to = $form->user->email;
+        $subtitle = 'Successfully Submitted Your Co-Investment Opportunity!';
+        $subject = 'Submitted Your Co-Investment Opportunity!';
+        $content = 'Thank you for submitting your co-investment opportunity to the Family InVestment Exchange. Once the opportunity has matched the profile of a member of the FIVE Network, we will connect them to the appropriate contact person for this opportunity.';
+        $link = url('/member');
+        $link_name = 'Go To Dashboard';
+
+        Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
+
+        $msg = ['Success','Successfully Submitted Your Co-Investment Opportunity','success'];
+        return redirect()->route('member.submit-opportunity-form',['code' => $form->code])->with(['msg' => $msg]);
     }
 }
