@@ -19,7 +19,7 @@
 
     <title>Family Investment Exchange | Apply Membership</title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon.png')}}">
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/dashboard/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -99,6 +99,7 @@ color: #797979;
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Validation wizard -->
+                
                 <div class="row" id="validation">
                     <div class="col-12">
                         <div class="card wizard-content apply-box">

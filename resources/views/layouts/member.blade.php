@@ -11,7 +11,7 @@
     <meta name="keywords"  content="Family Investment Exchange" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon.png')}}">
     <title>Family Investment Exchange | Member Dashboard</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/dashboard/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -76,9 +76,9 @@ color: #797979;
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{asset('logo.png')}}" width="128" height="40" alt="homepage" class="dark-logo" />
+                            <img src="{{asset('logo.png')}}" width="128" height="56" alt="homepage" class="dark-logo" />
                             <!-- Light Logo icon -->
-                            <img src="{{asset('logo.png')}}" width="128" height="40" alt="homepage" class="light-logo" />
+                            <img src="{{asset('logo.png')}}" width="128" height="56" alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->

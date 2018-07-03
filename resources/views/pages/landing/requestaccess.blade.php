@@ -13,7 +13,7 @@
 
     <title>Family Investment Exchange | Login</title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon.png')}}">
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/dashboard/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -59,9 +59,16 @@
 
     .login-box{
         position: absolute;
-        top: 50%;
+        top: 55%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%,-55%);
+    }
+
+    #logo-box{
+        top: 25%;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-25%);
     }
 
     .sweet-alert {
@@ -95,6 +102,7 @@
     <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
+            <img src="{{asset('logo.png')}}" id="logo-box" width="250">
             <div class="login-box card">
                 <div class="card-body">
                     <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('requestaccess') }}" aria-label="{{ __('Request Access') }}">

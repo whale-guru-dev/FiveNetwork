@@ -17,7 +17,7 @@ if(!isset($user))
 
     <title>Family Investment Exchange | Refer A Member</title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon.png')}}">
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/dashboard/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -63,9 +63,16 @@ if(!isset($user))
 
     .login-box{
         position: absolute;
-        top: 50%;
+        top: 70%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%,-70%);
+    }
+
+    #logo-box{
+        top: 0%;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,0%);
     }
 
     .sweet-alert {
@@ -98,6 +105,7 @@ if(!isset($user))
     <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
+            <img src="{{asset('logo.png')}}" id="logo-box" width="250">
             <div class="card login-box">
                 <div class="card-body">
                     <h4 class="card-title">Refer A Member</h4>

@@ -14,7 +14,7 @@
 
     <title>Family Investment Exchange | Reset Password</title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon.png')}}">
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/dashboard/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -55,9 +55,16 @@
 
     .login-box{
         position: absolute;
-        top: 50%;
+        top: 60%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%,-60%);
+    }
+
+    #logo-box{
+        top: 15%;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-15%);
     }
 </style>
 <body>
@@ -73,6 +80,7 @@
     <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
+            <img src="{{asset('logo.png')}}" id="logo-box" width="250">
             <div class="login-box card">
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.request') }}" class="form-horizontal" aria-label="{{ __('Reset Password') }}">

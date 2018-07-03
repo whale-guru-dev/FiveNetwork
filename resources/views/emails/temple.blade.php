@@ -233,7 +233,7 @@ a[x-apple-data-detectors=true] {
                   
                     <div align="center" class="img-container center  autowidth  " style="padding-right: 20px;  padding-left: 20px;">
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px;line-height:0px;"><td style="padding-right: 20px; padding-left: 20px;" align="center"><![endif]-->
-<div style="line-height:20px;font-size:1px">&#160;</div>  <img class="center  autowidth " align="center" border="0" src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/63/yourlogo_white(1).png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;width: 100%;max-width: 100px" width="100">
+<div style="line-height:20px;font-size:1px">&#160;</div>  <img class="center  autowidth " align="center" border="0" src="{{asset('logo.png')}}" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;width: 100%;max-width: 100px" width="100">
 <div style="line-height:20px;font-size:1px">&#160;</div><!--[if mso]></td></tr></table><![endif]-->
 </div>
 
