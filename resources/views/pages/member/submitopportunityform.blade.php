@@ -241,9 +241,6 @@
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                         <button type="button" class="btn btn-inverse waves-effect waves-light" id="cancel-btn">Cancel</button>
                     </form>
-                    <form action="{{route('member.submit-coinvestment-opportunity')}}" class="validation-wizard wizard-circle" id="apply-form" method="POST" >
-                        @csrf
-                    </form>
                 </div>
             </div>
         </div>
