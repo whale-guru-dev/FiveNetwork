@@ -39,6 +39,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // $this->middleware('guest')->except('logout');
         $this->middleware('guest')->except('logout');
     }
 
@@ -91,8 +92,8 @@ class LoginController extends Controller
                     'long' => $long,
                     'lat'  => $lat
                 ]);
-
-                return $this->sendLoginResponse($request);
+                return redirect()->route('member.dashboard');
+                // return $this->sendLoginResponse($request);
             }
 
             // If the login attempt was unsuccessful we will increment the number of attempts

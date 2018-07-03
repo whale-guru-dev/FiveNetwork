@@ -58,4 +58,9 @@ class OpportunityController extends Controller
             return redirect()->route('member.dashboard');
         }
     }
+
+    public function submitopportunityform(Request $request)
+    {
+        
+    }
 }

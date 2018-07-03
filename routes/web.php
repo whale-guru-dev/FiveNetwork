@@ -49,6 +49,7 @@ Route::group(['prefix'=>'member','namespace'=>'member'],function(){
 	Route::post('request-opportunity','OpportunityController@request')->name('member.requestopportunity');
 
 	Route::get('submit-opportunity-form/{code}','OpportunityController@submitopportunityformview')->name('member.submit-opportunity-form');
+	Route::post('submit-opportunity-form','OpportunityController@submitopportunityform')->name('member.submit-coinvestment-opportunity');
 
 	// Route::get('lock-screen','HomeController@lockscreen')->name('member.lock-screen');
 	// Route::get('keep-alive','HomeController@keepalive')->name('member.keep-alive');
