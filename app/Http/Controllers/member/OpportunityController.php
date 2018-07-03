@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Model\MemberRequestOpportunity;
+use App\Model\MemberOpportunityForm;
+use Mail;
+use App\Mail\Follow;
 
 class OpportunityController extends Controller
 {
@@ -61,6 +64,6 @@ class OpportunityController extends Controller
 
     public function submitopportunityform(Request $request)
     {
-        
+
     }
 }

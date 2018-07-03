@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Model\MemberRequestOpportunity;
+use App\Model\MemberOpportunityForm;
 use Mail;
 use App\Mail\Follow;
 
