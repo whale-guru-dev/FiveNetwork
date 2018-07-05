@@ -87,7 +87,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 col-lg-6">
-                            <a href="#" class="btn btn-block btn-outline-info">Submit co-investment opportunity</a>
+                            <a href="{{route('member.request-opportunity')}}" class="btn btn-block btn-outline-info">Submit co-investment opportunity</a>
                         </div>
 
                         <div class="col-md-6 col-lg-6">
@@ -101,7 +101,7 @@
                         </div>
                         
                         <div class="col-md-6 col-lg-6">
-                            <a href="#" class="btn btn-block btn-outline-info">My FIVE Verified Opportunities</a>
+                            <a href="{{route('member.verified-opportunity')}}" class="btn btn-block btn-outline-info">My FIVE Verified Opportunities</a>
                         </div>
                     </div>
                     <br>
