@@ -56,17 +56,18 @@
     }
 
     .login-box{
-        position: absolute;
+/*        position: absolute;
         top: 60%;
         left: 50%;
-        transform: translate(-50%,-60%);
+        transform: translate(-50%,-60%);*/
     }
 
     #logo-box{
-        top: 25%;
+        /*top: 25%;
         position: absolute;
         left: 50%;
-        transform: translate(-50%,-25%);
+        transform: translate(-50%,-25%);*/
+        margin : 0 auto;
     }
 </style>
 <body>
@@ -84,7 +85,10 @@
     <section id="wrapper">
         <div class="login-register">
             <!-- <div class="row"> -->
-            <img src="{{asset('logo.png')}}" id="logo-box" width="250">
+                <div class="row text-center">
+                    <img src="{{asset('logo.png')}}" id="logo-box" width="250" height="200">
+                </div>
+            
             <!-- </div> -->
             <div class="login-box card">
                 <div class="card-body">

@@ -134,8 +134,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="investment_structureype_id">Investment Structure :</label>
-                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%;"  data-placeholder="Choose" name="investment_structureype_id" id="investment_structureype_id">
+                                    <label for="investment_structuretype_id">Investment Structure :</label>
+                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%;"  data-placeholder="Choose" name="investment_structuretype_id" id="investment_structuretype_id">
                                         <option value="">Select</option>
                                         @foreach($invest_types as $type)
                                         <option value="{{$type->id}}">{{$type->type}}</option>

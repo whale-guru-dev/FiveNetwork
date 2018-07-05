@@ -15,6 +15,9 @@
 
 Auth::routes();
 
+Route::get('/email-test1','EmailTestController@emailtest1');
+Route::get('/email-test2','EmailTestController@emailtest2');
+
 Route::get('/', 'HomeController@index');
 
 Route::post('/preregister','HomeController@preregister');

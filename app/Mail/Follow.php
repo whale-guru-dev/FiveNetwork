@@ -42,6 +42,6 @@ class Follow extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.temple')->with(['link'=>$this->link, 'link_name'=>$this->link_name, 'content'=>$this->content, 'subtitle' => $this->subtitle, 'subject'=>$this->subject]);
+        return $this->view('emails.follow')->with(['link'=>$this->link, 'link_name'=>$this->link_name, 'content'=>$this->content, 'subtitle' => $this->subtitle, 'subject'=>$this->subject]);
     }
 }

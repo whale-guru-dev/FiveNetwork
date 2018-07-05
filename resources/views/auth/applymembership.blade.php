@@ -1135,7 +1135,7 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <label for="input-file-now">Please attach a copy of a government issued photo ID <span class="danger">*</span></label>
-                                                <input type="file" id="input-file-now" class="dropify required" name="govern_photo_id" accept="image/*"/>
+                                                <input type="file" id="input-file-now" class="dropify required" name="govern_photo_id" accept="image/*"/ data-default-file="{{asset('assets/dashboard/profile/id.png')}}">
                                             </div>
                                         </div>
                                         <br>

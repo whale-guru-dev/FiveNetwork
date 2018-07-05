@@ -58,17 +58,18 @@
     }
 
     .login-box{
-        position: absolute;
+        /*position: absolute;
         top: 55%;
         left: 50%;
-        transform: translate(-50%,-55%);
+        transform: translate(-50%,-55%);*/
     }
 
     #logo-box{
-        top: 25%;
+        /*top: 25%;
         position: absolute;
         left: 50%;
-        transform: translate(-50%,-25%);
+        transform: translate(-50%,-25%);*/
+        margin: 0 auto;
     }
 
     .sweet-alert {
@@ -102,7 +103,9 @@
     <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
-            <img src="{{asset('logo.png')}}" id="logo-box" width="250">
+            <div class="row text-center">
+                <img src="{{asset('logo.png')}}" id="logo-box" width="250" height="200">
+            </div>
             <div class="login-box card">
                 <div class="card-body">
                     <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('requestaccess') }}" aria-label="{{ __('Request Access') }}">

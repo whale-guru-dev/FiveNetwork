@@ -62,17 +62,18 @@ if(!isset($user))
     }
 
     .login-box{
-        position: absolute;
+        /*position: absolute;
         top: 70%;
         left: 50%;
-        transform: translate(-50%,-70%);
+        transform: translate(-50%,-70%);*/
     }
 
     #logo-box{
-        top: 0%;
+        /*top: 0%;
         position: absolute;
         left: 50%;
-        transform: translate(-50%,0%);
+        transform: translate(-50%,0%);*/
+        margin: 0 auto;
     }
 
     .sweet-alert {
@@ -105,7 +106,9 @@ if(!isset($user))
     <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
-            <img src="{{asset('logo.png')}}" id="logo-box" width="250">
+            <div class="row text-center">
+                <img src="{{asset('logo.png')}}" id="logo-box" width="250" height="200">
+            </div>
             <div class="card login-box">
                 <div class="card-body">
                     <h4 class="card-title">Refer A Member</h4>
