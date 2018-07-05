@@ -253,10 +253,10 @@ $('#usa').vectorMap({
     enableZoom: true,
     hoverColor: '#009efb',
     markers : [
-    {latLng : [36.778259, -119.417931],name : 'I Love My India'},
-    {latLng : [44.182205, -84.506836],name : 'I Love My India'},
-    {latLng : [33.247875, -83.441162],name : 'I Love My India'},
-    {latLng : [66.160507, -153.369141],name : 'I Love My India'}
+    {latLng : [36.778259, -119.417931],name : ''},
+    {latLng : [44.182205, -84.506836],name : ''},
+    {latLng : [33.247875, -83.441162],name : ''},
+    {latLng : [66.160507, -153.369141],name : ''}
     ],
     hoverOpacity: null,
     normalizeFunction: 'linear',
