@@ -164,37 +164,44 @@ color: #797979;
                         </li>
 
                         <li> 
-                            <a class="waves-effect waves-dark" href="{{route('member.faq')}}" aria-expanded="false">
-                                <i class="mdi mdi-gauge"></i>
-                                <span class="hide-menu">Faq</span>
-                            </a>
-                        </li>
-
-                        <li> 
                             <a class="waves-effect waves-dark" href="{{route('member.refer-member-view')}}" aria-expanded="false">
-                                <i class="mdi mdi-gauge"></i>
-                                <span class="hide-menu">Refer a Family</span>
+                                <i class="mdi mdi-share-variant"></i>
+                                <span class="hide-menu">Refer A Family</span>
                             </a>
                         </li>
 
                         <li> 
                             <a class="waves-effect waves-dark" href="{{route('member.request-opportunity')}}" aria-expanded="false">
-                                <i class="mdi mdi-gauge"></i>
-                                <span class="hide-menu">Request a opportunity</span>
+                                <i class="mdi mdi-plus-box"></i>
+                                <span class="hide-menu">Request A Opportunity</span>
+                            </a>
+                        </li>
+
+                        <li> 
+                            <a class="waves-effect waves-dark" href="{{route('member.verified-opportunity')}}" aria-expanded="false">
+                                <i class="mdi mdi-verified"></i>
+                                <span class="hide-menu">My Verified Opportunity</span>
                             </a>
                         </li>
 
                         <li> 
                             <a class="waves-effect waves-dark" href="{{route('member.dealroom')}}" aria-expanded="false">
-                                <i class="mdi mdi-gauge"></i>
+                                <i class="mdi mdi-file-multiple"></i>
                                 <span class="hide-menu">Deal Room</span>
                             </a>
                         </li>
 
                         <li> 
                             <a class="waves-effect waves-dark" href="{{route('member.profile')}}" aria-expanded="false">
-                                <i class="mdi mdi-gauge"></i>
+                                <i class="mdi mdi-account-circle"></i>
                                 <span class="hide-menu">Profile</span>
+                            </a>
+                        </li>
+
+                        <li> 
+                            <a class="waves-effect waves-dark" href="{{route('member.faq')}}" aria-expanded="false">
+                                <i class="mdi mdi-comment-question-outline"></i>
+                                <span class="hide-menu">Faq</span>
                             </a>
                         </li>
                     </ul>

@@ -121,6 +121,7 @@
 	                                    @elseif($request->is_accepted == 1)
 	                                    <div class="col-md-offset-6 col-md-6">
 	                                        <button type="button" class="btn btn-info"> <i class="fa fa-pencil"></i> Allowed</button>
+	                                    </div>
 	                                    @elseif($request->is_accepted == 2)
 	                                    <div class="col-md-offset-6 col-md-6">
 	                                        <button type="button" class="btn btn-danger">Denied</button>

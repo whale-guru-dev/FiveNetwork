@@ -8,10 +8,11 @@ use Auth;
 use App\Model\MemberRequestOpportunity;
 use App\Model\MemberOpportunityForm;
 use App\Model\MemberInvestmentStructure;
+use App\Model\MemberOpportunityMatch;
 use Mail;
 use App\Mail\Follow;
 use App\User;
-use App\Model\MemberOpportunityMatch;
+
 
 class OpportunityController extends Controller
 {
@@ -104,7 +105,7 @@ class OpportunityController extends Controller
         return redirect()->route('member.submit-opportunity-form',['code' => $form->code])->with(['msg' => $msg]);
     }
 
-    public function calculateScore(MemberOpportunityForm $mof)
+    public function checkmatch(MemberOpportunityForm $mof)
     {
         $score = 0;
         $member = User::where('id', $mof->member_id)->first();
@@ -134,7 +135,7 @@ class OpportunityController extends Controller
                 foreach($each->investmentsize as $is){
                     if($is == 1 && $amount_seeking_investment < 5 * pow(10,5)){
                         $score = $score + 30;
-                    }elseif($is == 2 && $amount_seeking_investment >= 5 * pow(10,5) && $amount_seeking_investment =< pow(10,6)){
+                    }elseif($is == 2 && $amount_seeking_investment >= 5 * pow(10,5) && $amount_seeking_investment <= pow(10,6)){
                         $score = $score + 30;
                     }elseif($is == 3 && $amount_seeking_investment >= pow(10,6) && $amount_seeking_investment <= 5 * pow(10,6)){
                         $score = $score + 30;
@@ -163,7 +164,44 @@ class OpportunityController extends Controller
                 ]);
             }
         }
+    }
 
+    public function verifiedopportunityview()
+    {
+        $usid = Auth::user()->id;
+        $oppors = MemberOpportunityMatch::where('matched_member_id', $usid)->get();
+        return view('pages.member.verifiedopportunity')->with(['oppors' => $oppors]);
+    }
 
+    public function detailopportunity($id)
+    {
+        $usid = Auth::user()->id;
+        $matched_oppor = MemberOpportunityMatch::where('matched_member_id', $usid)->where('opportunity_id', $id)->first();
+        if($matched_oppor->count()>0){
+            $oppor = MemberOpportunityForm::find($id);
+            return view('pages.member.detailopportunity')->with(['oppor' => $oppor,'matched_oppor' => $matched_oppor]);
+        }else{
+            return redirect()->route('member.verified-opportunity');
+        }
+    }
+
+    public function interestopportunity(Request $request)
+    {
+        $id = $request['id'];
+        $usid = Auth::user()->id;
+        $matched_oppor = MemberOpportunityMatch::where('matched_member_id', $usid)->where('opportunity_id', $id)->first();
+        $matched_oppor->update(['binterest' => 1]);
+        $msg = ['Success', 'Successfully Expressed your interest','success'];
+        return redirect()->route('member.opportunity-detail',['id' => $id])->with(['msg' => $msg]);
+    }
+
+    public function nointerestopportunity(Request $request)
+    {
+        $id = $request['id'];
+        $usid = Auth::user()->id;
+        $matched_oppor = MemberOpportunityMatch::where('matched_member_id', $usid)->where('opportunity_id', $id)->first();
+        $matched_oppor->update(['binterest' => 2]);
+        $msg = ['Success', 'Successfully Expressed your no interest','success'];
+        return redirect()->route('member.opportunity-detail',['id' => $id])->with(['msg' => $msg]);
     }
 }
