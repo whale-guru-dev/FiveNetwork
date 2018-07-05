@@ -5445,7 +5445,7 @@ Main sidebar
   height: 100%;
   top: 0px;
   z-index: 20;
-  padding-top: 60px;
+  padding-top: 56px; /*60px*/
   background: #fff;
   -webkit-box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
   box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08); }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Model\MemberRequestOpportunity;
 use App\Model\MemberOpportunityForm;
+use App\Model\MemberOpportunityMatch;
 use Mail;
 use App\Mail\Follow;
 
@@ -72,5 +73,17 @@ class OpportunityController extends Controller
 
     	$msg = ['Success','Successfully Denied Member to Submit Opportunity','success'];
     	return redirect()->route('admin.requestopportunity-detail',['id'=>$request['id']])->with(['msg' => $msg]);
+    }
+
+    public function analyticsview()
+    {
+        $oppors = MemberOpportunityMatch::with('matchedMember')->get();
+        return view('pages.admin.opportunityanalytics')->with(['oppors' => $oppors]);
+    }
+
+    public function detailopportunity($id)
+    {
+        $oppor = MemberOpportunityForm::find($id);
+        return view('pages.admin.detailopportunity')->with(['oppor' => $oppor]);
     }
 }

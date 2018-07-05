@@ -90,4 +90,6 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::get('request-opportunity-detail/{id}','OpportunityController@detailrequestopportunity')->name('admin.requestopportunity-detail');
 	Route::post('allow-requestopportunity-detail','OpportunityController@allowusersumitopportunity')->name('admin.allow-submit-opportunity');
 	Route::post('deny-requestopportunity-detail','OpportunityController@denyusersumitopportunity')->name('admin.deny-submit-opportunity');
+	Route::get('opportunity-analytics', 'OpportunityController@analyticsview')->name('admin.opportunity-analytics');
+	Route::get('opportunity-detail/{id}','OpportunityController@detailopportunity')->name('admin.opportunity-detail');
 });

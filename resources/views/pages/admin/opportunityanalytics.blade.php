@@ -7,13 +7,13 @@
 @section('admin-content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Allow To User Who Applied Membership</h3>
+        <h3 class="text-themecolor">Opportunity Analytics</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
             <li class="breadcrumb-item">pages</li>
-            <li class="breadcrumb-item active">Allow To User Who Applied Membership</li>
+            <li class="breadcrumb-item active">Opportunity Analytics</li>
         </ol>
     </div>
 </div>
@@ -32,45 +32,49 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Users Who Required</h4>
-                    <h6 class="card-subtitle">You can allow user to submit co-investment opportunity.</h6>
+                    <h4 class="card-title">Opportunity Analytics</h4>
+                    <h6 class="card-subtitle">You can check matched opportunities.</h6>
                     <div class="table-responsive m-t-40">
                         <table id="allow-apply" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Family Office Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>Requested Time</th>
-                                    <th>Action</th>
+                                    <th>Opportunity</th>
+                                    <th>Submitted Member</th>
+                                    <th>Matched Family</th>
+                                    <th>Matched Score</th>
+                                    <th>Submitted Time</th>
+                                    <th>Interested</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Family Office Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>Applied Time</th>
-                                    <th>Action</th>
+                                    <th>Opportunity</th>
+                                    <th>Submitted Member</th>
+                                    <th>Matched Family</th>
+                                    <th>Matched Score</th>
+                                    <th>Submitted Time</th>
+                                    <th>Interested</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @if($requests->count()>0)
-                                @foreach($requests as $request)
-                                <tr>
-                                    <td>{{$i++}}</td>
-                                    <td>{{$request->user->family_office_name}}</td>
-                                    <td>{{$request->user->fName}}</td>
-                                    <td>{{$request->user->lName}}</td>
-                                    <td>{{$request->user->email}}</td>
-                                    <td>{{$request->user->updated_at}}</td>
-                                    <td><a  href="{{route('admin.requestopportunity-detail',['id'=>$request->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
-                                </tr>
-                                @endforeach
+                                @if($oppors->count()>0)
+                                	@foreach($oppors as $each)
+									<td>{{$i++}}</td>
+                                    <td><a href="{{route('admin.opportunity-detail',['id' => $each->opportunity_id])}}">{{$each->opportunity->project_name}} <i class="fa fa-share"></i></a></td>
+                                    <td><a href="{{route('admin.membership-detail',['id' => $each->opportunity->user->id])}}">{{$each->opportunity->user->fName.' '.$each->opportunity->user->lName}} <i class="fa fa-share"></i></a></td>
+                                    <td><a href="{{route('admin.membership-detail',['id' => $each->matchedMember->id])}}">{{$each->matchedMember->fName.' '.$each->matchedMember->lName}} <i class="fa fa-share"></i></a></td>
+                                    <td>{{$each->score}}</td>
+                                    <td>{{$each->opportunity->created_at}}</td>
+                                    @if($each->binterest == 0)
+                                    <td>Not Expressed</td>
+                                    @elseif($each->binterest == 1)
+                                    <td>Interested</td>
+                                    @elseif($each->binterest == 2)
+                                    <td>Not Interested</td>
+                                    @endif
+                                	@endforeach
                                 @endif
                             </tbody>
                         </table>

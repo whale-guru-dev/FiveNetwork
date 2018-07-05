@@ -158,7 +158,7 @@ class OpportunityController extends Controller
 
                 MemberOpportunityMatch::create([
                     'opportunity_id' => $mof->id,
-                    'member_id' => $each->id,
+                    'matched_member_id' => $each->id,
                     'score' => $score
                 ]);
             }

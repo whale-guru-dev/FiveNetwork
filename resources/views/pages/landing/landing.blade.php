@@ -60,7 +60,7 @@
               <h1 class="brand-heading">Family Investment Exchange</h1>
               <p class="intro-text">Connecting Family Offices Around the World.</p>
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     </header>
