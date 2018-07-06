@@ -111,7 +111,7 @@
                         </div>
                         
                         <div class="col-md-6 col-lg-6">
-                            <a href="#" class="btn btn-block btn-outline-info">Dealroom</a>
+                            <a href="{{route('member.dealroom')}}" class="btn btn-block btn-outline-info">Dealroom</a>
                         </div>
                     </div>
                 </div>

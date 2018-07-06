@@ -192,6 +192,18 @@ class OpportunityController extends Controller
         $matched_oppor = MemberOpportunityMatch::where('matched_member_id', $usid)->where('opportunity_id', $id)->first();
         $matched_oppor->update(['binterest' => 1]);
         $msg = ['Success', 'Successfully Expressed your interest','success'];
+
+        $to = $matched_oppor->opportunity->user->email; 
+        $submittor = $matched_oppor->opportunity->user->fName.' '.$matched_oppor->opportunity->user->lName;
+        $interested_party = Auth::user()->fName.' '.Auth::user()->lName;
+        $subtitle = 'Expressed Interest on your opportunity!';
+        $subject = 'Expressed Interest on your opportunity';
+        $content = $submittor.'<br>'.$interested_party.' has expressed interest in learning more about '.$matched_oppor->opportunity->project_name.'. I will leave it to you both to connect as your schedules allow.';
+        $link = url('/member');
+        $link_name = 'Go To Dashboard';
+
+        Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
         return redirect()->route('member.opportunity-detail',['id' => $id])->with(['msg' => $msg]);
     }
 

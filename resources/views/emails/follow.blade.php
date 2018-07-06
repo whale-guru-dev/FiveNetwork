@@ -340,7 +340,7 @@
                                                 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 20px;"><![endif]-->
                                                 <div style="color:#989898;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;line-height:200%; padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 20px;">
                                                     <div style="line-height:24px;font-size:12px;text-align:center;color:#989898;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;">
-                                                        <div style="line-height:24px; font-size:12px; text-align: center;"><span style="font-size: 14px; font-family: 'lucida sans unicode', 'lucida grande', sans-serif; line-height: 28px;">{{$content}}</span></div>
+                                                        <div style="line-height:24px; font-size:12px; text-align: center;"><span style="font-size: 14px; font-family: 'lucida sans unicode', 'lucida grande', sans-serif; line-height: 28px;">{!! $content !!}</span></div>
                                                     </div>
                                                 </div>
                                                 <!--[if mso]></td></tr></table><![endif]-->
