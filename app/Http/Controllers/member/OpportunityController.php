@@ -228,7 +228,7 @@ class OpportunityController extends Controller
         $score_sector = 0;
         $score_size = 0;
 
-        $whole_member = User::whereNot('id', $member->id)->get();
+        $whole_member = User::where('id', '<>', $member->id)->get();
         foreach($whole_member as $each)
         {
             if($each->investmentstructure){
