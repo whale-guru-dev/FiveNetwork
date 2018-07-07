@@ -41,27 +41,27 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
-	                                    <label class="control-label text-right col-md-6">Contact Name</label>
-	                                    <div class="col-md-6">
+	                                    <label class="control-label text-right col-md-4">Contact Name</label>
+	                                    <div class="col-md-8">
 	                                        <p class="form-control-static"> {{$oppor->contact_name}} </p>
 	                                    </div>
 	                                </div>
 	                            </div>
 	                            <div class="col-md-12">
 	                            	<div class="row">
-	                            		<div class="col-md-6">
+	                            		<div class="col-md-6 col-sm-12">
 	                            			<div class="form-group">
-			                                	<label class="control-label text-right col-md-6">First</label>
-			                                    <div class="col-md-6">
+			                                	<label class="control-label text-left col-md-4 col-sm-6">First</label>
+			                                    <div class="col-md-8 col-sm-6">
 			                                        <p class="form-control-static"> {{$oppor->fName}} </p>
 			                                    </div>
 			                                </div>
 	                            		</div>
 
-	                            		<div class="col-md-6">
+	                            		<div class="col-md-6 col-sm-12">
 	                            			<div class="form-group">
-			                                	<label class="control-label text-right col-md-6">Last</label>
-			                                    <div class="col-md-6">
+			                                	<label class="control-label text-left col-md-4 col-sm-6">Last</label>
+			                                    <div class="col-md-8 col-sm-6">
 			                                        <p class="form-control-static"> {{$oppor->lName}} </p>
 			                                    </div>
 			                                </div>
@@ -71,19 +71,19 @@
 
 	                            <div class="col-md-12">
 	                            	<div class="row">
-	                            		<div class="col-md-6">
+	                            		<div class="col-md-6 col-sm-12">
 	                            			<div class="form-group">
-			                                	<label class="control-label text-right col-md-6">Phone</label>
-			                                    <div class="col-md-6">
+			                                	<label class="control-label text-left col-md-4 col-sm-6">Phone</label>
+			                                    <div class="col-md-8 col-sm-6">
 			                                        <p class="form-control-static"> {{$oppor->phone}} </p>
 			                                    </div>
 			                                </div>
 	                            		</div>
 
-	                            		<div class="col-md-6">
+	                            		<div class="col-md-6 col-sm-12">
 	                            			<div class="form-group">
-			                                	<label class="control-label text-right col-md-6">Email</label>
-			                                    <div class="col-md-6">
+			                                	<label class="control-label text-left col-md-4 col-sm-6">Email</label>
+			                                    <div class="col-md-8  col-sm-6">
 			                                        <p class="form-control-static"> {{$oppor->email}} </p>
 			                                    </div>
 			                                </div>
