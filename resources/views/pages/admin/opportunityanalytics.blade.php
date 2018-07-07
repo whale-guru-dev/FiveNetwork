@@ -63,7 +63,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.membership-detail',['id' => $each->opportunity->user->id])}}">{{$each->user->fName.' '.$each->user->lName}} <i class="fa fa-share"></i>
+                                        <a href="{{route('admin.membership-detail',['id' => $each->user->id])}}">{{$each->user->fName.' '.$each->user->lName}} <i class="fa fa-share"></i>
                                         </a>
                                     </td>
                                     <td>{{$each->created_at}}</td>
