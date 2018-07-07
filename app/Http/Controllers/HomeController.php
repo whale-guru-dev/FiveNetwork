@@ -13,6 +13,7 @@ use App\Model\MemberInvestmentSector;
 use Mail;
 use App\Mail\Follow;
 
+
 class HomeController extends Controller
 {
     /**
@@ -292,6 +293,10 @@ class HomeController extends Controller
                     ]);
                 }
             }
+
+            
+
+            
                 
         }else{
             if($request['email'] != $request['email_confirmation']){
@@ -491,6 +496,8 @@ class HomeController extends Controller
         }
         return $randomString;
     }
+
+
 
 
 }

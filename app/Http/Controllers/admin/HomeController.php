@@ -8,6 +8,8 @@ use App\Model\Preregister;
 use App\User;
 use Mail;
 use App\Mail\Follow;
+use App\Model\MemberOpportunityForm;
+use App\Model\MemberOpportunityMatch;
 
 class HomeController extends Controller
 {
@@ -53,6 +55,10 @@ class HomeController extends Controller
         $link_name = 'Go To Login';
 
         Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
+        $mofs = MemberOpportunityForm::all();
+        foreach($mofs as $mof)
+            $this->checkmatch($mof,$user);
 
         // return new Follow($link, $content, $subtitle, $subject);
         // return (new App\Mail\InvoicePaid($link, $content, $subtitle, $subject))->render();
@@ -160,6 +166,87 @@ class HomeController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function checkmatch(MemberOpportunityForm $mof, User $new_user)
+    {
+        if($mof){
+            $score = 0;
+            $member = User::where('id', $mof->member_id)->first();
+            $current_capital_raise_structure = $mof->current_capital_raise_structure;//Investment Structure
+            $investment_stage = $mof->investment_stage;//Investment Stage
+            $state = $mof->state;//Investment Region
+            $sector = $mof->sector;// Investment Sector Focus
+            $investment_size = $mof->investment_size;//Investment Size
+
+            $score_structure = 0;
+            $score_stage = 0;
+            $score_state = 0;
+            $score_sector = 0;
+            $score_size = 0;
+
+            $whole_member = $new_user;
+            foreach($whole_member as $each)
+            {
+                if($each->investmentstructure){
+                    foreach($each->investmentstructure as $is){
+                        if($current_capital_raise_structure == $is->type_id)
+                            $score_structure = 1;
+                    }
+                }
+
+                if($each->investmentstage){
+                    foreach($each->investmentstage as $is){
+                        if($investment_stage == $is->type_id)
+                            $score_stage = 1;
+                    }
+                }
+
+                if($each->investmentregion){
+                    foreach($each->investmentregion as $is){
+                        if($state == $is->type_id)
+                            $score_state = 1;
+                    }
+                }
+
+                if($each->investmentsector){
+                    foreach($each->investmentsector as $is){
+                        if($sector == $is->type_id)
+                            $score_sector = 1;
+                    }
+                }
+
+
+                if($each->investmentsize){
+                    foreach($each->investmentsize as $is){
+                        if($is == 1 && $investment_size < 5 * pow(10,5)){
+                            $score_size = 1;
+                        }elseif($is == 2 && $investment_size >= 5 * pow(10,5) && $investment_size <= pow(10,6)){
+                            $score_size = 1;
+                        }elseif($is == 3 && $investment_size >= pow(10,6) && $investment_size <= 5 * pow(10,6)){
+                            $score_size = 1;
+                        }elseif($is == 4 && $investment_size >= 5 * pow(10,6) && $investment_size <= pow(10,7)){
+                            $score_size = 1;
+                        }elseif($is == 5 && $investment_size >= pow(10,7)){
+                            $score_size = 1;
+                        }
+                    }
+                }
+
+                $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
+                $match_member_oppor = MemberOpportunityMatch::create([
+                    'opportunity_id' => $mof->id,
+                    'matched_member_id' => $each->id,
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }
+        }
+        
     }
 }
  
