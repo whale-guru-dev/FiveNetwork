@@ -41,8 +41,8 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
-	                                    <label class="control-label text-right col-md-4">Contact Name</label>
-	                                    <div class="col-md-8">
+	                                    <label class="control-label text-right col-md-6">Contact Name</label>
+	                                    <div class="col-md-6">
 	                                        <p class="form-control-static"> {{$oppor->contact_name}} </p>
 	                                    </div>
 	                                </div>
@@ -51,8 +51,8 @@
 	                            	<div class="row">
 	                            		<div class="col-md-6">
 	                            			<div class="form-group">
-			                                	<label class="control-label text-right col-md-4">First</label>
-			                                    <div class="col-md-8">
+			                                	<label class="control-label text-right col-md-6">First</label>
+			                                    <div class="col-md-6">
 			                                        <p class="form-control-static"> {{$oppor->fName}} </p>
 			                                    </div>
 			                                </div>
@@ -60,8 +60,8 @@
 
 	                            		<div class="col-md-6">
 	                            			<div class="form-group">
-			                                	<label class="control-label text-right col-md-4">Last</label>
-			                                    <div class="col-md-8">
+			                                	<label class="control-label text-right col-md-6">Last</label>
+			                                    <div class="col-md-6">
 			                                        <p class="form-control-static"> {{$oppor->lName}} </p>
 			                                    </div>
 			                                </div>
@@ -73,8 +73,8 @@
 	                            	<div class="row">
 	                            		<div class="col-md-6">
 	                            			<div class="form-group">
-			                                	<label class="control-label text-right col-md-4">Phone</label>
-			                                    <div class="col-md-8">
+			                                	<label class="control-label text-right col-md-6">Phone</label>
+			                                    <div class="col-md-6">
 			                                        <p class="form-control-static"> {{$oppor->phone}} </p>
 			                                    </div>
 			                                </div>
@@ -82,8 +82,8 @@
 
 	                            		<div class="col-md-6">
 	                            			<div class="form-group">
-			                                	<label class="control-label text-right col-md-4">Email</label>
-			                                    <div class="col-md-8">
+			                                	<label class="control-label text-right col-md-6">Email</label>
+			                                    <div class="col-md-6">
 			                                        <p class="form-control-static"> {{$oppor->email}} </p>
 			                                    </div>
 			                                </div>
