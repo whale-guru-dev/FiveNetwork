@@ -86,7 +86,7 @@
         <div class="login-register">
             <!-- <div class="row"> -->
                 <div class="row text-center">
-                    <img src="{{asset('logo.png')}}" id="logo-box" width="250" height="200">
+                    <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('logo.png')}}" width="250" height="200"></a>
                 </div>
             
             <!-- </div> -->

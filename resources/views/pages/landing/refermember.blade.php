@@ -62,7 +62,7 @@ if(!isset($user))
     }
 
     .login-box{
-        /*position: absolute;
+/*        position: absolute;
         top: 70%;
         left: 50%;
         transform: translate(-50%,-70%);*/
@@ -107,7 +107,7 @@ if(!isset($user))
     <section id="wrapper">
         <div class="login-register">
             <div class="row text-center">
-                <img src="{{asset('logo.png')}}" id="logo-box" width="250" height="200">
+                <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('logo.png')}}" width="250" height="200"></a>
             </div>
             <div class="card login-box">
                 <div class="card-body">
