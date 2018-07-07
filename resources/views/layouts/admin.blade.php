@@ -181,8 +181,8 @@
                                 <span class="hide-menu">Opportunity</span>
                             </a>
                             <ul aria-expanded="true" class="collapse in" style="">
-                                <li><a href="{{route('admin.check-request-opportunity')}}">Allow Members To Submit Opportunity</a></li>
-                                <li><a href="{{route('admin.check-allrequest-opportunity')}}">All Members' Requests for Opportunity</a></li>
+                                <li><a href="{{route('admin.check-request-opportunity')}}">Allow Members To Submit Investment Questionnaire</a></li>
+                                <li><a href="{{route('admin.check-allrequest-opportunity')}}">All Members' Submitted Investment Opportunity</a></li>
                                 <li><a href="{{route('admin.opportunity-analytics')}}">Opportunity Analytics</a></li>
                                 <li><a href="#">All Members Submitted Opportunity</a></li>
                             </ul>
