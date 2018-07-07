@@ -39,7 +39,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Opportunity</th>
+                                    <th>Opportunity Contact Name</th>
                                     <th>Submitted Member</th>
                                     <th>Submitted Time</th>
                                     <th>Action</th>
