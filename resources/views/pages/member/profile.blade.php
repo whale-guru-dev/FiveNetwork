@@ -164,14 +164,14 @@
                                             <div class="form-group">
                                                 <label for="password"> Password : 
                                                 </label>
-                                                <input type="password" class="form-control" id="password" name="password"> 
+                                                <input type="password" class="form-control" id="password" name="password"  minlength="8"> 
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="conf_password"> Confirm Password : 
                                                 </label>
-                                                <input type="password" class="form-control" id="conf_password" name="conf_password"> 
+                                                <input type="password" class="form-control" id="conf_password" name="conf_password"  minlength="8"> 
                                             </div>
                                         </div>
                                     </div>
