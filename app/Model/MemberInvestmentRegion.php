@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MemberInvestmentRegion extends Model
 {
     protected $table = 'tb_member_investment_region';
+    public $timestamps = false;
     protected $fillable = ['member_id','type_id'];
 
     public function user()

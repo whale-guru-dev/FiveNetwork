@@ -8,6 +8,7 @@ class MemberInvestmentSector extends Model
 {
     //
     protected $table = 'tb_member_investment_sector';
+    public $timestamps = false;
     protected $fillable = ['member_id','type_id'];
 
     public function user()
