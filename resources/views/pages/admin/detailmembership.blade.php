@@ -628,13 +628,13 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
         			@elseif($user->is_allowed == 1)
         			<div class="row">
         				<div class="col-sm-2 col-md-4 offset-md-4">
-	                        <button type="button" class="btn btn-rounded btn-block btn-success">Allowed</button>
+	                        <span class="badge badge-success ml-auto">Allowed</span>
 	                    </div>
         			</div>
         			@else
                     <div class="row">
                         <div class="col-sm-2 col-md-4 offset-md-4">
-                            <button type="button" class="btn btn-rounded btn-block btn-danger">Denied</button>
+                            <span class="badge badge-warning ml-auto">Denied</span>
                         </div>
                     </div>
         			@endif

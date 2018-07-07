@@ -70,7 +70,7 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$each->matchedMember->fName.' '.$each->matchedMember->lName}}</td>
-                                    <td>{{$each->score}}</td>
+                                    <td>{{$each->score}} %</td>
                                     <td>{{$each->matched_structure==1?'Matched':'Unmatched'}}</td>
                                     <td>{{$each->matched_state==1?'Matched':'Unmatched'}}</td>
                                     <td>{{$each->matched_stage==1?'Matched':'Unmatched'}}</td>
