@@ -59,7 +59,7 @@
                                 	@foreach($oppors as $each)
 									<td>{{$i++}}</td>
                                     <td>
-                                        <a href="{{route('admin.opportunity-detail',['id' => $each->opportunity_id])}}">{{$each->contact_name}} <i class="fa fa-share"></i>
+                                        <a href="{{route('admin.opportunity-detail',['id' => $each->id])}}">{{$each->contact_name}} <i class="fa fa-share"></i>
                                         </a>
                                     </td>
                                     <td>
