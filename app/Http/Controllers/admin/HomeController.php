@@ -216,15 +216,15 @@ class HomeController extends Controller
 
             if($new_user->investmentsize){
                 foreach($new_user->investmentsize as $is){
-                    if($is == 1 && $investment_size < 5 * pow(10,5)){
+                    if($is->type_id == 1 && $investment_size < 5 * pow(10,5)){
                         $score_size = 1;
-                    }elseif($is == 2 && $investment_size >= 5 * pow(10,5) && $investment_size <= pow(10,6)){
+                    }elseif($is->type_id == 2 && $investment_size >= 5 * pow(10,5) && $investment_size <= pow(10,6)){
                         $score_size = 1;
-                    }elseif($is == 3 && $investment_size >= pow(10,6) && $investment_size <= 5 * pow(10,6)){
+                    }elseif($is->type_id == 3 && $investment_size >= pow(10,6) && $investment_size <= 5 * pow(10,6)){
                         $score_size = 1;
-                    }elseif($is == 4 && $investment_size >= 5 * pow(10,6) && $investment_size <= pow(10,7)){
+                    }elseif($is->type_id == 4 && $investment_size >= 5 * pow(10,6) && $investment_size <= pow(10,7)){
                         $score_size = 1;
-                    }elseif($is == 5 && $investment_size >= pow(10,7)){
+                    }elseif($is->type_id == 5 && $investment_size >= pow(10,7)){
                         $score_size = 1;
                     }
                 }
