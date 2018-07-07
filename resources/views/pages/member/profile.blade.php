@@ -127,7 +127,7 @@
                     </div>
                     <div class="tab-pane" id="settings" role="tabpanel">
                         <div class="card-body">
-                            <form class="form-horizontal form-material" action="{{route('member.edit-profile')}}" method="POST" enctype="multipart/form-data">
+                            <form class="form-horizontal form-material" action="{{route('member.edit-profile')}}" method="POST" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 <section>
                                     <div class="row">
@@ -165,6 +165,8 @@
                                                 <label for="password"> Password : 
                                                 </label>
                                                 <input type="password" class="form-control" id="password" name="password"  minlength="8"> 
+                                                <div class="form-control-feedback"><small>Add minlength="8" password</small></div>
+
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -172,6 +174,8 @@
                                                 <label for="conf_password"> Confirm Password : 
                                                 </label>
                                                 <input type="password" class="form-control" id="conf_password" name="conf_password"  minlength="8"> 
+                                                <div class="form-control-feedback"><small>Add minlength="8" password</small></div>
+
                                             </div>
                                         </div>
                                     </div>
