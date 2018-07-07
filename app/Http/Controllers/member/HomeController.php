@@ -19,7 +19,8 @@ class HomeController extends Controller
     public function index()
     {
         $logins = MemberLogin::where('usid', Auth::user()->id)->get();
-    	return view('pages.member.dashbaord')->with(['logins'=>$logins]);
+        $map_markers = MemberLogin::where('is_active', 1)->get();
+    	return view('pages.member.dashbaord')->with(['logins' => $logins,'markers' => $map_markers]);
     }
 
     public function faqview()

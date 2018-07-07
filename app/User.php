@@ -118,4 +118,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Model\MemberOpportunityMatch','matched_member_id');
     }
+
+    public function login()
+    {
+        return $this->hasMany('App\Model\MemberLogin','id');
+    }
 }
