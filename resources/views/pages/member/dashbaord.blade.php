@@ -254,7 +254,7 @@ $('#usa').vectorMap({
     hoverColor: '#009efb',
     markers : [
     @foreach($markers as $marker)
-    { latLng : [ {{$maker->lat}}, {{$maker->long}} ],name : {{$maker->member->fName.' '.$maker->member->lName}} },
+    { latLng : [ {{$marker->lat}}, {{$marker->long}} ],name : {{$marker->member->fName.' '.$marker->member->lName}} },
     @endforeach
     ],
     hoverOpacity: null,
