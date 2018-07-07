@@ -185,66 +185,63 @@ class HomeController extends Controller
             $score_sector = 0;
             $score_size = 0;
 
-            $whole_member = $new_user;
-            foreach($whole_member as $each)
-            {
-                if($each->investmentstructure){
-                    foreach($each->investmentstructure as $is){
-                        if($current_capital_raise_structure == $is->type_id)
-                            $score_structure = 1;
-                    }
+            if($new_user->investmentstructure){
+                foreach($new_user->investmentstructure as $is){
+                    if($current_capital_raise_structure == $is->type_id)
+                        $score_structure = 1;
                 }
-
-                if($each->investmentstage){
-                    foreach($each->investmentstage as $is){
-                        if($investment_stage == $is->type_id)
-                            $score_stage = 1;
-                    }
-                }
-
-                if($each->investmentregion){
-                    foreach($each->investmentregion as $is){
-                        if($state == $is->type_id)
-                            $score_state = 1;
-                    }
-                }
-
-                if($each->investmentsector){
-                    foreach($each->investmentsector as $is){
-                        if($sector == $is->type_id)
-                            $score_sector = 1;
-                    }
-                }
-
-
-                if($each->investmentsize){
-                    foreach($each->investmentsize as $is){
-                        if($is == 1 && $investment_size < 5 * pow(10,5)){
-                            $score_size = 1;
-                        }elseif($is == 2 && $investment_size >= 5 * pow(10,5) && $investment_size <= pow(10,6)){
-                            $score_size = 1;
-                        }elseif($is == 3 && $investment_size >= pow(10,6) && $investment_size <= 5 * pow(10,6)){
-                            $score_size = 1;
-                        }elseif($is == 4 && $investment_size >= 5 * pow(10,6) && $investment_size <= pow(10,7)){
-                            $score_size = 1;
-                        }elseif($is == 5 && $investment_size >= pow(10,7)){
-                            $score_size = 1;
-                        }
-                    }
-                }
-
-                $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
-                $match_member_oppor = MemberOpportunityMatch::create([
-                    'opportunity_id' => $mof->id,
-                    'matched_member_id' => $each->id,
-                    'score' => $score,
-                    'matched_structure' => $score_structure,
-                    'matched_stage' => $score_stage,
-                    'matched_state' => $score_state,
-                    'matched_sector' => $score_sector,
-                    'matched_size' => $score_size
-                ]);
             }
+
+            if($new_user->investmentstage){
+                foreach($new_user->investmentstage as $is){
+                    if($investment_stage == $is->type_id)
+                        $score_stage = 1;
+                }
+            }
+
+            if($new_user->investmentregion){
+                foreach($new_user->investmentregion as $is){
+                    if($state == $is->type_id)
+                        $score_state = 1;
+                }
+            }
+
+            if($new_user->investmentsector){
+                foreach($new_user->investmentsector as $is){
+                    if($sector == $is->type_id)
+                        $score_sector = 1;
+                }
+            }
+
+
+            if($new_user->investmentsize){
+                foreach($new_user->investmentsize as $is){
+                    if($is == 1 && $investment_size < 5 * pow(10,5)){
+                        $score_size = 1;
+                    }elseif($is == 2 && $investment_size >= 5 * pow(10,5) && $investment_size <= pow(10,6)){
+                        $score_size = 1;
+                    }elseif($is == 3 && $investment_size >= pow(10,6) && $investment_size <= 5 * pow(10,6)){
+                        $score_size = 1;
+                    }elseif($is == 4 && $investment_size >= 5 * pow(10,6) && $investment_size <= pow(10,7)){
+                        $score_size = 1;
+                    }elseif($is == 5 && $investment_size >= pow(10,7)){
+                        $score_size = 1;
+                    }
+                }
+            }
+
+            $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
+            $match_member_oppor = MemberOpportunityMatch::create([
+                'opportunity_id' => $mof->id,
+                'matched_member_id' => $new_user->id,
+                'score' => $score,
+                'matched_structure' => $score_structure,
+                'matched_stage' => $score_stage,
+                'matched_state' => $score_state,
+                'matched_sector' => $score_sector,
+                'matched_size' => $score_size
+            ]);
+
         }
         
     }
