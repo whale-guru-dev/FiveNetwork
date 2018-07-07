@@ -38,10 +38,8 @@ class User extends Authenticatable
         'phone_office',
         'phone_mobile',
         'dob',
-        'desired_invest_type',
         'private_investment_number',
         'additional_capacity',
-        'region',
         'professional_history_bio',
         'family_office_investment_entity',
         'area_family_investor_expertise',
@@ -94,6 +92,16 @@ class User extends Authenticatable
     public function investmentsize()
     {
         return $this->hasMany('App\Model\MemberInvestmentSize','member_id');
+    }
+
+    public function investmentregion()
+    {
+        return $this->hasMany('App\Model\MemberInvestmentRegion','member_id');
+    }
+
+    public function investmentsector()
+    {
+        return $this->hasMany('App\Model\MemberInvestmentSector','member_id');
     }
 
     public function requestopportunity()

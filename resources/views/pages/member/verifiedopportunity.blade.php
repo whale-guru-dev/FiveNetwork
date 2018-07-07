@@ -65,13 +65,15 @@
                                     <td><a href="{{route('member.opportunity-detail',['id' => $each->opportunity_id])}}">{{$each->opportunity->project_name}} <i class="fa fa-share"></i></a></td>
                                     <td>{{$each->opportunity->user->fName.' '.$each->opportunity->user->lName}}</td>
                                     <td>{{$each->opportunity->created_at}}</td>
-                                    @if($each->binterest == 0)
-                                    <td>Not Expressed</td>
-                                    @elseif($each->binterest == 1)
-                                    <td>Interested</td>
-                                    @elseif($each->binterest == 2)
-                                    <td>Not Interested</td>
-                                    @endif
+                                    <td>
+                                        @if($each->binterest == 0)
+                                        <span class="badge badge-info ml-auto">Not Expressed</span>
+                                        @elseif($each->binterest == 1)
+                                        <span class="badge badge-success ml-auto">Interested</span>
+                                        @elseif($each->binterest == 2)
+                                        <span class="badge badge-warning ml-auto">Not Interested</span>
+                                        @endif
+                                    </td>
                                     @endforeach
                                 @endif
                             </tbody>
@@ -112,11 +114,6 @@
 <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 <!-- end - This is for export functionality only -->
 <script type="text/javascript">
-    $('#allow-apply').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
-    });
+    $('#allow-apply').DataTable();
 </script>
 @endsection

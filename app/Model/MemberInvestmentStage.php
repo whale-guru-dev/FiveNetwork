@@ -21,4 +21,9 @@ class MemberInvestmentStage extends Model
     {
     	return $this->belongsTo('App\User');
     }
+
+    public function questionnaire()
+    {
+        return $this->hasMany('App\Model\MemberOpportunityForm','id');
+    }
 }

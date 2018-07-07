@@ -42,11 +42,11 @@ class OpportunityController extends Controller
     	$requestopportuniy->is_accepted = 1;
     	$requestopportuniy->save();
 
-    	$to = $requestopportuniy->user->email;
+    	$to = $requestopportuniy->email;
         $subtitle = 'Your opportunity was accepted!';
         $subject = 'Your opportunity was accepted!';
-        $content = 'The family investment exchange is more interested in your opportunity so please follow this link to fill out the forms.';
-        $link = route('member.submit-opportunity-form',['code' => $requestopportuniy->code]);
+        $content = 'A member of the Family Investment Exchange has requested we contact you to request additional information on your investment opportunity. Please complete the Investment Questionnaire in this email to share this opportunity with families throughout the US who are looking for opportunities like yours.<br>Best,<br>The Five Network Team.';
+        $link = route('member.investment-questionnaire-form',['code' => $requestopportuniy->code]);
         $link_name = 'Fill out the forms';
 
         Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
@@ -66,7 +66,7 @@ class OpportunityController extends Controller
         $subtitle = 'Your opportunity was denied!';
         $subject = 'Your opportunity was denied!';
         $content = 'Unfortunately your opportunity was denied.';
-        $link = route('member.request-opportunity');
+        $link = route('member.submit-opportunity');
         $link_name = 'Request Another Opportunity';
 
         Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
@@ -77,7 +77,7 @@ class OpportunityController extends Controller
 
     public function analyticsview()
     {
-        $oppors = MemberOpportunityMatch::with('matchedMember')->get();
+        $oppors = MemberOpportunityForm::all();
         return view('pages.admin.opportunityanalytics')->with(['oppors' => $oppors]);
     }
 
@@ -85,5 +85,25 @@ class OpportunityController extends Controller
     {
         $oppor = MemberOpportunityForm::find($id);
         return view('pages.admin.detailopportunity')->with(['oppor' => $oppor]);
+    }
+
+    public function checkmatch($id)
+    {
+        $matchinfo = MemberOpportunityMatch::where('opportunity_id', $id)->orderBy('score', 'desc')->get();
+        return view('pages.admin.checkmatchdetail')->with(['matchinfo' => $matchinfo]);
+    }
+
+    public function approveopportunitymatch(Request $request)
+    {
+        $id = $requests['id'];
+        $oppor = MemberOpportunityMatch::find($id);
+        $oppor->update(['is_allowed' => 1]);
+
+        $family_email = $oppor->matchedMember->email;
+
+        //Mail
+
+        $msg = ['Success', 'Successfully Approved to Send Email with hightlight to family','success'];
+        return redirect()->route('admin.check-member-opportunity-match',['id' => $oppor->opportunity_id])->with(['msg' => $msg]);
     }
 }

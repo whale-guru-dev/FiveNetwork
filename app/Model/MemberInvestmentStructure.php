@@ -21,4 +21,5 @@ class MemberInvestmentStructure extends Model
     {
     	return $this->belongsTo('App\User');
     }
+
 }

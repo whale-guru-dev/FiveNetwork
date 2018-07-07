@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\Model\Preregister;
+use App\Model\MemberReferLog;
 use Mail;
 use App\Mail\Follow;
 
@@ -37,11 +38,13 @@ class ReferController extends Controller
 
         $link = route('member.dashboard');
         $link_name = 'Go To Dashboard';
-        $content = 'Thank you for referring '.$email.' to join the Family InVestment Exchange. Invite x more families to gain priority access to the FIVE Network';
+        $content = 'Thank you for referring '.$email.' to join the Family InVestment Exchange.<br> Invite x more families to gain priority access to the FIVE Network';
         $subtitle = 'Thank you for referring';
         $subject = 'Thank you for referring';
 
         Mail::to(Auth::user()->email)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
+        $log = MemberReferLog::create(['usid' => Auth::user()->id,'referer_email' => $email]);
 
         // return new Follow($link, $content, $subtitle, $subject);
         // return (new App\Mail\InvoicePaid($link, $content, $subtitle, $subject))->render();

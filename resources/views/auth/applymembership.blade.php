@@ -1,8 +1,10 @@
-<?php
+@php
     $invest_types = App\Model\InvestmentStructureType::all();
     $invest_size_types = App\Model\MemberInvestmentSizeType::all();
     $invest_stage_types = App\Model\MemberInvestmentStageType::all();
-?>
+    $invest_sector_types = App\Model\MemberInvestmentSectorType::all();
+    $invest_region_types = App\Model\MemberInvestmentRegionType::all();
+@endphp
 
 <!DOCTYPE html>
 <html lang="en">
@@ -573,12 +575,33 @@ color: #797979;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="desired_invest_type">Desired Types of Investments :</label>
-                                                    <select class="custom-select form-control " id="desired_invest_type" name="desired_invest_type">
-                                                        <option value="">Select</option>
-                                                        <option value="1" {{ old('desired_invest_type') == 1 ? 'selected' : '' }}>Control/Active – Ask specific</option>
-                                                        <option value="0" {{ old('desired_invest_type') == 0 ? 'selected' : '' }}>Non- Control/Passive – Ask Specific</option>
+                                                    <label for="invest_region">Investment Regions :</label>
+                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
+                                                        @foreach($invest_region_types as $irt)
+                                                            @if($irt->id < 14)
+                                                            <optgroup label="Southeast">
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            </optgroup>
+                                                            @elseif($irt->id > 13 && $irt->id < 18)
+                                                            <optgroup label="Southwest">
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            </optgroup>
+                                                            @elseif($irt->id > 17 && $irt->id < 30)
+                                                            <optgroup label="Midwest">
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            </optgroup>
+                                                            @elseif($irt->id > 29 && $irt->id < 41)
+                                                            <optgroup label="West">
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            </optgroup>
+                                                            @else
+                                                            <optgroup label="Northeast">
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            </optgroup>
+                                                            @endif
+                                                        @endforeach
                                                     </select>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -640,293 +663,12 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="region">Regions – Will have broken out :</label>
-                                                    <select class="custom-select form-control" id="region" name="region">
+                                                    <label for="investment_sector">Investment Sector Focus :</label>
+                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector">
                                                         <option value="">Select</option>
-                                                        <option value="North America">  North America </option>
-                                                        <option value="South America">  South America </option>
-                                                        <option value="Western Europe"> Western Europe </option>
-                                                        <option value="Emerging Europe">    Emerging Europe </option>
-                                                        <option value="MENA">   MENA </option>
-                                                        <option value="BRICs">  BRICs </option>
-                                                        <option value="Asia Ex-Japan">  Asia Ex-Japan </option>
-                                                        <option value="Indian Subcontinent">    Indian Subcontinent </option>
-                                                        <option value="Frontier (Asia)">    Frontier (Asia) </option>
-                                                        <option value="Global Emerging Markets">    Global Emerging Markets </option>
-                                                        <option value="Central America">    Central America </option>
-                                                        <option value="CIS">    CIS </option>
-                                                        <option value="Sub-Saharan Africa"> Sub-Saharan Africa </option>
-                                                        <option value="Antarctica Region">  Antarctica Region </option>
-                                                        <option value="Global"> Global </option>
-                                                        <option value="Latin America">  Latin America </option>
-                                                        <option value="Andean Region">  Andean Region </option>
-                                                        <option value="Europe"> Europe </option>
-                                                        <option value="Southern Europe">    Southern Europe </option>
-                                                        <option value="Northern Europe">    Northern Europe </option>
-                                                        <option value="DACH">   DACH </option>
-                                                        <option value="BeNeLux">    BeNeLux </option>
-                                                        <option value="Scandinavia">    Scandinavia </option>
-                                                        <option value="Baltic Region">  Baltic Region </option>
-                                                        <option value="Iberian Penisula">   Iberian Penisula </option>
-                                                        <option value="CEE">    CEE </option>
-                                                        <option value="Central Europe"> Central Europe </option>
-                                                        <option value="Africa"> Africa </option>
-                                                        <option value="West Africa">    West Africa </option>
-                                                        <option value="East Africa">    East Africa </option>
-                                                        <option value="Francophone Africa"> Francophone Africa </option>
-                                                        <option value="Southern Africa">    Southern Africa </option>
-                                                        <option value="Asia">   Asia </option>
-                                                        <option value="ASEAN">  ASEAN </option>
-                                                        <option value="Middle East">    Middle East </option>
-                                                        <option value="East Asia">  East Asia </option>
-                                                        <option value="Central Asia">   Central Asia </option>
-                                                        <option value="Oceania">    Oceania </option>
-                                                        <option value="Caribbean">  Caribbean </option>
-                                                        <option value="Afghanistan">    Afghanistan </option>
-                                                        <option value="Aland Islands">  Aland Islands </option>
-                                                        <option value="Albania">    Albania </option>
-                                                        <option value="Algeria">    Algeria </option>
-                                                        <option value="American Samoa"> American Samoa </option>
-                                                        <option value="Andorra">    Andorra </option>
-                                                        <option value="Angola"> Angola </option>
-                                                        <option value="Anguilla">   Anguilla </option>
-                                                        <option value="Antarctica"> Antarctica </option>
-                                                        <option value="Antigua and Barbuda">    Antigua and Barbuda </option>
-                                                        <option value="Argentina">  Argentina </option>
-                                                        <option value="Armenia">    Armenia </option>
-                                                        <option value="Aruba">  Aruba </option>
-                                                        <option value="Australia">  Australia </option>
-                                                        <option value="Austria">    Austria </option>
-                                                        <option value="Azerbaijan"> Azerbaijan </option>
-                                                        <option value="Bahamas">    Bahamas </option>
-                                                        <option value="Bahrain">    Bahrain </option>
-                                                        <option value="Bangladesh"> Bangladesh </option>
-                                                        <option value="Barbados">   Barbados </option>
-                                                        <option value="Belarus">    Belarus </option>
-                                                        <option value="Belgium">    Belgium </option>
-                                                        <option value="Belize"> Belize </option>
-                                                        <option value="Benin">  Benin </option>
-                                                        <option value="Bermuda">    Bermuda </option>
-                                                        <option value="Bhutan"> Bhutan </option>
-                                                        <option value="Bolivia">    Bolivia </option>
-                                                        <option value="Bonaire">    Bonaire </option>
-                                                        <option value="Bosnia"> Bosnia </option>
-                                                        <option value="Botswana">   Botswana </option>
-                                                        <option value="Bouvet Island">  Bouvet Island </option>
-                                                        <option value="Brazil"> Brazil </option>
-                                                        <option value="British Indian Ocean">   British Indian Ocean </option>
-                                                        <option value="Brunei Darussalam">  Brunei Darussalam </option>
-                                                        <option value="Bulgaria">   Bulgaria </option>
-                                                        <option value="Burkina Faso">   Burkina Faso </option>
-                                                        <option value="Burundi">    Burundi </option>
-                                                        <option value="Cambodia">   Cambodia </option>
-                                                        <option value="Cameroon">   Cameroon </option>
-                                                        <option value="Canada"> Canada </option>
-                                                        <option value="Cape Verde"> Cape Verde </option>
-                                                        <option value="Cayman Islands"> Cayman Islands </option>
-                                                        <option value="Central African">    Central African </option>
-                                                        <option value="Chad">   Chad </option>
-                                                        <option value="Chile">  Chile </option>
-                                                        <option value="China">  China </option>
-                                                        <option value="Christmas Island">   Christmas Island </option>
-                                                        <option value="Cocos Islands">  Cocos Islands </option>
-                                                        <option value="Colombia">   Colombia </option>
-                                                        <option value="Comoros">    Comoros </option>
-                                                        <option value="Cook Islands">   Cook Islands </option>
-                                                        <option value="Costa Rica"> Costa Rica </option>
-                                                        <option value="Cote d'Ivoire">  Cote d'Ivoire </option>
-                                                        <option value="Croatia">    Croatia </option>
-                                                        <option value="Cuba">   Cuba </option>
-                                                        <option value="Curacao">    Curacao </option>
-                                                        <option value="Cyprus"> Cyprus </option>
-                                                        <option value="Czech Republic"> Czech Republic </option>
-                                                        <option value="Democratic Republic of the Congo">   Democratic Republic of the Congo </option>
-                                                        <option value="Denmark">    Denmark </option>
-                                                        <option value="Djibouti">   Djibouti </option>
-                                                        <option value="Dominica">   Dominica </option>
-                                                        <option value="Dominican Republic"> Dominican Republic </option>
-                                                        <option value="East Timor"> East Timor </option>
-                                                        <option value="Ecuador">    Ecuador </option>
-                                                        <option value="Egypt">  Egypt </option>
-                                                        <option value="El Salvador">    El Salvador </option>
-                                                        <option value="Equatorial Guinea">  Equatorial Guinea </option>
-                                                        <option value="Eritrea">    Eritrea </option>
-                                                        <option value="Estonia">    Estonia </option>
-                                                        <option value="Ethiopia">   Ethiopia </option>
-                                                        <option value="Falkland Islands">   Falkland Islands </option>
-                                                        <option value="Faroe Islands">  Faroe Islands </option>
-                                                        <option value="Fiji">   Fiji </option>
-                                                        <option value="Finland">    Finland </option>
-                                                        <option value="France"> France </option>
-                                                        <option value="French Guiana">  French Guiana </option>
-                                                        <option value="French Polynesia">   French Polynesia </option>
-                                                        <option value="French Southern">    French Southern </option>
-                                                        <option value="Gabon">  Gabon </option>
-                                                        <option value="Gambia"> Gambia </option>
-                                                        <option value="Georgia">    Georgia </option>
-                                                        <option value="Germany">    Germany </option>
-                                                        <option value="Ghana">  Ghana </option>
-                                                        <option value="Gibraltar">  Gibraltar </option>
-                                                        <option value="Greece"> Greece </option>
-                                                        <option value="Greenland">  Greenland </option>
-                                                        <option value="Grenada">    Grenada </option>
-                                                        <option value="Guadeloupe"> Guadeloupe </option>
-                                                        <option value="Guam">   Guam </option>
-                                                        <option value="Guatemala">  Guatemala </option>
-                                                        <option value="Guernsey">   Guernsey </option>
-                                                        <option value="Guinea"> Guinea </option>
-                                                        <option value="Guinea-Bissau">  Guinea-Bissau </option>
-                                                        <option value="Guyana"> Guyana </option>
-                                                        <option value="Haiti">  Haiti </option>
-                                                        <option value="Vatican City">   Vatican City </option>
-                                                        <option value="Honduras">   Honduras </option>
-                                                        <option value="Hong Kong">  Hong Kong </option>
-                                                        <option value="Hungary">    Hungary </option>
-                                                        <option value="Iceland">    Iceland </option>
-                                                        <option value="India">  India </option>
-                                                        <option value="Indonesia">  Indonesia </option>
-                                                        <option value="Iran">   Iran </option>
-                                                        <option value="Iraq">   Iraq </option> 
-                                                        <option value="Ireland">    Ireland </option>
-                                                        <option value="Isle of Man">    Isle of Man </option>
-                                                        <option value="Israel"> Israel </option>
-                                                        <option value="Italy">  Italy </option>
-                                                        <option value="Jamaica">    Jamaica </option>
-                                                        <option value="Japan">  Japan </option> 
-                                                        <option value="Jersey"> Jersey </option>
-                                                        <option value="Jordan"> Jordan </option>
-                                                        <option value="Kazakhstan"> Kazakhstan </option>
-                                                        <option value="Kenya">  Kenya </option>
-                                                        <option value="Kiribati">   Kiribati </option>
-                                                        <option value="South Korea">    South Korea </option>
-                                                        <option value="Kuwait"> Kuwait </option>
-                                                        <option value="Kyrgyzstan"> Kyrgyzstan </option>
-                                                        <option value="Laos">   Laos </option>
-                                                        <option value="Latvia"> Latvia </option> 
-                                                        <option value="Lebanon">    Lebanon </option>
-                                                        <option value="Lesotho">    Lesotho </option>
-                                                        <option value="Liberia">    Liberia </option>
-                                                        <option value="Libya">  Libya </option>
-                                                        <option value="Liechtenstein">  Liechtenstein </option>
-                                                        <option value="Lithuania">  Lithuania </option>
-                                                        <option value="Luxembourg"> Luxembourg </option>
-                                                        <option value="Macau">  Macau </option>
-                                                        <option value="Macedonia">  Macedonia </option>
-                                                        <option value="Madagascar"> Madagascar </option>
-                                                        <option value="Malawi"> Malawi </option> 
-                                                        <option value="Malaysia">   Malaysia </option>
-                                                        <option value="Maldives">   Maldives </option>
-                                                        <option value="Mali">   Mali </option>
-                                                        <option value="Malta">  Malta </option> 
-                                                        <option value="Mariana Islands">    Mariana Islands </option>
-                                                        <option value="Marshall Islands">   Marshall Islands </option>
-                                                        <option value="Martinique"> Martinique </option>
-                                                        <option value="Mauritania"> Mauritania </option>
-                                                        <option value="Mauritius">  Mauritius </option>
-                                                        <option value="Mayotte">    Mayotte </option>
-                                                        <option value="Mexico"> Mexico </option>
-                                                        <option value="Micronesia"> Micronesia </option>
-                                                        <option value="Moldova">    Moldova </option>
-                                                        <option value="Monaco"> Monaco </option>
-                                                        <option value="Mongolia">   Mongolia </option>
-                                                        <option value="Montenegro"> Montenegro </option>
-                                                        <option value="Montserrat"> Montserrat </option>
-                                                        <option value="Morocco">    Morocco </option>
-                                                        <option value="Mozambique"> Mozambique </option>
-                                                        <option value="Myanmar">    Myanmar </option>
-                                                        <option value="Namibia">    Namibia </option>
-                                                        <option value="Nauru">  Nauru </option>
-                                                        <option value="Nepal">  Nepal </option>
-                                                        <option value="Netherlands">    Netherlands </option>
-                                                        <option value="New Caledonia">  New Caledonia </option>
-                                                        <option value="New Zealand">    New Zealand </option>
-                                                        <option value="Nicaragua">  Nicaragua </option>
-                                                        <option value="Niger">  Niger </option>
-                                                        <option value="Nigeria">    Nigeria </option>
-                                                        <option value="Niue">   Niue </option>
-                                                        <option value="Norfolk Island"> Norfolk Island </option>
-                                                        <option value="Norway"> Norway </option>
-                                                        <option value="Oman">   Oman </option>
-                                                        <option value="Pakistan">   Pakistan </option>
-                                                        <option value="Palau">  Palau </option>
-                                                        <option value="Palestinian Territory">  Palestinian Territory </option>
-                                                        <option value="Panama"> Panama </option>
-                                                        <option value="Papua New Guinea">   Papua New Guinea </option>
-                                                        <option value="Paraguay">   Paraguay </option>
-                                                        <option value="Peru">   Peru </option>
-                                                        <option value="Philippines">    Philippines </option>
-                                                        <option value="Pitcairn">   Pitcairn </option>
-                                                        <option value="Poland"> Poland </option>
-                                                        <option value="Portugal">   Portugal </option>
-                                                        <option value="Puerto Rico">    Puerto Rico </option>
-                                                        <option value="Qatar">  Qatar </option>
-                                                        <option value="Republic of the Congo">  Republic of the Congo </option>
-                                                        <option value="Reunion">    Reunion </option>
-                                                        <option value="Romania">    Romania </option>
-                                                        <option value="Russia"> Russia </option>
-                                                        <option value="Rwanda"> Rwanda </option>
-                                                        <option value="Saint Bartelemey">   Saint Bartelemey </option>
-                                                        <option value="Saint Kitts and Nevis">  Saint Kitts and Nevis </option>
-                                                        <option value="Saint Lucia">    Saint Lucia </option>
-                                                        <option value="Saint Martin">   Saint Martin </option>
-                                                        <option value="Saint Pierre and Miquelon">  Saint Pierre and Miquelon </option>
-                                                        <option value="Saint Vincent">  Saint Vincent </option>
-                                                        <option value="Samoa">  Samoa </option>
-                                                        <option value="San Marino"> San Marino </option>
-                                                        <option value="Sao Tome and Principe">  Sao Tome and Principe </option>
-                                                        <option value="Saudi Arabia">   Saudi Arabia </option>
-                                                        <option value="Senegal">    Senegal </option>
-                                                        <option value="Serbia"> Serbia </option>
-                                                        <option value="Seychelles"> Seychelles </option>
-                                                        <option value="Sierra Leone">   Sierra Leone </option>
-                                                        <option value="Singapore">  Singapore </option>
-                                                        <option value="Sint Maarten">   Sint Maarten </option>
-                                                        <option value="Slovakia">   Slovakia </option>
-                                                        <option value="Slovenia">   Slovenia </option>
-                                                        <option value="Solomon Islands">    Solomon Islands </option>
-                                                        <option value="Somalia">    Somalia </option>
-                                                        <option value="South Africa">   South Africa </option>
-                                                        <option value="South Georgia">  South Georgia </option>
-                                                        <option value="South Sudan">    South Sudan </option>
-                                                        <option value="Spain">  Spain </option>
-                                                        <option value="Sri Lanka">  Sri Lanka </option>
-                                                        <option value="St. Helena"> St. Helena </option>
-                                                        <option value="Sudan">  Sudan </option>
-                                                        <option value="Suriname">   Suriname </option>
-                                                        <option value="Svalbard">   Svalbard </option>
-                                                        <option value="Swaziland">  Swaziland </option>
-                                                        <option value="Sweden"> Sweden </option>
-                                                        <option value="Switzerland">    Switzerland </option>
-                                                        <option value="Syria">  Syria </option>
-                                                        <option value="Taiwan"> Taiwan </option>
-                                                        <option value="Tajikistan"> Tajikistan </option>
-                                                        <option value="Tanzania">   Tanzania </option>
-                                                        <option value="Thailand">   Thailand </option>
-                                                        <option value="Togo">   Togo </option>
-                                                        <option value="Tokelau">    Tokelau </option>
-                                                        <option value="Tonga">  Tonga </option>
-                                                        <option value="Trinidad">   Trinidad </option>
-                                                        <option value="Tunisia">    Tunisia</option>
-                                                        <option value="Turkey"> Turkey</option>
-                                                        <option value="Turkmenistan">   Turkmenistan</option>
-                                                        <option value="Turks">  Turks</option>
-                                                        <option value="Tuvalu"> Tuvalu</option>
-                                                        <option value="Uganda"> Uganda</option>
-                                                        <option value="Ukraine">    Ukraine</option>
-                                                        <option value="United Arab Emirates">   United Arab Emirates</option>
-                                                        <option value="United Kingdom"> United Kingdom</option>
-                                                        <option value="United States of America">   United States of America</option>
-                                                        <option value="Uruguay">    Uruguay</option>
-                                                        <option value="Uzbekistan"> Uzbekistan</option>
-                                                        <option value="Vanuatu">    Vanuatu</option>
-                                                        <option value="Venezuela">  Venezuela</option>
-                                                        <option value="Vietnam">    Vietnam</option>
-                                                        <option value="Virgin Islands"> Virgin Islands</option>
-                                                        <option value="Wallis"> Wallis</option>
-                                                        <option value="Western Sahara"> Western Sahara</option>
-                                                        <option value="Yemen">  Yemen</option>
-                                                        <option value="Zambia"> Zambia</option>
-                                                        <option value="Zimbabwe">   Zimbabwe</option>
+                                                        @foreach($invest_sector_types as $isrt)
+                                                        <option value="{{$isrt->id}}">{{$isrt->type}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -1204,6 +946,47 @@ color: #797979;
                                             </div>
                                         </div>
 
+                                    </section>
+
+                                    <h6> Disclaimers Tab </h6>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-weight: bold;">Personal and Noncommercial Use :</label>
+                                                    <p class="form-control-static">PERSONAL AND NON-COMMERCIAL USE LIMITATION <br>
+The Site is for your personal and non-commercial use, and FIVE Network grants you a non-exclusive, non-transferable and limited personal license to access and use the Site, conditioned on your continued compliance with these Terms of Use. You may not modify, copy (except as set forth below), distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information, products or services obtained from the Site. You may not link other websites to the Site without the prior written permission of FIVE Network. You may print one hardcopy of the information and download one temporary copy of the information into one single computer’s memory solely for your own personal, non-commercial use and not for distribution, provided that all relevant copyright, trademark and other proprietary notices are kept intact. You are prohibited from using the Site to advertise or perform any commercial solicitation. You also are prohibited from using any robot, spider, scraper or other automated means to access the Site for any purpose without the prior written permission of FIVE Network. You may not take any action that imposes, or may impose, in our sole discretion, an unreasonable or disproportionately large load on our infrastructure, interfere or attempt to interfere with the proper working of the Site or any activities conducted on the Site, or bypass any measures we may use to prevent or restrict access to the Site. Any rights not expressly granted herein are reserved.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-weight: bold;">This is not a recommendation :</label>
+                                                    <p class="form-control-static">NO INVESTMENT ADVICE<br>
+The information on the Site is intended to enable investors to understand the nature of FIVE Network’s services. It is not intended as and does not constitute investment advice or legal or tax advice or an offer to sell any securities to any person or a solicitation of any person of any offer to purchase any securities. The information in the Site should not be construed as any endorsement, recommendation or sponsorship of any company or security by FIVE Network. There are inherent risks in relying on, using or retrieving any information found on the Site, and FIVE Network urges you to make sure you understand these risks before relying on, using or retrieving any information on the Site. You should evaluate the information made available through the Site, and you should seek the advice of professionals, as appropriate, to evaluate any opinion, advice, product, service or other information.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-weight: bold;">We are not a broker dealer :</label>
+                                                    <p class="form-control-static">The FIVE Network is not a registered broker-dealer or a registered investment adviser. You understand that the Product is furnished for your personal, noncommercial, informational purposes only, and that no mention of a particular security in the Product constitutes a recommendation to buy, sell, or hold that or any other security, or that any particular security, portfolio of securities, transaction or investment strategy is suitable for any specific person. You further understand that FIVE Network will not advise you personally concerning the nature, potential, value or suitability of any particular security, portfolio of securities, transaction, investment strategy or other matter. To the extent any of the information contained in the Product may be deemed to be investment advice, such information is impersonal and not tailored to the investment needs of any specific person. You acknowledge that you are responsible for your own financial decisions.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-weight: bold;">No Liability :</label>
+                                                    <p class="form-control-static">USE OF THIS SITE AND CONTENT IS SOLELY AT YOUR RISK. FIVE NETWORK AND ITS AFFILIATES, SHAREHOLDERS, DIRECTORS, OFFICERS, EMPLOYEES AND LICENSORS WILL NOT BE LIABLE (JOINTLY OR SEVERALLY) TO YOU OR ANY OTHER PERSON AS A RESULT OF YOUR USE OF, OR RELIANCE ON, OR INABILITY TO USE FAMILYINVESTMENTEXCHANGE.COM FOR INDIRECT, CONSEQUENTIAL, SPECIAL, INCIDENTAL, PUNITIVE, OR EXEMPLARY DAMAGES, INCLUDING, WITHOUT LIMITATION, LOST PROFITS, LOST SAVINGS AND LOST REVENUES (COLLECTIVELY, “THE EXCLUDED DAMAGES”), WHETHER OR NOT CHARACTERIZED IN NEGLIGENCE, TORT, CONTRACT, OR OTHER THEORY OF LIABILITY, EVEN IF ANY OF THE FIVE NETWORK PARTIES HAVE BEEN ADVISED OF THE POSSIBILITY OF OR COULD HAVE FORESEEN ANY OF THE EXCLUDED DAMAGES, AND IRRESPECTIVE OF ANY FAILURE OF AN ESSENTIAL PURPOSE OF A LIMITED REMEDY. IF ANY APPLICABLE AUTHORITY HOLDS ANY PORTION OF THIS SECTION TO BE UNENFORCEABLE, THEN THE FIVE NETWORK PARTIES' LIABILITY WILL BE LIMITED TO THE FULLEST POSSIBLE EXTENT PERMITTED BY APPLICABLE LAW.</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </section>
                                 </form>
                             </div>

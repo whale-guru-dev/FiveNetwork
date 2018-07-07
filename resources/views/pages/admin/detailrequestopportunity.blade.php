@@ -40,6 +40,18 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
+	                                    <label class="control-label text-right col-md-4">Contact name:</label>
+	                                    <div class="col-md-8">
+	                                        <p class="form-control-static"> {{$request->contact_name}} </p>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <!--/span-->
+	                        </div>
+
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group row">
 	                                    <label class="control-label text-right col-md-4">Email:</label>
 	                                    <div class="col-md-8">
 	                                        <p class="form-control-static"> {{$request->email}} </p>
@@ -64,9 +76,17 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
-	                                    <label class="control-label text-right col-md-4">Opportunity Name:</label>
+	                                    <label class="control-label text-right col-md-4">Company Stage</label>
 	                                    <div class="col-md-8">
-	                                        <p class="form-control-static"> {{$request->opportunity_name}} </p>
+	                                        <p class="form-control-static">
+	                                        @if($request->company_stage == 0)
+	                                        Seed/Pre-Revenue, Early Stage
+	                                        @elseif($request->company_stage == 1)
+	                                        Venture Capital
+	                                        @elseif($request->company_stage == 2)
+	                                        Private Equity
+	                                        @endif 
+	                                        </p>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -76,7 +96,7 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
-	                                    <label class="control-label text-right col-md-4">How much they are investing?</label>
+	                                    <label class="control-label text-right col-md-4">Amount they are investing</label>
 	                                    <div class="col-md-8">
 	                                        <p class="form-control-static"> {{$request->investing_amount}} </p>
 	                                    </div>
@@ -88,7 +108,7 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
-	                                    <label class="control-label text-right col-md-4">Raising:</label>
+	                                    <label class="control-label text-right col-md-4">Total Investment company is looking to raise:</label>
 	                                    <div class="col-md-8">
 	                                        <p class="form-control-static"> {{$request->raising}} </p>
 	                                    </div>
@@ -100,7 +120,7 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
-	                                    <label class="control-label text-right col-md-4">Valuation:</label>
+	                                    <label class="control-label text-right col-md-4">Available capacity for FIVE Network members:</label>
 	                                    <div class="col-md-8">
 	                                        <p class="form-control-static"> {{$request->valuation}} </p>
 	                                    </div>

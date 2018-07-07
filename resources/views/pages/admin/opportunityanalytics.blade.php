@@ -8,7 +8,7 @@
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h3 class="text-themecolor">Opportunity Analytics</h3>
-    </div>
+    </div> 
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
@@ -25,7 +25,7 @@
 <!-- ============================================================== -->
 <?php $i=1;?>
 <div class="container-fluid">
-    <!-- ============================================================== -->
+    <!-- =============================== =============================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
@@ -41,39 +41,33 @@
                                     <th>#</th>
                                     <th>Opportunity</th>
                                     <th>Submitted Member</th>
-                                    <th>Matched Family</th>
-                                    <th>Matched Score</th>
                                     <th>Submitted Time</th>
-                                    <th>Interested</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Opportunity</th>
+                                    <th>Opportunity Contact Name</th>
                                     <th>Submitted Member</th>
-                                    <th>Matched Family</th>
-                                    <th>Matched Score</th>
                                     <th>Submitted Time</th>
-                                    <th>Interested</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
                                 @if($oppors->count()>0)
                                 	@foreach($oppors as $each)
 									<td>{{$i++}}</td>
-                                    <td><a href="{{route('admin.opportunity-detail',['id' => $each->opportunity_id])}}">{{$each->opportunity->project_name}} <i class="fa fa-share"></i></a></td>
-                                    <td><a href="{{route('admin.membership-detail',['id' => $each->opportunity->user->id])}}">{{$each->opportunity->user->fName.' '.$each->opportunity->user->lName}} <i class="fa fa-share"></i></a></td>
-                                    <td><a href="{{route('admin.membership-detail',['id' => $each->matchedMember->id])}}">{{$each->matchedMember->fName.' '.$each->matchedMember->lName}} <i class="fa fa-share"></i></a></td>
-                                    <td>{{$each->score}}</td>
-                                    <td>{{$each->opportunity->created_at}}</td>
-                                    @if($each->binterest == 0)
-                                    <td>Not Expressed</td>
-                                    @elseif($each->binterest == 1)
-                                    <td>Interested</td>
-                                    @elseif($each->binterest == 2)
-                                    <td>Not Interested</td>
-                                    @endif
+                                    <td>
+                                        <a href="{{route('admin.opportunity-detail',['id' => $each->opportunity_id])}}">{{$each->contact_name}} <i class="fa fa-share"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.membership-detail',['id' => $each->opportunity->user->id])}}">{{$each->user->fName.' '.$each->user->lName}} <i class="fa fa-share"></i>
+                                        </a>
+                                    </td>
+                                    <td>{{$each->created_at}}</td>
+                                    <td><a href="{{route('admin.check-member-opportunity-match',['id' => $each->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check Match</a></td>
                                 	@endforeach
                                 @endif
                             </tbody>

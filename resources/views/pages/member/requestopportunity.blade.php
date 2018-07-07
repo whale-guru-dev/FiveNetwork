@@ -32,14 +32,25 @@
                     <form class="form p-t-20" action="{{route('member.requestopportunity')}}" method="POST" id="request-form">
                         @csrf
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
+                            <label for="contact_name">Contact name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="ti-world"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Enter Contact name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="ti-email"></i>
                                     </span>
                                 </div>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
                             </div>
                         </div>
                         <div class="form-group">
@@ -54,29 +65,35 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="opportunity_name">Opportunity Name</label>
+                            <label for="company_stage">Company Stage</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="ti-tag"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="opportunity_name" name="opportunity_name" placeholder="Enter opportunity name">
+
+                                <select name="company_stage" class="form-control">
+                                    <option>Select</option>
+                                    <option value="0">Seed/Pre-Revenue, Early Stage</option>
+                                    <option value="1">Venture Capital</option>
+                                    <option value="2">Private Equity</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="investing_amount">How much they are investing?</label>
+                            <label for="investing_amount">Amount You are Investing</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="ti-target"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="investing_amount" name="investing_amount" placeholder="Enter how much they are investing">
+                                <input type="text" class="form-control" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="raising">Raising</label>
+                            <label for="raising">Total Investment company is looking to raise</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
@@ -87,14 +104,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="valuation">Valuation</label>
+                            <label for="valuation">Available capacity for FIVE Network members</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="valuation" name="valuation" placeholder="Enter Valuation">
+                                <input type="text" class="form-control" id="valuation" name="valuation" placeholder="Enter Available capacity for FIVE Network members">
                             </div>
                         </div>
 

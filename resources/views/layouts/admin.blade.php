@@ -195,6 +195,13 @@
                             </a>
                         </li>
 
+                        <li>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true">
+                                <i class="ti-harddrives"></i>
+                                <span class="hide-menu">Staff Management</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

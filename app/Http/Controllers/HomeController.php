@@ -8,6 +8,8 @@ use App\User;
 use App\Model\MemberInvestmentStructure;
 use App\Model\MemberInvestmentSize;
 use App\Model\MemberInvestmentStage;
+use App\Model\MemberInvestmentRegion;
+use App\Model\MemberInvestmentSector;
 use Mail;
 use App\Mail\Follow;
 
@@ -213,10 +215,8 @@ class HomeController extends Controller
                 'phone_office' => $request['phone_office'],
                 'phone_mobile' => $mobile,
                 'dob'        => $request['dob'],
-                'desired_invest_type' => $request['desired_invest_type'] ? $request['desired_invest_type']:0,
                 'private_investment_number' => $request['private_investment_number'] ? $request['private_investment_number']:0,
                 'additional_capacity' => $request['additional_capacity'] ? $request['additional_capacity']:0,
-                'region'     => $request['region'] ? $request['region']:'',
                 'professional_history_bio' => $request['professional_history_bio'],
                 'family_office_investment_entity' => $request['family_office_investment_entity'],
                 'area_family_investor_expertise'  => $request['area_family_investor_expertise'] ? $request['area_family_investor_expertise']:'',
@@ -254,6 +254,15 @@ class HomeController extends Controller
                     ]);
                 }
             }
+
+            if(isset($request['invest_region'])){
+                foreach ($request['invest_region'] as $ir) {
+                    $record_is = MemberInvestmentRegion::create([
+                        'member_id' => $user->id,
+                        'region' => $ir
+                    ]);
+                }
+            }
                 
 
             if(isset($request['average_investment_size'])){
@@ -271,6 +280,15 @@ class HomeController extends Controller
                     $record_is = MemberInvestmentStage::create([
                         'member_id' => $user->id,
                         'type_id' => $ist
+                    ]);
+                }
+            }
+            
+            if(isset($request['investment_sector'])){
+                foreach ($request['investment_sector'] as $isr) {
+                    $record_is = MemberInvestmentSector::create([
+                        'member_id' => $user->id,
+                        'sector' => $isr
                     ]);
                 }
             }
@@ -339,10 +357,8 @@ class HomeController extends Controller
                 'phone_office' => $request['phone_office'],
                 'phone_mobile' => $mobile,
                 'dob'        => $request['dob'],
-                'desired_invest_type' => $request['desired_invest_type'] ? $request['desired_invest_type']:0,
                 'private_investment_number' => $request['private_investment_number'] ? $request['private_investment_number']:0,
                 'additional_capacity' => $request['additional_capacity'] ? $request['additional_capacity']:0,
-                'region'     => $request['region'] ? $request['region']:'',
                 'professional_history_bio' => $request['professional_history_bio'],
                 'family_office_investment_entity' => $request['family_office_investment_entity'],
                 'area_family_investor_expertise'  => $request['area_family_investor_expertise'] ? $request['area_family_investor_expertise']:'',
@@ -384,6 +400,20 @@ class HomeController extends Controller
                     ]);
                 }
             }
+
+            if(isset($request['invest_region'])){
+                $existing_record = MemberInvestmentRegion::where('member_id',$user->id)->get();
+                if($existing_record->count()>0)
+                    foreach($existing_record as $e_r){
+                        $e_r->delete();
+                    }
+                foreach ($request['invest_region'] as $ir) {
+                    $record_is = MemberInvestmentRegion::create([
+                        'member_id' => $user->id,
+                        'region' => $ir
+                    ]);
+                }
+            }
                 
 
             if(isset($request['average_investment_size'])){
@@ -412,6 +442,21 @@ class HomeController extends Controller
                     $record_is = MemberInvestmentStage::create([
                         'member_id' => $user->id,
                         'type_id' => $ist
+                    ]);
+                }
+            }
+
+            if(isset($request['investment_sector'])){
+                $existing_record = MemberInvestmentSector::where('member_id',$user->id)->get();
+                if($existing_record->count()>0)
+                    foreach($existing_record as $e_r){
+                        $e_r->delete();
+                    }
+                    
+                foreach ($request['investment_sector'] as $isr) {
+                    $record_is = MemberInvestmentSector::create([
+                        'member_id' => $user->id,
+                        'sector' => $isr
                     ]);
                 }
             }

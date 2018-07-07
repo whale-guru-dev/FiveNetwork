@@ -171,9 +171,9 @@ color: #797979;
                         </li>
 
                         <li> 
-                            <a class="waves-effect waves-dark" href="{{route('member.request-opportunity')}}" aria-expanded="false">
+                            <a class="waves-effect waves-dark" href="{{route('member.submit-opportunity')}}" aria-expanded="false">
                                 <i class="mdi mdi-plus-box"></i>
-                                <span class="hide-menu">Request A Opportunity</span>
+                                <span class="hide-menu">Submit A Co-Investment Opportunity</span>
                             </a>
                         </li>
 

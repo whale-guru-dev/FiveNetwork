@@ -48,10 +48,10 @@ Route::group(['prefix'=>'member','namespace'=>'member'],function(){
 
 	Route::get('dealroom','DealRoomController@dealroomview')->name('member.dealroom');
 
-	Route::get('request-opportunity','OpportunityController@requestview')->name('member.request-opportunity');
+	Route::get('submit-opportunity','OpportunityController@requestview')->name('member.submit-opportunity');
 	Route::post('request-opportunity','OpportunityController@request')->name('member.requestopportunity');
 
-	Route::get('submit-opportunity-form/{code}','OpportunityController@submitopportunityformview')->name('member.submit-opportunity-form');
+	Route::get('investment-questionnaire-form/{code}','OpportunityController@submitopportunityformview')->name('member.investment-questionnaire-form');
 	Route::post('submit-opportunity-form','OpportunityController@submitopportunityform')->name('member.submit-coinvestment-opportunity');
 	Route::get('verified-opportunity','OpportunityController@verifiedopportunityview')->name('member.verified-opportunity');
 	Route::get('opportunity-detail/{id}','OpportunityController@detailopportunity')->name('member.opportunity-detail');
@@ -95,4 +95,6 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::post('deny-requestopportunity-detail','OpportunityController@denyusersumitopportunity')->name('admin.deny-submit-opportunity');
 	Route::get('opportunity-analytics', 'OpportunityController@analyticsview')->name('admin.opportunity-analytics');
 	Route::get('opportunity-detail/{id}','OpportunityController@detailopportunity')->name('admin.opportunity-detail');
+	Route::get('check-member-opportunity-match/{id}','OpportunityController@checkmatch')->name('admin.check-member-opportunity-match');
+	Route::post('approve-opportunity-match','OpportunityController@approveopportunitymatch')->name('admin.approve-opportunity-match');
 });

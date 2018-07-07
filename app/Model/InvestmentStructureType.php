@@ -12,4 +12,9 @@ class InvestmentStructureType extends Model
     {
     	return $this->hasMany('App\Model\MemberInvestmentStructure','id');
     }
+
+    public function questionnaire()
+    {
+        return $this->hasOne('App\Model\MemberOpportunityForm','id');
+    }
 }

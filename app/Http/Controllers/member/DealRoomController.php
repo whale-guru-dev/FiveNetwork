@@ -4,6 +4,7 @@ namespace App\Http\Controllers\member;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\MemberRequestOpportunity;
 
 class DealRoomController extends Controller
 {
@@ -14,6 +15,7 @@ class DealRoomController extends Controller
 
     public function dealroomview()
     {
-    	return view('pages.member.dealroom');
+    	$oppors = MemberRequestOpportunity::all();
+    	return view('pages.member.dealroom')->with(['oppors' => $oppors]);
     }
 }
