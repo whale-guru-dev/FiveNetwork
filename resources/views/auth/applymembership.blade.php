@@ -167,7 +167,7 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="conf_password"> Confirm Password : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="password" class="form-control required" minlength="6" id="conf_password" name="conf_password"> 
+                                                    <input type="password" class="form-control required" minlength="8" id="conf_password" name="conf_password"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -179,9 +179,9 @@ color: #797979;
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <select class="custom-select form-control required" id="aware_method" name="aware_method">
-                                                        <option value="-1" selected>Select</option>
-                                                        <option value="1" {{ old('aware_method') == 1 ? 'selected' : '' }}>Current FIVE Network member</option>
-                                                        <option value="0" {{ old('aware_method') == 0 ? 'selected' : '' }}>Other</option>
+                                                        <option value="" selected>Select</option>
+                                                        <option value="1">Current FIVE Network member</option>
+                                                        <option value="0">Other</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -579,25 +579,45 @@ color: #797979;
                                                     <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
                                                         @foreach($invest_region_types as $irt)
                                                             @if($irt->id < 14)
+                                                            @if($loop->iteration == 1)
                                                             <optgroup label="Southeast">
+                                                            @endif
                                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 13)
                                                             </optgroup>
+                                                            @endif
                                                             @elseif($irt->id > 13 && $irt->id < 18)
+                                                            @if($loop->iteration == 14)
                                                             <optgroup label="Southwest">
+                                                            @endif
                                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 17)
                                                             </optgroup>
+                                                            @endif
                                                             @elseif($irt->id > 17 && $irt->id < 30)
+                                                            @if($loop->iteration == 18)
                                                             <optgroup label="Midwest">
+                                                            @endif
                                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 29)
                                                             </optgroup>
+                                                            @endif
                                                             @elseif($irt->id > 29 && $irt->id < 41)
+                                                            @if($loop->iteration == 30)
                                                             <optgroup label="West">
+                                                            @endif
                                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 40)
                                                             </optgroup>
+                                                            @endif
                                                             @else
+                                                            @if($loop->iteration == 41)
                                                             <optgroup label="Northeast">
+                                                            @endif
                                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 50)
                                                             </optgroup>
+                                                            @endif
                                                             @endif
                                                         @endforeach
                                                     </select>
@@ -622,7 +642,7 @@ color: #797979;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="additional_capacity">Desired Types of Investments :</label>
+                                                    <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
                                                     <select class="custom-select form-control " id="additional_capacity" name="additional_capacity">
                                                         <option value="">Select</option>
                                                         <option value="20" {{ old('additional_capacity') == 20 ? 'selected' : '' }}>20%</option>
@@ -861,7 +881,7 @@ color: #797979;
                                                     <label for="pref_contact_form"> Preferred Form of Contact
                                                     </label>
                                                     <select class="custom-select form-control" id="pref_contact_form" name="pref_contact_form">
-                                                        <option value="">Select</option>
+                                                        <option value="" selected>Select</option>
                                                         <option value="0" {{old('pref_contact_form') == 0 ? 'Selected':''}}>Office</option>
                                                         <option value="1" {{old('pref_contact_form') == 1 ? 'Selected':''}}>Mobile</option>
                                                         <option value="2" {{old('pref_contact_form') == 2 ? 'Selected':''}}>Email</option>
@@ -887,9 +907,9 @@ color: #797979;
                                                     <label for="attest_ai_qp"> Please attest you are Accredited Investor/Qualified Purchaser.
                                                     </label>
                                                     <select class="custom-select form-control" id="attest_ai_qp" name="attest_ai_qp">
-                                                        <option value="">Select</option>
-                                                        <option value="1" {{old('attest_ai_qp') == 1 ? 'Selected':''}}>Yes</option>
-                                                        <option value="0" {{old('attest_ai_qp') == 0 ? 'Selected':''}}>No</option>
+                                                        <option value="" selected>Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -901,9 +921,9 @@ color: #797979;
                                                     <label for="platform_use_case"> Please attest you will not use this platform to circumvent or attempt to interfere with an investment opportunity made available to you through the FIVE Network, and you understand if this activity takes place you will be removed from the network indefinitely.
                                                     </label>
                                                     <select class="custom-select form-control" id="platform_use_case" name="platform_use_case">
-                                                        <option value="">Select</option>
-                                                        <option value="1" {{old('platform_use_case') == 1 ? 'Selected':''}}>Yes</option>
-                                                        <option value="0" {{old('platform_use_case') == 0 ? 'Selected':''}}>No</option>
+                                                        <option value="" selected>Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -915,9 +935,9 @@ color: #797979;
                                                     <label for="plan_use_network"> Please attest you plan to use this network for the purposes of sharing and syndicating investment opportunities and intend to share all investment opportunities of which there is capacity with members of the network. <span class="danger">*</span>
                                                     </label>
                                                     <select class="custom-select form-control required" id="plan_use_network" name="plan_use_network">
-                                                        <option value="">Select</option>
-                                                        <option value="1" {{old('plan_use_network') == 1 ? 'Selected':''}}>Yes</option>
-                                                        <option value="0" {{old('plan_use_network') == 0 ? 'Selected':''}}>No</option>
+                                                        <option value="" selected="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -938,9 +958,9 @@ color: #797979;
                                                     <label for="understand_agree"> Please attest you understand and agree this network is not a recommendation for investment and isn’t responsible for any investment performance that is learned about through the platform.
                                                     </label>
                                                     <select class="custom-select form-control" id="understand_agree" name="understand_agree">
-                                                        <option value="">Select</option>
-                                                        <option value="1" {{old('understand_agree') == 1 ? 'Selected':''}}>Yes</option>
-                                                        <option value="0" {{old('understand_agree') == 0 ? 'Selected':''}}>No</option>
+                                                        <option value="" selected="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
                                                     </select>
                                                 </div>
                                             </div>

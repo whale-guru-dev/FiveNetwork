@@ -282,14 +282,7 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                             </div>
 	                    </div>
 
-	                    <div class="tags-default col-md-6">
-        					<div class="form-group row">
-                                <label class="control-label text-left col-md-3">Desired Types of Investments:</label>
-                                <div class="col-md-9">
-	                                <input type="text" value="{{$user->desired_invest_type==0?'Non-Control/Passive':' Control/Active'}}" data-role="tagsinput" disabled="" />
-                                </div>
-                            </div>
-	                    </div>
+	                    
         			</div>
 
         			<div class="row">
@@ -338,19 +331,34 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                                 </div>
                             </div>
 	                    </div>
-
-                        
         			</div>
 
         			<div class="row">
         				<div class="tags-default col-md-6">
         					<div class="form-group row">
-                                <label class="control-label text-left col-md-3">Regions – Will have broken out</label>
+                                <label class="control-label text-left col-md-3">Investment Regions</label>
                                 <div class="col-md-9">
-	                                <input type="text" value="{{$user->region}}" data-role="tagsinput" disabled="" />
+                                    <select multiple data-role="tagsinput" disabled="">
+                                        @foreach($user->investmentregion as $ir)
+                                        <option value="{{$ir->type->type}}">{{$ir->type->type}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 	                    </div>
+
+                        <div class="tags-default col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-left col-md-3">Investment Sector Focus</label>
+                                <div class="col-md-9">
+                                    <select multiple data-role="tagsinput" disabled="">
+                                        @foreach($user->investmentsector as $isr)
+                                        <option value="{{$isr->type->type}}">{{$isr->type->type}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
         			</div>
                     
         		</div>

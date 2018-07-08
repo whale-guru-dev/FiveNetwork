@@ -260,7 +260,7 @@ class HomeController extends Controller
                 foreach ($request['invest_region'] as $ir) {
                     $record_is = MemberInvestmentRegion::create([
                         'member_id' => $user->id,
-                        'region' => $ir
+                        'type_id' => $ir
                     ]);
                 }
             }
@@ -289,7 +289,7 @@ class HomeController extends Controller
                 foreach ($request['investment_sector'] as $isr) {
                     $record_is = MemberInvestmentSector::create([
                         'member_id' => $user->id,
-                        'sector' => $isr
+                        'type_id' => $isr
                     ]);
                 }
             }
