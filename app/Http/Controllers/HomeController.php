@@ -163,8 +163,8 @@ class HomeController extends Controller
                 return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
             }
             
-            if(isset($request['phone_mobile']) && isset($request['mobilex']))
-                $mobile = $request['mobilex'].$request['phone_mobile'];
+            if(isset($request['mobilex']))
+                $mobile = $request['mobilex'];
             else
                 $mobile = '';
             
@@ -309,8 +309,8 @@ class HomeController extends Controller
                 return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
             }
             
-            if(isset($request['phone_mobile']) && isset($request['mobilex']))
-                $mobile = $request['mobilex'].$request['phone_mobile'];
+            if(isset($request['mobilex']))
+                $mobile = $request['mobilex'];
             else
                 $mobile = '';
             

@@ -1075,13 +1075,15 @@ The information on the Site is intended to enable investors to understand the na
 
             initialCountry: "us",
 
-            separateDialCode: true
-            // utilsScript: "./utils.js"
+            separateDialCode: true,
+            utilsScript: "{{asset('assets/dashboard/admin/js/utils.js')}}" 
         });
 
         $("#apply-form").submit(function() {
             $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
         });
+
+
     </script>
     @if(Session::get('msg'))
         @if(Session::get('msg')[2] == 'success')

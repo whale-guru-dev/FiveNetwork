@@ -165,8 +165,6 @@
                                                 <label for="password"> Password : 
                                                 </label>
                                                 <input type="password" class="form-control" id="password" name="password"  minlength="8"> 
-                                                <div class="form-control-feedback"><small>Add minlength="8" password</small></div>
-
                                             </div>
                                         </div>
                                         <div class="col-md-6">

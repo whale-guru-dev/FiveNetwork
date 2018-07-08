@@ -48,12 +48,13 @@ if(!isset($user))
         width: 100%;
         padding: 5% 0;
         z-index: 100;
-        position: fixed;
+        position: relative;
     }
 
     #particles-js{
         background-color: #2164fb;
-        height: 100vh;
+        height: 100%;
+        /*min-height: 100%;*/
         position: absolute;
         top: 0;
         left: 50%;
@@ -188,7 +189,7 @@ if(!isset($user))
                 </div>
             </div>
         </div>
-        <div id="particles-js" style="background-color: #2164fb;height: 100vh;"></div>
+        <div id="particles-js" style="background-color: #2164fb;min-height: 100%;"></div>
     </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -202,13 +203,7 @@ if(!isset($user))
     <script src="{{asset('assets/dashboard/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{{asset('assets/dashboard/admin/js/jquery.slimscroll.js')}}"></script>
-    <!--Wave Effects -->
-    <script src="{{asset('assets/dashboard/admin/js/waves.js')}}"></script>
-    <!--Menu sidebar -->
-    <script src="{{asset('assets/dashboard/admin/js/sidebarmenu.js')}}"></script>
-    <!--stickey kit -->
-    <script src="{{asset('assets/dashboard/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
-    <script src="{{asset('assets/dashboard/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+
     <!--Custom JavaScript -->
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
     <!-- ============================================================== -->
@@ -217,7 +212,7 @@ if(!isset($user))
     <script src="{{asset('assets/dashboard/plugins/sweetalert/jquery.sweet-alert.custom.js')}}"></script>
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
+    <!-- <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script> -->
     <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
     <script type="text/javascript">
         particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
