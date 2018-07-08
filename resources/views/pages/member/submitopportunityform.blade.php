@@ -146,25 +146,45 @@
                                     <select class="select2 form-control custom-select required" style="width: 100%" name="state" id="state">
                                         @foreach($invest_region_types as $irt)
                                             @if($irt->id < 14)
+                                            @if($loop->iteration == 1)
                                             <optgroup label="Southeast">
+                                            @endif
                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                            @if($loop->iteration == 13)
                                             </optgroup>
+                                            @endif
                                             @elseif($irt->id > 13 && $irt->id < 18)
+                                            @if($loop->iteration == 14)
                                             <optgroup label="Southwest">
+                                            @endif
                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                            @if($loop->iteration == 17)
                                             </optgroup>
+                                            @endif
                                             @elseif($irt->id > 17 && $irt->id < 30)
+                                            @if($loop->iteration == 18)
                                             <optgroup label="Midwest">
+                                            @endif
                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                            @if($loop->iteration == 29)
                                             </optgroup>
+                                            @endif
                                             @elseif($irt->id > 29 && $irt->id < 41)
+                                            @if($loop->iteration == 30)
                                             <optgroup label="West">
+                                            @endif
                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                            @if($loop->iteration == 40)
                                             </optgroup>
+                                            @endif
                                             @else
+                                            @if($loop->iteration == 41)
                                             <optgroup label="Northeast">
+                                            @endif
                                                 <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                            @if($loop->iteration == 50)
                                             </optgroup>
+                                            @endif
                                             @endif
                                         @endforeach
                                     </select>
