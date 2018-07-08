@@ -20,8 +20,8 @@ class ReferController extends Controller
 
     public function refermemberview()
     {
-        $refers = User::where('refer_by',Auth::user()->user_code)->get();
-        $preregisters = Preregister::where('refer_by',Auth::user()->user_code)->where('applied',0)->get();
+        $refers = User::where('refer_by',Auth::user()->user_code)->latest()->get();
+        $preregisters = Preregister::where('refer_by',Auth::user()->user_code)->where('applied',0)->latest()->get();
         return view('pages.member.refermember')->with(['referers'=>$refers,'preregisters'=>$preregisters]);
     }
 

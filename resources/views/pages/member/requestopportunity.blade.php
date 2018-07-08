@@ -11,12 +11,12 @@
 <!-- ============================================================== -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Request a opportunity</h3>
+        <h3 class="text-themecolor">Submit an opportunity</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-            <li class="breadcrumb-item active">Request a opportunity</li>
+            <li class="breadcrumb-item active">Submit an opportunity</li>
         </ol>
     </div>
 </div>
@@ -27,8 +27,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Request a opportunity</h4>
-                    <h6 class="card-subtitle">Please fill these input to request a opportunity.</h6>
+                    <h4 class="card-title">Submit an opportunity</h4>
+                    <h6 class="card-subtitle">Please fill these input to submit an opportunity.</h6>
                     <form class="form p-t-20" action="{{route('member.requestopportunity')}}" method="POST" id="request-form">
                         @csrf
                         <div class="form-group">

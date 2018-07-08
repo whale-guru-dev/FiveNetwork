@@ -102,7 +102,7 @@
                                                 <tr>
                                                     <td>{{$i++}}</td>
                                                     <td>{{$pre->email}}</td>
-                                                    <td>{{$pre->created_at}}</td>
+                                                    <td>{{$pre->created_at->format('Y/m/d')}}</td>
                                                     <td><span class="label label-warning">Access Requested</span></td>
                                                 </tr>
                                                 @endforeach

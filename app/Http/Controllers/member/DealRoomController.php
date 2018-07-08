@@ -15,7 +15,7 @@ class DealRoomController extends Controller
 
     public function dealroomview()
     {
-    	$oppors = MemberRequestOpportunity::all();
+    	$oppors = MemberRequestOpportunity::latest()->get();
     	return view('pages.member.dealroom')->with(['oppors' => $oppors]);
     }
 }

@@ -30,7 +30,7 @@ if(!isset($user))
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/member/css/custom.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('assets/dashboard/member/css/custom.css')}}"> -->
 
     <link href="{{asset('assets/dashboard/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
@@ -206,6 +206,10 @@ if(!isset($user))
 
     <!--Custom JavaScript -->
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
+    
+    <script src="{{asset('assets/dashboard/admin/js/sidebarmenu.js')}}"></script>
+
+    <script src="{{asset('assets/dashboard/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
     <!-- ============================================================== -->
     <!-- Sweet-Alert  -->
     <script src="{{asset('assets/dashboard/plugins/sweetalert/sweetalert.min.js')}}"></script>
