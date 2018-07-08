@@ -132,10 +132,10 @@ color: #797979;
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{route('member.profile')}}"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                                    <!-- <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li> -->
+                                    <!-- <li><a href="#"><i class="ti-email"></i> Inbox</a></li> -->
+                                    <!-- <li role="separator" class="divider"></li> -->
+                                    <!-- <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li> -->
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> Logout</a></li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
