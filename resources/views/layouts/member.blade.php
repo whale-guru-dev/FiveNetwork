@@ -97,7 +97,12 @@ color: #797979;
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
-                    <ul class="navbar-nav mr-auto mt-md-0"></ul>
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <li class="nav-item"> 
+                            <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi-close mdi-menu mdi"></i>
+                            </a> 
+                        </li>
+                    </ul>
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
