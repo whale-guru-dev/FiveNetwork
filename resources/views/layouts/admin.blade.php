@@ -190,7 +190,6 @@
                                 <li><a href="{{route('admin.check-request-opportunity')}}">Allow Members To Submit Investment Questionnaire</a></li>
                                 <li><a href="{{route('admin.check-allrequest-opportunity')}}">All Members' Submitted Investment Opportunity</a></li>
                                 <li><a href="{{route('admin.opportunity-analytics')}}">Opportunity Analytics</a></li>
-                                <li><a href="#">All Members Submitted Opportunity</a></li>
                             </ul>
                         </li>
 

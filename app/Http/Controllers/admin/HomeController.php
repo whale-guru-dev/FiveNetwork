@@ -11,6 +11,8 @@ use App\Mail\Follow;
 use App\Model\MemberOpportunityForm;
 use App\Model\MemberOpportunityMatch;
 use App\Model\MemberLogin;
+use App\Model\MemberRequestOpportunity;
+use App\Model\MemberReferLog;
 
 class HomeController extends Controller
 {
@@ -263,6 +265,17 @@ class HomeController extends Controller
         }
 
         return view('pages.admin.detaillogins')->with(['logins' => $logins, 'date' => $date]);
+    }
+
+    public function memberactivity($id)
+    {
+        $member = User::find($id);
+        $logins = MemberLogin::where('usid', $id)->orderBy('created_at', 'DESC')->get();
+        $oppors = MemberRequestOpportunity::where('usid', $id)->orderBy('created_at', 'DESC')->get();
+        $referlog = MemberReferLog::where('usid', $id)->orderBy('created_at', 'DESC')->get();
+        $matchs = MemberOpportunityMatch::where('matched_member_id', $id)->get();
+
+        return view('pages.admin.memberactivity')->with(['member' => $member, 'logins' => $logins, 'oppors' => $oppors, 'referlog' => $referlog, 'matchs' => $matchs]);
     }
 }
  

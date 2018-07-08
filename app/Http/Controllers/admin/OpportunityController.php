@@ -10,6 +10,7 @@ use App\Model\MemberOpportunityForm;
 use App\Model\MemberOpportunityMatch;
 use Mail;
 use App\Mail\Follow;
+use App\Mail\Highlight;
 
 class OpportunityController extends Controller
 {
@@ -101,7 +102,10 @@ class OpportunityController extends Controller
 
         $family_email = $oppor->matchedMember->email;
 
-        //Mail
+        $link = route('member.opportunity-detail',['id' => $oppor->opportunity_id]);
+        $subject = 'Express your interest';
+        $content = '';
+        Mail::to($to)->send(new Highlight($link, $content, $subject));
 
         $msg = ['Success', 'Successfully Approved to Send Email with hightlight to family','success'];
         return redirect()->route('admin.check-member-opportunity-match',['id' => $oppor->opportunity_id])->with(['msg' => $msg]);

@@ -103,4 +103,6 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::post('approve-opportunity-match','OpportunityController@approveopportunitymatch')->name('admin.approve-opportunity-match');
 
 	Route::get('member-visit-detail/{date}','HomeController@visitdetail')->name('admin.member-visit-detail');
+
+	Route::get('member-activity-detail/{id}','HomeController@memberactivity')->name('admin.member-activity-detail');
 });

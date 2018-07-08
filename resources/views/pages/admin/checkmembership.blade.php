@@ -43,6 +43,7 @@
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
+                                    <th>Net Worth</th>
                                     <th>Applied Time</th>
                                     <th>Action</th>
                                 </tr>
@@ -54,6 +55,7 @@
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
+                                    <th>Net Worth</th>
                                     <th>Applied Time</th>
                                     <th>Action</th>
                                 </tr>
@@ -67,6 +69,7 @@
                                     <td>{{$user->fName}}</td>
                                     <td>{{$user->lName}}</td>
                                     <td>{{$user->email}}</td>
+                                    <td>{{$user->networth_aum}}</td>
                                     <td>{{$user->updated_at}}</td>
                                     <td><a  href="{{route('admin.membership-detail',['id'=>$user->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
                                 </tr>

@@ -55,6 +55,5 @@ class MonthlyEmailController extends Controller
 	   		$msg = ['Warning','You can\'t answer these questions.','error'];
 	   			return redirect()->route('monthly-email',['year' => $year, 'month' => $month, 'memberid' => $memberid, 'code' => $code])->with(['msg' => $msg]);
 	   	}
-
    }
 }

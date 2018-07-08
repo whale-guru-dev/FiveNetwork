@@ -45,10 +45,12 @@ class MonthlyEmail extends Command
         foreach($members as $member)
         {
             $code = $this->generateRandomString(10);
+            if(date('m') - 1 == 0)
+                $year = date('Y') - 1;
             MemberMonthlyEmail::create([
                 'usid' => $member->id,
-                'year' => date('Y'),
-                'month' => date('m'),
+                'year' => $year,
+                'month' => date('m') - 1,
                 'code' => $code
             ]);
 
