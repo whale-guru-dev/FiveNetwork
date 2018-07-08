@@ -26,6 +26,10 @@
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
+@php
+$num_refer = App\Model\MemberReferLog::where('usid', Auth::user()->id)->count();
+$num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)->count();
+@endphp
 <div class="container-fluid">
     <!-- ============================================================== -->
     <!-- Start Page Content -->
@@ -39,8 +43,18 @@
                         <h4 class="card-title m-t-10">{{$user->fName.' '.$user->lName}}</h4>
                         <h6 class="card-subtitle">{{$user->title}}</h6>
                         <div class="row text-center justify-content-md-center">
-                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
-                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
+                            <div class="col-4" data-toggle="tooltip" title="Number of Referrals">
+                                <a href="javascript:void(0)" class="link">
+                                    <i class="icon-people"></i> 
+                                    <font class="font-medium">{{$num_refer}}</font>
+                                </a>
+                            </div>
+                            <div class="col-4" data-toggle="tooltip" title="Number of Opportunities">
+                                <a href="javascript:void(0)" class="link">
+                                    <i class="icon-layers"></i> 
+                                    <font class="font-medium">{{$num_oppor}}</font>
+                                </a>
+                            </div>
                         </div>
                     </center>
                 </div>

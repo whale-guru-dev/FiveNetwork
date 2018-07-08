@@ -118,7 +118,12 @@
             </div>
         </div>
     </div>
-
+@php
+$num_total_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)->count();
+$num_allow_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)->where('is_accepted',1)->count();
+$num_referrals = App\Model\MemberReferLog::where('usid', Auth::user()->id)->count();
+$num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
+@endphp
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -130,7 +135,7 @@
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card card-inverse card-info">
                                 <div class="box bg-info text-center">
-                                    <h1 class="font-light text-white">2,064</h1>
+                                    <h1 class="font-light text-white">{{$num_total_oppor}}</h1>
                                     <h6 class="text-white">Total opportunities</h6>
                                 </div>
                             </div>
@@ -139,8 +144,8 @@
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card card-success card-inverse">
                                 <div class="box text-center">
-                                    <h1 class="font-light text-white">1,738</h1>
-                                    <h6 class="text-white">Responded</h6>
+                                    <h1 class="font-light text-white">{{$num_allow_oppor}}</h1>
+                                    <h6 class="text-white">Allowed opportunities</h6>
                                 </div>
                             </div>
                         </div>
@@ -148,8 +153,8 @@
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card card-inverse card-danger">
                                 <div class="box text-center">
-                                    <h1 class="font-light text-white">1100</h1>
-                                    <h6 class="text-white">Resolve</h6>
+                                    <h1 class="font-light text-white">{{$num_referrals}}</h1>
+                                    <h6 class="text-white">Referrals</h6>
                                 </div>
                             </div>
                         </div>
@@ -157,8 +162,8 @@
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card card-inverse card-dark">
                                 <div class="box text-center">
-                                    <h1 class="font-light text-white">964</h1>
-                                    <h6 class="text-white">Pending</h6>
+                                    <h1 class="font-light text-white">{{$num_logins}}</h1>
+                                    <h6 class="text-white">Logins</h6>
                                 </div>
                             </div>
                         </div>
