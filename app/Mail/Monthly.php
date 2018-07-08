@@ -16,9 +16,15 @@ class Monthly extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    public $link;
+
+    public $subject;
+
+    public function __construct($_link, $_subject)
     {
-        //
+        $this->link = $_link;
+        $this->subject = $_subject;
     }
 
     /**
@@ -28,6 +34,6 @@ class Monthly extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.monthly');
+        return $this->view('emails.monthly')->with(['link'=>$this->link, 'subject'=>$this->subject]);
     }
 }

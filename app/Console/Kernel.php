@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+
+        'App\Console\Commands\MonthlyEmail',
     ];
 
     /**
@@ -24,8 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('Monthly:email')
+                ->timezone('America/New_York')
+                ->monthlyOn(1, '12:00');
     }
 
     /**

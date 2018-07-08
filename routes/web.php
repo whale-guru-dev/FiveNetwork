@@ -17,8 +17,9 @@ Auth::routes();
 
 Route::get('/email-test1','EmailTestController@emailtest1');
 Route::get('/email-test2','EmailTestController@emailtest2');
+Route::get('/monthly','EmailTestController@monthly');
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('/preregister','HomeController@preregister');
 
@@ -34,6 +35,9 @@ Route::get('/apply-membership/{code}','HomeController@applymembershipview')->nam
 Route::post('/applymembership','HomeController@applymembership');
 
 Route::get('/follow-me/{link}','HomeController@Referral');
+
+Route::get('/monthly-email/{year}/{month}/{memberid}/{code}','MonthlyEmailController@gatherview')->name('monthly-email');
+Route::post('monthly-email','MonthlyEmailController@gatherinfo')->name('answer-monthly-email');
 
 Route::group(['prefix'=>'member','namespace'=>'member'],function(){
 	Route::get('/','HomeController@index');

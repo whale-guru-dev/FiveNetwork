@@ -25,4 +25,9 @@ class EmailTestController extends Controller
     {
     	return new Monthly();
     }
+
+    public function monthly()
+    {
+        return view('pages.landing.monthlyanswer');
+    }
 }

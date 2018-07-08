@@ -123,4 +123,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Model\MemberLogin','id');
     }
+
+    public function monthly()
+    {
+        return $this->hasMany('App\Model\MemberMonthlyEmail', 'usid');
+    }
 }

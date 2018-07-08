@@ -115,7 +115,6 @@ $current_visit = App\Model\MemberLogin::whereDate('created_at', '=', \Carbon\Car
 @endsection
 
 @section('admin-js')
-<script src="{{asset('assets/dashboard/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/plugins/chartist-js/dist/chartist.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}"></script>
 
