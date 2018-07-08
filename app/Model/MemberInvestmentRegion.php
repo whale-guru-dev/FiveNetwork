@@ -24,4 +24,9 @@ class MemberInvestmentRegion extends Model
     {
         return $this->hasOne('App\Model\MemberOpportunityForm','id');
     }
+
+    public function logins()
+    {
+        return $this->hasMany('App\Model\MemberLogin','usid');
+    }
 }

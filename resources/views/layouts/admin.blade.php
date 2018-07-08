@@ -162,13 +162,19 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
+                        <li> 
+                            <a class="waves-effect waves-dark" href="{{route('admin.dashboard')}}">
+                                <i class="mdi mdi-gauge"></i>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
 
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="mdi mdi-widgets"></i>
                                 <span class="hide-menu">Membership</span>
                             </a>
-                            <ul aria-expanded="true" class="collapse in" style="">
+                            <ul aria-expanded="false" class="collapse" style="">
                                 <li><a href="{{route('admin.allow-apply-membership')}}">Allow Preregisters To Apply Membership</a></li>
                                 <li><a href="{{route('admin.check-membership')}}">Check Newly Applied Membership</a></li>
                                 <li><a href="{{route('admin.check.membership')}}">All Members Membership Info</a></li>
@@ -176,11 +182,11 @@
                         </li>
 
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="ti-harddrives"></i>
                                 <span class="hide-menu">Opportunity</span>
                             </a>
-                            <ul aria-expanded="true" class="collapse in" style="">
+                            <ul aria-expanded="false" class="collapse" style="">
                                 <li><a href="{{route('admin.check-request-opportunity')}}">Allow Members To Submit Investment Questionnaire</a></li>
                                 <li><a href="{{route('admin.check-allrequest-opportunity')}}">All Members' Submitted Investment Opportunity</a></li>
                                 <li><a href="{{route('admin.opportunity-analytics')}}">Opportunity Analytics</a></li>
@@ -196,8 +202,8 @@
                         </li>
 
                         <li>
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true">
-                                <i class="ti-harddrives"></i>
+                            <a  href="#" aria-expanded="false">
+                                <i class="mdi mdi-account-key"></i>
                                 <span class="hide-menu">Staff Management</span>
                             </a>
                         </li>

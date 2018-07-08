@@ -97,4 +97,6 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::get('opportunity-detail/{id}','OpportunityController@detailopportunity')->name('admin.opportunity-detail');
 	Route::get('check-member-opportunity-match/{id}','OpportunityController@checkmatch')->name('admin.check-member-opportunity-match');
 	Route::post('approve-opportunity-match','OpportunityController@approveopportunitymatch')->name('admin.approve-opportunity-match');
+
+	Route::get('member-visit-detail/{date}','HomeController@visitdetail')->name('admin.member-visit-detail');
 });

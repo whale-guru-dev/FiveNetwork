@@ -294,10 +294,6 @@ class HomeController extends Controller
                 }
             }
 
-            
-
-            
-                
         }else{
             if($request['email'] != $request['email_confirmation']){
                 $msg = ['Error','You should confirm your email address !','error'];

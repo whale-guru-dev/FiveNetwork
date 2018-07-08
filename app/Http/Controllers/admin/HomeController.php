@@ -10,6 +10,7 @@ use Mail;
 use App\Mail\Follow;
 use App\Model\MemberOpportunityForm;
 use App\Model\MemberOpportunityMatch;
+use App\Model\MemberLogin;
 
 class HomeController extends Controller
 {
@@ -244,6 +245,24 @@ class HomeController extends Controller
 
         }
         
+    }
+
+    public function visitdetail($date)
+    {
+        if($date == 'total'){
+            $logins = MemberLogin::orderBy('created_at','DESC')->get();
+            $date = 'Total';
+        }elseif($date == 'today'){
+            $logins = MemberLogin::whereDate('created_at', '=', \Carbon\Carbon::today()->toDateString())->orderBy('created_at','DESC')->get();
+            $date = 'Today';
+        }elseif($date == 'current'){
+            $logins = MemberLogin::whereDate('created_at', '=', \Carbon\Carbon::today()->toDateString())->where('is_active', 1)->orderBy('created_at','DESC')->get();
+            $date = 'Current';
+        }else{
+            return redirect()->route('admin.member-visit-detail',['date' => 'total']);
+        }
+
+        return view('pages.admin.detaillogins')->with(['logins' => $logins, 'date' => $date]);
     }
 }
  
