@@ -44,6 +44,10 @@
         color: white;
     }
 
+    .sidebar-nav > ul > li > a {
+        background: #272c33 !important;
+    }
+
 </style>
 
 <body class="fix-header card-no-border">
