@@ -34,18 +34,24 @@
 <![endif]-->
 </head>
 <style type="text/css">
+    body{
+
+    }
     .login-register{
-        background-size: cover;
+        /*background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
         height: 100%;
         width: 100%;
         padding: 5% 0;
         z-index: 100;
-        position: fixed;
+        position: fixed;*/
+        background-image: url({{asset('assets/landing/img/background.jpg')}}) ;
+        -webkit-filter: sepia(0.7);    
+        filter: sepia(0.7);
     }
 
-    #particles-js{
+/*    #particles-js{
         background-color: #2164fb;
         height: 100vh;
         position: absolute;
@@ -53,7 +59,7 @@
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
-    }
+    }*/
 
     .login-box{
 /*        position: absolute;
@@ -84,6 +90,7 @@
 
     <section id="wrapper">
         <div class="login-register">
+            
             <!-- <div class="row"> -->
                 <div class="row text-center">
                     <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('logo.png')}}" width="250" height="200"></a>
@@ -142,7 +149,7 @@
                 </div>
             </div>
         </div>
-        <div id="particles-js" style="background-color: #2164fb;height: 100vh;"></div>
+        <!-- <div id="particles-js" style="background-color: #2164fb;height: 100vh;"></div> -->
     </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -172,10 +179,10 @@
     <!-- ============================================================== -->
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
     
-    <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
-    <script type="text/javascript">
+    <!-- <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script> -->
+    <!-- <script type="text/javascript">
         particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
-    </script>
+    </script> -->
 </body>
 
 </html>

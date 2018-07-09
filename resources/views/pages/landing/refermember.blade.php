@@ -41,26 +41,29 @@ if(!isset($user))
 </head>
 <style type="text/css">
     .login-register{
-        background-size: cover;
+        /*background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
         height: 100%;
         width: 100%;
         padding: 5% 0;
         z-index: 100;
-        position: relative;
+        position: relative;*/
+        background-image: url({{asset('assets/landing/img/background.jpg')}}) ;
+        -webkit-filter: sepia(0.7);    
+        filter: sepia(0.7);
     }
 
-    #particles-js{
+    /*#particles-js{
         background-color: #2164fb;
         height: 100%;
-        /*min-height: 100%;*/
+        min-height: 100%;
         position: absolute;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
-    }
+    }*/
 
     .login-box{
 /*        position: absolute;
@@ -189,7 +192,7 @@ if(!isset($user))
                 </div>
             </div>
         </div>
-        <div id="particles-js" style="background-color: #2164fb;min-height: 100%;"></div>
+        <!-- <div id="particles-js" style="background-color: #2164fb;min-height: 100%;"></div> -->
     </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -217,10 +220,10 @@ if(!isset($user))
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <!-- <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script> -->
-    <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
+    <!-- <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
     <script type="text/javascript">
         particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
-    </script>
+    </script> -->
     <script type="text/javascript">
       $.SweetAlert.init();
     </script>
