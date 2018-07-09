@@ -175,7 +175,7 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
                         <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list" data-page-size="10">
                             <thead>
                                 <tr>
-                                    <th>ID #</th>
+                                    <th>#</th>
                                     <th>IP Address</th>
                                     <th>Location</th>
                                     <th>Device</th>

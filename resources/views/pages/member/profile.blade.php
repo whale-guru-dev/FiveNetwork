@@ -141,7 +141,7 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                     </div>
                     <div class="tab-pane" id="settings" role="tabpanel">
                         <div class="card-body">
-                            <form class="form-horizontal form-material" action="{{route('member.edit-profile')}}" method="POST" enctype="multipart/form-data" novalidate>
+                            <form class="form-horizontal form-material" action="{{route('member.edit-profile')}}" method="POST" enctype="multipart/form-data" >
                                 @csrf
                                 <section>
                                     <div class="row">
@@ -179,6 +179,8 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                                 <label for="password"> Password : 
                                                 </label>
                                                 <input type="password" class="form-control" id="password" name="password"  minlength="8"> 
+                                                <div class="form-control-feedback"><small>Add <code>minlength="8"</code>  to accept.</small></div>
+
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -186,7 +188,7 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                                 <label for="conf_password"> Confirm Password : 
                                                 </label>
                                                 <input type="password" class="form-control" id="conf_password" name="conf_password"  minlength="8"> 
-                                                <div class="form-control-feedback"><small>Add minlength="8" password</small></div>
+                                                <div class="form-control-feedback"><small>Add <code>minlength="8"</code>  to accept.</small></div>
 
                                             </div>
                                         </div>
@@ -582,9 +584,13 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
 
 @section('member-js')
 <script src="{{asset('assets/dashboard/plugins/dropify/dist/js/dropify.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/plugins/wizard/jquery.validate.min.js')}}"></script>
+<!-- <script type="text/javascript" src="{{asset('assets/dashboard/member/js/validation.js')}}"></script> -->
 <script type="text/javascript">
     $('.dropify').dropify();
 </script>
+
+
 @if(Session::get('msg'))
     @if(Session::get('msg')[2] == 'success')
         <script type="text/javascript">
