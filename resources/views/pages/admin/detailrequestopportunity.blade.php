@@ -20,15 +20,18 @@
 </div>
 <div class="container-fluid">
 	<div class="row">
+		<div class="col-md-3">
+	        <button type="button" class="btn btn-info" id="back-btn"><i class="ti-back-left">Back</i></button>
+	    </div>
+	</div>
+		
+	<div class="row">
 		<div class="col-12">
-			<div class="card card-outline-info">
+			<div class="card">
 				<div class="card-header">
 	            	<div class="row">
                         <div class="col-md-9">
                             <h4 class="m-b-0 text-white">Request Info</h4>
-                        </div>
-                        <div class="col-md-3">
-                            <button type="button" class="btn btn-warning" id="back-btn"><i class="ti-back-left">Back</i></button>
                         </div>
                     </div>
                 </div>
@@ -180,9 +183,7 @@
 		$("#deny-request-form").submit();
 	});
 
-	$(document).on("click","#back-btn",function(){
-        window.history.back();
-    });
+
 </script>
 @if(Session::get('msg'))
 <script type="text/javascript">

@@ -29,6 +29,11 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-info" id="back-btn"><i class="ti-back-left">Back</i></button>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -105,6 +110,7 @@
 </div>
 
 <form action="{{route('admin.approve-opportunity-match')}}" method="POST" id="approve-form">
+    @csrf
 	<input type="hidden" name="id" id="approve-id">
 </form>
 @endsection
@@ -133,6 +139,7 @@
     	$("#approve-id").val(id);
     	$("#approve-form").submit();
     });
+
 </script>
 @if(Session::get('msg'))
 <script type="text/javascript">

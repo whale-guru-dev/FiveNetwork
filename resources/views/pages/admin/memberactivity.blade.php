@@ -37,6 +37,12 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
     <!-- ============================================================== -->
     <div class="row">
         <div class="col-md-3">
+            <button type="button" class="btn btn-info" id="back-btn"><i class="ti-back-left">Back</i></button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3">
             <div class="card"> <img class="card-img-top" src="{{asset('assets/landing/img/intro-bg.jpg')}}" alt="Background image cap" style="max-height: 165px;">
                 <div class="card-body little-profile text-center">
                     <div class="pro-img"><img src="{{asset('assets/dashboard/profile/propic/'.$member->propic)}}" alt="user"></div>

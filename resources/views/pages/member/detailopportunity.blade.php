@@ -50,7 +50,7 @@
                             <h4>GENERAL INFORMATION</h4>
                             <hr>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">Contact Name</label>
                                         <div class="col-md-8">
@@ -61,8 +61,8 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label text-right col-md-4">First</label>
+                                            <div class="form-group row">
+                                                <label class="control-label text-right col-md-4">First Name</label>
                                                 <div class="col-md-8">
                                                     <p class="form-control-static"> {{$oppor->fName}} </p>
                                                 </div>
@@ -70,8 +70,8 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="control-label text-right col-md-4">Last</label>
+                                            <div class="form-group row">
+                                                <label class="control-label text-right col-md-4">Last Name</label>
                                                 <div class="col-md-8">
                                                     <p class="form-control-static"> {{$oppor->lName}} </p>
                                                 </div>
@@ -83,7 +83,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group row">
                                                 <label class="control-label text-right col-md-4">Phone</label>
                                                 <div class="col-md-8">
                                                     <p class="form-control-static"> {{$oppor->phone}} </p>
@@ -92,7 +92,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group row">
                                                 <label class="control-label text-right col-md-4">Email</label>
                                                 <div class="col-md-8">
                                                     <p class="form-control-static"> {{$oppor->email}} </p>
@@ -101,21 +101,24 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Company Name</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->company_name}} </p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="control-label text-right col-md-4">Company Name</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{$oppor->company_name}} </p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Company Website</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->company_website}} </p>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="control-label text-right col-md-4">Company Website</label>
+                                                <div class="col-md-8">
+                                                    <p class="form-control-static"> {{$oppor->company_website}} </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +126,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group row">
                                                 <label class="control-label text-right col-md-4">Address</label>
                                                 <div class="col-md-8">
                                                     <p class="form-control-static"> {{$oppor->address}} </p>
@@ -132,7 +135,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group row">
                                                 <label class="control-label text-right col-md-4">City</label>
                                                 <div class="col-md-8">
                                                     <p class="form-control-static"> {{$oppor->city}} </p>
@@ -145,7 +148,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group row">
                                                 <label class="control-label text-right col-md-4">State</label>
                                                 <div class="col-md-8">
                                                     <p class="form-control-static"> {{$oppor->investmentregion->type}} </p>
@@ -154,9 +157,9 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group row">
                                                 <label class="control-label text-right col-md-4">Country</label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8 row">
                                                     <p class="form-control-static"> {{$oppor->country}} </p>
                                                 </div>
                                             </div>
@@ -167,7 +170,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">What is the structure of the Current Capital Raise ?</label>
                                         <div class="col-md-8">
@@ -684,7 +687,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">Type of Debt, Rate, Maturity, & Payment Terms</label>
                                         <div class="col-md-8">
@@ -1284,7 +1287,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">Have you had previous capital raises?</label>
                                         <div class="col-md-8">
@@ -1564,6 +1567,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
+
                                         @if($matched_oppor->binterest == 0)
                                         <div class="offset-md-3 col-md-3">
                                             <button type="button" class="btn btn-sm btn-info" id="interest-btn"> <i class="fa fa-pencil"></i> Interest</button>

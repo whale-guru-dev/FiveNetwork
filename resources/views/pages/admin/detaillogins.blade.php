@@ -19,6 +19,11 @@
 </div>
 
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-info" id="back-btn"><i class="ti-back-left">Back</i></button>
+        </div>
+    </div>
 	<div class="row">
         <div class="col-12">
             <div class="card">
@@ -90,5 +95,7 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
+
+    
 </script>
 @endsection

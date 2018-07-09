@@ -293,6 +293,11 @@
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
 
     @yield('admin-js')
+    <script type="text/javascript">
+        $(document).on("click","#back-btn",function(){
+            window.history.back();
+        });
+    </script>
 </body>
 
 </html>

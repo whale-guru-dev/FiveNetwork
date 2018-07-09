@@ -96,7 +96,7 @@ class OpportunityController extends Controller
 
     public function approveopportunitymatch(Request $request)
     {
-        $id = $requests['id'];
+        $id = $request['id'];
         $oppor = MemberOpportunityMatch::find($id);
         $oppor->update(['is_allowed' => 1]);
 
@@ -105,7 +105,7 @@ class OpportunityController extends Controller
         $link = route('member.opportunity-detail',['id' => $oppor->opportunity_id]);
         $subject = 'Express your interest';
         $content = '';
-        Mail::to($to)->send(new Highlight($link, $content, $subject));
+        Mail::to($family_email)->send(new Highlight($link, $content, $subject));
 
         $msg = ['Success', 'Successfully Approved to Send Email with hightlight to family','success'];
         return redirect()->route('admin.check-member-opportunity-match',['id' => $oppor->opportunity_id])->with(['msg' => $msg]);

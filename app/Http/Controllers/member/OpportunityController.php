@@ -301,7 +301,7 @@ class OpportunityController extends Controller
     {
         $usid = Auth::user()->id;
         $matched_oppor = MemberOpportunityMatch::where('matched_member_id', $usid)->where('opportunity_id', $id)->where('is_allowed', 1)->first();
-        if($matched_oppor->count()>0){
+        if($matched_oppor){
             $oppor = MemberOpportunityForm::find($id);
             return view('pages.member.detailopportunity')->with(['oppor' => $oppor,'matched_oppor' => $matched_oppor]);
         }else{
