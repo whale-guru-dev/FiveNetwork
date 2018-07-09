@@ -227,7 +227,9 @@
                                 <span class="hide-menu">Staff</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="">
+                                @if(Auth::user()->role == 1)
                                 <li><a href="{{route('admin.staff-management')}}">Management</a></li>
+                                @endif
                                 <li><a href="{{route('admin.staff-account')}}">Account Setting</a></li>
                             </ul>
                         </li>
