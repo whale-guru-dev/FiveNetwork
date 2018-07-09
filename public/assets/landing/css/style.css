@@ -63,6 +63,16 @@ select:-webkit-autofill:focus {
   .masthead .intro-body .brand-heading {
       font-size: 60px !important; 
   }
+
+  #logo-img {
+    width: 250px;
+  }
+}
+
+@media (max-width: 767px){
+    #logo-img {
+        width: 100px;
+    }
 }
 
 /*===*/
