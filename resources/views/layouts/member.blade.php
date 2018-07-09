@@ -48,6 +48,22 @@ color: #797979;
 .sweet-alert .sa-icon.sa-success .sa-fix {
     background-color: white; 
 }
+
+@font-face {
+   font-family: Shrikhand;
+   src: url({{asset('assets/dashboard/member/font/Shrikhand-Regular.ttf')}});
+}
+
+.navbar-brand{
+    font-family: Shrikhand;
+    color: white !important;
+}
+
+@media (max-width: 479px){
+    .navbar-brand{
+        font-size: 15px;
+    }
+}
 </style>
 
 <body class="fix-header card-no-border logo-center">
@@ -73,25 +89,8 @@ color: #797979;
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{url('/member')}}">
                         <!-- Logo icon -->
-                        <b>
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="{{asset('logo.png')}}" width="128" height="56" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="{{asset('logo.png')}}" width="128" height="56" alt="homepage" class="light-logo" />
-                            <!-- <h1 class="dark-logo">Family Investment Exchange</h1> -->
-                            <!-- <h1 class="light-logo">FIVE</h1> -->
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span>
-                             <!-- dark Logo text -->
-                             <!-- <img src="{{asset('logo.png')}}" width="128" height="40" alt="homepage" class="dark-logo" /> -->
-                             <!-- Light Logo text -->    
-                             <!-- <img src="{{asset('logo.png')}}" width="128" height="40" class="light-logo" alt="homepage" /> -->
-                             <!-- <h1 class="dark-logo">Family Investment Exchange</h1> -->
-                             <!-- <h1 class="light-logo">Family Investment Exchange</h1> -->
-                        </span> 
+                        <!-- <b>Family Investment Exchange</b> -->
+                        Family Investment Exchange
                     </a>
                 </div>
                 <!-- ============================================================== -->
