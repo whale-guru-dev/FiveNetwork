@@ -40,7 +40,7 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
             <button type="button" class="btn btn-info" id="back-btn"><i class="ti-back-left">Back</i></button>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-3">
             <div class="card"> <img class="card-img-top" src="{{asset('assets/landing/img/intro-bg.jpg')}}" alt="Background image cap" style="max-height: 165px;">
@@ -67,7 +67,7 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
             <!-- <div class="row"> -->
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-subtitle">List of Login Information</h6>
+                        <label for="basic-url">List of Login Information</label>
                         <div class="table-responsive m-t-10">
                             @if($logins->count()>0)
                             <table id="myTable" class="table table-bordered table-striped">
@@ -104,7 +104,7 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
 
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-subtitle">List of Opportunies Information</h6>
+                        <label for="basic-url">List of Opportunies Information</label>
                         <div class="table-responsive m-t-10">
                             @if($oppors->count()>0)
                             <table id="myTable1" class="table table-bordered table-striped">
@@ -150,7 +150,7 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
 
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-subtitle">Express Interests</h6>
+                        <label for="basic-url">Express Interests</label>
                         <div class="table-responsive m-t-10">
                             @if($matchs->count()>0)
                             <table id="myTable1" class="table table-bordered table-striped">
@@ -194,7 +194,7 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
 
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-subtitle">Referrals</h6>
+                        <label for="basic-url">Referrals</label>
                         <div class="table-responsive m-t-10">
                             @if($referlog->count()>0)
                             <table id="myTable1" class="table table-bordered table-striped">
