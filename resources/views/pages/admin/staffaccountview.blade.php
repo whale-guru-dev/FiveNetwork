@@ -172,14 +172,14 @@
                     <div class="form-group">
                         <label class="col-md-12">Password</label>
                         <div class="col-md-12">
-                            <input type="password" name="password" class="form-control" placeholder="type new password">
+                            <input type="password" name="password" class="form-control" minlength="8" placeholder="type new password">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-12">Confirm Password</label>
                         <div class="col-md-12">
-                            <input type="password" name="conf_password" class="form-control" placeholder="type confirm password">
+                            <input type="password" name="conf_password" class="form-control" minlength="8" placeholder="type confirm password">
                         </div>
                     </div>
                     
@@ -197,6 +197,7 @@
 @endsection
 
 @section('admin-js')
+<script src="{{asset('assets/dashboard/plugins/wizard/jquery.validate.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/plugins/dropify/dist/js/dropify.min.js')}}"></script>
 <script type="text/javascript">
     $('.dropify').dropify();
