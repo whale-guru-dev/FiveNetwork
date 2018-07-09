@@ -126,6 +126,13 @@
                             <div class="col-xs-12">
                                 <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">{{ __('Submit') }}</button>
                             </div>
+                            <br><br>
+                            <div class="col-xs-12">
+                                Already A Member?
+                                <a class="" href="{{url('/login')}}">
+                                    {{ __('Login') }}
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>

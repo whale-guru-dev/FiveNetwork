@@ -189,12 +189,12 @@ color: #797979;
                                                 <div class="form-group collapse" id="aware_who" style="display: none;">
                                                     <label for="aware_method_desc_who"> Who : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="email" class="form-control " id="aware_method_desc_who" name="aware_method_desc" value="{{old('aware_method_desc')}}"> 
+                                                    <input type="email" class="form-control" id="aware_method_desc_who" name="aware_method_desc_who"> 
                                                 </div>
                                                 <div class="form-group collapse" id="aware_how" style="display: none;">
                                                     <label for="aware_method_desc_how"> How : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="text" class="form-control " id="aware_method_desc_how" name="aware_method_desc"  value="{{old('aware_method_desc')}}"> 
+                                                    <input type="text" class="form-control " id="aware_method_desc_how" name="aware_method_desc_how"> 
                                                 </div>
                                             </div>
                                         </div>

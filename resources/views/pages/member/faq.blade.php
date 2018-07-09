@@ -10,10 +10,16 @@
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center">
+    <div class="col-md-4 align-self-center">
         <h3 class="text-themecolor">Faqs</h3>
     </div>
-    <div class="col-md-7 align-self-center">
+    <div class="col-md-4 align-self-center text-center">
+        <!-- <div class="row text-center"> -->
+            <img src="{{asset('logo.png')}}" width="200" height="150" alt="homepage" class="dark-logo" />
+        <!-- </div> -->
+        
+    </div>
+    <div class="col-md-4 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item active">Faqs</li>

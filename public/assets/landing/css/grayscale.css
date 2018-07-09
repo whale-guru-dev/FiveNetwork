@@ -120,8 +120,9 @@ a:focus, a:hover {
 .masthead {
   display: table;
   width: 100%;
-  height: auto;
-  padding: 200px 0;
+  height: 100%;
+  /*padding: 200px 0;*/
+
   text-align: center;
   color: white;
   background: url("../img/intro-bg.jpg") no-repeat bottom center scroll;

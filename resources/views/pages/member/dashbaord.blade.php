@@ -37,6 +37,10 @@
         r:0;fill:transparent;fill-opacity:0;
       }
     }
+
+    #link-board a{
+        white-space: normal;
+    }
       
 </style>
 @endsection
@@ -48,10 +52,18 @@
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
 <div class="row page-titles">
-    <div class="col-md-5 align-self-center">
+    <div class="col-md-4 align-self-center">
         <h3 class="text-themecolor">Dashboard</h3>
     </div>
-    <div class="col-md-7 align-self-center">
+
+    <div class="col-md-4 align-self-center text-center">
+        <!-- <div class="row text-center"> -->
+            <img src="{{asset('logo.png')}}" width="200" height="150" alt="homepage" class="dark-logo" />
+        <!-- </div> -->
+        
+    </div>
+
+    <div class="col-md-4 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item active">Dashboard</li>
@@ -84,8 +96,8 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
-                    <div class="row">
+                <div class="card-body" id="link-board">
+                    <div class="row  button-group">
                         <div class="col-md-6 col-lg-6">
                             <a href="{{route('member.submit-opportunity')}}" class="btn btn-block btn-outline-info">Submit co-investment opportunity</a>
                         </div>
@@ -95,7 +107,7 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row">
+                    <div class="row  button-group">
                         <div class="col-md-6 col-lg-6">
                             <a href="{{route('member.profile')}}" class="btn btn-block btn-outline-info">Edit Profile</a>
                         </div>
@@ -105,7 +117,7 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row">
+                    <div class="row  button-group">
                         <div class="col-md-6 col-lg-6">
                             <a href="{{route('member.faq')}}" class="btn btn-block btn-outline-info">Frequently Asked Questions</a>
                         </div>

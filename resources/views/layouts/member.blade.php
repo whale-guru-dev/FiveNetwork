@@ -79,6 +79,8 @@ color: #797979;
                             <img src="{{asset('logo.png')}}" width="128" height="56" alt="homepage" class="dark-logo" />
                             <!-- Light Logo icon -->
                             <img src="{{asset('logo.png')}}" width="128" height="56" alt="homepage" class="light-logo" />
+                            <!-- <h1 class="dark-logo">Family Investment Exchange</h1> -->
+                            <!-- <h1 class="light-logo">FIVE</h1> -->
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
@@ -87,6 +89,8 @@ color: #797979;
                              <!-- <img src="{{asset('logo.png')}}" width="128" height="40" alt="homepage" class="dark-logo" /> -->
                              <!-- Light Logo text -->    
                              <!-- <img src="{{asset('logo.png')}}" width="128" height="40" class="light-logo" alt="homepage" /> -->
+                             <!-- <h1 class="dark-logo">Family Investment Exchange</h1> -->
+                             <!-- <h1 class="light-logo">Family Investment Exchange</h1> -->
                         </span> 
                     </a>
                 </div>
@@ -130,8 +134,8 @@ color: #797979;
                                                 <p class="text-muted">{{Auth::user()->email}}</p><a href="{{route('member.profile')}}" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                         </div>
                                     </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="{{route('member.profile')}}"><i class="ti-user"></i> My Profile</a></li>
+                                    <!-- <li role="separator" class="divider"></li> -->
+                                    <!-- <li><a href="{{route('member.profile')}}"><i class="ti-user"></i> My Profile</a></li> -->
                                     <!-- <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li> -->
                                     <!-- <li><a href="#"><i class="ti-email"></i> Inbox</a></li> -->
                                     <!-- <li role="separator" class="divider"></li> -->

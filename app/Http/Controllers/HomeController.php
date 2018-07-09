@@ -195,14 +195,17 @@ class HomeController extends Controller
                 $msg = ['Error','You should upload your government ID photo !','error'];
                 return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
             }
-
+            if($request['aware_method_desc_how'])
+                $aware_method_desc = $request['aware_method_desc_how'];
+            elseif($request['aware_method_desc_who'])
+                $aware_method_desc = $request['aware_method_desc_who'];
             $user = User::create([
                 'apply_type' => $request['apply_type'],
                 'bprinciple' => $request['bprinciple'],
                 'email'      => $request['email'],
                 'password'   => bcrypt($request['password']),
                 'aware_method' => $request['aware_method'],
-                'aware_method_desc' => $request['aware_method_desc'] ? $request['aware_method_desc']:'',
+                'aware_method_desc' => $aware_method_desc,
                 'family_office_name' => $request['family_office_name'],
                 'fName'      => $request['fName'],
                 'lName'      => $request['lName'],
@@ -338,13 +341,18 @@ class HomeController extends Controller
                 return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
             }
 
+            if($request['aware_method_desc_how'])
+                $aware_method_desc = $request['aware_method_desc_how'];
+            elseif($request['aware_method_desc_who'])
+                $aware_method_desc = $request['aware_method_desc_who'];
+
             $user->update([
                 'apply_type' => $request['apply_type'],
                 'bprinciple' => $request['bprinciple'],
                 'email'      => $request['email'],
                 'password'   => bcrypt($request['password']),
                 'aware_method' => $request['aware_method'],
-                'aware_method_desc' => $request['aware_method_desc'] ? $request['aware_method_desc']:'',
+                'aware_method_desc' => $aware_method_desc,
                 'family_office_name' => $request['family_office_name'],
                 'fName'      => $request['fName'],
                 'lName'      => $request['lName'],
@@ -411,7 +419,7 @@ class HomeController extends Controller
                 foreach ($request['invest_region'] as $ir) {
                     $record_is = MemberInvestmentRegion::create([
                         'member_id' => $user->id,
-                        'region' => $ir
+                        'type_id' => $ir
                     ]);
                 }
             }

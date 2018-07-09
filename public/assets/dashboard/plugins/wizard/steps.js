@@ -60,6 +60,22 @@ $(".validation-wizard").steps({
     , rules: {
         email: {
             email: !0
+        },
+        email_confirmation:{
+            equalTo: email
+        },
+        password: {
+            minlength: 8,
+        },
+        conf_password: {
+            minlength: 8,
+            equalTo: password
+        },
+        company_website: {
+            url:true
+        },
+        linkedIn: {
+            url:true
         }
     }
 })

@@ -13,11 +13,17 @@ $(function () {
             $("#aware_who").addClass("show");
             $("#aware_how").hide();
             $("#aware_how").removeClass("show");
+            $("#aware_method_desc_who").addClass("required");
+            $("#aware_method_desc_how").removeClass("required");
+            $("#aware_method_desc_how").val('');
          }else if($(this).val() == 0){
             $("#aware_how").show();
             $("#aware_how").addClass("show");
+            $("#aware_method_desc_who").val('');
             $("#aware_who").hide();
             $("#aware_who").removeClass("show");
+            $("#aware_method_desc_how").addClass("required");
+            $("#aware_method_desc_who").removeClass("required");
          }else if($(this).val() == "-1"){
             $("#aware_how").hide();
             $("#aware_who").hide();
