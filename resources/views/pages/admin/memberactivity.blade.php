@@ -196,7 +196,7 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
                     <div class="card-body">
                         <h6 class="card-subtitle">Referrals</h6>
                         <div class="table-responsive m-t-10">
-                            @if($matchs->count()>0)
+                            @if($referlog->count()>0)
                             <table id="myTable1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
