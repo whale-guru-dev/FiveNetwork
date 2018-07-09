@@ -60,7 +60,7 @@
           <div class="row">
             <div class="col-lg-8 mx-auto">
               <h1 class="brand-heading">Family Investment Exchange</h1>
-              <p class="intro-text">Connecting Family Offices Around the World.</p>
+              <p class="intro-text">Connecting Like-Minded Family Offices to World Class Investment Opportunities.</p>
             </div>
           </div> 
         </div>

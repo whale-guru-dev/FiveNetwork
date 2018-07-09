@@ -352,12 +352,17 @@ A member of the FIVE Network has submitted a co-investment opportunity that coul
                                             <div align="center" class="button-container center " style="padding-right: 0px; padding-left: 0px; padding-top:0px; padding-bottom:0px;">
                                                 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:0px; padding-bottom:0px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:43pt; v-text-anchor:middle; width:175pt;" arcsize="7%" strokecolor="#FFFFFF" fillcolor="#FFFFFF"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#000000; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size:16px;"><![endif]-->
                                                 <div style="color: #000000; background-color: #FFFFFF; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 234px; width: 174px;width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 10px; padding-right: 30px; padding-bottom: 10px; padding-left: 30px; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; text-align: center; mso-border-alt: none;">
-                                                    <a href="{{$link}}" style="line-height: 28px; font-size: 12px;" data-mce-style="line-height: 28px;"><span style="font-size: 16px; line-height: 38px;" data-mce-style="font-size: 16px;"><strong><span style="font-family: inherit; line-height: 38px; font-size: 16px;" mce-data-marked="1">Express Your Interest</span></strong></span>
-                        </a>
+                                                    <a href="{{$link}}" style="line-height: 28px; font-size: 12px;" data-mce-style="line-height: 28px;">
+                                                        <span style="font-size: 16px; line-height: 38px;" data-mce-style="font-size: 16px;">
+                                                            <strong>
+                                                                <span style="font-family: inherit; line-height: 38px; font-size: 16px;" mce-data-marked="1">Express Your Interest</span>
+                                                            </strong>
+                                                        </span>
+                                                    </a>
                                                 </div>
                                                 <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
                                             </div>
-
+                                            
                                             <!--[if (!mso)&(!IE)]><!-->
                                         </div>
                                         <!--<![endif]-->

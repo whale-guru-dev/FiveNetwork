@@ -62,7 +62,7 @@ class HomeController extends Controller
             $email = $user['email'];
             $link = url('/');
             $link_name = 'Go To Website';
-            $content = 'Thank you for pre-registering to be a part of the Family InVestment Exchange. The membership committee will be in touch with you to request additional information and update you when the platform will be available for use.';
+            $content = 'Thank you for requesting access to the Family Investment Exchange. The membership committee will be in touch with you to request additional information and update you when the platform will be available for use.';
             $subtitle = 'Successfully Requested Access!';
             $subject = 'Successfully Requested Access';
 

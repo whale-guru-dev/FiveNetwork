@@ -140,7 +140,7 @@ color: #797979;
                                         </div>
                                     </section>
                                     <!-- Step 1 -->
-                                    <h6>Applicant Information – For Family Office</h6>
+                                    <h6>Applicant Information</h6>
                                     <section>
                                         <div class="row">
                                             <div class="col-md-6">
