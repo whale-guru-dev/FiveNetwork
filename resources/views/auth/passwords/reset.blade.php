@@ -32,39 +32,43 @@
 <![endif]-->
 </head>
 <style type="text/css">
-    .login-register{
-        background-size: cover;
+        .login-register{
+        /*background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
         height: 100%;
         width: 100%;
         padding: 5% 0;
         z-index: 100;
-        position: fixed;
+        position: fixed;*/
+        background-image: url({{asset('assets/landing/img/background.jpg')}}) ;
+        -webkit-filter: sepia(0.7);    
+        filter: sepia(0.7);
     }
 
     #particles-js{
-        background-color: #2164fb;
+        /*background-color: #2164fb;
         height: 100vh;
         position: absolute;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 100%;
+        width: 100%;*/
     }
 
     .login-box{
-        position: absolute;
+        /*position: absolute;
         top: 60%;
         left: 50%;
-        transform: translate(-50%,-60%);
+        transform: translate(-50%,-60%);*/
     }
 
     #logo-box{
-        top: 15%;
+        /*top: 20%;
         position: absolute;
         left: 50%;
-        transform: translate(-50%,-15%);
+        transform: translate(-50%,-20%);*/
+        margin: 0 auto;
     }
 </style>
 <body>
@@ -80,7 +84,9 @@
     <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
-            <img src="{{asset('logo.png')}}" id="logo-box" width="250">
+            <div class="row text-center">
+                <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('logo.png')}}" width="250" height="200"></a>
+            </div>
             <div class="login-box card">
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.request') }}" class="form-horizontal" aria-label="{{ __('Reset Password') }}">
@@ -142,7 +148,7 @@
                 </div>
             </div>
         </div>
-        <div id="particles-js" style="background-color: #2164fb;height: 100vh;"></div>
+        <!-- <div id="particles-js" style="background-color: #2164fb;height: 100vh;"></div> -->
     </section>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -169,9 +175,9 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
-    <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
+    <!-- <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script> -->
     <script type="text/javascript">
-        particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
+        // particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
     </script>
 </body>
 
