@@ -127,24 +127,24 @@
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{asset('assets/dashboard/images/users/1.jpg')}}" alt="user" class="profile-pic" />
+                                <img src="{{asset('assets/dashboard/profile/propic/'.Auth::user()->propic)}}" alt="user" class="profile-pic" />
                             </a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
                                 <ul class="dropdown-user">
                                     <li>
                                         <div class="dw-user-box">
                                             <div class="u-img">
-                                                <img src="{{asset('assets/dashboard/images/users/1.jpg')}}" alt="user">
+                                                <img src="{{asset('assets/dashboard/profile/propic/'.Auth::user()->propic)}}" alt="user">
                                             </div>
                                             <div class="u-text">
                                                 <h4>{{Auth::user()->fName.' '.AUth::user()->lName}}</h4>
                                                 <p class="text-muted">{{Auth::user()->email}}</p>
-                                                <a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                                <a href="{{route('admin.staff-account')}}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                                             </div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                                    <li><a href="{{route('admin.staff-account')}}"><i class="ti-user"></i> My Profile</a></li>
                                     <!-- <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li> -->
                                     <!-- <li><a href="#"><i class="ti-email"></i> Inbox</a></li> -->
                                     <!-- <li role="separator" class="divider"></li> -->
@@ -170,7 +170,7 @@
                 <!-- User profile -->
                 <div class="user-profile" style="background: url({{asset('assets/dashboard/images/background/user-info.jpg')}}) no-repeat;">
                     <!-- User profile image -->
-                    <div class="profile-img"> <img src="{{asset('assets/dashboard/images/users/1.jpg')}}" alt="user" /> </div>
+                    <div class="profile-img"> <img src="{{asset('assets/dashboard/profile/propic/'.Auth::user()->propic)}}" alt="user" /> </div>
                     <!-- User profile text-->
                     <div class="profile-text"> 
                         <!-- <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe <span class="caret"></span>
@@ -219,11 +219,17 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a  href="#" aria-expanded="false">
+                        
+
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="mdi mdi-account-key"></i>
-                                <span class="hide-menu">Staff Management</span>
+                                <span class="hide-menu">Staff</span>
                             </a>
+                            <ul aria-expanded="false" class="collapse" style="">
+                                <li><a href="{{route('admin.staff-management')}}">Management</a></li>
+                                <li><a href="{{route('admin.staff-account')}}">Account Setting</a></li>
+                            </ul>
                         </li>
 
                     </ul>

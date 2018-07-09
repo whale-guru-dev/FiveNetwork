@@ -105,4 +105,11 @@ Route::group(['prefix'=>'admin','namespace'=>'admin'],function(){
 	Route::get('member-visit-detail/{date}','HomeController@visitdetail')->name('admin.member-visit-detail');
 
 	Route::get('member-activity-detail/{id}','HomeController@memberactivity')->name('admin.member-activity-detail');
+
+	Route::get('staff-management','StaffController@staffmanageview')->name('admin.staff-management');
+	Route::get('staff-account', 'StaffController@staffaccountview')->name('admin.staff-account');
+	Route::post('admin.new-staff', 'StaffController@newstaff')->name('admin.new-staff');
+	Route::post('edit-admin-staff', 'StaffController@editadminstaff')->name('admin.edit-admin-staff');
+	Route::post('edit-staff', 'StaffController@editstaffaccount')->name('admin.edit-staff');
+	Route::post('del-staff', 'StaffController@delstaff')->name('admin.del-staff');
 });
