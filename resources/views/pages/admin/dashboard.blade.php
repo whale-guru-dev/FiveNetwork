@@ -50,6 +50,8 @@ foreach(App\User::all() as $each){
 	$user_act[$each->id] = ['id' => $each->id, 'Name' => $each->fName.' '.$each->lName, 'score' => $sum_score];
 }
 
+
+$admins = App\Model\Admin::all();
 @endphp
 
 
@@ -246,6 +248,53 @@ foreach(App\User::all() as $each){
                 </div>
 			</div>
 		</div>
+
+        <div class="col-lg-6 col-xlg-6">
+            <div class="card card-default">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                        <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                        <a class="btn-close" data-action="close"><i class="ti-close"></i></a>
+                    </div>
+
+                    <h4 class="card-title m-b-0">Admins</h4>
+                    
+                </div>
+                <div class="card-body collapse show">
+                    <div class="table-responsive">
+                        <table class="table product-overview">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Admin Name</th>
+                                    <th>Admin Email</th>
+                                    <th>Role</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($admins as $admin)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$admin->fName.' '.$admin->lName}}</td>
+                                    <td>{{$admin->email}}</td>
+                                    <td>
+                                        @if($admin->role == 1)
+                                        <span class="badge badge-danger">Super Admin</span>
+                                        @else
+                                        <span class="badge badge-success">Admin</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$admin->created_at->format('Y/m/d')}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
 </div>	
 
