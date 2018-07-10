@@ -477,7 +477,7 @@ class HomeController extends Controller
                 foreach ($request['investment_sector'] as $isr) {
                     $record_is = MemberInvestmentSector::create([
                         'member_id' => $user->id,
-                        'sector' => $isr
+                        'type_id' => $isr
                     ]);
                 }
             }
@@ -495,6 +495,18 @@ class HomeController extends Controller
             $subject = 'Thank you for applying to join the Family InVestment Exchange';
 
             Mail::to($email)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
+            foreach(Admin::all() as $admin)
+            {
+                $to = $admin->email;
+                $subtitle = 'A Member Submitted a membership application!';
+                $subject = 'A Member Submitted a membership application!';
+                $content = 'Member '.$user->fName.' '.$user->lName.' was submitted a membership application.';
+                $link = route('admin.membership-detail',['id' => $user->id]);
+                $link_name = 'Go To Dashboard';
+
+                Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+            }
 
             return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
         }

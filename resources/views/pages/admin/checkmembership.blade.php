@@ -39,10 +39,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Family Office Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Name</th>
                                     <th>Email</th>
+                                    <th>Sector of Focus</th>
                                     <th>Net Worth</th>
                                     <th>Applied Time</th>
                                     <th>Action</th>
@@ -51,10 +50,9 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Family Office Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Name</th>
                                     <th>Email</th>
+                                    <th>Sector of Focus</th>
                                     <th>Net Worth</th>
                                     <th>Applied Time</th>
                                     <th>Action</th>
@@ -65,10 +63,15 @@
                                 @foreach($users as $user)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{$user->family_office_name}}</td>
-                                    <td>{{$user->fName}}</td>
-                                    <td>{{$user->lName}}</td>
+                                    <td>{{$user->fName.' '.$user->lName}}</td>
                                     <td>{{$user->email}}</td>
+                                    <td>
+                                        @if($user->investmentsector)
+                                            @foreach($user->investmentsector as $isr)
+                                                <span class="badge badge-info">{{$isr->type->type}}</span>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>{{$user->networth_aum}}</td>
                                     <td>{{$user->updated_at}}</td>
                                     <td><a  href="{{route('admin.membership-detail',['id'=>$user->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
