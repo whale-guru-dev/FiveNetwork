@@ -60,11 +60,11 @@ class HomeController extends Controller
         $user = Preregister::create(['email'=>$request['email'], 'code'=>$this->generateRandomString(10),'refer_by'=>$referat_de]);
         if($user){
             $email = $user['email'];
-            $link = url('/');
-            $link_name = 'Go To Website';
+            $link = route('home');
+            $link_name = 'Go to Family Investment Exchange';
             $content = 'Thank you for requesting access to the Family Investment Exchange. The membership committee will be in touch with you to request additional information and update you when the platform will be available for use.';
-            $subtitle = 'Successfully Requested Access!';
-            $subject = 'Successfully Requested Access';
+            $subtitle = 'Access Requested!';
+            $subject = 'Access Requested';
 
             Mail::to($email)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
 
@@ -103,7 +103,7 @@ class HomeController extends Controller
 
         $link = '';
         $link_name = '';
-        $content = 'Thank you for referring ____ to join the Family InVestment Exchange. Invite x more families to gain priority access to the FIVE Network';
+        $content = 'Thank you for referring families to join the Family InVestment Exchange. Invite x more families to gain priority access to the FIVE Network';
         $subtitle = 'Thank you for referring!';
         $subject = 'Thank you for referring';
 
@@ -137,9 +137,9 @@ class HomeController extends Controller
         $user = User::where('user_code', $code)->first();
 
         if(($referer && !$user)||($referer && $user->is_allowed == 2)){
-            return view('auth.applymembership')->with(['user' => $referer]);
+            return view('auth.applymembership')->with(['user' => $referer, 'submitted' => 0]);
         }else{
-            return redirect('/');
+            return view('auth.applymembership')->with(['user' => $user, 'submitted' => 1]);
         }
     }
 
@@ -477,7 +477,7 @@ class HomeController extends Controller
 
             $email = $user['email'];
             $link = url('/');
-            $link_name = 'Go To Website';
+            $link_name = 'Go to Family Inveestment Exchange';
             $content = 'Thank you for applying to join the Family InVestment Exchange. The FIVE Network membership committee will review your application and upon review you will receive an email with a status of your application. We appreciate your interest and look forward to speaking with you soon.';
             $subtitle = 'Thank you for applying to join the Family InVestment Exchange!';
             $subject = 'Thank you for applying to join the Family InVestment Exchange';

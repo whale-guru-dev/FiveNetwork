@@ -1103,8 +1103,17 @@ The information on the Site is intended to enable investors to understand the na
             $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
         });
 
-
     </script>
+
+    @if($submitted == 1)
+        <script type="text/javascript">
+            $("#apply-form input").prop("disabled", true);
+            $("#apply-form select").prop("disabled", true);
+            $("#apply-form textarea").prop("disabled", true);
+            $("#apply-form .actions").hide();
+        </script>
+    @endif
+
     @if(Session::get('msg'))
         @if(Session::get('msg')[2] == 'success')
             <script type="text/javascript">

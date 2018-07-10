@@ -30,4 +30,9 @@ class EmailTestController extends Controller
     {
         return view('pages.landing.monthlyanswer');
     }
+
+    public function viewtest()
+    {
+        return view('test');
+    }
 }

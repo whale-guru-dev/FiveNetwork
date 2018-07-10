@@ -49,6 +49,7 @@ if(!isset($user))
         padding: 5% 0;
         z-index: 100;
         position: relative;*/
+        position: relative;
         background-image: url({{asset('assets/landing/img/background.jpg')}}) ;
         -webkit-filter: sepia(0.7);    
         filter: sepia(0.7);

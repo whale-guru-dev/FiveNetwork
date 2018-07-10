@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/email-test1','EmailTestController@emailtest1');
 Route::get('/email-test2','EmailTestController@emailtest2');
 Route::get('/monthly','EmailTestController@monthly');
+Route::get('/viewtest', 'EmailTestController@viewtest');
 
 Route::get('/', 'HomeController@index')->name('home');
 
