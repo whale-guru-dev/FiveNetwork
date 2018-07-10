@@ -12,7 +12,7 @@ use App\Model\MemberOpportunityMatch;
 use Mail;
 use App\Mail\Follow;
 use App\User;
-
+use App\Model\Admin;
 
 class OpportunityController extends Controller
 {
@@ -39,8 +39,44 @@ class OpportunityController extends Controller
             'company_stage' => $request['company_stage'],
     		'code' => $this->generateRandomString(10)
     	]);
+        if($request['company_stage'] == 0)
+            $company_stage = 'Pre-Revenue/Seed';
+        elseif($request['company_stage'] == 1)
+            $company_stage = 'Early Stage/Venture Capital';
+        elseif($request['company_stage'] == 2)
+            $company_stage = 'Private Equity';
 
     	if($request_opp){
+            $to = Auth::user()->email;
+            $subtitle = 'Successfully Submitted a Co-Investment Opportunity!';
+            $subject = 'Submitted a Co-Investment Opportunity!';
+            $content = 'Thank you for submitting an opportunity for co-investment with the FIVE Network. A member of the FIVE Network will reach out to you in order to learn more about the specifics of this opportunity and find the best co-investment partners.';
+            $link = url('/member');
+            $link_name = 'Go To Dashboard';
+
+            Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+            foreach(Admin::all() as $admin)
+            {
+                $to = $admin->email;
+                $subtitle = 'A Member Submitted a Co-Investment Opportunity!';
+                $subject = 'A Member Submitted a Co-Investment Opportunity!';
+                $content = 'A member of the FIVE Network has submitted an opportunity for co-investment. Below are the details submitted:<br>
+                    <ul style="text-align:left;">
+                        <li>Submitter of Opportunity : '.Auth::user()->fName.' '.Auth::user()->lName.'</li>
+                        <li>Contact Name : '.$request['contact_name'].'</li>
+                        <li>Email : '.$request['email'].'</li>
+                        <li>Phone number : '.$request['phone'].'</li>
+                        <li>Stage : '.$company_stage.'</li>
+                        <li>Amount Investing : '.$request['investing_amount'].'</li>
+                        <li>Total Investment Company is looking to Raise : '.$request['raising'].'</li>
+                        <li>Amount Available for FIVE Network members : '.$request['valuation'].'</li>
+                    </ul>';
+                $link = url('/admin');
+                $link_name = 'Go To Dashboard';
+    
+                Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+            }
+
     		$msg = ['Success','Successfully Requested','success'];
     		return redirect()->route('member.submit-opportunity')->with(['msg' => $msg]);
     	}
@@ -206,6 +242,18 @@ class OpportunityController extends Controller
         $link_name = 'Go To Dashboard';
 
         Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
+        foreach(Admin::all() as $admin)
+        {
+            $to = $admin->email;
+            $subtitle = 'A Member Submitted a Investment Questionnaire!';
+            $subject = 'A Member Submitted a Investment Questionnaire!';
+            $content = 'Member '.Auth::user()->fName.' '.Auth::user()->lName.' was submitted a Investment Questionnaire.';
+            $link = route('admin.opportunity-detail',['id' => $form->id]);
+            $link_name = 'Go To Dashboard';
+
+            Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+        }
 
 
         $msg = ['Success','Successfully Submitted Your Investment Questionnaire','success'];

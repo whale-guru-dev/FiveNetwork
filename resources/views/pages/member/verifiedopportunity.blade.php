@@ -50,7 +50,10 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Opportunity</th>
-                                    <th>Submitted Member</th>
+                                    <th>Investment Stage</th>
+                                    <th>Investment Sector</th>
+                                    <th>Investment Region</th>
+                                    <th>Investment Size</th>
                                     <th>Submitted Time</th>
                                     <th>Interested</th>
                                 </tr>
@@ -59,7 +62,10 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Opportunity</th>
-                                    <th>Submitted Member</th>
+                                    <th>Investment Stage</th>
+                                    <th>Investment Sector</th>
+                                    <th>Investment Region</th>
+                                    <th>Investment Size</th>
                                     <th>Submitted Time</th>
                                     <th>Interested</th>
                                 </tr>
@@ -68,8 +74,11 @@
                                 @if($oppors->count()>0)
                                     @foreach($oppors as $each)
                                     <td>{{$i++}}</td>
-                                    <td><a href="{{route('member.opportunity-detail',['id' => $each->opportunity_id])}}">{{$each->opportunity->project_name}} <i class="fa fa-share"></i></a></td>
-                                    <td>{{$each->opportunity->user->fName.' '.$each->opportunity->user->lName}}</td>
+                                    <td><a href="{{route('member.opportunity-detail',['id' => $each->opportunity_id])}}">{{$each->opportunity->company_name}} <i class="fa fa-share"></i></a></td>
+                                    <td>{{$each->opportunity->investmentstage->type}}</td>
+                                    <td>{{$each->opportunity->investmentsector->type}}</td>
+                                    <td>{{$each->opportunity->investmentregion->type}}</td>
+                                    <td>{{$each->opportunity->investment_size}}</td>
                                     <td>{{$each->opportunity->created_at}}</td>
                                     <td>
                                         @if($each->binterest == 0)

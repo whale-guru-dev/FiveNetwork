@@ -41,6 +41,10 @@
     #link-board a{
         white-space: normal;
     }
+
+    .card .box h6{
+        font-size: 12px;
+    }
       
 </style>
 @endsection
@@ -141,14 +145,14 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Analytics</h4>
-                    <h6 class="card-subtitle">List of opportunities opend by you</h6>
+                    <!-- <h6 class="card-subtitle">List of opportunities opend by you</h6> -->
                     <div class="row m-t-40">
                         <!-- Column -->
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card card-inverse card-info">
                                 <div class="box bg-info text-center">
                                     <h1 class="font-light text-white">{{$num_total_oppor}}</h1>
-                                    <h6 class="text-white">Total opportunities</h6>
+                                    <h6 class="text-white">Co-Investment Opportunities submitted</h6>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +161,7 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
                             <div class="card card-success card-inverse">
                                 <div class="box text-center">
                                     <h1 class="font-light text-white">{{$num_allow_oppor}}</h1>
-                                    <h6 class="text-white">Allowed opportunities</h6>
+                                    <h6 class="text-white">Investment Questionnaires Completed</h6>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +185,7 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
                         </div>
                         <!-- Column -->
                     </div>
-                    <hr>
+                    <!-- <hr>
                     <h6 class="card-subtitle">List of Login Information</h6>
                     <div class="table-responsive">
                         <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list" data-page-size="10">
@@ -216,7 +220,7 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
                                 </tr>
                             </tfoot>
                         </table>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

@@ -194,9 +194,9 @@
                                 <span class="hide-menu">Membership</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="">
-                                <li><a href="{{route('admin.allow-apply-membership')}}">Allow Preregisters To Apply Membership</a></li>
-                                <li><a href="{{route('admin.check-membership')}}">Check Newly Applied Membership</a></li>
-                                <li><a href="{{route('admin.check.membership')}}">All Members Membership Info</a></li>
+                                <li><a href="{{route('admin.allow-apply-membership')}}">Access Requested</a></li>
+                                <li><a href="{{route('admin.check-membership')}}">Pending Membership Applications</a></li>
+                                <li><a href="{{route('admin.check.membership')}}">Membership Database</a></li>
                             </ul>
                         </li>
 
@@ -206,8 +206,8 @@
                                 <span class="hide-menu">Opportunity</span>
                             </a>
                             <ul aria-expanded="false" class="collapse" style="">
-                                <li><a href="{{route('admin.check-request-opportunity')}}">Allow Members To Submit Investment Questionnaire</a></li>
-                                <li><a href="{{route('admin.check-allrequest-opportunity')}}">All Members' Submitted Investment Opportunity</a></li>
+                                <li><a href="{{route('admin.check-request-opportunity')}}">Approve Co-Investment Opportunity</a></li>
+                                <li><a href="{{route('admin.check-allrequest-opportunity')}}">Co-Investment Database</a></li>
                                 <li><a href="{{route('admin.opportunity-analytics')}}">Opportunity Analytics</a></li>
                             </ul>
                         </li>

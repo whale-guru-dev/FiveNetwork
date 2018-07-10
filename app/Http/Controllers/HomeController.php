@@ -12,7 +12,7 @@ use App\Model\MemberInvestmentRegion;
 use App\Model\MemberInvestmentSector;
 use Mail;
 use App\Mail\Follow;
-
+use App\Model\Admin;
 
 class HomeController extends Controller
 {
@@ -65,8 +65,20 @@ class HomeController extends Controller
             $content = 'Thank you for requesting access to the Family Investment Exchange. The membership committee will be in touch with you to request additional information and update you when the platform will be available for use.';
             $subtitle = 'Access Requested!';
             $subject = 'Access Requested';
-            return new Follow($link, $link_name, $content, $subtitle, $subject);
+            
             Mail::to($email)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+
+            foreach(Admin::all() as $admin)
+            {
+                $to = $admin->email;
+                $subtitle = 'Requested Access!';
+                $subject = 'Requested Access!';
+                $content = 'Someone with email '.$email.' requested access, Please check the request';
+                $link = url('/admin');
+                $link_name = 'Go To Dashboard';
+    
+                Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
+            }
 
             $msg = ['Success','Welcome to Family Investment Exchange. One of our members will be contacting you soon.','success'];
             return redirect()->route('request-access')->with(['user' => $user['email'], 'msg'=>$msg]);
