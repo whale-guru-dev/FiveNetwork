@@ -36,6 +36,25 @@
 <![endif]-->
 </head>
 <style type="text/css">
+
+    img.background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        /*z-index: -1;*/
+        /*-webkit-filter: blur(5px);  Safari 6.0 - 9.0 
+        filter: blur(5px);*/
+        -webkit-filter: sepia(0.7);    
+        filter: sepia(0.7);
+    }
+    /*@media (max-width: 767px){
+        .login-register {
+            position: fixed;
+            overflow: hidden;
+        }
+    }*/
     .login-register{
         /*background-size: cover;
         background-repeat: no-repeat;
@@ -45,9 +64,10 @@
         padding: 5% 0;
         z-index: 100;
         position: fixed;*/
-        background-image: url({{asset('assets/landing/img/background.jpg')}}) ;
-        -webkit-filter: sepia(0.7);    
-        filter: sepia(0.7);
+        /*background-image: url({{asset('assets/landing/img/background.jpg')}}) ;*/
+        /*-webkit-filter: sepia(0.7);    
+        filter: sepia(0.7);*/
+        position: relative;
     }
 
     /*#particles-js{
@@ -73,6 +93,7 @@
         left: 50%;
         transform: translate(-50%,-25%);*/
         margin: 0 auto;
+        z-index: 1;
     }
 
     .sweet-alert {
@@ -106,6 +127,9 @@
     <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
+            <div>
+                <img src="{{asset('assets/landing/img/background.jpg')}}" class="background">
+            </div>
             <div class="row text-center">
                 <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('logo.png')}}" width="250" height="200"></a>
             </div>
