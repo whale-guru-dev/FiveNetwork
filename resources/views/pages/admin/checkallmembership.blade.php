@@ -41,7 +41,10 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Region of focus</th>
                                     <th>Sector of Focus</th>
+                                    <th>Investment Size</th>
+                                    <th>Area of Family/Investor Expertise</th>
                                     <th>Net Worth</th>
                                     <th>Applied Time</th>
                                     <th>Action</th>
@@ -52,7 +55,10 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Region of focus</th>
                                     <th>Sector of Focus</th>
+                                    <th>Investment Size</th>
+                                    <th>Area of Family/Investor Expertise</th>
                                     <th>Net Worth</th>
                                     <th>Applied Time</th>
                                     <th>Action</th>
@@ -66,12 +72,27 @@
                                     <td>{{$user->fName.' '.$user->lName}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>
+                                        @if($user->investmentregion)
+                                            @foreach($user->investmentregion as $ir)
+                                                <span class="badge badge-success">{{$ir->type->type}}</span>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td>
                                         @if($user->investmentsector)
                                             @foreach($user->investmentsector as $isr)
                                                 <span class="badge badge-info">{{$isr->type->type}}</span>
                                             @endforeach
                                         @endif
                                     </td>
+                                    <td>
+                                        @if($user->investmentsize)
+                                            @foreach($user->investmentsize as $isz)
+                                                <span class="badge badge-warning">{{$isz->type->type}}</span>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td>{{$user->area_family_investor_expertise}}</td>
                                     <td>{{$user->networth_aum}}</td>
                                     <td>{{$user->updated_at}}</td>
                                     <td><a  href="{{route('admin.membership-detail',['id'=>$user->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
