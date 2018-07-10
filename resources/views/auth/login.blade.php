@@ -49,15 +49,15 @@
         /*background-image: url({{asset('assets/landing/img/background.jpg')}}) ;
         -webkit-filter: sepia(0.7);    
         filter: sepia(0.7);*/
-        position: relative;
+        /*position: relative;*/
     }
 
-    /*@media (max-width: 767px){
+    @media (max-width: 767px){
         .login-register {
             position: fixed;
             overflow: hidden;
         }
-    }*/
+    }
 
     img.background {
         width: 100%;

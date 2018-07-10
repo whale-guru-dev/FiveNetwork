@@ -81,8 +81,8 @@
 
                                 <select name="company_stage" class="form-control">
                                     <option>Select</option>
-                                    <option value="0">Seed/Pre-Revenue, Early Stage</option>
-                                    <option value="1">Venture Capital</option>
+                                    <option value="0">Pre-Revenue/Seed</option>
+                                    <option value="1">Early Stage/Venture Capital</option>
                                     <option value="2">Private Equity</option>
                                 </select>
                             </div>
@@ -106,7 +106,7 @@
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="raising" name="raising" placeholder="Enter raising">
+                                <input type="text" class="form-control" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise">
                             </div>
                         </div>
                         <div class="form-group">

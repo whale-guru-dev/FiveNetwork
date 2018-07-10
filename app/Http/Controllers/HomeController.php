@@ -103,7 +103,7 @@ class HomeController extends Controller
 
         $link = '';
         $link_name = '';
-        $content = 'Thank you for referring families to join the Family InVestment Exchange. Invite x more families to gain priority access to the FIVE Network';
+        $content = 'Thank you for referring families to join the Family InVestment Exchange.';
         $subtitle = 'Thank you for referring!';
         $subject = 'Thank you for referring';
 

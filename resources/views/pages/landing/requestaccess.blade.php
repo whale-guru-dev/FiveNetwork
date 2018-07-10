@@ -49,12 +49,12 @@
         -webkit-filter: sepia(0.7);    
         filter: sepia(0.7);
     }
-    /*@media (max-width: 767px){
+    @media (max-width: 767px){
         .login-register {
             position: fixed;
             overflow: hidden;
         }
-    }*/
+    }
     .login-register{
         /*background-size: cover;
         background-repeat: no-repeat;
@@ -67,7 +67,7 @@
         /*background-image: url({{asset('assets/landing/img/background.jpg')}}) ;*/
         /*-webkit-filter: sepia(0.7);    
         filter: sepia(0.7);*/
-        position: relative;
+        /*position: relative;*/
     }
 
     /*#particles-js{

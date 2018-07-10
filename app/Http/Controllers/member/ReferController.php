@@ -38,7 +38,7 @@ class ReferController extends Controller
 
         $link = route('member.dashboard');
         $link_name = 'Go To Dashboard';
-        $content = 'Thank you for referring '.$email.' to join the Family InVestment Exchange.<br> Invite x more families to gain priority access to the FIVE Network';
+        $content = 'Thank you for referring '.$email.' to join the Family InVestment Exchange.';
         $subtitle = 'Thank you for referring';
         $subject = 'Thank you for referring';
 

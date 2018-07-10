@@ -69,9 +69,9 @@
                                 <td>{{$oppor->user->fName.' '.$oppor->user->lName}}</td>
                                 <td>
                                     @if($oppor->company_stage == 0)
-                                    Seed/Pre-Revenue, Early Stage
+                                    Pre-Revenue/Seed
                                     @elseif($oppor->company_stage == 1)
-                                    Venture Capital
+                                    Early Stage/Venture Capital
                                     @elseif($oppor->company_stage == 2)
                                     Private Equity
                                     @endif
