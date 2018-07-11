@@ -289,8 +289,7 @@ a[x-apple-data-detectors=true] {
                     <div class="">
 	<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 30px; padding-left: 30px; padding-top: 30px; padding-bottom: 5px;"><![endif]-->
 	<div style="color:#555555;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;line-height:120%; padding-right: 30px; padding-left: 30px; padding-top: 30px; padding-bottom: 5px;">	
-		<div style="font-size:12px;line-height:14px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#555555;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center"><span style="font-size: 34px; line-height: 40px;">Member,<br>
-A member of the FIVE Network has submitted a co-investment opportunity that could be of interest to you based on your profile. If this opportunity does not fit within the types of opportunities you are seeking, click <a href="{{route('member.edit-profile')}}">here</a> to update your profile</span></p></div>	
+		<div style="font-size:12px;line-height:14px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:#555555;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center"><span style="font-size: 34px; line-height: 40px;">You Have Been Matched For a Co-Investment Opportunity!<br></span></p></div>	
 	</div>
 	<!--[if mso]></td></tr></table><![endif]-->
 </div>

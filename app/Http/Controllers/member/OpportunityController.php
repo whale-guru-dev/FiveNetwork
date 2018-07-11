@@ -37,7 +37,10 @@ class OpportunityController extends Controller
     		'raising' => $request['raising'],
     		'valuation' => $request['valuation'],
             'company_stage' => $request['company_stage'],
-    		'code' => $this->generateRandomString(10)
+    		'code' => $this->generateRandomString(10),
+            'investment_sector' => $request['investment_sector'],
+            'investment_region' => $request['investment_region'],
+            'investment_structure' => $request['investment_structure']
     	]);
         if($request['company_stage'] == 0)
             $company_stage = 'Pre-Revenue/Seed';
@@ -67,6 +70,9 @@ class OpportunityController extends Controller
                         <li>Email : '.$request['email'].'</li>
                         <li>Phone number : '.$request['phone'].'</li>
                         <li>Stage : '.$company_stage.'</li>
+                        <li>Investment Sector : '.$request_opp->investmentsector->type.'</li>
+                        <li>Investment Region : '.$request_opp->investmentregion->type.'</li>
+                        <li>Investment Structure : '.$request_opp->investmentstructure->type.'</li>
                         <li>Amount Investing : '.$request['investing_amount'].'</li>
                         <li>Total Investment Company is looking to Raise : '.$request['raising'].'</li>
                         <li>Amount Available for FIVE Network members : '.$request['valuation'].'</li>
@@ -362,9 +368,9 @@ class OpportunityController extends Controller
     {
         $id = $request['id'];
         $usid = Auth::user()->id;
-        $matched_oppor = MemberOpportunityMatch::where('matched_member_id', $usid)->where('opportunity_id', $id)->where('is_allowed' ,1)->first();
+        $matched_oppor = MemberOpportunityMatch::where('matched_member_id', $usid)->where('id', $id)->where('is_allowed' ,1)->first();
         $matched_oppor->update(['binterest' => 1]);
-        $msg = ['Success', 'Successfully Expressed your interest','success'];
+        
 
         $to = $matched_oppor->opportunity->user->email; 
         $submittor = $matched_oppor->opportunity->user->fName.' '.$matched_oppor->opportunity->user->lName;
@@ -377,7 +383,8 @@ class OpportunityController extends Controller
 
         Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
 
-        return redirect()->route('member.opportunity-detail',['id' => $id])->with(['msg' => $msg]);
+        $msg = ['Success', 'Successfully Expressed your interest','success'];
+        return redirect()->route('member.opportunity-detail',['id' => $matched_oppor->opportunity_id])->with(['msg' => $msg]);
     }
 
     public function nointerestopportunity(Request $request)
@@ -387,7 +394,7 @@ class OpportunityController extends Controller
         $matched_oppor = MemberOpportunityMatch::where('matched_member_id', $usid)->where('opportunity_id', $id)->where('is_allowed', 1)->first();
         $matched_oppor->update(['binterest' => 2]);
         $msg = ['Success', 'Successfully Expressed your no interest','success'];
-        return redirect()->route('member.opportunity-detail',['id' => $id])->with(['msg' => $msg]);
+        return redirect()->route('member.opportunity-detail',['id' => $matched_oppor->opportunity_id])->with(['msg' => $msg]);
     }
 
     public function viewall()

@@ -101,10 +101,21 @@ class OpportunityController extends Controller
         $oppor->update(['is_allowed' => 1]);
 
         $family_email = $oppor->matchedMember->email;
+        $oppr_request = MemberRequestOpportunity::where('code', $oppor->Opportunity->code)->first();
 
         $link = route('member.opportunity-detail',['id' => $oppor->opportunity_id]);
         $subject = 'Express your interest';
-        $content = '';
+        $content = '<p>A member of the FIVE Network has submitted an opportunity for co-investment. Below are the details submitted:</p><br>
+        <ul>
+        <li>Company Name: '.$oppor->opportunity->company_name.'</li>
+        <li>Company Description: '.$oppor->opportunity->company_desc.'</li>
+        <li>Company Headquaters: '.$oppor->opportunity->investmentregion->type.'</li>
+        <li>Company Sector: '.$oppor->opportunity->investmentsector->type.'</li>
+        <li>Structure: '.$oppor->opportunity->investmentstructure->type.'</li>
+        <li>Stage: '.$oppor->opportunity->investmentstage->type.'</li>
+        <li>Total Investment Company is looking to Raise: $'.$oppor->opportunity->investment_size.'</li>
+        <li>Amount Available for FIVE Network members: '.$oppr_request->valuation.'</li>
+        </ul>';
         Mail::to($family_email)->send(new Highlight($link, $content, $subject));
 
         $msg = ['Success', 'Successfully Approved to Send Email with hightlight to family','success'];

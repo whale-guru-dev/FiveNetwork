@@ -5,7 +5,11 @@
 
 
 @section('member-content')
-
+@php
+$invest_region_types = App\Model\MemberInvestmentRegionType::all();
+$invest_sector_types = App\Model\MemberInvestmentSectorType::all();
+$invest_types = App\Model\InvestmentStructureType::all();
+@endphp
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
@@ -42,7 +46,7 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
-                                        <i class="ti-world"></i>
+                                        <i class="ti-pencil"></i>
                                     </span>
                                 </div>
                                 <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Enter Contact name">
@@ -87,6 +91,100 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="investment_sector">Investment Sector</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="ti-briefcase"></i>
+                                    </span>
+                                </div>
+
+                                <select class="custom-select form-control required" id="investment_sector" name="investment_sector" required>
+                                    <option value="" selected>Select</option>
+                                    @foreach($invest_sector_types as $sector)
+                                    <option value="{{$sector->id}}">{{$sector->type}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="investment_region">Investment Region</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="ti-world"></i>
+                                    </span>
+                                </div>
+
+                                <select class="form-control custom-select required" name="investment_region" id="investment_region" required>
+                                    @foreach($invest_region_types as $irt)
+                                        @if($irt->id < 14)
+                                        @if($loop->iteration == 1)
+                                        <optgroup label="Southeast">
+                                        @endif
+                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                        @if($loop->iteration == 13)
+                                        </optgroup>
+                                        @endif
+                                        @elseif($irt->id > 13 && $irt->id < 18)
+                                        @if($loop->iteration == 14)
+                                        <optgroup label="Southwest">
+                                        @endif
+                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                        @if($loop->iteration == 17)
+                                        </optgroup>
+                                        @endif
+                                        @elseif($irt->id > 17 && $irt->id < 30)
+                                        @if($loop->iteration == 18)
+                                        <optgroup label="Midwest">
+                                        @endif
+                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                        @if($loop->iteration == 29)
+                                        </optgroup>
+                                        @endif
+                                        @elseif($irt->id > 29 && $irt->id < 41)
+                                        @if($loop->iteration == 30)
+                                        <optgroup label="West">
+                                        @endif
+                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                        @if($loop->iteration == 40)
+                                        </optgroup>
+                                        @endif
+                                        @else
+                                        @if($loop->iteration == 41)
+                                        <optgroup label="Northeast">
+                                        @endif
+                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                        @if($loop->iteration == 50)
+                                        </optgroup>
+                                        @endif
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="investment_structure">Investment Structure</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="ti-thought"></i>
+                                    </span>
+                                </div>
+
+                                <select class="custom-select form-control required" id="investment_structure" name="investment_structure" required>
+                                    <option value="" selected>Select</option>
+                                    @foreach($invest_types as $type)
+                                    <option value="{{$type->id}}">{{$type->type}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="investing_amount">Amount You are Investing</label>
                             <div class="input-group">
