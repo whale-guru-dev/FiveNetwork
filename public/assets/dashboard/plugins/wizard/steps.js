@@ -33,9 +33,9 @@ $(".validation-wizard").steps({
     , onFinished: function (event, currentIndex) {
          swal({
             title : "Membership Application Submit!", 
-            text : "You have to wait to be allowed by administrator.",
+            text : "Thank you for submitting membership application to the Family Investment Exchange… The membership committee will be in touch.",
             confirmButtonColor:"#1e88e5",
-            confirmButtonText: "Apply Membership!",   
+            confirmButtonText: "Submit Membership Application!",   
             closeOnConfirm: false }, 
             function(){   
                 var form = $("#apply-form");
