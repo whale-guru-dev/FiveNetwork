@@ -102,7 +102,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-info waves-effect"  id="faq-form-submit-btn">Save</button>
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default waves-effect" id="new-cancel-btn" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -164,7 +164,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-info waves-effect"  id="faq-form-submit-btn">Save</button>
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default waves-effect" id="edit-cancel-btn" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -286,6 +286,14 @@
     $(document).on("click", "#del-staff", function(){
         var delid = $(this).data('id');
         $("#admin-del-id").val(delid);
+    });
+
+    $(document).on("click", "#edit-cancel-btn", function(){
+        document.getElementById("edit-staff-form").reset();
+    });
+
+    $(document).on("click", "#new-cancel-btn", function(){
+        document.getElementById("new-staff-form").reset();
     });
 </script>
 @endsection
