@@ -46,60 +46,59 @@
                 </div>
                 <form class="form-horizontal" action="{{route('admin.new-staff')}}" method="POST" id="new-staff-form">
                     <div class="modal-body" >
-                            @csrf
-                            <div class="form-group">
-                                <label class="col-md-12">Admin UserName</label>
-                                <div class="col-md-12">
-                                    <input type="text" name="username" class="form-control" placeholder="type username" required=""> 
-                                </div>
+                        @csrf
+                        <div class="form-group">
+                            <label class="col-md-12">Admin UserName</label>
+                            <div class="col-md-12">
+                                <input type="text" name="username" class="form-control" placeholder="type username" required=""> 
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12">Admin First Name</label>
-                                <div class="col-md-12">
-                                    <input type="text" name="fName" class="form-control" placeholder="type first name" required=""> 
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Admin First Name</label>
+                            <div class="col-md-12">
+                                <input type="text" name="fName" class="form-control" placeholder="type first name" required=""> 
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12">Admin Last Name</label>
-                                <div class="col-md-12">
-                                    <input type="text" name="lName" class="form-control" placeholder="type last name" required=""> 
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Admin Last Name</label>
+                            <div class="col-md-12">
+                                <input type="text" name="lName" class="form-control" placeholder="type last name" required=""> 
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12">Admin Email</label>
-                                <div class="col-md-12">
-                                    <input type="email" name="email" class="form-control" placeholder="type email" required=""> 
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Admin Email</label>
+                            <div class="col-md-12">
+                                <input type="email" name="email" class="form-control" placeholder="type email" required=""> 
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12">Admin Role</label>
-                                <div class="col-md-12">
-                                    <select name="role" class="form-control" required="">
-                                        <option value="" selected="">Select</option>
-                                        <option value="1">Super Admin</option>
-                                        <option value="2">Admin</option>
-                                    </select>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Admin Role</label>
+                            <div class="col-md-12">
+                                <select name="role" class="form-control" required="">
+                                    <option value="" selected="">Select</option>
+                                    <option value="1">Super Admin</option>
+                                    <option value="2">Admin</option>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12">Initial Password</label>
-                                <div class="col-md-12">
-                                    <input type="password" name="password" class="form-control" required="">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Initial Password</label>
+                            <div class="col-md-12">
+                                <input type="password" name="password" class="form-control" required="" minlength="8">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-md-12">Confirm Password</label>
-                                <div class="col-md-12">
-                                    <input type="password" name="conf_password" class="form-control" required="">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Confirm Password</label>
+                            <div class="col-md-12">
+                                <input type="password" name="conf_password" class="form-control" required="" minlength="8">
                             </div>
-                        
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-info waves-effect"  id="faq-form-submit-btn">Save</button>

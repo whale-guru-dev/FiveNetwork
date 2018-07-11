@@ -1131,7 +1131,7 @@ The information on the Site is intended to enable investors to understand the na
             </script>
         @elseif(Session::get('msg')[2] == 'error')
             <script type="text/javascript">
-              swal({   
+                swal({   
                     title: "{{Session::get('msg')[0]}}",   
                     text: "{{Session::get('msg')[1]}}",   
                     type: "{{Session::get('msg')[2]}}",   

@@ -26,6 +26,7 @@ class StaffController extends Controller
 
     public function newstaff(Request $request)
     {
+        
     	$fName = $request['fName'];
     	$lName = $request['lName'];
     	$email = $request['email'];
@@ -33,6 +34,16 @@ class StaffController extends Controller
     	$password = $request['password'];
     	$conf_password = $request['conf_password'];
     	$role = $request['role'];
+
+        if(Admin::where('username', $username)->first()){
+            $msg = ['Error', 'This username is already taken.', 'error'];
+            return redirect()->route('admin.staff-management')->with(['msg' => $msg]);
+        }
+
+        if(Admin::where('email', $email)->first()){
+            $msg = ['Error', 'This email is already taken.', 'error'];
+            return redirect()->route('admin.staff-management')->with(['msg' => $msg]);
+        }
 
     	if($password == $conf_password){
     		$admin = Admin::create([

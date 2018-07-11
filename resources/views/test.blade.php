@@ -3,7 +3,7 @@
 
 <head>
 
-    <meta charset="utf-8">
+        <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
     <meta name="description"  content="Family Investment Exchange" />
@@ -29,7 +29,7 @@
     <link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
 
     <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
-    <!-- <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/multiple-select/multiple-select.css')}}"> -->
+
     <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
 
     <link href="{{asset('assets/dashboard/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
@@ -59,7 +59,7 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
     <div class="col-md-6">
         <div class="form-group">
             <label for="invest_region">Investment Regions :</label>
-            <select class="m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
+            <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
                 @foreach($invest_region_types as $irt)
                     @if($irt->id < 14)
                     @if($loop->iteration == 1)
@@ -147,7 +147,6 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 
     <script src="{{asset('assets/dashboard/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script>
 
-    <script src="{{asset('assets/dashboard/plugins/multiple-select/multiple-select.js')}}"></script>
 
     <script src="{{asset('assets/dashboard/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
 
@@ -157,6 +156,11 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 
     <script src="{{asset('assets/dashboard/admin/js/intlTelInput.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/self-custom.js')}}"></script> 
+
+    <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
+    <script type="text/javascript">
+        // particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
+    </script>
 
     <script type="text/javascript">
         // $users_list = $('#invest_region');
