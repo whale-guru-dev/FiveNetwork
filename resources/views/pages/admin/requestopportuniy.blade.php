@@ -67,7 +67,7 @@
                                     <td>{{$request->user->fName}}</td>
                                     <td>{{$request->user->lName}}</td>
                                     <td>{{$request->user->email}}</td>
-                                    <td>{{$request->user->updated_at}}</td>
+                                    <td>{{$request->created_at}}</td>
                                     <td><a  href="{{route('admin.requestopportunity-detail',['id'=>$request->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
                                 </tr>
                                 @endforeach

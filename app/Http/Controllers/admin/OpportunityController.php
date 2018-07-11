@@ -21,7 +21,7 @@ class OpportunityController extends Controller
 
     public function checkrequest()
     {
-    	$requests = MemberRequestOpportunity::where('is_accepted',0)->get();
+    	$requests = MemberRequestOpportunity::where('is_accepted',0)->orderBy('created_at','DESC')->get();
     	return view('pages.admin.requestopportuniy')->with(['requests' => $requests]);
     }
 
