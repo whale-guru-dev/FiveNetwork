@@ -99,6 +99,7 @@ class OpportunityController extends Controller
         if($opportunitymember){
             return view('pages.member.submitopportunityform')->with(['opportunitymember' => $opportunitymember,'submitted' => 0]);
         }else{
+            $opportunitymember = MemberRequestOpportunity::where('code',$code)->where('is_submitted',1)->first();
             return view('pages.member.submitopportunityform')->with(['opportunitymember' => $opportunitymember,'submitted' => 1]);
         }
     }
