@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use App\Model\Faq;
 use App\Model\MemberLogin;
+use App\Model\MemberReferLog;
 
 class HomeController extends Controller
 {
@@ -44,7 +45,14 @@ class HomeController extends Controller
     public function profileview()
     {
     	$user = Auth::user();
-    	return view('pages.member.profile')->with(['user'=>$user]);
+        $logins = MemberLogin::where('usid', Auth::user()->id)->orderBy('created_at','DESC')->get();
+    	return view('pages.member.profile')->with(['user'=>$user, 'logins' => $logins]);
+    }
+
+    public function viewreferral()
+    {
+        $referlog = MemberReferLog::where('usid', Auth::user()->id)->get();
+        return view('pages.member.referrals')->with(['referlog' => $referlog]);
     }
 
     // public function lockscreen()

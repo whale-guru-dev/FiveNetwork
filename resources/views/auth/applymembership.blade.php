@@ -278,6 +278,7 @@ color: #797979;
                                                     <label for="country"> Country : <span class="danger">*</span> </label>
                                                     <select class="custom-select form-control required" id="country" name="country">
                                                         <option value="">Select Country</option>
+                                                        <option value="US" selected>United States</option>
                                                         <option value="AF">Afghanistan</option>
                                                         <option value="AX">Åland Islands</option>
                                                         <option value="AL">Albania</option>
@@ -513,7 +514,6 @@ color: #797979;
                                                         <option value="UA">Ukraine</option>
                                                         <option value="AE">United Arab Emirates</option>
                                                         <option value="GB">United Kingdom</option>
-                                                        <option value="US" selected="">United States</option>
                                                         <option value="UM">United States Minor Outlying Islands</option>
                                                         <option value="UY">Uruguay</option>
                                                         <option value="UZ">Uzbekistan</option>

@@ -50,13 +50,13 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                         <h6 class="card-subtitle">{{$user->title}}</h6>
                         <div class="row text-center justify-content-md-center">
                             <div class="col-4" data-toggle="tooltip" title="Number of Referrals">
-                                <a href="javascript:void(0)" class="link">
+                                <a href="{{route('member.view-referrals')}}" class="link">
                                     <i class="icon-people"></i> 
                                     <font class="font-medium">{{$num_refer}}</font>
                                 </a>
                             </div>
                             <div class="col-4" data-toggle="tooltip" title="Number of Opportunities">
-                                <a href="javascript:void(0)" class="link">
+                                <a href="{{route('member.view-opportunities')}}" class="link">
                                     <i class="icon-layers"></i> 
                                     <font class="font-medium">{{$num_oppor}}</font>
                                 </a>
@@ -89,6 +89,7 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                 <ul class="nav nav-tabs profile-tab" role="tablist">
                     <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Profile</a> </li>
                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#logins" role="tab">Login Info</a> </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -185,8 +186,6 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                                 <label for="password"> Password : 
                                                 </label>
                                                 <input type="password" class="form-control" id="password" name="password"  minlength="8"> 
-                                                <div class="form-control-feedback"><small>Add <code>minlength="8"</code>  to accept.</small></div>
-
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -194,8 +193,6 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                                 <label for="conf_password"> Confirm Password : 
                                                 </label>
                                                 <input type="password" class="form-control" id="conf_password" name="conf_password"  minlength="8"> 
-                                                <div class="form-control-feedback"><small>Add <code>minlength="8"</code>  to accept.</small></div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -279,6 +276,7 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                                 <label for="country"> Country :  </label>
                                                 <select class="custom-select form-control required" id="country" name="country">
                                                     <option value="">Select Country</option>
+                                                    <option value="US" selected>United States</option>
                                                     <option value="AF">Afghanistan</option>
                                                     <option value="AX">Åland Islands</option>
                                                     <option value="AL">Albania</option>
@@ -514,7 +512,6 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                                     <option value="UA">Ukraine</option>
                                                     <option value="AE">United Arab Emirates</option>
                                                     <option value="GB">United Kingdom</option>
-                                                    <option value="US">United States</option>
                                                     <option value="UM">United States Minor Outlying Islands</option>
                                                     <option value="UY">Uruguay</option>
                                                     <option value="UZ">Uzbekistan</option>
@@ -564,6 +561,45 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane active" id="logins" role="tabpanel">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list" data-page-size="10">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>IP Address</th>
+                                            <th>Location</th>
+                                            <th>Device</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($logins as $login)
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$login->ip_addr}}</td>
+                                            <td>{{$login->location}}</td>
+                                            <td>{{$login->device}}</td>
+                                            <td>{{$login->created_at}}</td>
+                                        </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="6">
+                                                <div class="text-right">
+                                                    <ul class="pagination"> </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

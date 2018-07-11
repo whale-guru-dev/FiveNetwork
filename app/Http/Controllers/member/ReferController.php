@@ -29,16 +29,16 @@ class ReferController extends Controller
     {
     	$email = $request['family_email'];
     	$link = url('/follow-me/'.Auth::user()->user_code);
-        $link_name = 'Family InVestment Exchange';
+        $link_name = 'Family Investment Exchange';
         $content = 'You have been invited to be a member of the Family Investment Exchange (FIVE Network). To join the exclusive network of family office and private investors and access co-investment opportunities alongside high impact investors, Click below to request access to the FIVE Network';
-        $subtitle = 'You have been invited';
-        $subject = 'Invite To Be a Member of Family InVestment Exchange';
+        $subtitle = 'You have been invited To Join Family Investment Exchange';
+        $subject = 'Invitation To Join Family Investment Exchange';
 
         Mail::to($email)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
 
         $link = route('member.dashboard');
-        $link_name = 'Go To Dashboard';
-        $content = 'Thank you for referring '.$email.' to join the Family InVestment Exchange.';
+        $link_name = 'Family Investment Exchange';
+        $content = 'Thank you for referring '.$email.' to join the Family Investment Exchange.';
         $subtitle = 'Thank you for referring';
         $subject = 'Thank you for referring';
 

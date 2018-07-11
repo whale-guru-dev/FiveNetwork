@@ -1,10 +1,6 @@
 @extends('layouts.member')
 @section('member-css')
-<style type="text/css">
-    thead th {
-        font-size: 14px;
-    }
-</style>
+
 @endsection
 
 
@@ -15,20 +11,18 @@
 <!-- ============================================================== -->
 <div class="row page-titles">
     <div class="col-md-4 align-self-center">
-        <h3 class="text-themecolor">Deal Room</h3>
+        <h3 class="text-themecolor">Referrals</h3>
     </div>
-
     <div class="col-md-4 align-self-center text-center">
         <!-- <div class="row text-center"> -->
             <img src="{{asset('logo.png')}}" width="200" height="150" alt="homepage" class="dark-logo" />
         <!-- </div> -->
         
     </div>
-
     <div class="col-md-4 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item active">Deal Room</li>
+            <li class="breadcrumb-item active">Referrals</li>
         </ol>
     </div>
 
@@ -39,7 +33,7 @@
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
-
+<?php $i=1;?>
 <div class="container-fluid">
     <!-- ============================================================== -->
     <!-- Start Page Content -->
@@ -48,47 +42,56 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Deal Room</h4>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="deal-room-table">
+                    <h4 class="card-title">Referrals</h4>
+                    
+                    <div class="table-responsive m-t-40">
+                        <table id="allow-apply" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Submitter</th>
                                     <th>Company Stage</th>
-                                    <th>Amount they are investing</th>
-                                    <th>Total Investment company is looking to raise</th>
-                                    <th>Date</th>
+                                    <th>Amount you are investing</th>
+                                    <th>Requested Time</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if($oppors->count()>0)
-                                @foreach($oppors as $oppor)
+                            <tfoot>
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$oppor->user->fName.' '.$oppor->user->lName}}</td>
+                                    <th>#</th>
+                                    <th>Company Stage</th>
+                                    <th>Amount you are investing</th>
+                                    <th>Requested Time</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if($requests->count()>0)
+                                @foreach($requests as $request)
+                                <tr>
+                                    <td>{{$i++}}</td>
                                     <td>
-                                        @if($oppor->company_stage == 0)
-                                        Pre-Revenue/Seed
-                                        @elseif($oppor->company_stage == 1)
-                                        Early Stage/Venture Capital
-                                        @elseif($oppor->company_stage == 2)
-                                        Private Equity
+                                        @if($request->company_stage == 0)
+                                        <span class="badge badge-info">Seed/Pre-Revenue</span>
+                                        @elseif($request->company_stage == 1)
+                                        <span class="badge badge-success">Early Stage/Venture Capital</span>
+                                        @elseif($request->company_stage == 2)
+                                        <span class="badge badge-warning">Private Equity</span>
                                         @endif
                                     </td>
-                                    <td>{{$oppor->investing_amount}}</td>
-                                    <td>{{$oppor->raising}}</td>
-                                    <td>{{$oppor->created_at->format('Y/m/d')}}</td>
+                                    <td>{{$request->investing_amount}}</td>
+                                    <td>{{$request->user->updated_at}}</td>
                                     <td>
-                                        @if($oppor->is_accepted == 0)
-                                        <span class="label label-info">Checking</span>
-                                        @elseif($oppor->is_accepted == 1)
-                                        <span class="label label-success">Allowed</span>
-                                        @elseif($oppor->is_accepted == 2)
-                                        <span class="label label-Warning">Denied</span>
+                                        @if($request->is_accepted == 0)
+                                        <span class="badge badge-info">Not Checked</span>
+                                        @elseif($request->is_accepted == 1)
+                                        <span class="badge badge-success">Allowed</span>
+                                        @elseif($request->is_accepted == 2)
+                                        <span class="badge badge-success">Denied</span>
                                         @endif
-                                    </td>
+                                    </td>                                    
+                                    <td><a  href="{{route('member.requestopportunity-detail',['id'=>$request->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -130,6 +133,8 @@
 <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 <!-- end - This is for export functionality only -->
 <script type="text/javascript">
-    $('#deal-room-table').DataTable();
+    $('#allow-apply').DataTable({
+        
+    });
 </script>
 @endsection

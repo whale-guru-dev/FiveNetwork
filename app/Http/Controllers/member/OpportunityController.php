@@ -388,4 +388,17 @@ class OpportunityController extends Controller
         $msg = ['Success', 'Successfully Expressed your no interest','success'];
         return redirect()->route('member.opportunity-detail',['id' => $id])->with(['msg' => $msg]);
     }
+
+    public function viewall()
+    {
+        $requests = MemberRequestOpportunity::where('usid', Auth::user()->id)->get();
+        return view('pages.member.opportunity')->with(['requests' => $requests]);
+    }
+
+    public function detailrequestopportunity($id)
+    {
+        $request = MemberRequestOpportunity::where('id',$id)->where('usid',Auth::user()->id)->first();
+        return view('pages.member.detailrequestopportunity')->with(['request' => $request]);
+    }
+
 }

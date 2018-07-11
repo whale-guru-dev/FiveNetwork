@@ -159,7 +159,7 @@
                                 
 
                                 <a class="text-dark pull-right" href="{{ route('password.request') }}"  id="to-recover">
-                                    <i class="fa fa-lock m-r-5"></i>{{ __('Forgot Pwd?') }}
+                                    <i class="fa fa-lock m-r-5"></i>{{ __('Forgot Password?') }}
                                 </a>
                                 
                             </div>

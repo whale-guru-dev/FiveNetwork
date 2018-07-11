@@ -80,7 +80,7 @@ class HomeController extends Controller
                 Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
             }
 
-            $msg = ['Success','Welcome to Family Investment Exchange. One of our members will be contacting you soon.','success'];
+            $msg = ['Success','Thank you for requesting access to the Family Investment Exchange. One of our members will be contacting you soon.','success'];
             return redirect()->route('request-access')->with(['user' => $user['email'], 'msg'=>$msg]);
         }
     }
@@ -115,7 +115,7 @@ class HomeController extends Controller
 
         $link = '';
         $link_name = '';
-        $content = 'Thank you for referring families to join the Family InVestment Exchange.';
+        $content = 'Thank you for referring families to join the Family Investment Exchange.';
         $subtitle = 'Thank you for referring!';
         $subject = 'Thank you for referring';
 
@@ -126,10 +126,10 @@ class HomeController extends Controller
         foreach ($emails as $email) {
             if($email != null){
                 $link = $refer_link;
-                $link_name = 'Request Access';
-                $content = 'You have been invited to be a member of the Family InVestment Exchange (FIVE Network). To join the exclusive network of family office and private investors and access co-investment opportunities alongside high impact investors, please click here to pre-register, or respond to this email with “Please Pre-register me"';
-                $subtitle = 'Request Access';
-                $subject = 'Request Access';
+                $link_name = 'Family Investment Exchange';
+                $content = 'You have been invited to be a member of the Family Investment Exchange (FIVE Network). To join the exclusive network of family office and private investors and access co-investment opportunities alongside high impact investors, please click here to pre-register, or respond to this email with “Please Pre-register me"';
+                $subtitle = 'Invitation To Join Family Investment Exchange';
+                $subject = 'Invitation To Join Family Investment Exchange';
 
                 Mail::to($email)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
             }

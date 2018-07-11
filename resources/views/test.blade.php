@@ -29,7 +29,7 @@
     <link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
 
     <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/multiple-select/multiple-select.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/multiple-select/multiple-select.css')}}"> -->
     <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
 
     <link href="{{asset('assets/dashboard/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
@@ -126,11 +126,11 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
     <script src="{{asset('assets/dashboard/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!--Custom JavaScript -->
 
-    <!-- <script src="{{asset('assets/dashboard/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script> -->
-    <!-- <script src="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script> -->
-    <!-- <script src="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script> -->
+    <script src="{{asset('assets/dashboard/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
 
-    <!-- <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script> -->
+    <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
 
 
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
@@ -166,11 +166,11 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
         //     showSelectedItems: false
         // });
 
-        $("#invest_region").multipleSelect({
-            multiple: true,
-            multipleWidth: 55,
-            width: '100%'
-        });
+        // $("#invest_region").multipleSelect({
+        //     multiple: true,
+        //     multipleWidth: 55,
+        //     width: '100%'
+        // });
     </script>
 </body>
 
