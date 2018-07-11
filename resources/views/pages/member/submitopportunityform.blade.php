@@ -1721,6 +1721,14 @@
     </script>
     @endif
 
+    @if($submitted == 1)
+    <script type="text/javascript">
+        $("#submit-form input").prop("disabled", true);
+        $("#submit-form select").prop("disabled", true);
+        $("#submit-form textarea").prop("disabled", true);
+        $(".btn").hide();
+    </script>
+    @endif
 <script type="text/javascript">
     $(".select2").select2();
 
@@ -1728,7 +1736,7 @@
         document.getElementById("request-form").reset();
     });
 
-    $("#submit-form").submit(function( event ) {money_unit
+    $("#submit-form").submit(function( event ) {
       var investment_size_val = $("#investment_size_val").val();
       var money_unit = $("#money_unit").val();
       var investment_size = 0;
