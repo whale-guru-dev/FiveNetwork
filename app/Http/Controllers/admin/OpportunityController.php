@@ -33,7 +33,7 @@ class OpportunityController extends Controller
 
     public function checkallrequest()
     {
-    	$requests = MemberRequestOpportunity::all();
+    	$requests = MemberRequestOpportunity::orderBy('created_at','DESC')->get();
     	return view('pages.admin.checkallrequest')->with(['requests' => $requests]);
     }
 
