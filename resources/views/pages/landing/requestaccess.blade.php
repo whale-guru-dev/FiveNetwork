@@ -174,7 +174,7 @@
             confirmButtonText: "OK",   
             closeOnConfirm: false 
         }, function(){   
-            window.location.href = "{{route('refer-member',['user' => Session::get('user')])}}";
+            window.location.href = "{{route('home')}}";
         });
     </script>
     @endif

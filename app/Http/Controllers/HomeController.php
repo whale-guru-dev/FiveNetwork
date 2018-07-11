@@ -40,7 +40,8 @@ class HomeController extends Controller
     {
         $request->validate(['email'=>'required|unique:tb_member_preregister']);
         $user = Preregister::create(['email'=>$request['email'], 'code'=>$this->generateRandomString()]);
-        return redirect()->route('refer-member',['user' => $user['email']]);
+        // return redirect()->route('refer-member',['user' => $user['email']]);
+        return redirect()->route('home');
     }
 
     public function requestaccessview()
@@ -202,11 +203,12 @@ class HomeController extends Controller
                     $msg = ['Error','There was an error on uploading your government ID photo! Pleae try again.','error'];
                     return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
                 }
-            }else{
-                $error2 = 1;
-                $msg = ['Error','You should upload your government ID photo !','error'];
-                return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
             }
+            // else{
+            //     $error2 = 1;
+            //     $msg = ['Error','You should upload your government ID photo !','error'];
+            //     return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
+            // }
             if($request['aware_method_desc_how'])
                 $aware_method_desc = $request['aware_method_desc_how'];
             elseif($request['aware_method_desc_who'])
