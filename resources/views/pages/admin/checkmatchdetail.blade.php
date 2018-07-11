@@ -88,7 +88,7 @@
                                         @elseif($each->score == 20)
                                         <span class="badge badge-danger">{{$each->score}} %</span>
                                         @elseif($each->score == 0)
-                                        <span class="badge badge-default">{{$each->score}} %</span>
+                                        <span class="label label-inverse">{{$each->score}} %</span>
                                         @endif
                                     </td>
                                     <td>{{$each->matched_structure==1?'Matched':'Unmatched'}}</td>
