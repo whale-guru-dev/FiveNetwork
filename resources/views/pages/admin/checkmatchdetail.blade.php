@@ -91,11 +91,46 @@
                                         <span class="badge badge-danger">{{$each->score}} %</span>
                                         @endif
                                     </td>
-                                    <td>{{$each->matched_structure==1?'Matched':'Unmatched'}}</td>
-                                    <td>{{$each->matched_state==1?'Matched':'Unmatched'}}</td>
-                                    <td>{{$each->matched_stage==1?'Matched':'Unmatched'}}</td>
-                                    <td>{{$each->matched_sector==1?'Matched':'Unmatched'}}</td>
-                                    <td>{{$each->matched_size==1?'Matched':'Unmatched'}}</td>
+                                    <td>
+                                        
+                                        @if($each->matched_structure==1)
+                                        <span class="badge badge-success">Matched</span>
+                                        @else
+                                        <span class="badge badge-danger">Unmatched</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        
+                                        @if($each->matched_state==1)
+                                        <span class="badge badge-success">Matched</span>
+                                        @else
+                                        <span class="badge badge-danger">Unmatched</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        
+                                        @if($each->matched_stage==1)
+                                        <span class="badge badge-success">Matched</span>
+                                        @else
+                                        <span class="badge badge-danger">Unmatched</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        
+                                        @if($each->matched_sector==1)
+                                        <span class="badge badge-success">Matched</span>
+                                        @else
+                                        <span class="badge badge-danger">Unmatched</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        
+                                        @if($each->matched_size==1)
+                                        <span class="badge badge-success">Matched</span>
+                                        @else
+                                        <span class="badge badge-danger">Unmatched</span>
+                                        @endif
+                                    </td>
                                     <td>
                                     	@if($each->binterest == 0)
                                     	<span class="badge badge-info ml-auto">Not Expressed</span>
