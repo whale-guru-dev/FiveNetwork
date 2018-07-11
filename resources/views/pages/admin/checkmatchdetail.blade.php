@@ -75,7 +75,16 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$each->matchedMember->fName.' '.$each->matchedMember->lName}}</td>
-                                    <td>{{$each->score}} %</td>
+                                    <td>
+                                        
+                                        @if($each->score > 50)
+                                        <span class="badge badge-success">{{$each->score}} %</span>
+                                        @elseif($each->score < 50)
+                                        <span class="badge badge-warning">{{$each->score}} %</span>
+                                        @elseif($each->score == 0)
+                                        <span class="badge badge-danger">{{$each->score}} %</span>
+                                        @endif
+                                    </td>
                                     <td>{{$each->matched_structure==1?'Matched':'Unmatched'}}</td>
                                     <td>{{$each->matched_state==1?'Matched':'Unmatched'}}</td>
                                     <td>{{$each->matched_stage==1?'Matched':'Unmatched'}}</td>
