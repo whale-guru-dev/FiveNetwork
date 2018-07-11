@@ -79,7 +79,7 @@
                                         
                                         @if($each->score > 50)
                                         <span class="badge badge-success">{{$each->score}} %</span>
-                                        @elseif($each->score < 50)
+                                        @elseif($each->score < 50 && $each->score > 0)
                                         <span class="badge badge-warning">{{$each->score}} %</span>
                                         @elseif($each->score == 0)
                                         <span class="badge badge-danger">{{$each->score}} %</span>
