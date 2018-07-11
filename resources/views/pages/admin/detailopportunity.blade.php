@@ -142,7 +142,9 @@
                                             <div class="form-group row">
                                                 <label class="control-label text-right col-md-4">State</label>
                                                 <div class="col-md-8">
+                                                    @if($oppor->investmentregion)
                                                     <p class="form-control-static"> {{$oppor->investmentregion->type}} </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +167,9 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">What is the structure of the Current Capital Raise ?</label>
                                         <div class="col-md-8">
+                                            @if($oppor->investmentstructure)
                                             <p class="form-control-static"> {{$oppor->investmentstructure->type}} </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +181,9 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">Investment Stage</label>
                                         <div class="col-md-8">
+                                            @if($oppor->investmentstage)
                                             <p class="form-control-static"> {{$oppor->investmentstage->type}} </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -186,7 +192,9 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">Sector</label>
                                         <div class="col-md-8">
+                                            @if($oppor->investmentsector)
                                             <p class="form-control-static"> {{$oppor->investmentsector->type}} </p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
