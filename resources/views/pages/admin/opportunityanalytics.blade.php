@@ -57,17 +57,19 @@
                             <tbody>
                                 @if($oppors->count()>0)
                                 	@foreach($oppors as $each)
-									<td>{{$i++}}</td>
-                                    <td>
-                                        <a href="{{route('admin.opportunity-detail',['id' => $each->id])}}">{{$each->contact_name}} <i class="fa fa-share"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.membership-detail',['id' => $each->user->id])}}">{{$each->user->fName.' '.$each->user->lName}} <i class="fa fa-share"></i>
-                                        </a>
-                                    </td>
-                                    <td>{{$each->created_at}}</td>
-                                    <td><a href="{{route('admin.check-member-opportunity-match',['id' => $each->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check Match</a></td>
+                                    <tr>
+    									<td>{{$i++}}</td>
+                                        <td>
+                                            <a href="{{route('admin.opportunity-detail',['id' => $each->id])}}">{{$each->contact_name}} <i class="fa fa-share"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{route('admin.membership-detail',['id' => $each->user->id])}}">{{$each->user->fName.' '.$each->user->lName}} <i class="fa fa-share"></i>
+                                            </a>
+                                        </td>
+                                        <td>{{$each->created_at}}</td>
+                                        <td><a href="{{route('admin.check-member-opportunity-match',['id' => $each->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check Match</a></td>
+                                    </tr>
                                 	@endforeach
                                 @endif
                             </tbody>
