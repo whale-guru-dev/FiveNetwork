@@ -185,6 +185,7 @@ $admins = App\Model\Admin::all();
                             <thead>
                                 <tr>
                                     <th>Admin</th>
+                                    <th>Email</th>
                                     <th>IP Address</th>
                                     <th>Location</th>
                                     <th>Device</th>
@@ -195,6 +196,7 @@ $admins = App\Model\Admin::all();
                                 @foreach($adminlogins as $login)
                                 <tr>
                                 	<td>{{$login->admin->fName.' '.$login->admin->lName}}</td>
+                                    <td>{{$login->admin->email}}</td>
                                 	<td>{{$login->ip_addr}}</td>
                                 	<td>{{$login->location}}</td>
                                 	<td>{{$login->device}}</td>
