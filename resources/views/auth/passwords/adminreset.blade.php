@@ -32,18 +32,16 @@
 <![endif]-->
 </head>
 <style type="text/css">
-    .login-box{
-        position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%,-60%);
+    @media (max-width: 767px){
+        .login-register {
+            position: relative;
+            overflow: hidden;
+        }
     }
 
     #logo-box{
-        top: 15%;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%,-15%);
+        margin: 0 auto;
+        z-index: 1;
     }
 </style>
 <body>
@@ -59,7 +57,9 @@
     <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
-            <img src="{{asset('logo.png')}}" id="logo-box" width="250">
+            <div class="row text-center">
+                <img src="{{asset('logo.png')}}" id="logo-box" width="250" height="200">
+            </div>
             <div class="login-box card">
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.password.request') }}" class="form-horizontal" aria-label="{{ __('Reset Password') }}">

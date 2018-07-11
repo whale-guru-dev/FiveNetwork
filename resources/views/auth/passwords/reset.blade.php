@@ -46,50 +46,11 @@
         position: absolute;
         left: 0px;
         top: 0px;
-        /*z-index: -1;*/
-       /* -webkit-filter: blur(5px);  Safari 6.0 - 9.0 
-        filter: blur(5px);*/
         -webkit-filter: sepia(0.7);    
         filter: sepia(0.7);
     }
 
-    .login-register{
-        /*background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        height: 100%;
-        width: 100%;
-        padding: 5% 0;
-        z-index: 100;
-        position: fixed;*/
-        /*background-image: url({{asset('assets/landing/img/background.jpg')}}) ;
-        -webkit-filter: sepia(0.7);    
-        filter: sepia(0.7);*/
-        /*position: relative;*/
-    }
-
-    #particles-js{
-        /*background-color: #2164fb;
-        height: 100vh;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;*/
-    }
-
-    .login-box{
-        /*position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%,-60%);*/
-    }
-
     #logo-box{
-        /*top: 20%;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%,-20%);*/
         margin: 0 auto;
         z-index: 1;
     }
