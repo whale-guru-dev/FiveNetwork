@@ -521,7 +521,7 @@
                                     <label for="investment_size_val"> Investment Size </label>
                                     <div class="input-group">
                                         <input type="hidden" name="investment_size" id="investment_size" value="">
-                                        <input type="text" class="form-control required" name="investment_size_val" id="investment_size_val" required>
+                                        <input type="number" class="form-control required" name="investment_size_val" id="investment_size_val" required>
                                         <span class="input-group-btn">
                                             <select class="btn" id="money_unit">
                                                 <option value="1">K $</option>

@@ -246,9 +246,9 @@ class OpportunityController extends Controller
         foreach(Admin::all() as $admin)
         {
             $to = $admin->email;
-            $subtitle = 'A Member Submitted a Investment Questionnaire!';
-            $subject = 'A Member Submitted a Investment Questionnaire!';
-            $content = 'Member '.Auth::user()->fName.' '.Auth::user()->lName.' was submitted a Investment Questionnaire.';
+            $subtitle = 'A Member Submitted an Investment Questionnaire!';
+            $subject = 'A Member Submitted an Investment Questionnaire!';
+            $content = 'Member '.Auth::user()->fName.' '.Auth::user()->lName.' submitted an Investment Questionnaire.';
             $link = route('admin.opportunity-detail',['id' => $form->id]);
             $link_name = 'Go To Dashboard';
 
