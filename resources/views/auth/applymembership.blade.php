@@ -1099,7 +1099,7 @@ The information on the Site is intended to enable investors to understand the na
     @endif
 
     @if(Session::get('msg'))
-        if(Session::get('msg')[2] == 'error')
+        @if(Session::get('msg')[2] == 'error')
             <script type="text/javascript">
                 swal({   
                     title: "{{Session::get('msg')[0]}}",   

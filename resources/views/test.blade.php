@@ -110,6 +110,18 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
             <input type="text" placeholder="" data-mask="$999,999,999.99" class="form-control" name="currenty">
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="company_website">Company Website : </label>
+                
+                <input type="text" class="form-control" id="company_website" name="company_website" > 
+                
+                
+                
+            </div>
+        </div>
+    </div>
 </div>
 <button type="submit">submit</button>
 </form>
