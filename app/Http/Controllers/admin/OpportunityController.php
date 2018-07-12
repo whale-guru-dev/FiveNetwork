@@ -78,7 +78,7 @@ class OpportunityController extends Controller
 
     public function analyticsview()
     {
-        $oppors = MemberOpportunityForm::all();
+        $oppors = MemberOpportunityForm::orderBy('created_at','DESC')->get();
         return view('pages.admin.opportunityanalytics')->with(['oppors' => $oppors]);
     }
 
