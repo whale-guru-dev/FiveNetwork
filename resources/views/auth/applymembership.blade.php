@@ -110,7 +110,13 @@ color: #797979;
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Validation wizard -->
-                
+                @if($submitted == 1)
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{{route('home')}}" class="btn btn-sm">Go To Landing Page</a>
+                    </div>
+                </div>
+                @endif
                 <div class="row" id="validation">
                     <div class="col-12">
                         <div class="card wizard-content apply-box">
