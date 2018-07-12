@@ -55,11 +55,15 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Submitter</th>
-                                    <th>Company Stage</th>
-                                    <th>Amount they are investing</th>
-                                    <th>Total Investment company is looking to raise</th>
                                     <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Company Name</th>
+                                    <th>Company Description</th>
+                                    <th>Company sector</th>
+                                    <th>Investment Structure</th>
+                                    <th>Amount Raising</th>
+                                    <th>Valuation</th>
+                                    <!-- <th>Revenue</th>
+                                    <th>EBITDA</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,28 +71,14 @@
                                 @foreach($oppors as $oppor)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$oppor->user->fName.' '.$oppor->user->lName}}</td>
-                                    <td>
-                                        @if($oppor->company_stage == 0)
-                                        Pre-Revenue/Seed
-                                        @elseif($oppor->company_stage == 1)
-                                        Early Stage/Venture Capital
-                                        @elseif($oppor->company_stage == 2)
-                                        Private Equity
-                                        @endif
-                                    </td>
-                                    <td>{{$oppor->investing_amount}}</td>
-                                    <td>{{$oppor->raising}}</td>
+                                    <td>{{$oppor->contact_name}}</td>
                                     <td>{{$oppor->created_at->format('Y/m/d')}}</td>
-                                    <td>
-                                        @if($oppor->is_accepted == 0)
-                                        <span class="label label-info">Checking</span>
-                                        @elseif($oppor->is_accepted == 1)
-                                        <span class="label label-success">Allowed</span>
-                                        @elseif($oppor->is_accepted == 2)
-                                        <span class="label label-warning">Denied</span>
-                                        @endif
-                                    </td>
+                                    <td>{{$oppor->company_name}}</td>
+                                    <td>{{$oppor->company_desc}}</td>
+                                    <td><span class="label label-info">{{$oppor->investmentsector->type}}</span></td>
+                                    <td><span class="label label-success">{{$oppor->investmentstructure->type}}</span></td>
+                                    <td>{{$oppor->raising_capital}}</td>
+                                    <td>{{$oppor->cur_postmoney_valuation}}</td>
                                 </tr>
                                 @endforeach
                                 @endif
