@@ -107,9 +107,9 @@ class HomeController extends Controller
             
             //Mail Function
             $to = $user->email;
-            $subtitle = 'You have been granted access to apply for membership to Family Investment Exchange';
+            $subtitle = 'Access Granted to Family Investment Exchange!';
             $subject = 'Access Granted – Family Investment Exchange!';
-            $content = 'You are allowed by administrator to apply membership, you can apply right now!';
+            $content = 'You have been granted access to apply for membership to Family Investment Exchange';
             $link = route('apply-membership',['code'=>$user->code]);
             $link_name = 'Begin Application';
             Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));

@@ -551,7 +551,7 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="phone_mobile">Mobile Phone : </label>
-                                                    <input type="tel" class="form-control" id="phone_mobile" name="phone_mobile" value="{{old('phone_mobile')}}"> 
+                                                    <input type="tel" class="form-control" id="phone_mobile" name="phone_mobile" value="{{old('phone_mobile')}}" placeholder="000-000-0000"> 
                                                     <input id="mobilex" type="hidden" name="mobilex" value="{{old('mobilex')}}">
                                 
                                                 </div>
@@ -667,7 +667,7 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="average_investment_size">How much capacity is left this round :</label>
+                                                    <label for="average_investment_size">Typical Check Size :</label>
                                                     <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size">
                                                         <option value="">Select</option>
                                                         @foreach($invest_size_types as $type)
@@ -785,7 +785,7 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="education">Education : </label>
+                                                    <label for="education">Education (Please include, High School, College, and Post Graduate if applicable): </label>
                                                     <textarea class="form-control" id="education" name="education" cols="3"></textarea> 
                                                 </div>
                                             </div>
@@ -796,7 +796,7 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="desc_notable_past_investment">Description of Notable Past Investments : </label>
+                                                    <label for="desc_notable_past_investment">Description of Notable Past/Current Investments (If applicable) : </label>
                                                     <textarea name="desc_notable_past_investment" id="desc_notable_past_investment" rows="3" class="form-control">{{old('desc_notable_past_investment')}}</textarea>
                                                 </div>
                                             </div>

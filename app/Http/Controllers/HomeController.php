@@ -204,11 +204,9 @@ class HomeController extends Controller
                     return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
                 }
             }
-            // else{
-            //     $error2 = 1;
-            //     $msg = ['Error','You should upload your government ID photo !','error'];
-            //     return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
-            // }
+            else{
+                $govern_photo_id_name = '';
+            }
             if($request['aware_method_desc_how'])
                 $aware_method_desc = $request['aware_method_desc_how'];
             elseif($request['aware_method_desc_who'])
@@ -347,9 +345,7 @@ class HomeController extends Controller
                     return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
                 }
             }else{
-                $error2 = 1;
-                $msg = ['Error','You should upload your government ID photo !','error'];
-                return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
+                $govern_photo_id_name = '';
             }
 
             if($request['aware_method_desc_how'])
@@ -496,8 +492,8 @@ class HomeController extends Controller
             {
                 $to = $admin->email;
                 $subtitle = 'A Member Submitted a membership application!';
-                $subject = 'A Member Submitted a membership application!';
-                $content = 'Member '.$user->fName.' '.$user->lName.' was submitted a membership application.';
+                $subject = 'Membership Application – Submitted';
+                $content = $user->email.' has submitted application for membership.';
                 $link = route('admin.membership-detail',['id' => $user->id]);
                 $link_name = 'Go To Dashboard';
 

@@ -32,10 +32,10 @@ $(".validation-wizard").steps({
     }
     , onFinished: function (event, currentIndex) {
          swal({
-            title : "Family Investment Exchange – Application Complete!", 
+            title : "Application Complete!", 
             text : "The FIVE Network is reviewing your application and will be back to you shortly.",
             confirmButtonColor:"#1e88e5",
-            confirmButtonText: "Family Investment Exchange – It can take you back to landing page",   
+            confirmButtonText: "Back to Family Investment Exchange",   
             closeOnConfirm: false }, 
             function(){   
                 var form = $("#apply-form");
