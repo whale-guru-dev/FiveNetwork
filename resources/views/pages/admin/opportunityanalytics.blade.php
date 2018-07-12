@@ -39,7 +39,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Opportunity Contact Name</th>
+                                    <th>Company Name</th>
                                     <th>Submitted Member</th>
                                     <th>Submitted Time</th>
                                     <th>Action</th>
@@ -48,7 +48,7 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Opportunity Contact Name</th>
+                                    <th>Company Name</th>
                                     <th>Submitted Member</th>
                                     <th>Submitted Time</th>
                                     <th>Action</th>
@@ -60,7 +60,7 @@
                                     <tr>
     									<td>{{$i++}}</td>
                                         <td>
-                                            <a href="{{route('admin.opportunity-detail',['id' => $each->id])}}">{{$each->contact_name}} <i class="fa fa-share"></i>
+                                            <a href="{{route('admin.opportunity-detail',['id' => $each->id])}}">{{$each->company_name}} <i class="fa fa-share"></i>
                                             </a>
                                         </td>
                                         <td>

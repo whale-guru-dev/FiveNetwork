@@ -658,7 +658,7 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="average_investment_size">Average Investment Size :</label>
+                                                    <label for="average_investment_size">How much capacity is left this round :</label>
                                                     <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size">
                                                         <option value="">Select</option>
                                                         @foreach($invest_size_types as $type)
@@ -727,7 +727,7 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="networth_aum">Approximate Networth/AUM : </label>
-                                                    <input type="text" class="form-control" id="networth_aum" name="networth_aum" value="{{old('networth_aum')}}"> 
+                                                    <input type="text" class="form-control" id="networth_aum" name="networth_aum" value="{{old('networth_aum')}}" data-mask="$999,999,999" > 
                                                 </div>
                                             </div>
                                         </div>
@@ -736,7 +736,11 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="company_website">Company Website : </label>
+                                                    
                                                     <input type="text" class="form-control" id="company_website" name="company_website"  value="{{old('company_website')}}"> 
+                                                    
+                                                    
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -746,6 +750,7 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="linkedIn">LinkedIn : </label>
                                                     <input type="text" class="form-control" id="linkedIn" name="linkedIn" value="{{old('linkedIn')}}"> 
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -767,42 +772,17 @@ color: #797979;
                                                 </div>
                                             </div>
                                         </div>
-                                        <h6>Education(Please include High School, College, and Post Graduate if applicable.)</h6>
+                                        
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="education">Education : </label>
-                                                    <input type="text" class="form-control" id="education" name="education" value="{{old('education')}}"> 
+                                                    <textarea class="form-control" id="education" name="education" cols="3"></textarea> 
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="high_school">High School : </label>
-                                                    <input type="text" class="form-control" id="high_school" name="high_school" value="{{old('high_school')}}"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="college">College : </label>
-                                                    <input type="text" class="form-control" id="college" name="college" value="{{old('college')}}"> 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="graduate_school">Graduate School : </label>
-                                                    <input type="text" class="form-control" id="graduate_school" name="graduate_school"  value="{{old('graduate_school')}}"> 
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                         <div class="row">
                                             <div class="col-md-12">
@@ -1055,12 +1035,15 @@ The information on the Site is intended to enable investors to understand the na
 
 
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/admin/js/mask.js')}}"></script>
+
     <!-- ============================================================== -->
     <!-- Wizard -->
     <script src="{{asset('assets/dashboard/plugins/wizard/jquery.steps.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/plugins/wizard/jquery.validate.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/plugins/wizard/steps.js')}}"></script>
     <!-- ============================================================== -->
+    <!-- <script src="{{asset('assets/dashboard/member/js/validation.js')}}"></script> -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
@@ -1105,6 +1088,7 @@ The information on the Site is intended to enable investors to understand the na
 
     </script>
 
+
     @if($submitted == 1)
         <script type="text/javascript">
             $("#apply-form input").prop("disabled", true);
@@ -1115,21 +1099,7 @@ The information on the Site is intended to enable investors to understand the na
     @endif
 
     @if(Session::get('msg'))
-        @if(Session::get('msg')[2] == 'success')
-            <script type="text/javascript">
-              swal({   
-                    title: "{{Session::get('msg')[0]}}",   
-                    text: "{{Session::get('msg')[1]}}",   
-                    type: "{{Session::get('msg')[2]}}",   
-                    showCancelButton: false,   
-                    confirmButtonColor:"#1e88e5",
-                    confirmButtonText: "Okay",   
-                    closeOnConfirm: false 
-                }, function(){   
-                    window.location.href = "{{url('/')}}";
-                });
-            </script>
-        @elseif(Session::get('msg')[2] == 'error')
+        if(Session::get('msg')[2] == 'error')
             <script type="text/javascript">
                 swal({   
                     title: "{{Session::get('msg')[0]}}",   

@@ -49,11 +49,9 @@ class HomeController extends Controller
         $user->update(['is_allowed'=>1]);
         //Mail Function
         $to = $user->email;
-        $subtitle = 'Congratulations and welcome to the FIVE Network!';
-        $subject = 'Congratulations and welcome to the FIVE Network.';
-        $content = 'Congratulations and welcome to the FIVE Network. We are excited to have you and look forward to bringing you tailored investment opportunities from members of the Family Investment Exchange network. The FIVE Network was created to facilitate investment opportunities between high impact, like-minded families, and we hope that your experience with the Network is one of continued success.
-            If at any point during your membership you have questions or concerns, feel free to reach out to  xxxxx@familyinvestmentexchange.com.
-            To gain Priority Access to the FIVE Network, invite 5 qualified families to apply for membership by clicking here.';
+        $subtitle = 'Congratulations and Welcome to the Family Investment Exchange!';
+        $subject = 'Congratulations and Welcome to the Family Investment Exchange';
+        $content = 'Congratulations and welcome to the FIVE Network. We are excited to have you and look forward to bringing you tailored investment opportunities from members of the Family Investment Exchange network. The FIVE Network was created to facilitate investment opportunities between high impact, like-minded families, and we hope that your experience with the Network is one of continued success.';
         $link = route('login');
         $link_name = 'Go To Login';
 
@@ -109,11 +107,11 @@ class HomeController extends Controller
             
             //Mail Function
             $to = $user->email;
-            $subtitle = 'You are allowed to apply membership!';
-            $subject = 'Apply Membership!';
+            $subtitle = 'You have been granted access to apply for membership to Family Investment Exchange';
+            $subject = 'Access Granted – Family Investment Exchange!';
             $content = 'You are allowed by administrator to apply membership, you can apply right now!';
             $link = route('apply-membership',['code'=>$user->code]);
-            $link_name = 'Go To Apply Membership';
+            $link_name = 'Begin Application';
             Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
 
             // return new Follow($link, $content, $subtitle, $subject);

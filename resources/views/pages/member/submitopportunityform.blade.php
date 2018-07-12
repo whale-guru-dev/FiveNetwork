@@ -50,16 +50,7 @@
                         <input type="hidden" name="code" value="{{$opportunitymember->code}}">
                         <h4>GENERAL INFORMATION</h4>
                         <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="contact_name"> Contact Name
-                                        <span class="danger">*</span> 
-                                    </label>
-                                    <input type="text" class="form-control required" id="contact_name" name="contact_name" required>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <div class="row">
                             <div class="col-md-6">
@@ -505,30 +496,23 @@
                         
                         </div>
 
-                        <h4>Investment Size</h4>
+                        <h4>How much capacity is left this round</h4>
                         <hr>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="raising_capital"> How much capital are you raising this round? <span class="danger">*</span> 
                                     </label>
-                                    <input type="text" class="form-control required" id="raising_capital" name="raising_capital" required> 
+                                    <input type="text" class="form-control required" id="raising_capital" name="raising_capital" required data-mask="$999,999,999">  
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="investment_size_val"> Investment Size </label>
-                                    <div class="input-group">
-                                        <input type="hidden" name="investment_size" id="investment_size" value="">
-                                        <input type="number" class="form-control required" name="investment_size_val" id="investment_size_val" required>
-                                        <span class="input-group-btn">
-                                            <select class="btn" id="money_unit">
-                                                <option value="1">K $</option>
-                                                <option value="2">MM $</option>
-                                            </select>
-                                        </span>
-                                    </div>
+                                    <label for="investment_size"> How much capacity is left this round </label>
+                                    
+                                    <input type="text" class="form-control required" name="investment_size" id="investment_size" required data-mask="$999,999,999">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -732,14 +716,14 @@
                                         <div class="form-group">
                                             <label for="prev4_total_revenue"> Total 2014 Revenue :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev4_total_revenue" name="prev4_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="prev4_total_revenue" name="prev4_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prev4_total_expense"> Total 2014 Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev4_total_expense" name="prev4_total_expense" required> 
+                                            <input type="text" class="form-control required" id="prev4_total_expense" name="prev4_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -748,7 +732,7 @@
                                         <div class="form-group">
                                             <label for="prev4_revenue_expense"> Total Revenue - Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev4_revenue_expense" name="prev4_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="prev4_revenue_expense" name="prev4_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -763,14 +747,14 @@
                                         <div class="form-group">
                                             <label for="prev3_total_revenue"> Total 2015 Revenue :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev3_total_revenue" name="prev3_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="prev3_total_revenue" name="prev3_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prev3_total_expense"> Total 2015 Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev3_total_expense" name="prev3_total_expense" required> 
+                                            <input type="text" class="form-control required" id="prev3_total_expense" name="prev3_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -779,7 +763,7 @@
                                         <div class="form-group">
                                             <label for="prev3_revenue_expense"> Total Revenue - Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev3_revenue_expense" name="prev3_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="prev3_revenue_expense" name="prev3_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -794,14 +778,14 @@
                                         <div class="form-group">
                                             <label for="prev2_total_revenue"> Total 2016 Revenue :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev2_total_revenue" name="prev2_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="prev2_total_revenue" name="prev2_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prev2_total_expense"> Total 2016 Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev2_total_expense" name="prev2_total_expense" required> 
+                                            <input type="text" class="form-control required" id="prev2_total_expense" name="prev2_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -810,7 +794,7 @@
                                         <div class="form-group">
                                             <label for="prev2_revenue_expense"> Total Revenue - Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev2_revenue_expense" name="prev2_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="prev2_revenue_expense" name="prev2_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -825,14 +809,14 @@
                                         <div class="form-group">
                                             <label for="prev1_total_revenue"> Total 2017 Revenue :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev1_total_revenue" name="prev1_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="prev1_total_revenue" name="prev1_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prev1_total_expense"> Total 2017 Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev1_total_expense" name="prev1_total_expense" required> 
+                                            <input type="text" class="form-control required" id="prev1_total_expense" name="prev1_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -841,7 +825,7 @@
                                         <div class="form-group">
                                             <label for="prev1_revenue_expense"> Total Revenue - Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev1_revenue_expense" name="prev1_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="prev1_revenue_expense" name="prev1_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -856,14 +840,14 @@
                                         <div class="form-group">
                                             <label for="cur_total_revenue"> Projected 2018 Total Revenue :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_total_revenue" name="cur_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="cur_total_revenue" name="cur_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="cur_total_expense"> Projected 2018 Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_total_expense" name="cur_total_expense" required> 
+                                            <input type="text" class="form-control required" id="cur_total_expense" name="cur_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -872,7 +856,7 @@
                                         <div class="form-group">
                                             <label for="cur_revenue_expense"> Projected 2018 Total Revenue - Total Expense :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_revenue_expense" name="cur_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="cur_revenue_expense" name="cur_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -892,14 +876,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="percent_cur_revenue">What percent of current revenue is contractually recurring (vs. non-recurring)?</label>
-                                    <input type="text" name="percent_cur_revenue" class="form-control required" id="percent_cur_revenue" required>
+                                    <input type="text" name="percent_cur_revenue" class="form-control required" id="percent_cur_revenue" required data-mask="99%">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="cash_balance">Cash Balance of Company today</label>
-                                    <input type="text" name="cash_balance" class="form-control required" id="cash_balance" required>
+                                    <input type="text" name="cash_balance" class="form-control required" id="cash_balance" required data-mask="$999,999,999">
                                 </div>
                             </div>
                         </div>
@@ -929,7 +913,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="debt_amount">Amount</label>
-                                            <input type="text" name="debt_amount" class="form-control" id="debt_amount">
+                                            <input type="text" name="debt_amount" class="form-control" id="debt_amount" data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>
@@ -953,14 +937,14 @@
                                         <div class="form-group">
                                             <label for="prev1_total_revenue"> Total 2017 Revenue :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev1_total_revenue" name="prev1_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="prev1_total_revenue" name="prev1_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prev1_total_expense"> Total 2017 Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev1_total_expense" name="prev1_total_expense" required> 
+                                            <input type="text" class="form-control required" id="prev1_total_expense" name="prev1_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -969,7 +953,7 @@
                                         <div class="form-group">
                                             <label for="prev1_revenue_expense"> Total Revenue - Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev1_revenue_expense" name="prev1_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="prev1_revenue_expense" name="prev1_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -984,14 +968,14 @@
                                         <div class="form-group">
                                             <label for="prev_quater_total_revenue"> Total Revenue Last 3 months :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev_quater_total_revenue" name="prev_quater_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="prev_quater_total_revenue" name="prev_quater_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prev_quater_total_expense"> Total Expenses Last 3 months :
                                             </label>
-                                            <input type="text" class="form-control required" id="prev_quater_total_expense" name="prev_quater_total_expense" required> 
+                                            <input type="text" class="form-control required" id="prev_quater_total_expense" name="prev_quater_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1000,7 +984,7 @@
                                         <div class="form-group">
                                             <label for="prev_quater_revenue_expense"> Total Revenue - Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev_quater_revenue_expense" name="prev_quater_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="prev_quater_revenue_expense" name="prev_quater_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1015,14 +999,14 @@
                                         <div class="form-group">
                                             <label for="prev_month_total_revenue"> Total Revenue Last Month :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev_month_total_revenue" name="prev_month_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="prev_month_total_revenue" name="prev_month_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prev_month_total_expense"> Total Expenses Last Month :
                                             </label>
-                                            <input type="text" class="form-control required" id="prev_month_total_expense" name="prev_month_total_expense" required> 
+                                            <input type="text" class="form-control required" id="prev_month_total_expense" name="prev_month_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1031,7 +1015,7 @@
                                         <div class="form-group">
                                             <label for="prev_month_revenue_expense"> Total Revenue - Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="prev_month_revenue_expense" name="prev_month_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="prev_month_revenue_expense" name="prev_month_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1046,14 +1030,14 @@
                                         <div class="form-group">
                                             <label for="cur_total_revenue"> Projected 2018 Total Revenue :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_total_revenue" name="cur_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="cur_total_revenue" name="cur_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="cur_total_expense"> Projected 2018 Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_total_expense" name="cur_total_expense" required> 
+                                            <input type="text" class="form-control required" id="cur_total_expense" name="cur_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1062,7 +1046,7 @@
                                         <div class="form-group">
                                             <label for="cur_revenue_expense"> Projected 2018 Total Revenue - Total Expense :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_revenue_expense" name="cur_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="cur_revenue_expense" name="cur_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1077,14 +1061,14 @@
                                         <div class="form-group">
                                             <label for="next3month_total_revenue"> Projected Total Revenue Next 3 months :  
                                             </label>
-                                            <input type="text" class="form-control required" id="next3month_total_revenue" name="next3month_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="next3month_total_revenue" name="next3month_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="next3month_total_expense"> Projected Total Expenses Next 3 Months :  
                                             </label>
-                                            <input type="text" class="form-control required" id="next3month_total_expense" name="next3month_total_expense" required> 
+                                            <input type="text" class="form-control required" id="next3month_total_expense" name="next3month_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1093,7 +1077,7 @@
                                         <div class="form-group">
                                             <label for="next3month_revenue_expense"> Projected Total Revenue - Total Expenses :  
                                             </label>
-                                            <input type="text" class="form-control required" id="next3month_revenue_expense" name="next3month_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="next3month_revenue_expense" name="next3month_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1108,14 +1092,14 @@
                                         <div class="form-group">
                                             <label for="cur_month_total_revenue"> Projected Total Revenue This Month :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_month_total_revenue" name="cur_month_total_revenue" required> 
+                                            <input type="text" class="form-control required" id="cur_month_total_revenue" name="cur_month_total_revenue" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="cur_month_total_expense"> Projected Total Expenses This Month :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_month_total_expense" name="cur_month_total_expense" required> 
+                                            <input type="text" class="form-control required" id="cur_month_total_expense" name="cur_month_total_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1124,7 +1108,7 @@
                                         <div class="form-group">
                                             <label for="cur_month_revenue_expense"> Projected Total Revenue - Total Expense :  
                                             </label>
-                                            <input type="text" class="form-control required" id="cur_month_revenue_expense" name="cur_month_revenue_expense" required> 
+                                            <input type="text" class="form-control required" id="cur_month_revenue_expense" name="cur_month_revenue_expense" required data-mask="$999,999,999"> 
                                         </div>
                                     </div>
                                 </div>
@@ -1153,14 +1137,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="percent_cur_revenue">What percent of current revenue is contractually recurring (vs. non-recurring)?</label>
-                                    <input type="text" name="percent_cur_revenue" class="form-control required" id="percent_cur_revenue" required>
+                                    <input type="text" name="percent_cur_revenue" class="form-control required" id="percent_cur_revenue" required data-mask="99%">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="cash_balance">Cash Balance of Company today</label>
-                                    <input type="text" name="cash_balance" class="form-control required" id="cash_balance" required>
+                                    <input type="text" name="cash_balance" class="form-control required" id="cash_balance" required data-mask="$999,999,999">
                                 </div>
                             </div>
                         </div>
@@ -1190,7 +1174,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="debt_amount">Amount</label>
-                                            <input type="text" name="debt_amount" class="form-control" id="debt_amount">
+                                            <input type="text" name="debt_amount" class="form-control" id="debt_amount" data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>
@@ -1252,7 +1236,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="revenue_avg_customer">Average contract revenue per customer</label>
-                                            <input type="text" name="revenue_avg_customer" class="form-control" id="revenue_avg_customer">
+                                            <input type="text" name="revenue_avg_customer" class="form-control" id="revenue_avg_customer" data-mask="$999,999,999">
                                         </div>
                                     </div> 
                                 </div>
@@ -1271,7 +1255,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="percent_revenue_1">Percentage of Revenue</label>
-                                                    <input type="text" name="percent_revenue_1" class="form-control" id="percent_revenue_1">
+                                                    <input type="text" name="percent_revenue_1" class="form-control" id="percent_revenue_1" data-mask="99%">
                                                 </div>
                                             </div>
                                         </div>
@@ -1287,7 +1271,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="percent_revenue_2">Percentage of Revenue</label>
-                                                    <input type="text" name="percent_revenue_2" class="form-control" id="percent_revenue_2">
+                                                    <input type="text" name="percent_revenue_2" class="form-control" id="percent_revenue_2" data-mask="99%">
                                                 </div>
                                             </div>
                                         </div>
@@ -1303,7 +1287,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="percent_revenue_3">Percentage of Revenue</label>
-                                                    <input type="text" name="percent_revenue_3" class="form-control" id="percent_revenue_3">
+                                                    <input type="text" name="percent_revenue_3" class="form-control" id="percent_revenue_3" data-mask="99%">
                                                 </div>
                                             </div>
                                         </div>
@@ -1319,7 +1303,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="percent_revenue_4">Percentage of Revenue</label>
-                                                    <input type="text" name="percent_revenue_4" class="form-control" id="percent_revenue_4">
+                                                    <input type="text" name="percent_revenue_4" class="form-control" id="percent_revenue_4" data-mask="99%">
                                                 </div>
                                             </div>
                                         </div>
@@ -1334,7 +1318,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="percent_revenue_5">Percentage of Revenue</label>
-                                                    <input type="text" name="percent_revenue_5" class="form-control" id="percent_revenue_5">
+                                                    <input type="text" name="percent_revenue_5" class="form-control" id="percent_revenue_5" data-mask="99%">
                                                 </div>
                                             </div>
                                         </div>
@@ -1417,7 +1401,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="capital_amt_began">Amount of Capital Business Began With</label>
-                                    <input type="text" name="capital_amt_began" class="form-control required" id="capital_amt_began" required>
+                                    <input type="text" name="capital_amt_began" class="form-control required" id="capital_amt_began" required data-mask="$999,999,999">
                                 </div>
                             </div>
 
@@ -1440,7 +1424,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="capital_used_for">What will the capital be used for?</label>
-                                    <input type="text" name="capital_used_for" class="form-control required" id="capital_used_for" required>
+                                    <input type="text" name="capital_used_for" class="form-control required" id="capital_used_for" required >
                                 </div>
                             </div>
                         </div>
@@ -1472,7 +1456,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prior_raised_amount">Amount Raised</label>
-                                            <input type="text" name="prior_raised_amount" class="form-control" id="prior_raised_amount">
+                                            <input type="text" name="prior_raised_amount" class="form-control" id="prior_raised_amount" data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>
@@ -1488,7 +1472,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="prior_valuation">Valuation</label>
-                                            <input type="text" name="prior_valuation" class="form-control" id="prior_valuation">
+                                            <input type="text" name="prior_valuation" class="form-control" id="prior_valuation" data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>
@@ -1513,7 +1497,7 @@
                                     <div class="col-md-6" id="founder_capital_amount_div" style="display: none;">
                                         <div class="form-group">
                                             <label for="founder_capital_amount">How much</label>
-                                            <input type="text" name="founder_capital_amount" class="form-control" id="founder_capital_amount" >
+                                            <input type="text" name="founder_capital_amount" class="form-control" id="founder_capital_amount" data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>
@@ -1538,7 +1522,7 @@
                                     <div class="col-md-6" id="expect_future_raise_div" style="display: none;">
                                         <div class="form-group">
                                             <label for="expect_future_raise_amount">How much</label>
-                                            <input type="text" name="expect_future_raise_amount" class="form-control" id="expect_future_raise_amount">
+                                            <input type="text" name="expect_future_raise_amount" class="form-control" id="expect_future_raise_amount" data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>
@@ -1577,7 +1561,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="amount_committed">Amount Committed</label>
-                                            <input type="text" name="amount_committed" class="form-control required" id="amount_committed" required>
+                                            <input type="text" name="amount_committed" class="form-control required" id="amount_committed" required data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>
@@ -1592,7 +1576,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="cur_postmoney_valuation">Current Post-Money Valuation</label>
-                                            <input type="text" name="cur_postmoney_valuation" class="form-control required" id="cur_postmoney_valuation" required>
+                                            <input type="text" name="cur_postmoney_valuation" class="form-control required" id="cur_postmoney_valuation" required data-mask="$999,999,999">
                                         </div>
                                     </div>
 
@@ -1664,7 +1648,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="revenue_target">Revenue Target</label>
-                                            <input type="text" name="revenue_target" class="form-control required" id="revenue_target" required>
+                                            <input type="text" name="revenue_target" class="form-control required" id="revenue_target" required data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>
@@ -1673,14 +1657,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="net_income_target">Net Income Target</label>
-                                            <input type="text" name="net_income_target" class="form-control required" id="net_income_target" required>
+                                            <input type="text" name="net_income_target" class="form-control required" id="net_income_target" required data-mask="$999,999,999">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exit_valuation">Exit Valuation</label>
-                                            <input type="text" name="exit_valuation" class="form-control required" id="exit_valuation" required>
+                                            <input type="text" name="exit_valuation" class="form-control required" id="exit_valuation" required data-mask="$999,999,999">
                                         </div>
                                     </div>
                                 </div>

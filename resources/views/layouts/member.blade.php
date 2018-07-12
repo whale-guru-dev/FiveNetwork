@@ -271,6 +271,7 @@ color: #797979;
     <script src="{{asset('assets/dashboard/plugins/sweetalert/jquery.sweet-alert.custom.js')}}"></script>
     <!--Custom JavaScript -->
     <script src="{{asset('assets/dashboard/member/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/admin/js/mask.js')}}"></script>
     <!-- ============================================================== -->
 
     <!-- <script src="{{asset('assets/dashboard/plugins/session-timeout/jquery.sessionTimeout.min.js')}}"></script> -->

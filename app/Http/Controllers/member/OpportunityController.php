@@ -117,7 +117,6 @@ class OpportunityController extends Controller
             'member_id' => Auth::user()->id,
             'code' => $request['code'],
             'company_stage' => $opportunity->company_stage,
-            'contact_name' => $request['contact_name'],
             'fName' => $request['fName'],
             'lName' => $request['lName'],
             'phone' => $request['phone'],
@@ -242,9 +241,9 @@ class OpportunityController extends Controller
         $this->checkmatch($form);
 
         $to = $form->user->email;
-        $subtitle = 'Successfully Submitted Your Co-Investment Questionnaire!';
+        $subtitle = 'Thank you for completing the Investment Questionnaire';
         $subject = 'Submitted Your Co-Investment Questionnaire!';
-        $content = 'Thank you for submitting your co-investment opportunity to the Family InVestment Exchange. Once the opportunity has matched the profile of a member of the FIVE Network, we will connect them to the appropriate contact person for this opportunity.';
+        $content = 'Thank you for submitting your investment opportunity to the Family Investment Exchange. We will reach out to you if a member of the Family Investment Exchange has an interest in investing in this opportunity.';
         $link = url('/member');
         $link_name = 'Go To Dashboard';
 

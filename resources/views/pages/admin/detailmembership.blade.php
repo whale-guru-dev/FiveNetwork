@@ -310,7 +310,7 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
         			<div class="row">
         				<div class="tags-default col-md-6">
         					<div class="form-group row">
-                                <label class="control-label text-left col-md-3">Average Investment Size:</label>
+                                <label class="control-label text-left col-md-3">How much capacity is left this round:</label>
                                 <div class="col-md-9">
 	                                <select multiple data-role="tagsinput" disabled="">
 	                                	@foreach($user->investmentsize as $isz)
@@ -439,7 +439,7 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group row">
                                 <label class="control-label text-right col-md-3">Education:</label>
                                 <div class="col-md-9">
@@ -448,35 +448,8 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                             </div>
                         </div>
                         <!--/span-->
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-3">High School:</label>
-                                <div class="col-md-9">
-                                    <p class="form-control-static"> {{$user->high_school}} </p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-3">College:</label>
-                                <div class="col-md-9">
-                                    <p class="form-control-static"> {{$user->college}} </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-3">Graduate School:</label>
-                                <div class="col-md-9">
-                                    <p class="form-control-static"> {{$user->graduate_school}} </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="row">
                         <!--/span-->

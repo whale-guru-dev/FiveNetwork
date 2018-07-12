@@ -71,7 +71,7 @@
                                 @foreach($oppors as $oppor)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$oppor->contact_name}}</td>
+                                    <td>{{$oppor->fName.' '.$oppor->lName}}</td>
                                     <td>{{$oppor->created_at->format('Y/m/d')}}</td>
                                     <td>{{$oppor->company_name}}</td>
                                     <td>{{$oppor->company_desc}}</td>

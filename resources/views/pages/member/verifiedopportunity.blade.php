@@ -53,7 +53,7 @@
                                     <th>Investment Stage</th>
                                     <th>Investment Sector</th>
                                     <th>Investment Region</th>
-                                    <th>Investment Size</th>
+                                    <th>How much capacity is left this round</th>
                                     <th>Submitted Time</th>
                                     <th>Interested</th>
                                 </tr>
@@ -65,7 +65,7 @@
                                     <th>Investment Stage</th>
                                     <th>Investment Sector</th>
                                     <th>Investment Region</th>
-                                    <th>Investment Size</th>
+                                    <th>How much capacity is left this round</th>
                                     <th>Submitted Time</th>
                                     <th>Interested</th>
                                 </tr>

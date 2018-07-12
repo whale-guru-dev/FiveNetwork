@@ -193,7 +193,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-target"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing">
+                                <input type="text" class="form-control" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing" data-mask="$999,999,999">
                             </div>
                         </div>
                         <div class="form-group">
@@ -204,7 +204,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise">
+                                <input type="text" class="form-control" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise" data-mask="$999,999,999">
                             </div>
                         </div>
                         <div class="form-group">
@@ -215,7 +215,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="valuation" name="valuation" placeholder="Enter Available capacity for FIVE Network members">
+                                <input type="text" class="form-control" id="valuation" name="valuation" placeholder="Enter Available capacity for FIVE Network members" data-mask="$999,999,999">
                             </div>
                         </div>
 

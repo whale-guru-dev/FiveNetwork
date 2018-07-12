@@ -44,8 +44,8 @@ class OpportunityController extends Controller
     	$requestopportuniy->save();
 
     	$to = $requestopportuniy->email;
-        $subtitle = 'Your opportunity was accepted!';
-        $subject = 'Your opportunity was accepted!';
+        $subtitle = 'The Family Investment Exchange is interested in your opportunity!';
+        $subject = 'The Family Investment Exchange is interested in your opportunity!';
         $content = 'A member of the Family Investment Exchange has requested we contact you to request additional information on your investment opportunity. Please complete the Investment Questionnaire in this email to share this opportunity with families throughout the US who are looking for opportunities like yours.<br>Best,<br>The Five Network Team.';
         $link = route('member.investment-questionnaire-form',['code' => $requestopportuniy->code]);
         $link_name = 'Fill out the forms';

@@ -56,14 +56,6 @@
                             <h4>GENERAL INFORMATION</h4>
                             <hr>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Contact Name</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->contact_name}} </p>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -207,7 +199,7 @@
                                 </div>
                                 <!--/span-->
                             </div>
-                            <h6>Investment Size</h6>
+                            <h6>How much capacity is left this round</h6>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
@@ -626,7 +618,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">What percent of current revenue is contractually recurring (vs. non-recurring)?</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->percent_cur_revenue}} %</p>
+                                            <p class="form-control-static"> {{$oppor->percent_cur_revenue}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -897,7 +889,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">What percent of current revenue is contractually recurring (vs. non-recurring)?</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->percent_cur_revenue}} %</p>
+                                            <p class="form-control-static"> {{$oppor->percent_cur_revenue}}</p>
                                         </div>
                                     </div>
                                 </div>

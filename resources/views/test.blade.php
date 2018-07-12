@@ -3,7 +3,7 @@
 
 <head>
 
-        <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
     <meta name="description"  content="Family Investment Exchange" />
@@ -55,7 +55,6 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 <body>
 <form method="post" class="validation-wizard wizard-circle">
  <div class="row">
-
     <div class="col-md-6">
         <div class="form-group">
             <label for="invest_region">Investment Regions :</label>
@@ -104,7 +103,11 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
                     @endif
                 @endforeach
             </select>
-
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="text" placeholder="" data-mask="$999,999,999.99" class="form-control" name="currenty">
         </div>
     </div>
 </div>
@@ -134,6 +137,7 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 
 
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/admin/js/mask.js')}}"></script>
     <!-- ============================================================== -->
     <!-- Wizard -->
     <script src="{{asset('assets/dashboard/plugins/wizard/jquery.steps.min.js')}}"></script>

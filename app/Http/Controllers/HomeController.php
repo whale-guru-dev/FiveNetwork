@@ -63,7 +63,7 @@ class HomeController extends Controller
             $email = $user['email'];
             $link = route('home');
             $link_name = 'Go to Family Investment Exchange';
-            $content = 'Thank you for requesting access to the Family Investment Exchange. The membership committee will be in touch with you to request additional information and update you when the platform will be available for use.';
+            $content = 'Thank you for requesting access to the Family Investment Exchange. A member of the FIVE Network will reach out to request additional information in the coming days.';
             $subtitle = 'Access Requested!';
             $subject = 'Access Requested';
             
@@ -244,9 +244,6 @@ class HomeController extends Controller
                 'corporate_board' => $request['corporate_board'] ? $request['corporate_board']:'',
                 'civic_non_profit_board' => $request['civic_non_profit_board'] ? $request['civic_non_profit_board']:'',
                 'education' => $request['education'] ? $request['education']:'',
-                'high_school' => $request['high_school'] ? $request['high_school']:'',
-                'college'    => $request['college'] ? $request['college']:'',
-                'graduate_school' => $request['graduate_school'] ? $request['graduate_school']:'',
                 'desc_notable_past_investment' => $request['desc_notable_past_investment'] ? $request['desc_notable_past_investment']:'',
                 'rank_show_deals' => $request['rank_show_deals'],
                 'rank_see_deals'  => $request['rank_see_deals'],
@@ -391,9 +388,6 @@ class HomeController extends Controller
                 'corporate_board' => $request['corporate_board'] ? $request['corporate_board']:'',
                 'civic_non_profit_board' => $request['civic_non_profit_board'] ? $request['civic_non_profit_board']:'',
                 'education' => $request['education'] ? $request['education']:'',
-                'high_school' => $request['high_school'] ? $request['high_school']:'',
-                'college'    => $request['college'] ? $request['college']:'',
-                'graduate_school' => $request['graduate_school'] ? $request['graduate_school']:'',
                 'desc_notable_past_investment' => $request['desc_notable_past_investment'] ? $request['desc_notable_past_investment']:'',
                 'rank_show_deals' => $request['rank_show_deals'],
                 'rank_see_deals'  => $request['rank_see_deals'],
@@ -486,7 +480,7 @@ class HomeController extends Controller
         }
 
         if($error1 == 0 && $error2 == 0){
-            $msg = ['Success','We have sent your membership application to administrator, please wait to be allowed by administrator!','success'];
+            // $msg = ['Success','We have sent your membership application to administrator, please wait to be allowed by administrator!','success'];
             $preregister->update(['applied'=>1]);
 
             $email = $user['email'];
@@ -510,7 +504,8 @@ class HomeController extends Controller
                 Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
             }
 
-            return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
+            // return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
+            return redirect()->route('apply-membership',['user' => $preregister['code']]);
         }
 
         

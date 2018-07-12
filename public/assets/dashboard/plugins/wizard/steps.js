@@ -32,10 +32,10 @@ $(".validation-wizard").steps({
     }
     , onFinished: function (event, currentIndex) {
          swal({
-            title : "Membership Application Submit!", 
-            text : "Thank you for submitting membership application to the Family Investment Exchange… The membership committee will be in touch.",
+            title : "Family Investment Exchange – Application Complete!", 
+            text : "The FIVE Network is reviewing your application and will be back to you shortly.",
             confirmButtonColor:"#1e88e5",
-            confirmButtonText: "Submit Membership Application!",   
+            confirmButtonText: "Family Investment Exchange – It can take you back to landing page",   
             closeOnConfirm: false }, 
             function(){   
                 var form = $("#apply-form");
@@ -72,10 +72,10 @@ $(".validation-wizard").steps({
             equalTo: password
         },
         company_website: {
-            url:true
+            regx: /^(http[s]?|ftp[s]?):\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}/
         },
         linkedIn: {
-            url:true
+            regx: /^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/
         }
     }
 })
