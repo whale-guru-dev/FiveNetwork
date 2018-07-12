@@ -1720,17 +1720,7 @@
         document.getElementById("request-form").reset();
     });
 
-    $("#submit-form").submit(function( event ) {
-      var investment_size_val = $("#investment_size_val").val();
-      var money_unit = $("#money_unit").val();
-      var investment_size = 0;
-      if(money_unit == 1)
-        investment_size = investment_size_val * 1000;
-      else if(money_unit == 2)
-        investment_size = investment_size_val * 1000000;
-      $("#investment_size").val(investment_size);
-    });
-
+    
     $( "#bpatent" ).change(function() {
         if($( "#bpatent" ).val() == 1)
             $("#patent_div").show();
