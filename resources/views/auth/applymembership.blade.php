@@ -113,7 +113,7 @@ color: #797979;
                 @if($submitted == 1)
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="{{route('home')}}" class="btn btn-sm">Go To Landing Page</a>
+                        <a href="{{route('home')}}" class="btn btn-sm btn-info">Go To Landing Page</a>
                     </div>
                 </div>
                 @endif
