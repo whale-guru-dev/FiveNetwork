@@ -33,7 +33,7 @@ class HomeController extends Controller
 
     public function checkmembershipview()
     {
-        $users = User::where('is_allowed',0)->get();
+        $users = User::where('is_allowed',0)->orderBy('created_at','DESC')->get();
     	return view('pages.admin.checkmembership')->with(['users'=>$users]);
     }
 
