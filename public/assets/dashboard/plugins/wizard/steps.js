@@ -70,12 +70,6 @@ $(".validation-wizard").steps({
         conf_password: {
             minlength: 8,
             equalTo: password
-        },
-        company_website: {
-            regx: /^(http[s]?|ftp[s]?):\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,4}/
-        },
-        linkedIn: {
-            regx: /^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/
         }
     }
 })

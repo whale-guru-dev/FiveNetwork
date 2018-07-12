@@ -74,6 +74,15 @@ color: #797979;
 .sweet-alert .sa-icon.sa-success .sa-fix {
     background-color: white; 
 }
+.emsg{
+    color: red;
+}
+.emsg1{
+    color: red;
+}
+.hidden {
+     visibility:hidden;
+}
 </style>
 <body>
     <!-- ============================================================== -->
@@ -738,7 +747,7 @@ color: #797979;
                                                     <label for="company_website">Company Website : </label>
                                                     
                                                     <input type="text" class="form-control" id="company_website" name="company_website"  value="{{old('company_website')}}"> 
-                                                    
+                                                    <p><span class="emsg hidden">Please Enter a Valid Name</span></p>
                                                     
                                                     
                                                 </div>
@@ -750,7 +759,7 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="linkedIn">LinkedIn : </label>
                                                     <input type="text" class="form-control" id="linkedIn" name="linkedIn" value="{{old('linkedIn')}}"> 
-                                                    
+                                                    <p><span class="emsg1 hidden">Please Enter a Valid Name</span></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1086,6 +1095,31 @@ The information on the Site is intended to enable investors to understand the na
             $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
         });
 
+        $(document).ready(function(){
+            var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
+            $('#company_website').on('keypress keydown keyup',function(){
+                if (!$(this).val().match($regexname)) {
+                  // there is a mismatch, hence show the error message
+                    $('.emsg').removeClass('hidden');
+                    $('.emsg').show();
+                 }
+                else{
+                    // else, do not display message
+                    $('.emsg').addClass('hidden');
+                }
+            });
+            $('#linkedIn').on('keypress keydown keyup',function(){
+                if (!$(this).val().match($regexname)) {
+                  // there is a mismatch, hence show the error message
+                    $('.emsg1').removeClass('hidden');
+                    $('.emsg1').show();
+                 }
+                else{
+                    // else, do not display message
+                    $('.emsg1').addClass('hidden');
+                }
+            });
+        });
     </script>
 
 

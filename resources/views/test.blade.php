@@ -49,6 +49,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style type="text/css">
+    .emsg{
+    color: red;
+    }
+    .hidden {
+         visibility:hidden;
+    }
+</style>
 @php
 $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 @endphp
@@ -110,16 +118,41 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
             <input type="text" placeholder="" data-mask="$999,999,999.99" class="form-control" name="currenty">
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="company_website">Company Website : </label>
-                
-                <input type="text" class="form-control" id="company_website" name="company_website" > 
-                
-                
-                
-            </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="email"> Email Address : <span class="danger">*</span> </label>
+            <input type="email" class="form-control required" id="email" name="email" readonly=""> </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="conf_email">Re-Enter Email : <span class="danger">*</span> </label>
+            <input type="email" class="form-control required" id="conf_email" name="email_confirmation"> </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="password"> Password : <span class="danger">*</span> 
+            </label>
+            <input type="password" class="form-control required" minlength="8" id="password" name="password"> 
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="conf_password"> Confirm Password : <span class="danger">*</span> 
+            </label>
+            <input type="password" class="form-control required" minlength="8" id="conf_password" name="conf_password"> 
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="company_website">Company Website : </label>
+            <input type="text" class="form-control" id="company_website" name="company_website" > 
+            <p><span class="emsg hidden">Please Enter a Valid Name</span></p>
         </div>
     </div>
 </div>
@@ -191,6 +224,23 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
         //     multipleWidth: 55,
         //     width: '100%'
         // });
+    </script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
+        $('#company_website').on('keypress keydown keyup',function(){
+                 if (!$(this).val().match($regexname)) {
+                  // there is a mismatch, hence show the error message
+                     $('.emsg').removeClass('hidden');
+                     $('.emsg').show();
+                 }
+               else{
+                    // else, do not display message
+                    $('.emsg').addClass('hidden');
+                   }
+             });
+    });
     </script>
 </body>
 
