@@ -86,7 +86,7 @@
                                         @elseif($oppor->is_accepted == 1)
                                         <span class="label label-success">Allowed</span>
                                         @elseif($oppor->is_accepted == 2)
-                                        <span class="label label-Warning">Denied</span>
+                                        <span class="label label-warning">Denied</span>
                                         @endif
                                     </td>
                                 </tr>
