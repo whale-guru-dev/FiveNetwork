@@ -1338,7 +1338,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="cancellation_fee">Cancellation Fee</label>
-                                    <input type="text" name="cancellation_fee" class="form-control required" id="cancellation_fee" required>
+                                    <input type="text" name="cancellation_fee" class="form-control required" id="cancellation_fee" required data-mask="$999,999,999">
                                 </div>
                             </div>
                         </div>

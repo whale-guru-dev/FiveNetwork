@@ -37,6 +37,7 @@
     <link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
 
     <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/css/jquery.multiselect.css')}}" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
 
@@ -135,8 +136,8 @@ color: #797979;
                                                     </label>
                                                     <select class="custom-select form-control required" id="apply_type" name="apply_type">
                                                         <option value="">Select</option>
-                                                        <option value="0" {{ old('apply_type') == 0 ? 'selected' : '' }}>Family Office</option>
-                                                        <option value="1" {{ old('apply_type') == 1 ? 'selected' : '' }}>Individual</option>
+                                                        <option value="0">Family Office</option>
+                                                        <option value="1">Individual</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -147,8 +148,8 @@ color: #797979;
                                                     </label>
                                                     <select class="custom-select form-control required" id="bprinciple" name="bprinciple">
                                                         <option value="">Select</option>
-                                                        <option value="0" {{ old('bprinciple') == 0 ? 'selected' : '' }}>No</option>
-                                                        <option value="1" {{ old('bprinciple') == 0 ? 'selected' : '' }}>Yes</option>
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -219,7 +220,7 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="family_office_name"> Family Office Name : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="text" class="form-control required" id="family_office_name" name="family_office_name" value="{{old('family_office_name')}}"> 
+                                                    <input type="text" class="form-control required" id="family_office_name" name="family_office_name"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -229,14 +230,14 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="fName"> First Name : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="text" class="form-control required" id="fName" name="fName"  value="{{old('fName')}}"> 
+                                                    <input type="text" class="form-control required" id="fName" name="fName"  > 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="lName"> Last Name : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="text" class="form-control required" id="lName" name="lName" value="{{old('lName')}}"> 
+                                                    <input type="text" class="form-control required" id="lName" name="lName" > 
                                                 </div>
                                             </div>
                                         </div>
@@ -246,7 +247,7 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="title"> Title : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="text" class="form-control required" id="title" name="title" value="{{old('title')}}"> 
+                                                    <input type="text" class="form-control required" id="title" name="title" > 
                                                 </div>
                                             </div>
                                         </div>
@@ -255,13 +256,13 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="addr_1"> Address Line 1 : <span class="danger">*</span> </label>
-                                                    <input type="text" class="form-control required" id="addr_1" name="addr_1"  value="{{old('addr_1')}}"> 
+                                                    <input type="text" class="form-control required" id="addr_1" name="addr_1"  > 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="addr_2"> Address Line 2 :</label>
-                                                    <input type="text" class="form-control" id="addr_2"  name="addr_2"  value="{{old('addr_2')}}"> 
+                                                    <input type="text" class="form-control" id="addr_2"  name="addr_2"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -270,13 +271,13 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="town_city"> Town/City : <span class="danger">*</span> </label>
-                                                    <input type="text" class="form-control required" id="town_city" name="town_city"  value="{{old('town_city')}}"> 
+                                                    <input type="text" class="form-control required" id="town_city" name="town_city" > 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="state"> State : <span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="state"  name="state" value="{{old('state')}}"> 
+                                                    <input type="text" class="form-control required" id="state"  name="state" > 
                                                 </div>
                                             </div>
                                         </div>
@@ -285,7 +286,7 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="postal_code"> Postal Code : <span class="danger">*</span> </label>
-                                                    <input type="text" class="form-control required" id="postal_code" name="postal_code" value="{{old('postal_code')}}"> 
+                                                    <input type="text" class="form-control required" id="postal_code" name="postal_code"> 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -551,14 +552,14 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="phone_office">Office Phone : <span class="danger">*</span></label>
-                                                    <input type="tel" class="form-control required" id="phone_office" name="phone_office"  value="{{old('phone_office')}}"> 
+                                                    <input type="tel" class="form-control required" id="phone_office" name="phone_office"> 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="phone_mobile">Mobile Phone : </label>
-                                                    <input type="tel" class="form-control" id="phone_mobile" name="phone_mobile" value="{{old('phone_mobile')}}" placeholder="000-000-0000"> 
-                                                    <input id="mobilex" type="hidden" name="mobilex" value="{{old('mobilex')}}">
+                                                    <input type="tel" class="form-control" id="phone_mobile" name="phone_mobile"  placeholder="000-000-0000"> 
+                                                    <input id="mobilex" type="hidden" name="mobilex">
                                 
                                                 </div>
                                             </div>
@@ -567,7 +568,7 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="mdate">Date of Birth :</label>
-                                                    <input type="date" class="form-control" placeholder="mm/dd/yyyy" name="dob" value="{{old('dob')}}"> 
+                                                    <input type="date" class="form-control" placeholder="mm/dd/yyyy" name="dob" > 
 
                                                 </div>
                                             </div>
@@ -581,9 +582,9 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="invest_structure">Investment Structure :</label>
                                                     <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_structure[]" id="invest_structure">
-                                                        <option value="">Select</option>
+                                                        
                                                         @foreach($invest_types as $type)
-                                                        <option value="{{$type->id}}">{{$type->type}}</option>
+                                                        <option value="{{$type->id}}" selected="">{{$type->type}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -605,7 +606,7 @@ color: #797979;
                                                             @if($loop->iteration == 14)
                                                             <optgroup label="Southwest">
                                                             @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                                <option value="{{$irt->id}}" >{{$irt->type}}</option>
                                                             @if($loop->iteration == 17)
                                                             </optgroup>
                                                             @endif
@@ -646,12 +647,12 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
                                                     <select class="custom-select form-control " id="private_investment_number" name="private_investment_number">
-                                                        <option value="">Select</option>
-                                                        <option value="0" {{ old('private_investment_number') == 0 ? 'selected' : '' }}>1-2</option>
-                                                        <option value="1" {{ old('private_investment_number') == 1 ? 'selected' : '' }}>3-4</option>
-                                                        <option value="2" {{ old('private_investment_number') == 2 ? 'selected' : '' }}>5-7</option>
-                                                        <option value="3" {{ old('private_investment_number') == 3 ? 'selected' : '' }}>8-10</option>
-                                                        <option value="4" {{ old('private_investment_number') == 4 ? 'selected' : '' }}> >10 </option>
+                                                        <option selected="">Select</option>
+                                                        <option value="0">1-2</option>
+                                                        <option value="1">3-4</option>
+                                                        <option value="2">5-7</option>
+                                                        <option value="3">8-10</option>
+                                                        <option value="4"> >10 </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -659,12 +660,12 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
                                                     <select class="custom-select form-control " id="additional_capacity" name="additional_capacity">
-                                                        <option value="">Select</option>
-                                                        <option value="20" {{ old('additional_capacity') == 20 ? 'selected' : '' }}>20%</option>
-                                                        <option value="40" {{ old('additional_capacity') == 40 ? 'selected' : '' }}>40%</option>
-                                                        <option value="60" {{ old('additional_capacity') == 60 ? 'selected' : '' }}>60%</option>
-                                                        <option value="80" {{ old('additional_capacity') == 80 ? 'selected' : '' }}>80%</option>
-                                                        <option value="100" {{ old('additional_capacity') == 100 ? 'selected' : '' }}>100%</option>
+                                                        <option selected="">Select</option>
+                                                        <option value="20">20%</option>
+                                                        <option value="40">40%</option>
+                                                        <option value="60">60%</option>
+                                                        <option value="80">80%</option>
+                                                        <option value="100">100%</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -675,9 +676,9 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="average_investment_size">Typical Check Size :</label>
                                                     <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size">
-                                                        <option value="">Select</option>
+                                                        
                                                         @foreach($invest_size_types as $type)
-                                                        <option value="{{$type->id}}">{{$type->type}}</option>
+                                                        <option value="{{$type->id}}"  selected="">{{$type->type}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -686,9 +687,9 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="investment_stage">Investment Stage :</label>
                                                     <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage">
-                                                        <option value="">Select</option>
+                                                        
                                                         @foreach($invest_stage_types as $type)
-                                                        <option value="{{$type->id}}">{{$type->type}}</option>
+                                                        <option value="{{$type->id}}"  selected="">{{$type->type}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -700,9 +701,9 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="investment_sector">Investment Sector Focus :</label>
                                                     <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector">
-                                                        <option value="">Select</option>
+                                                        
                                                         @foreach($invest_sector_types as $isrt)
-                                                        <option value="{{$isrt->id}}">{{$isrt->type}}</option>
+                                                        <option value="{{$isrt->id}}"  selected="">{{$isrt->type}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -716,7 +717,7 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="professional_history_bio">Professional History/Bio : <span class="danger">*</span></label>
-                                                    <textarea name="professional_history_bio" id="professional_history_bio" rows="3" class="form-control required">{{old('professional_history_bio')}}</textarea>
+                                                    <textarea name="professional_history_bio" id="professional_history_bio" rows="3" class="form-control required"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -724,7 +725,7 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="family_office_investment_entity">About Family Office / Investment Entity : <span class="danger">*</span></label>
-                                                    <textarea name="family_office_investment_entity" id="family_office_investment_entity" rows="3" class="form-control required">{{old('family_office_investment_entity')}}</textarea>
+                                                    <textarea name="family_office_investment_entity" id="family_office_investment_entity" rows="3" class="form-control required"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -733,7 +734,7 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="area_family_investor_expertise">Area of Family/Investor Expertise : </label>
-                                                    <textarea name="area_family_investor_expertise" id="area_family_investor_expertise" rows="3" class="form-control">{{old('area_family_investor_expertise')}}</textarea>
+                                                    <textarea name="area_family_investor_expertise" id="area_family_investor_expertise" rows="3" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -742,7 +743,7 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="networth_aum">Approximate Networth/AUM : </label>
-                                                    <input type="text" class="form-control" id="networth_aum" name="networth_aum" value="{{old('networth_aum')}}" data-mask="$999,999,999" > 
+                                                    <input type="text" class="form-control" id="networth_aum" name="networth_aum" data-mask="$999,999,999" > 
                                                 </div>
                                             </div>
                                         </div>
@@ -752,7 +753,7 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="company_website">Company Website : </label>
                                                     
-                                                    <input type="text" class="form-control" id="company_website" name="company_website"  value="{{old('company_website')}}"> 
+                                                    <input type="text" class="form-control" id="company_website" name="company_website" > 
                                                     <p><span class="emsg hidden">Please Enter a Valid Name</span></p>
                                                     
                                                     
@@ -764,7 +765,7 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="linkedIn">LinkedIn : </label>
-                                                    <input type="text" class="form-control" id="linkedIn" name="linkedIn" value="{{old('linkedIn')}}"> 
+                                                    <input type="text" class="form-control" id="linkedIn" name="linkedIn"> 
                                                     <p><span class="emsg1 hidden">Please Enter a Valid Name</span></p>
                                                 </div>
                                             </div>
@@ -774,7 +775,7 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="corporate_board">Corporate Boards : </label>
-                                                    <input type="text" class="form-control" id="corporate_board" name="corporate_board" value="{{old('corporate_board')}}"> 
+                                                    <input type="text" class="form-control" id="corporate_board" name="corporate_board"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -783,7 +784,7 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="civic_non_profit_board">Civic/Non-Profit Boards : </label>
-                                                    <input type="text" class="form-control" id="civic_non_profit_board" name="civic_non_profit_board" value="{{old('civic_non_profit_board')}}"> 
+                                                    <input type="text" class="form-control" id="civic_non_profit_board" name="civic_non_profit_board"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -803,7 +804,7 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="desc_notable_past_investment">Description of Notable Past/Current Investments (If applicable) : </label>
-                                                    <textarea name="desc_notable_past_investment" id="desc_notable_past_investment" rows="3" class="form-control">{{old('desc_notable_past_investment')}}</textarea>
+                                                    <textarea name="desc_notable_past_investment" id="desc_notable_past_investment" rows="3" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -877,10 +878,10 @@ color: #797979;
                                                     </label>
                                                     <select class="custom-select form-control" id="pref_contact_form" name="pref_contact_form">
                                                         <option value="" selected>Select</option>
-                                                        <option value="0" {{old('pref_contact_form') == 0 ? 'Selected':''}}>Office</option>
-                                                        <option value="1" {{old('pref_contact_form') == 1 ? 'Selected':''}}>Mobile</option>
-                                                        <option value="2" {{old('pref_contact_form') == 2 ? 'Selected':''}}>Email</option>
-                                                        <option value="3" {{old('pref_contact_form') == 3 ? 'Selected':''}}>Administrative Assistant / Associate</option>
+                                                        <option value="0">Office</option>
+                                                        <option value="1">Mobile</option>
+                                                        <option value="2">Email</option>
+                                                        <option value="3">Administrative Assistant / Associate</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -942,7 +943,7 @@ color: #797979;
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="explain_plan_use_network_no">If no, Please explain. <span class="danger">*</span></label>
-                                                    <textarea name="explain_plan_use_network_no" id="explain_plan_use_network_no" rows="3" class="form-control ">{{old('explain_plan_use_network_no')}}</textarea>
+                                                    <textarea name="explain_plan_use_network_no" id="explain_plan_use_network_no" rows="3" class="form-control "></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -1048,7 +1049,7 @@ The information on the Site is intended to enable investors to understand the na
 
     <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
 
-
+    <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/mask.js')}}"></script>
 
@@ -1126,6 +1127,10 @@ The information on the Site is intended to enable investors to understand the na
                 }
             });
         });
+
+        // $("#invest_region, #invest_structure, #average_investment_size, #investment_stage, #investment_sector").multiselect({
+        //     addSearchBox:false
+        // });
     </script>
 
 

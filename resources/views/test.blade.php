@@ -29,6 +29,7 @@
     <link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
 
     <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/css/jquery.multiselect.css')}}" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
 
@@ -58,61 +59,169 @@
     }
 </style>
 @php
-$invest_region_types = App\Model\MemberInvestmentRegionType::all();
+    $invest_types = App\Model\InvestmentStructureType::all();
+    $invest_size_types = App\Model\MemberInvestmentSizeType::all();
+    $invest_stage_types = App\Model\MemberInvestmentStageType::all();
+    $invest_sector_types = App\Model\MemberInvestmentSectorType::all();
+    $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 @endphp
 <body>
-<form method="post" class="validation-wizard wizard-circle">
+<div id="main-wrapper">
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper" id="page-wrapper" style="margin-left: 0px !important;">
+
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Validation wizard -->
+                <div class="row" id="validation">
+                    <div class="col-12">
+                        <div class="card wizard-content apply-box">
+                            <div class="card-body">
+                                <h4 class="card-title">Apply for Membership</h4>
+
+                                <form action="{{url('/applymembership')}}" class="validation-wizard wizard-circle" id="apply-form" method="POST" enctype="multipart/form-data">
+                                    <h6>Step</h6>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="invest_structure">Investment Structure :</label>
+                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_structure[]" id="invest_structure">
+                                                        
+                                                        @foreach($invest_types as $type)
+                                                        <option value="{{$type->id}}">{{$type->type}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="invest_region">Investment Regions :</label>
+                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
+                                                        @foreach($invest_region_types as $irt)
+                                                            @if($irt->id < 14)
+                                                            @if($loop->iteration == 1)
+                                                            <optgroup label="Southeast">
+                                                            @endif
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 13)
+                                                            </optgroup>
+                                                            @endif
+                                                            @elseif($irt->id > 13 && $irt->id < 18)
+                                                            @if($loop->iteration == 14)
+                                                            <optgroup label="Southwest">
+                                                            @endif
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 17)
+                                                            </optgroup>
+                                                            @endif
+                                                            @elseif($irt->id > 17 && $irt->id < 30)
+                                                            @if($loop->iteration == 18)
+                                                            <optgroup label="Midwest">
+                                                            @endif
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 29)
+                                                            </optgroup>
+                                                            @endif
+                                                            @elseif($irt->id > 29 && $irt->id < 41)
+                                                            @if($loop->iteration == 30)
+                                                            <optgroup label="West">
+                                                            @endif
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 40)
+                                                            </optgroup>
+                                                            @endif
+                                                            @else
+                                                            @if($loop->iteration == 41)
+                                                            <optgroup label="Northeast">
+                                                            @endif
+                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                            @if($loop->iteration == 50)
+                                                            </optgroup>
+                                                            @endif
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
+                                                    <select class="custom-select form-control " id="private_investment_number" name="private_investment_number">
+                                                        <option value="" selected="">Select</option>
+                                                        <option value="0">1-2</option>
+                                                        <option value="1">3-4</option>
+                                                        <option value="2">5-7</option>
+                                                        <option value="3">8-10</option>
+                                                        <option value="4"> >10 </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
+                                                    <select class="custom-select form-control " id="additional_capacity" name="additional_capacity">
+                                                        <option value="" selected="">Select</option>
+                                                        <option value="20">20%</option>
+                                                        <option value="40">40%</option>
+                                                        <option value="60">60%</option>
+                                                        <option value="80">80%</option>
+                                                        <option value="100">100%</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="average_investment_size">Typical Check Size :</label>
+                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size">
+                                                        
+                                                        @foreach($invest_size_types as $type)
+                                                        <option value="{{$type->id}}">{{$type->type}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="investment_stage">Investment Stage :</label>
+                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage">
+                                                        
+                                                        @foreach($invest_stage_types as $type)
+                                                        <option value="{{$type->id}}">{{$type->type}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="investment_sector">Investment Sector Focus :</label>
+                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector">
+                                                        
+                                                        @foreach($invest_sector_types as $isrt)
+                                                        <option value="{{$isrt->id}}">{{$isrt->type}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
  <div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="invest_region">Investment Regions :</label>
-            <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
-                @foreach($invest_region_types as $irt)
-                    @if($irt->id < 14)
-                    @if($loop->iteration == 1)
-                    <optgroup label="Southeast">
-                    @endif
-                        <option value="{{$irt->id}}">{{$irt->type}}</option>
-                    @if($loop->iteration == 13)
-                    </optgroup>
-                    @endif
-                    @elseif($irt->id > 13 && $irt->id < 18)
-                    @if($loop->iteration == 14)
-                    <optgroup label="Southwest">
-                    @endif
-                        <option value="{{$irt->id}}">{{$irt->type}}</option>
-                    @if($loop->iteration == 17)
-                    </optgroup>
-                    @endif
-                    @elseif($irt->id > 17 && $irt->id < 30)
-                    @if($loop->iteration == 18)
-                    <optgroup label="Midwest">
-                    @endif
-                        <option value="{{$irt->id}}">{{$irt->type}}</option>
-                    @if($loop->iteration == 29)
-                    </optgroup>
-                    @endif
-                    @elseif($irt->id > 29 && $irt->id < 41)
-                    @if($loop->iteration == 30)
-                    <optgroup label="West">
-                    @endif
-                        <option value="{{$irt->id}}">{{$irt->type}}</option>
-                    @if($loop->iteration == 40)
-                    </optgroup>
-                    @endif
-                    @else
-                    @if($loop->iteration == 41)
-                    <optgroup label="Northeast">
-                    @endif
-                        <option value="{{$irt->id}}">{{$irt->type}}</option>
-                    @if($loop->iteration == 50)
-                    </optgroup>
-                    @endif
-                    @endif
-                @endforeach
-            </select>
-        </div>
-    </div>
     <div class="col-md-6">
         <div class="form-group">
             <input type="text" placeholder="" data-mask="$999,999,999.99" class="form-control" name="currenty">
@@ -158,6 +267,7 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 </div>
 <button type="submit">submit</button>
 </form>
+</div></div></div></div></div></div></div>
     <script src="{{asset('assets/dashboard/plugins/jquery/jquery.min.js')}}"></script>
     <!-- <script src="{{asset('assets/dashboard/plugins/jqueryui/jquery-ui.min.js')}}"></script> -->
     <!-- Bootstrap tether Core JavaScript -->
@@ -180,15 +290,17 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 
     <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
 
-
+    <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/mask.js')}}"></script>
+
     <!-- ============================================================== -->
     <!-- Wizard -->
     <script src="{{asset('assets/dashboard/plugins/wizard/jquery.steps.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/plugins/wizard/jquery.validate.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/plugins/wizard/steps.js')}}"></script>
     <!-- ============================================================== -->
+    <!-- <script src="{{asset('assets/dashboard/member/js/validation.js')}}"></script> -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{asset('assets/dashboard/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
@@ -204,7 +316,7 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 
 
     <script src="{{asset('assets/dashboard/admin/js/intlTelInput.js')}}"></script>
-    <script src="{{asset('assets/dashboard/admin/js/self-custom.js')}}"></script> 
+    <script src="{{asset('assets/dashboard/admin/js/self-custom.js')}}"></script>  
 
     <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
     <script type="text/javascript">
@@ -227,19 +339,22 @@ $invest_region_types = App\Model\MemberInvestmentRegionType::all();
     </script>
 
     <script type="text/javascript">
+        $("#invest_region, #invest_structure, #private_investment_number, #additional_capacity, #average_investment_size, #investment_stage, #investment_sector").multiselect({
+            addSearchBox:false
+        });
     $(document).ready(function(){
         var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
         $('#company_website').on('keypress keydown keyup',function(){
-                 if (!$(this).val().match($regexname)) {
-                  // there is a mismatch, hence show the error message
-                     $('.emsg').removeClass('hidden');
-                     $('.emsg').show();
-                 }
-               else{
-                    // else, do not display message
-                    $('.emsg').addClass('hidden');
-                   }
-             });
+            if (!$(this).val().match($regexname)) {
+              // there is a mismatch, hence show the error message
+                $('.emsg').removeClass('hidden');
+                $('.emsg').show();
+            }
+            else{
+                // else, do not display message
+                $('.emsg').addClass('hidden');
+            }
+        });
     });
     </script>
 </body>
