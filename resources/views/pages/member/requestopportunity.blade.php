@@ -193,7 +193,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-target"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing" data-mask="$999,999,999">
+                                <input type="text" class="form-control mask-money" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing">
                             </div>
                         </div>
                         <div class="form-group">
@@ -204,7 +204,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise" data-mask="$999,999,999">
+                                <input type="text" class="form-control mask-money" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise">
                             </div>
                         </div>
                         <div class="form-group">
@@ -215,7 +215,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="valuation" name="valuation" placeholder="Enter Available capacity for FIVE Network members" data-mask="$999,999,999">
+                                <input type="text" class="form-control mask-money" id="valuation" name="valuation" placeholder="Enter Available capacity for FIVE Network members">
                             </div>
                         </div>
 
@@ -230,6 +230,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
 @endsection
 
 @section('member-js')
+
     @if(Session::get('msg'))
     <script type="text/javascript">
       swal({   
@@ -248,5 +249,11 @@ $invest_types = App\Model\InvestmentStructureType::all();
     $(document).on("click","#cancel-btn",function(){
         document.getElementById("request-form").reset();
     });
+
+    $('.mask-money').mask('000,000,000$', {reverse: true});
+    // $('#valuation').mask('000,000,000$', {reverse: true});
+    // $('#raising').mask('000,000,000$', {reverse: true});
+    
+    
 </script>
 @endsection 
