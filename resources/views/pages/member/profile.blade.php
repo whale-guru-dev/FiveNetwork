@@ -564,7 +564,7 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                         </div>
                     </div>
 
-                    <div class="tab-pane active" id="logins" role="tabpanel">
+                    <div class="tab-pane" id="logins" role="tabpanel">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list" data-page-size="10">
@@ -630,6 +630,18 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
 <!-- <script type="text/javascript" src="{{asset('assets/dashboard/member/js/validation.js')}}"></script> -->
 <script type="text/javascript">
     $('.dropify').dropify();
+    var addrow = $('#demo-foo-addrow');
+        addrow.footable().on('click', '.delete-row-btn', function() {
+
+        //get the footable object
+        var footable = addrow.data('footable');
+
+        //get the row we are wanting to delete
+        var row = $(this).parents('tr:first');
+
+        //delete the row
+        footable.removeRow(row);
+    });
 </script>
 
 
