@@ -45,6 +45,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Family Name</th>
+                                    <th>Family Email</th>
                                     <th>Matched Score</th>
                                     <th>Structure Match</th>
                                     <th>State Match</th>
@@ -59,6 +60,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Family Name</th>
+                                    <th>Family Email</th>
                                     <th>Matched Score</th>
                                     <th>Structure Match</th>
                                     <th>State Match</th>
@@ -75,6 +77,7 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$each->matchedMember->fName.' '.$each->matchedMember->lName}}</td>
+                                    <td>{{$each->matchedMember->email}}</td>
                                     <td>
                                         
                                         @if($each->score == 100)
