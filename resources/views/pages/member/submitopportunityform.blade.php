@@ -876,7 +876,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="percent_cur_revenue">What percent of current revenue is contractually recurring (vs. non-recurring)?</label>
-                                    <input type="text" name="percent_cur_revenue mask-percent" class="form-control required" id="percent_cur_revenue" required>
+                                    <input type="text" name="percent_cur_revenue " class="form-control required mask-percent" id="percent_cur_revenue" required>
                                 </div>
                             </div>
 
@@ -1174,7 +1174,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="debt_amount">Amount</label>
-                                            <input type="text" name="debt_amount" class="form-control" id="debt_amount" data-mask="$999,999,999">
+                                            <input type="text" name="debt_amount" class="form-control mask-money" id="debt_amount">
                                         </div>
                                     </div>
                                 </div>
