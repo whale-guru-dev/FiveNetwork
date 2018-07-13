@@ -47,6 +47,7 @@ Route::group(['prefix'=>'member','namespace'=>'member'],function(){
 
 	Route::get('profile','HomeController@profileview')->name('member.profile');
 	Route::post('edit-profile','EditProfileController@editapplicantinfo')->name('member.edit-profile');
+	Route::post('edit-investment','EditProfileController@editinvestmentobjective')->name('member.edit-investment');
 
 	Route::get('refer-member','ReferController@refermemberview')->name('member.refer-member-view');
 	Route::post('refer-member','ReferController@refermember')->name('member.refer-member');

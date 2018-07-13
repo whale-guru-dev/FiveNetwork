@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use App\Model\MemberInvestmentStructure;
+use App\Model\MemberInvestmentSize;
+use App\Model\MemberInvestmentStage;
+use App\Model\MemberInvestmentRegion;
+use App\Model\MemberInvestmentSector;
+use App\Model\MemberOpportunityForm;
+use App\Model\MemberOpportunityMatch;
+use App\User;
 
 class EditProfileController extends Controller
 {
@@ -74,6 +82,107 @@ class EditProfileController extends Controller
     	return redirect()->route('member.profile')->with(['msg'=>$msg]);
     }
 
+    public function editinvestmentobjective(Request $request)
+    {
+        $user = Auth::user();
+
+        if(isset($request['private_investment_number'])){
+            $user->update([
+                'private_investment_number' => $request['private_investment_number']
+            ]);
+        }
+
+        if(isset($request['additional_capacity'])){
+            $user->update([
+                'additional_capacity' => $request['additional_capacity']
+            ]);
+        }
+
+        
+
+        if(isset($request['invest_structure'])){
+            $existing_record = MemberInvestmentStructure::where('member_id',$user->id)->get();
+
+            if($existing_record->count()>0)
+                foreach($existing_record as $e_r){
+                    $e_r->delete();
+                }
+            foreach ($request['invest_structure'] as $is) {
+                $record_is = MemberInvestmentStructure::create([
+                    'member_id' => $user->id,
+                    'type_id' => $is
+                ]);
+            }
+        }
+
+        if(isset($request['invest_region'])){
+            $existing_record = MemberInvestmentRegion::where('member_id',$user->id)->get();
+            if($existing_record->count()>0)
+                foreach($existing_record as $e_r){
+                    $e_r->delete();
+                }
+            foreach ($request['invest_region'] as $ir) {
+                $record_is = MemberInvestmentRegion::create([
+                    'member_id' => $user->id,
+                    'type_id' => $ir
+                ]);
+            }
+        }
+            
+
+        if(isset($request['average_investment_size'])){
+            $existing_record = MemberInvestmentSize::where('member_id',$user->id)->get();
+            if($existing_record->count()>0)
+                foreach($existing_record as $e_r){
+                    $e_r->delete();
+                }
+            foreach ($request['average_investment_size'] as $ais) {
+                $record_is = MemberInvestmentSize::create([
+                    'member_id' => $user->id,
+                    'type_id' => $ais
+                ]);
+            }
+        }
+            
+
+        if(isset($request['investment_stage'])){
+            $existing_record = MemberInvestmentStage::where('member_id',$user->id)->get();
+            if($existing_record->count()>0)
+                foreach($existing_record as $e_r){
+                    $e_r->delete();
+                }
+
+            foreach ($request['investment_stage'] as $ist) {
+                $record_is = MemberInvestmentStage::create([
+                    'member_id' => $user->id,
+                    'type_id' => $ist
+                ]);
+            }
+        }
+
+        if(isset($request['investment_sector'])){
+            $existing_record = MemberInvestmentSector::where('member_id',$user->id)->get();
+            if($existing_record->count()>0)
+                foreach($existing_record as $e_r){
+                    $e_r->delete();
+                }
+                
+            foreach ($request['investment_sector'] as $isr) {
+                $record_is = MemberInvestmentSector::create([
+                    'member_id' => $user->id,
+                    'type_id' => $isr
+                ]);
+            }
+        }
+
+        $mofs = MemberOpportunityForm::all();
+        foreach($mofs as $mof)
+            $this->checkmatch($mof,$user);
+
+        $msg = ['Success','Successfully Updated Profile!','success'];
+        return redirect()->route('member.profile')->with(['msg'=>$msg]);
+    }
+
     public function generateRandomString($length = 6) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -82,5 +191,95 @@ class EditProfileController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function checkmatch(MemberOpportunityForm $mof, User $new_user)
+    {
+        if($mof){
+            $score = 0;
+            $current_capital_raise_structure = $mof->current_capital_raise_structure;//Investment Structure
+            $investment_stage = $mof->investment_stage;//Investment Stage
+            $state = $mof->state;//Investment Region
+            $sector = $mof->sector;// Investment Sector Focus
+            $investment_size = $mof->investment_size;//Investment Size
+
+            $score_structure = 0;
+            $score_stage = 0;
+            $score_state = 0;
+            $score_sector = 0;
+            $score_size = 0;
+
+            if($new_user->investmentstructure){
+                foreach($new_user->investmentstructure as $is){
+                    if($current_capital_raise_structure == $is->type_id)
+                        $score_structure = 1;
+                }
+            }
+
+            if($new_user->investmentstage){
+                foreach($new_user->investmentstage as $is){
+                    if($investment_stage == $is->type_id)
+                        $score_stage = 1;
+                }
+            }
+
+            if($new_user->investmentregion){
+                foreach($new_user->investmentregion as $is){
+                    if($state == $is->type_id)
+                        $score_state = 1;
+                }
+            }
+
+            if($new_user->investmentsector){
+                foreach($new_user->investmentsector as $is){
+                    if($sector == $is->type_id)
+                        $score_sector = 1;
+                }
+            }
+
+
+            if($new_user->investmentsize){
+                foreach($new_user->investmentsize as $is){
+                    if($is->type_id == 1 && $investment_size < 5 * pow(10,5)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 2 && $investment_size >= 5 * pow(10,5) && $investment_size <= pow(10,6)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 3 && $investment_size >= pow(10,6) && $investment_size <= 5 * pow(10,6)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 4 && $investment_size >= 5 * pow(10,6) && $investment_size <= pow(10,7)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 5 && $investment_size >= pow(10,7)){
+                        $score_size = 1;
+                    }
+                }
+            }
+
+            $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
+            $match_member_oppor = MemberOpportunityMatch::where('opportunity_id',$mof->id)->where('matched_member_id',$new_user->id)->first();
+            if($match_member_oppor){
+                $match_member_oppor->update([
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }else{
+                $match_member_oppor = MemberOpportunityMatch::create([
+                    'opportunity_id' => $mof->id,
+                    'matched_member_id' => $new_user->id,
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }
+            
+
+        }
+        
     }
 }

@@ -173,7 +173,6 @@ class HomeController extends Controller
     {
         if($mof){
             $score = 0;
-            $member = User::where('id', $mof->member_id)->first();
             $current_capital_raise_structure = $mof->current_capital_raise_structure;//Investment Structure
             $investment_stage = $mof->investment_stage;//Investment Stage
             $state = $mof->state;//Investment Region

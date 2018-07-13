@@ -191,7 +191,7 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="aware_method"> How did you hear about Family InVestment Exchange?
+                                                    <label for="aware_method"> How did you hear about Family Investment Exchange?
                                                         <span class="danger">*</span> 
                                                     </label>
                                                     <select class="custom-select form-control required" id="aware_method" name="aware_method">

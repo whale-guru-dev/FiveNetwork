@@ -57,7 +57,7 @@
                                     <th>Email</th>
                                     <th>Region of focus</th>
                                     <th>Sector of Focus</th>
-                                    <th>How much capacity is left this round</th>
+                                    <th>Typical Check Size</th>
                                     <th>Area of Family/Investor Expertise</th>
                                     <th>Net Worth</th>
                                     <th>Applied Time</th>

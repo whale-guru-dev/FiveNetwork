@@ -1,11 +1,48 @@
 @extends('layouts.member')
 @section('member-css')
+<link href="{{asset('assets/dashboard/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+<link href="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+
+<link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/css/jquery.multiselect.css')}}" rel="stylesheet" type="text/css" />
+
 <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
+
 @endsection
 
 
 @section('member-content')
+@php
+    $invest_types = App\Model\InvestmentStructureType::all();
+    $invest_size_types = App\Model\MemberInvestmentSizeType::all();
+    $invest_stage_types = App\Model\MemberInvestmentStageType::all();
+    $invest_sector_types = App\Model\MemberInvestmentSectorType::all();
+    $invest_region_types = App\Model\MemberInvestmentRegionType::all();
 
+    $user_struc = [];$user_size = [];$user_stage = [];$user_sector = [];$user_region = [];
+    foreach(Auth::user()->investmentstructure as $uis)
+    {
+        $user_struc[] = $uis->type_id;
+    }
+    foreach(Auth::user()->investmentstage as $uist)
+    {
+        $user_stage[] = $uist->type_id;
+    }
+    foreach(Auth::user()->investmentsize as $uisz)
+    {
+        $user_size[] = $uisz->type_id;
+    }
+    foreach(Auth::user()->investmentregion as $uir)
+    {
+        $user_region[] = $uir->type_id;
+    }
+    foreach(Auth::user()->investmentsector as $uistr)
+    {
+        $user_sector[] = $uistr->type_id;
+    }
+@endphp
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
@@ -88,7 +125,8 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs profile-tab" role="tablist">
                     <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Profile</a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Applicant Information</a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#objectives" role="tab">Investment Objectives</a> </li>
                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#logins" role="tab">Login Info</a> </li>
                 </ul>
                 <!-- Tab panes -->
@@ -564,6 +602,149 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                         </div>
                     </div>
 
+                    <div class="tab-pane" id="objectives" role="tabpanel">
+                        <div class="card-body">
+                            <form class="form-horizontal form-material" action="{{route('member.edit-investment')}}" method="POST">
+                                @csrf
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="invest_structure">Investment Structure :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_structure[]" id="invest_structure">
+                                                    
+                                                    @foreach($invest_types as $type)
+                                                    <option value="{{$type->id}}" @php if(in_array($type->id, $user_struc)) echo "Selected" @endphp>{{$type->type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="invest_region">Investment Regions :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
+                                                    @foreach($invest_region_types as $irt)
+                                                        @if($irt->id < 14)
+                                                        @if($loop->iteration == 1)
+                                                        <optgroup label="Southeast">
+                                                        @endif
+                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
+                                                        @if($loop->iteration == 13)
+                                                        </optgroup>
+                                                        @endif
+                                                        @elseif($irt->id > 13 && $irt->id < 18)
+                                                        @if($loop->iteration == 14)
+                                                        <optgroup label="Southwest">
+                                                        @endif
+                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
+                                                        @if($loop->iteration == 17)
+                                                        </optgroup>
+                                                        @endif
+                                                        @elseif($irt->id > 17 && $irt->id < 30)
+                                                        @if($loop->iteration == 18)
+                                                        <optgroup label="Midwest">
+                                                        @endif
+                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
+                                                        @if($loop->iteration == 29)
+                                                        </optgroup>
+                                                        @endif
+                                                        @elseif($irt->id > 29 && $irt->id < 41)
+                                                        @if($loop->iteration == 30)
+                                                        <optgroup label="West">
+                                                        @endif
+                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
+                                                        @if($loop->iteration == 40)
+                                                        </optgroup>
+                                                        @endif
+                                                        @else
+                                                        @if($loop->iteration == 41)
+                                                        <optgroup label="Northeast">
+                                                        @endif
+                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
+                                                        @if($loop->iteration == 50)
+                                                        </optgroup>
+                                                        @endif
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
+                                                <select class="custom-select form-control " id="private_investment_number" name="private_investment_number">
+                                                    
+                                                    <option value="0" @php if(Auth::user()->private_investment_number == "0") echo "Selected" @endphp>1-2</option>
+                                                    <option value="1" @php if(Auth::user()->private_investment_number == "1") echo "Selected" @endphp>3-4</option>
+                                                    <option value="2" @php if(Auth::user()->private_investment_number == "2") echo "Selected" @endphp>5-7</option>
+                                                    <option value="3" @php if(Auth::user()->private_investment_number == "3") echo "Selected" @endphp>8-10</option>
+                                                    <option value="4" @php if(Auth::user()->private_investment_number == "4") echo "Selected" @endphp> >10 </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
+                                                <select class="custom-select form-control " id="additional_capacity" name="additional_capacity">
+                                                    
+                                                    <option value="20" @php if(Auth::user()->additional_capacity == "20") echo "Selected" @endphp>20%</option>
+                                                    <option value="40" @php if(Auth::user()->additional_capacity == "40") echo "Selected" @endphp>40%</option>
+                                                    <option value="60" @php if(Auth::user()->additional_capacity == "60") echo "Selected" @endphp>60%</option>
+                                                    <option value="80" @php if(Auth::user()->additional_capacity == "80") echo "Selected" @endphp>80%</option>
+                                                    <option value="100" @php if(Auth::user()->additional_capacity == "100") echo "Selected" @endphp>100%</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="average_investment_size">Typical Check Size :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size">
+                                                    
+                                                    @foreach($invest_size_types as $type)
+                                                    <option value="{{$type->id}}"  @php if(in_array($type->id, $user_size)) echo "Selected"; @endphp>{{$type->type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="investment_stage">Investment Stage :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage">
+                                                    
+                                                    @foreach($invest_stage_types as $type)
+                                                    <option value="{{$type->id}}"  @php if(in_array($type->id, $user_stage)) echo "Selected"; @endphp>{{$type->type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="investment_sector">Investment Sector Focus :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector">
+                                                    
+                                                    @foreach($invest_sector_types as $isrt)
+                                                    <option value="{{$isrt->id}}"  @php if(in_array($isrt->id, $user_sector)) echo "Selected"; @endphp>{{$isrt->type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
                     <div class="tab-pane" id="logins" role="tabpanel">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -625,11 +806,25 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
 @endsection
 
 @section('member-js')
-<script src="{{asset('assets/dashboard/plugins/dropify/dist/js/dropify.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script>
+
+<!-- ============================================================== -->
+<!-- Wizard -->
+<script src="{{asset('assets/dashboard/plugins/wizard/jquery.steps.min.js')}}"></script>
 <script src="{{asset('assets/dashboard/plugins/wizard/jquery.validate.min.js')}}"></script>
-<!-- <script type="text/javascript" src="{{asset('assets/dashboard/member/js/validation.js')}}"></script> -->
+<script src="{{asset('assets/dashboard/plugins/wizard/steps.js')}}"></script>
+
+<script src="{{asset('assets/dashboard/plugins/dropify/dist/js/dropify.min.js')}}"></script>
+
 <script type="text/javascript">
     $('.dropify').dropify();
+    $(".select2").select2();
     var addrow = $('#demo-foo-addrow');
         addrow.footable().on('click', '.delete-row-btn', function() {
 
