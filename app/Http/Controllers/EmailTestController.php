@@ -35,4 +35,10 @@ class EmailTestController extends Controller
     {
         return view('test');
     }
+
+    public function testpost(Request $request)
+    {
+
+        echo number_format($request['mask'], 0, '.',',').' $';
+    }
 }

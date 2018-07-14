@@ -520,7 +520,8 @@
                                 <div class="form-group">
                                     <label for="investment_size"> How much capacity is left this round <span class="danger">*</span></label>
                                     
-                                    <input type="text" class="form-control required mask-money" name="investment_size" id="investment_size" required>
+                                    <input type="text" class="form-control required mask-money" name="investment_size_cur" id="investment_size_cur" required>
+                                    <input type="hidden" name="investment_size" id="investment_size">
                                     
                                 </div>
                             </div>
@@ -1730,6 +1731,12 @@
 
     $(document).on("click","#cancel-btn",function(){
         document.getElementById("request-form").reset();
+    });
+
+    $("submit-form").submit(function(){
+        var investsize = $("#investment_size_cur").val();
+        var number = Number(investsize.replace(/[^0-9\.-]+/g,""));
+        $("#investment_size").val(number);
     });
 
     

@@ -69,205 +69,176 @@
 <div id="main-wrapper">
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper" id="page-wrapper" style="margin-left: 0px !important;">
+    <div class="page-wrapper" id="page-wrapper" style="margin-left: 0px !important;">
 
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container">
             <!-- ============================================================== -->
-            <!-- Container fluid  -->
+            <!-- Start Page Content -->
             <!-- ============================================================== -->
-            <div class="container">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- Validation wizard -->
-                <div class="row" id="validation">
-                    <div class="col-12">
-                        <div class="card wizard-content apply-box">
-                            <div class="card-body">
-                                <h4 class="card-title">Apply for Membership</h4>
+            <!-- Validation wizard -->
+            <div class="row" id="validation">
+                <div class="col-12">
+                    <div class="card wizard-content apply-box">
+                        <div class="card-body">
+                            <h4 class="card-title">Apply for Membership</h4>
 
-                                <form action="{{url('/applymembership')}}" class="validation-wizard wizard-circle" id="apply-form" method="POST" enctype="multipart/form-data">
-                                    <h6>Step</h6>
-                                    <section>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="invest_structure">Investment Structure :</label>
-                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_structure[]" id="invest_structure">
-                                                        
-                                                        @foreach($invest_types as $type)
-                                                        <option value="{{$type->id}}">{{$type->type}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="invest_region">Investment Regions :</label>
-                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
-                                                        @foreach($invest_region_types as $irt)
-                                                            @if($irt->id < 14)
-                                                            @if($loop->iteration == 1)
-                                                            <optgroup label="Southeast">
-                                                            @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 13)
-                                                            </optgroup>
-                                                            @endif
-                                                            @elseif($irt->id > 13 && $irt->id < 18)
-                                                            @if($loop->iteration == 14)
-                                                            <optgroup label="Southwest">
-                                                            @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 17)
-                                                            </optgroup>
-                                                            @endif
-                                                            @elseif($irt->id > 17 && $irt->id < 30)
-                                                            @if($loop->iteration == 18)
-                                                            <optgroup label="Midwest">
-                                                            @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 29)
-                                                            </optgroup>
-                                                            @endif
-                                                            @elseif($irt->id > 29 && $irt->id < 41)
-                                                            @if($loop->iteration == 30)
-                                                            <optgroup label="West">
-                                                            @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 40)
-                                                            </optgroup>
-                                                            @endif
-                                                            @else
-                                                            @if($loop->iteration == 41)
-                                                            <optgroup label="Northeast">
-                                                            @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 50)
-                                                            </optgroup>
-                                                            @endif
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-
-                                                </div>
+                            <form action="{{url('/test')}}" class="validation-wizard wizard-circle" id="apply-form" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <h6>Step</h6>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="invest_structure">Investment Structure :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_structure[]" id="invest_structure">
+                                                    
+                                                    @foreach($invest_types as $type)
+                                                    <option value="{{$type->id}}">{{$type->type}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="invest_region">Investment Regions :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
+                                                    @foreach($invest_region_types as $irt)
+                                                        @if($irt->id < 14)
+                                                        @if($loop->iteration == 1)
+                                                        <optgroup label="Southeast">
+                                                        @endif
+                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                        @if($loop->iteration == 13)
+                                                        </optgroup>
+                                                        @endif
+                                                        @elseif($irt->id > 13 && $irt->id < 18)
+                                                        @if($loop->iteration == 14)
+                                                        <optgroup label="Southwest">
+                                                        @endif
+                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                        @if($loop->iteration == 17)
+                                                        </optgroup>
+                                                        @endif
+                                                        @elseif($irt->id > 17 && $irt->id < 30)
+                                                        @if($loop->iteration == 18)
+                                                        <optgroup label="Midwest">
+                                                        @endif
+                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                        @if($loop->iteration == 29)
+                                                        </optgroup>
+                                                        @endif
+                                                        @elseif($irt->id > 29 && $irt->id < 41)
+                                                        @if($loop->iteration == 30)
+                                                        <optgroup label="West">
+                                                        @endif
+                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                        @if($loop->iteration == 40)
+                                                        </optgroup>
+                                                        @endif
+                                                        @else
+                                                        @if($loop->iteration == 41)
+                                                        <optgroup label="Northeast">
+                                                        @endif
+                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                        @if($loop->iteration == 50)
+                                                        </optgroup>
+                                                        @endif
+                                                        @endif
+                                                    @endforeach
+                                                </select>
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
-                                                    <select class="custom-select form-control " id="private_investment_number" name="private_investment_number">
-                                                        <option value="" selected="">Select</option>
-                                                        <option value="0">1-2</option>
-                                                        <option value="1">3-4</option>
-                                                        <option value="2">5-7</option>
-                                                        <option value="3">8-10</option>
-                                                        <option value="4"> >10 </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
-                                                    <select class="custom-select form-control " id="additional_capacity" name="additional_capacity">
-                                                        <option value="" selected="">Select</option>
-                                                        <option value="20">20%</option>
-                                                        <option value="40">40%</option>
-                                                        <option value="60">60%</option>
-                                                        <option value="80">80%</option>
-                                                        <option value="100">100%</option>
-                                                    </select>
-                                                </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="average_investment_size">Typical Check Size :</label>
-                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size">
-                                                        
-                                                        @foreach($invest_size_types as $type)
-                                                        <option value="{{$type->id}}">{{$type->type}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="investment_stage">Investment Stage :</label>
-                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage">
-                                                        
-                                                        @foreach($invest_stage_types as $type)
-                                                        <option value="{{$type->id}}">{{$type->type}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
+                                                <select class="custom-select form-control " id="private_investment_number" name="private_investment_number">
+                                                    <option value="" selected="">Select</option>
+                                                    <option value="0">1-2</option>
+                                                    <option value="1">3-4</option>
+                                                    <option value="2">5-7</option>
+                                                    <option value="3">8-10</option>
+                                                    <option value="4"> >10 </option>
+                                                </select>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="investment_sector">Investment Sector Focus :</label>
-                                                    <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector">
-                                                        
-                                                        @foreach($invest_sector_types as $isrt)
-                                                        <option value="{{$isrt->id}}">{{$isrt->type}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
+                                                <select class="custom-select form-control " id="additional_capacity" name="additional_capacity">
+                                                    <option value="" selected="">Select</option>
+                                                    <option value="20">20%</option>
+                                                    <option value="40">40%</option>
+                                                    <option value="60">60%</option>
+                                                    <option value="80">80%</option>
+                                                    <option value="100">100%</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    </section>
- <div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <input type="text" placeholder="" data-mask="$999,999,999.99" class="form-control" name="currenty">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="average_investment_size">Typical Check Size :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size">
+                                                    
+                                                    @foreach($invest_size_types as $type)
+                                                    <option value="{{$type->id}}">{{$type->type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="investment_stage">Investment Stage :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage">
+                                                    
+                                                    @foreach($invest_stage_types as $type)
+                                                    <option value="{{$type->id}}">{{$type->type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="investment_sector">Investment Sector Focus :</label>
+                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector">
+                                                    
+                                                    @foreach($invest_sector_types as $isrt)
+                                                    <option value="{{$isrt->id}}">{{$isrt->type}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label>Mask Test</label>
+                                            <input type="text" name="mask" class="form-control mask-money" id="mask">
+                                        </div>
+                                    </div>
+                                </section>
+                                
+                                <button type="submit">submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="email"> Email Address : <span class="danger">*</span> </label>
-            <input type="email" class="form-control required" id="email" name="email" readonly=""> </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="conf_email">Re-Enter Email : <span class="danger">*</span> </label>
-            <input type="email" class="form-control required" id="conf_email" name="email_confirmation"> </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="password"> Password : <span class="danger">*</span> 
-            </label>
-            <input type="password" class="form-control required" minlength="8" id="password" name="password"> 
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="conf_password"> Confirm Password : <span class="danger">*</span> 
-            </label>
-            <input type="password" class="form-control required" minlength="8" id="conf_password" name="conf_password"> 
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label for="company_website">Company Website : </label>
-            <input type="text" class="form-control" id="company_website" name="company_website" > 
-            <p><span class="emsg hidden">Please Enter a Valid Name</span></p>
-        </div>
-    </div>
-</div>
-<button type="submit">submit</button>
-</form>
-</div></div></div></div></div></div></div>
     <script src="{{asset('assets/dashboard/plugins/jquery/jquery.min.js')}}"></script>
     <!-- <script src="{{asset('assets/dashboard/plugins/jqueryui/jquery-ui.min.js')}}"></script> -->
     <!-- Bootstrap tether Core JavaScript -->
@@ -292,7 +263,7 @@
 
     <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
-    <script src="{{asset('assets/dashboard/admin/js/mask.js')}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
     <!-- ============================================================== -->
     <!-- Wizard -->
@@ -324,18 +295,15 @@
     </script>
 
     <script type="text/javascript">
-        // $users_list = $('#invest_region');
-        // $users_list.multiselect({
-        //     listWidth: 400,
-        //     addSearchBox: false,
-        //     showSelectedItems: false
-        // });
+        $(".mask-money").mask('000,000,000$', {reverse: true});
 
-        // $("#invest_region").multipleSelect({
-        //     multiple: true,
-        //     multipleWidth: 55,
-        //     width: '100%'
-        // });
+        $("#apply-form").submit(function(){
+            var investsite = $("#mask").val();
+            var number = Number(investsite.replace(/[^0-9\.-]+/g,""));
+            $("#mask").val(number);
+        });
+
+        
     </script>
 
     <script type="text/javascript">
