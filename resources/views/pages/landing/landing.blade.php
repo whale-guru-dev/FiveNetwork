@@ -109,9 +109,9 @@
     <script src="{{asset('assets/landing/js/grayscale.min.js')}}"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        //$("#loading").delay(2000).fadeOut(500);
+        $("#loading").delay(2000).fadeOut(500);
 
-        $("#loading").fadeOut(1000);
+        // $("#loading").fadeOut(1000);
 
       })
     </script>
