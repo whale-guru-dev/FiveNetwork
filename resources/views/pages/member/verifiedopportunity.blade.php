@@ -78,7 +78,7 @@
                                     <td>{{$each->opportunity->investmentstage->type}}</td>
                                     <td>{{$each->opportunity->investmentsector->type}}</td>
                                     <td>{{$each->opportunity->investmentregion->type}}</td>
-                                    <td>{{number_format($each->opportunity->investment_size, 0, '.',',').' $'}}</td>
+                                    <td>{{number_format($each->opportunity->investment_size, 0, '.',',').'$'}}</td>
                                     
                                     <td>{{$each->opportunity->created_at}}</td>
                                     <td>
