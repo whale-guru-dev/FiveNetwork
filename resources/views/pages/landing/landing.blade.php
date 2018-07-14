@@ -111,7 +111,7 @@
       $(document).ready(function() {
         //$("#loading").delay(2000).fadeOut(500);
 
-        $("#loading").fadeOut(500);
+        $("#loading").fadeOut(1000);
 
       })
     </script>
