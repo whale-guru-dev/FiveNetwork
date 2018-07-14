@@ -27,7 +27,25 @@
   </head>
 
   <body id="page-top">
-
+    <div id="loading">
+      <div id="loading-center">
+        <!-- <div> -->
+          <img src="{{asset('landing-logo.png')}}"  id="logo-img-loading" width="250" height="200">
+        <!-- </div> -->
+        <div id="loading-center-absolute">
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+          <div class="object"></div>
+        </div>
+      </div>
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
@@ -89,7 +107,14 @@
 
     <!-- Custom scripts for this template -->
     <script src="{{asset('assets/landing/js/grayscale.min.js')}}"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        //$("#loading").delay(2000).fadeOut(500);
 
+        $("#loading").fadeOut(500);
+
+      })
+    </script>
   </body>
 
 </html>
