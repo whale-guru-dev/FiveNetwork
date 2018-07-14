@@ -743,7 +743,7 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="networth_aum">Approximate Networth/AUM : </label>
-                                                    <input type="text" class="form-control" id="networth_aum" name="networth_aum" data-mask="$999,999,999" > 
+                                                    <input type="text" class="form-control mask-money" id="networth_aum" name="networth_aum" > 
                                                 </div>
                                             </div>
                                         </div>
@@ -892,7 +892,7 @@ color: #797979;
                                     <section>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <label for="input-file-now">Please attach a copy of a government issued photo ID <span class="danger">*</span></label>
+                                                <label for="input-file-now">Please attach a copy of a government issued photo ID </label>
                                                 <input type="file" id="input-file-now" class="dropify" name="govern_photo_id" accept="image/*"/ data-default-file="{{asset('assets/dashboard/profile/id.png')}}">
                                             </div>
                                         </div>
@@ -1051,7 +1051,7 @@ The information on the Site is intended to enable investors to understand the na
 
     <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
-    <script src="{{asset('assets/dashboard/admin/js/mask.js')}}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
     <!-- ============================================================== -->
     <!-- Wizard -->
@@ -1101,6 +1101,8 @@ The information on the Site is intended to enable investors to understand the na
         $("#apply-form").submit(function() {
             $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
         });
+
+        $(".mask-money").mask('000,000,000$', {reverse: true});
 
         $(document).ready(function(){
             var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;

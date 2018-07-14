@@ -11,7 +11,7 @@
 <!-- ============================================================== -->
 <div class="row page-titles">
     <div class="col-md-4 align-self-center">
-        <h3 class="text-themecolor">Faqs</h3>
+        <h3 class="text-themecolor">Frequently Asked Questions</h3>
     </div>
     <div class="col-md-4 align-self-center text-center">
         <!-- <div class="row text-center"> -->
@@ -22,7 +22,7 @@
     <div class="col-md-4 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">Home</li>
-            <li class="breadcrumb-item active">Faqs</li>
+            <li class="breadcrumb-item active">Frequently Asked Questions</li>
         </ol>
     </div>
 
@@ -42,7 +42,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Faqs</h4>
+                    <h4 class="card-title">Frequently Asked Questions</h4>
                     
                     <div id="accordion2" role="tablist" class="minimal-faq" aria-multiselectable="true">
                         @if($faqs->count()>0)

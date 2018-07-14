@@ -209,7 +209,7 @@ color: #797979;
                         <li> 
                             <a class="waves-effect waves-dark" href="{{route('member.faq')}}" aria-expanded="false">
                                 <i class="mdi mdi-comment-question-outline"></i>
-                                <span class="hide-menu">Faq</span>
+                                <span class="hide-menu">FAQ</span>
                             </a>
                         </li>
                     </ul>

@@ -482,9 +482,9 @@ class HomeController extends Controller
             $email = $user['email'];
             $link = url('/');
             $link_name = 'Go to Family Inveestment Exchange';
-            $content = 'Thank you for applying to join the Family InVestment Exchange. The FIVE Network membership committee will review your application and upon review you will receive an email with a status of your application. We appreciate your interest and look forward to speaking with you soon.';
-            $subtitle = 'Thank you for applying to join the Family InVestment Exchange!';
-            $subject = 'Thank you for applying to join the Family InVestment Exchange';
+            $content = 'Thank you for applying to join the Family Investment Exchange. The FIVE Network membership committee will review your application and upon review you will receive an email with a status of your application. We appreciate your interest and look forward to speaking with you soon.';
+            $subtitle = 'Thank you for applying to join the Family Investment Exchange!';
+            $subject = 'Thank you for applying to join the Family Investment Exchange';
 
             Mail::to($email)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
 
