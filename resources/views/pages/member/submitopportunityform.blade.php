@@ -6,6 +6,14 @@
 <link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
 
 <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.emsg{
+    color: red;
+}
+.hidden {
+     visibility:hidden;
+}
+</style>
 @endsection
 
 
@@ -110,6 +118,7 @@
                                         <span class="danger">*</span> 
                                     </label>
                                     <input type="text" class="form-control required" id="company_website" name="company_website" required>
+                                    <p><span class="emsg hidden">Please Enter a Valid Name</span></p>
                                 </div>
                             </div>
                         </div>
@@ -1783,6 +1792,21 @@
         if($( "#bhave_debt" ).val() == 1)
             $("#debt_detail_div").show();
         else $("#debt_detail_div").hide();
+    });
+
+    $(document).ready(function(){
+        var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
+        $('#company_website').on('keypress keydown keyup',function(){
+            if (!$(this).val().match($regexname)) {
+              // there is a mismatch, hence show the error message
+                $('.emsg').removeClass('hidden');
+                $('.emsg').show();
+             }
+            else{
+                // else, do not display message
+                $('.emsg').addClass('hidden');
+            }
+        });
     });
 
     

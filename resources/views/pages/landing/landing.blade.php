@@ -25,7 +25,17 @@
     <link href="{{asset('assets/landing/css/grayscale.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/landing/css/style.css')}}">
   </head>
-
+<style type="text/css">
+  /*img.background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        -webkit-filter: grayscale(10%);    
+        filter: grayscale(10%);
+    }*/
+</style>
   <body id="page-top">
 
     <!-- Navigation -->
@@ -55,6 +65,9 @@
 
     <!-- Intro Header -->
     <header class="masthead">
+      <!-- <div>
+        <img src="{{asset('assets/landing/img/intro-bg.jpg')}}" class="background">
+      </div> -->
       <div class="intro-body">
         <div class="container">
           <div class="row">
