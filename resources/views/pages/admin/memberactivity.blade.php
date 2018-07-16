@@ -126,11 +126,11 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
                                         <td>{{$oppor->contact_name}}</td>
                                         <td>{{$oppor->investing_amount}}</td>
                                         <td>
-                                            @if($oppor->company_stage == 0)
-                                            <span class="badge badge-success">Seed/Pre-Revenue, Early Stage</span>
-                                            @elseif($oppor->company_stage == 1)
-                                            <span class="badge badge-info">Venture Capital</span>
+                                            @if($oppor->company_stage == 1)
+                                            <span class="badge badge-success">Seed/Pre-Revenue</span>
                                             @elseif($oppor->company_stage == 2)
+                                            <span class="badge badge-info">Early Stage/Venture Capital</span>
+                                            @elseif($oppor->company_stage == 3)
                                             <span class="badge badge-warning">Private Equity</span>
                                             @endif
                                         </td>

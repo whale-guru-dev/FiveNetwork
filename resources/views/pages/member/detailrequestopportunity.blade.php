@@ -91,11 +91,11 @@
                                             <label class="control-label text-right col-md-4">Company Stage</label>
                                             <div class="col-md-8">
                                                 <p class="form-control-static">
-                                                @if($request->company_stage == 0)
-                                                Seed/Pre-Revenue, Early Stage
-                                                @elseif($request->company_stage == 1)
-                                                Venture Capital
+                                                @if($request->company_stage == 1)
+                                                Seed/Pre-Revenue
                                                 @elseif($request->company_stage == 2)
+                                                Early Stage/Venture Capital
+                                                @elseif($request->company_stage == 3)
                                                 Private Equity
                                                 @endif 
                                                 </p>
@@ -134,7 +134,7 @@
                                         <div class="form-group row">
                                             <label class="control-label text-right col-md-4">Available capacity for FIVE Network members:</label>
                                             <div class="col-md-8">
-                                                <p class="form-control-static"> {{$request->valuation}} </p>
+                                                <p class="form-control-static"> {{'$'.number_format($request->valuation, 0, '.',',')}} </p>
                                             </div>
                                         </div>
                                     </div>

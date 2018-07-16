@@ -72,11 +72,11 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>
-                                        @if($request->company_stage == 0)
+                                        @if($request->company_stage == 1)
                                         <span class="badge badge-info">Seed/Pre-Revenue</span>
-                                        @elseif($request->company_stage == 1)
-                                        <span class="badge badge-success">Early Stage/Venture Capital</span>
                                         @elseif($request->company_stage == 2)
+                                        <span class="badge badge-success">Early Stage/Venture Capital</span>
+                                        @elseif($request->company_stage == 3)
                                         <span class="badge badge-warning">Private Equity</span>
                                         @endif
                                     </td>

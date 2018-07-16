@@ -114,7 +114,7 @@ class OpportunityController extends Controller
         <li>Structure: '.$oppor->opportunity->investmentstructure->type.'</li>
         <li>Stage: '.$oppor->opportunity->investmentstage->type.'</li>
         <li>Total Investment Company is looking to Raise: '.$oppor->opportunity->investment_size.'</li>
-        <li>Amount Available for FIVE Network members: '.$oppr_request->valuation.'</li>
+        <li>Amount Available for FIVE Network members: $'.number_format($oppr_request->valuation, 0, '.',',').'</li>
         </ul>';
         Mail::to($family_email)->send(new Highlight($link, $content, $subject));
 

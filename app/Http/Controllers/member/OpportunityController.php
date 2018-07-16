@@ -42,11 +42,11 @@ class OpportunityController extends Controller
             'investment_region' => $request['investment_region'],
             'investment_structure' => $request['investment_structure']
     	]);
-        if($request['company_stage'] == 0)
+        if($request['company_stage'] == 1)
             $company_stage = 'Pre-Revenue/Seed';
-        elseif($request['company_stage'] == 1)
-            $company_stage = 'Early Stage/Venture Capital';
         elseif($request['company_stage'] == 2)
+            $company_stage = 'Early Stage/Venture Capital';
+        elseif($request['company_stage'] == 3)
             $company_stage = 'Private Equity';
 
     	if($request_opp){

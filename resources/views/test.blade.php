@@ -316,7 +316,6 @@
                 $('html, body').scrollTop($("#"+emptyfields[0].id).offset().top);
             }
             
-
         });
 
         $("#apply-form").submit(function(){
