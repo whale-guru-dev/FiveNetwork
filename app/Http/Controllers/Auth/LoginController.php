@@ -81,7 +81,7 @@ class LoginController extends Controller
                 $long = $this->ip_info_longlat($ip,"longitude");
                 $lat = $this->ip_info_longlat($ip,"latitude");
                 
-                $busa = $this->ip_info_country_code($id) == 'US' ? 1 :0;
+                $busa = $this->ip_info_country_code($ip) == 'US' ? 1 :0;
 
                 if($busa == 1) {
                     $code = 'US'.$this->ip_info_region_code($ip);
