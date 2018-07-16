@@ -22,6 +22,11 @@ class HomeController extends Controller
         $logins = MemberLogin::where('usid', Auth::user()->id)->orderBy('created_at','DESC')->get();
         $members = User::all();
         $map_markers = [];
+        $map_regions = [];
+        $regions = MemberLogin::where('is_usa', 1)->get();
+        foreach ($regions as $region) {
+            $map_regions[] = 'US-'.$region->code;
+        }
         foreach($members as $member){
             $login = MemberLogin::where('usid', $member->id)->orderBy('created_at','DESC')->first();
             if($login){
@@ -33,7 +38,7 @@ class HomeController extends Controller
             
         }
 
-    	return view('pages.member.dashbaord')->with(['logins' => $logins,'markers' => $map_markers]);
+    	return view('pages.member.dashbaord')->with(['logins' => $logins,'markers' => $map_markers, 'regions' => $map_regions]);
     }
 
     public function faqview()

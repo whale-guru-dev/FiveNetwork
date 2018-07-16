@@ -265,19 +265,23 @@ $('#usa').vectorMap({
     regionStyle : {
         initial : {
           fill : 'black'
+        },
+        selected: {
+            fill: '#1ba7ff'
         }
       },
     markerStyle: {
       initial: {
         },
     },
+    selectedRegions:[{{json_encode($regions)}}],
     enableZoom: true,
     hoverColor: '#009efb',
-    markers : [
-    @foreach($markers as $marker)
-    { latLng : [ {{$marker['lat']}}, {{$marker['long']}} ],name : '{{$marker['fName'].' '.$marker['lName']}}' },
-    @endforeach
-    ],
+    // markers : [
+    // @foreach($markers as $marker)
+    // { latLng : [ {{$marker['lat']}}, {{$marker['long']}} ],name : '{{$marker['fName'].' '.$marker['lName']}}' },
+    // @endforeach
+    // ],
     hoverOpacity: null,
     normalizeFunction: 'linear',
     scaleColors: ['#b6d6ff', '#005ace'],
@@ -285,6 +289,7 @@ $('#usa').vectorMap({
     selectedRegions: [],
     showTooltip: true,
 });
+
 </script>
 <script type="text/javascript">
     
