@@ -274,7 +274,6 @@ $('#usa').vectorMap({
       initial: {
         },
     },
-    selectedRegions:{!! json_encode($regions) !!},
     enableZoom: true,
     hoverColor: '#009efb',
     // markers : [
@@ -286,7 +285,7 @@ $('#usa').vectorMap({
     normalizeFunction: 'linear',
     scaleColors: ['#b6d6ff', '#005ace'],
     selectedColor: '#c9dfaf',
-    selectedRegions: [],
+    selectedRegions:{!! json_encode($regions) !!},
     showTooltip: true,
 });
 
