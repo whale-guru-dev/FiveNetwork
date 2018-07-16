@@ -100,7 +100,7 @@ class LoginController extends Controller
                     'long' => $long,
                     'lat'  => $lat,
                     'code' => $code,
-                    'is_usa' => $busa;
+                    'is_usa' => $busa
                 ]);
                 return redirect()->route('member.dashboard');
                 // return $this->sendLoginResponse($request);
