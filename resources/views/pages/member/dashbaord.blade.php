@@ -257,8 +257,8 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
 $('#usa').vectorMap({
     map : 'us_aea_en',
     backgroundColor: '#4c4c4c',
-    borderColor: '#818181',
-    borderOpacity: 0.25,
+    borderColor: '#000',
+    borderOpacity: 0.5,
     borderWidth: 1,
     zoomOnScroll: true,
     color: '#009efb',
@@ -267,7 +267,7 @@ $('#usa').vectorMap({
           fill : 'black'
         },
         selected: {
-            fill: '#1ba7ff'
+            fill: '#1976d2'
         }
       },
     markerStyle: {
