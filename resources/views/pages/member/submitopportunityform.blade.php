@@ -520,8 +520,8 @@
                                 <div class="form-group">
                                     <label for="investment_size"> How much capacity is left this round <span class="danger">*</span></label>
                                     
-                                    <input type="text" class="form-control required mask-money" name="investment_size_cur" id="investment_size_cur" required>
-                                    <input type="hidden" name="investment_size" id="investment_size">
+                                    <input type="text" class="form-control required mask-money" name="investment_size" id="investment_size" required>
+                                    
                                     
                                 </div>
                             </div>
@@ -1377,14 +1377,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="client_acq_cost">Client Acquisition Cost :  <span class="danger">*</span></label>
-                                    <input type="text" name="client_acq_cost" class="form-control required" id="client_acq_cost" required>
+                                    <input type="text" name="client_acq_cost" class="form-control required mask-money" id="client_acq_cost" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lifetime_val">Lifetime Value of Customer :  <span class="danger">*</span></label>
-                                    <input type="text" name="lifetime_val" class="form-control required" id="lifetime_val" required>
+                                    <input type="text" name="lifetime_val" class="form-control required mask-money" id="lifetime_val" required>
                                 </div>
                             </div>
                         </div>
@@ -1682,7 +1682,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                        <button type="button" class="btn btn-success waves-effect waves-light m-r-10" id="submit-btn">Submit</button>
                         <button type="button" class="btn btn-inverse waves-effect waves-light" id="cancel-btn">Cancel</button>
                     </form>
                 </div>
@@ -1710,7 +1710,7 @@
             confirmButtonText: "OK!",   
             closeOnConfirm: false 
         }, function(){   
-            window.location.href = "{{route('member.investment-questionnaire-form',['code' => $opportunitymember->code])}}";
+            window.location.href = "{{route('member.dashboard')}}";
         });
     </script>
     @endif
@@ -1726,17 +1726,20 @@
 <script type="text/javascript">
     $(".select2").select2();
 
-    $(".mask-money").mask('000,000,000$', {reverse: true});
+    $('.mask-money').mask('$000,000,000,000', {reverse: false});
     $(".mask-percent").mask('000%', {reverse: true});
 
-    $(document).on("click","#cancel-btn",function(){
-        document.getElementById("request-form").reset();
+    $(document).on("click","#submit-btn",function(){
+        var emptyfields = $('.required').filter(function() { return this.value === ""; });
+        if(emptyfields.length == 0){
+            $("#submit-form").submit();
+        }else{
+            $(document).scrollTop($("#"+emptyfields[0].id).offset().top);
+        }
     });
 
-    $("submit-form").submit(function(){
-        var investsize = $("#investment_size_cur").val();
-        var number = Number(investsize.replace(/[^0-9\.-]+/g,""));
-        $("#investment_size").val(number);
+    $(document).on("click","#cancel-btn",function(){
+        document.getElementById("submit-form").reset();
     });
 
     

@@ -198,7 +198,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">What amount is still available ?</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{number_format($oppor->investment_size, 0, '.',',').'$'}} </p>
+                                            <p class="form-control-static"> {{$oppor->investment_size}} </p>
                                         </div>
                                     </div>
                                 </div>

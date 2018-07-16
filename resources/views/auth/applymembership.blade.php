@@ -598,7 +598,7 @@ color: #797979;
                                                             @if($loop->iteration == 1)
                                                             <optgroup label="Southeast">
                                                             @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
                                                             @if($loop->iteration == 13)
                                                             </optgroup>
                                                             @endif
@@ -606,7 +606,7 @@ color: #797979;
                                                             @if($loop->iteration == 14)
                                                             <optgroup label="Southwest">
                                                             @endif
-                                                                <option value="{{$irt->id}}" >{{$irt->type}}</option>
+                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
                                                             @if($loop->iteration == 17)
                                                             </optgroup>
                                                             @endif
@@ -614,7 +614,7 @@ color: #797979;
                                                             @if($loop->iteration == 18)
                                                             <optgroup label="Midwest">
                                                             @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
                                                             @if($loop->iteration == 29)
                                                             </optgroup>
                                                             @endif
@@ -622,7 +622,7 @@ color: #797979;
                                                             @if($loop->iteration == 30)
                                                             <optgroup label="West">
                                                             @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
                                                             @if($loop->iteration == 40)
                                                             </optgroup>
                                                             @endif
@@ -630,7 +630,7 @@ color: #797979;
                                                             @if($loop->iteration == 41)
                                                             <optgroup label="Northeast">
                                                             @endif
-                                                                <option value="{{$irt->id}}">{{$irt->type}}</option>
+                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
                                                             @if($loop->iteration == 50)
                                                             </optgroup>
                                                             @endif
@@ -647,7 +647,7 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
                                                     <select class="custom-select form-control " id="private_investment_number" name="private_investment_number">
-                                                        <option selected="">Select</option>
+                                                        <option value="" selected="">Select</option>
                                                         <option value="0">1-2</option>
                                                         <option value="1">3-4</option>
                                                         <option value="2">5-7</option>
@@ -660,7 +660,7 @@ color: #797979;
                                                 <div class="form-group">
                                                     <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
                                                     <select class="custom-select form-control " id="additional_capacity" name="additional_capacity">
-                                                        <option selected="">Select</option>
+                                                        <option value="" selected="">Select</option>
                                                         <option value="20">20%</option>
                                                         <option value="40">40%</option>
                                                         <option value="60">60%</option>
@@ -1102,7 +1102,7 @@ The information on the Site is intended to enable investors to understand the na
             $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
         });
 
-        $(".mask-money").mask('000,000,000$', {reverse: true});
+        $('.mask-money').mask('$000,000,000,000', {reverse: false});
 
         $(document).ready(function(){
             var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
@@ -1138,10 +1138,7 @@ The information on the Site is intended to enable investors to understand the na
 
     @if($submitted == 1)
         <script type="text/javascript">
-            $("#apply-form input").prop("disabled", true);
-            $("#apply-form select").prop("disabled", true);
-            $("#apply-form textarea").prop("disabled", true);
-            $("#apply-form .actions").hide();
+            window.location.href = "{{route('home')}}";
         </script>
     @endif
 

@@ -197,11 +197,12 @@ class EditProfileController extends Controller
     {
         if($mof){
             $score = 0;
-            $current_capital_raise_structure = $mof->current_capital_raise_structure;//Investment Structure
-            $investment_stage = $mof->investment_stage;//Investment Stage
-            $state = $mof->state;//Investment Region
-            $sector = $mof->sector;// Investment Sector Focus
-            $investment_size = $mof->investment_size;//Investment Size
+
+            $state = $mof->investment_region;
+            $sector = $mof->investment_sector;
+            $stage = $mof->company_stage;
+            $structure = $mof->investment_structure;
+            $size = $mof->valuation;
 
             $score_structure = 0;
             $score_stage = 0;
@@ -211,14 +212,16 @@ class EditProfileController extends Controller
 
             if($new_user->investmentstructure){
                 foreach($new_user->investmentstructure as $is){
-                    if($current_capital_raise_structure == $is->type_id)
+                    if($structure == $is->type_id)
                         $score_structure = 1;
                 }
             }
 
             if($new_user->investmentstage){
                 foreach($new_user->investmentstage as $is){
-                    if($investment_stage == $is->type_id)
+                    if($is->type_id > 2 && $stage == 3) 
+                        $score_stage = 1;
+                    if($is->type_id <= 2 && $stage == $is->type_id)
                         $score_stage = 1;
                 }
             }
@@ -240,22 +243,24 @@ class EditProfileController extends Controller
 
             if($new_user->investmentsize){
                 foreach($new_user->investmentsize as $is){
-                    if($is->type_id == 1 && $investment_size < 5 * pow(10,5)){
+                    if($is->type_id == 1 && $size < 5 * pow(10,5)){
                         $score_size = 1;
-                    }elseif($is->type_id == 2 && $investment_size >= 5 * pow(10,5) && $investment_size <= pow(10,6)){
+                    }elseif($is->type_id == 2 && $size >= 5 * pow(10,5) && $size <= pow(10,6)){
                         $score_size = 1;
-                    }elseif($is->type_id == 3 && $investment_size >= pow(10,6) && $investment_size <= 5 * pow(10,6)){
+                    }elseif($is->type_id == 3 && $size >= pow(10,6) && $size <= 5 * pow(10,6)){
                         $score_size = 1;
-                    }elseif($is->type_id == 4 && $investment_size >= 5 * pow(10,6) && $investment_size <= pow(10,7)){
+                    }elseif($is->type_id == 4 && $size >= 5 * pow(10,6) && $size <= pow(10,7)){
                         $score_size = 1;
-                    }elseif($is->type_id == 5 && $investment_size >= pow(10,7)){
+                    }elseif($is->type_id == 5 && $size >= pow(10,7)){
                         $score_size = 1;
                     }
                 }
             }
 
+            $oppor_id = MemberOpportunityForm::where('code', $mof->code)->first()->id;
+
             $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
-            $match_member_oppor = MemberOpportunityMatch::where('opportunity_id',$mof->id)->where('matched_member_id',$new_user->id)->first();
+            $match_member_oppor = MemberOpportunityMatch::where('opportunity_id',$oppor_id)->where('matched_member_id',$new_user->id)->first();
             if($match_member_oppor){
                 $match_member_oppor->update([
                     'score' => $score,
@@ -267,7 +272,7 @@ class EditProfileController extends Controller
                 ]);
             }else{
                 $match_member_oppor = MemberOpportunityMatch::create([
-                    'opportunity_id' => $mof->id,
+                    'opportunity_id' => $oppor_id,
                     'matched_member_id' => $new_user->id,
                     'score' => $score,
                     'matched_structure' => $score_structure,

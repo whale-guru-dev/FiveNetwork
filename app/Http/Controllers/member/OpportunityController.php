@@ -75,7 +75,7 @@ class OpportunityController extends Controller
                         <li>Investment Structure : '.$request_opp->investmentstructure->type.'</li>
                         <li>Amount Investing : '.$request['investing_amount'].'</li>
                         <li>Total Investment Company is looking to Raise : '.$request['raising'].'</li>
-                        <li>Amount Available for FIVE Network members : '.$request['valuation'].'</li>
+                        <li>Amount Available for FIVE Network members : $'.number_format($request['valuation'], 0, '.',',').'</li>
                     </ul>';
                 $link = url('/admin');
                 $link_name = 'Go To Dashboard';
@@ -238,7 +238,7 @@ class OpportunityController extends Controller
 
         $opportunity->update(['is_submitted' => 1]);
 
-        $this->checkmatch($form);
+        $this->checkmatch($opportunity,$form->id);
 
         $to = $form->user->email;
         $subtitle = 'Thank you for completing the Investment Questionnaire';
@@ -266,15 +266,16 @@ class OpportunityController extends Controller
         return redirect()->route('member.investment-questionnaire-form',['code' => $form->code])->with(['msg' => $msg]);
     }
 
-    public function checkmatch(MemberOpportunityForm $mof)
+    public function checkmatch(MemberRequestOpportunity $mof, $id)
     {
         $score = 0;
-        $member = User::where('id', $mof->member_id)->first();
-        $current_capital_raise_structure = $mof->current_capital_raise_structure;//Investment Structure
-        $investment_stage = $mof->investment_stage;//Investment Stage
-        $state = $mof->state;//Investment Region
-        $sector = $mof->sector;// Investment Sector Focus
-        $investment_size = $mof->investment_size;//Investment Size
+        $member = User::where('id', $mof->usid)->first();
+
+        $state = $mof->investment_region;
+        $sector = $mof->investment_sector;
+        $stage = $mof->company_stage;
+        $structure = $mof->investment_structure;
+        $size = $mof->valuation;
 
         $score_structure = 0;
         $score_stage = 0;
@@ -287,14 +288,16 @@ class OpportunityController extends Controller
         {
             if($each->investmentstructure){
                 foreach($each->investmentstructure as $is){
-                    if($current_capital_raise_structure == $is->type_id)
+                    if($structure == $is->type_id)
                         $score_structure = 1;
                 }
             }
 
             if($each->investmentstage){
                 foreach($each->investmentstage as $is){
-                    if($investment_stage == $is->type_id)
+                    if($is->type_id > 2 && $stage == 3) 
+                        $score_stage = 1;
+                    if($is->type_id <= 2 && $stage == $is->type_id)
                         $score_stage = 1;
                 }
             }
@@ -316,15 +319,15 @@ class OpportunityController extends Controller
 
             if($each->investmentsize){
                 foreach($each->investmentsize as $is){
-                    if($is->type_id == 1 && $investment_size < 5 * pow(10,5)){
+                    if($is->type_id == 1 && $size < 5 * pow(10,5)){
                         $score_size = 1;
-                    }elseif($is->type_id == 2 && $investment_size >= 5 * pow(10,5) && $investment_size <= pow(10,6)){
+                    }elseif($is->type_id == 2 && $size >= 5 * pow(10,5) && $size <= pow(10,6)){
                         $score_size = 1;
-                    }elseif($is->type_id == 3 && $investment_size >= pow(10,6) && $investment_size <= 5 * pow(10,6)){
+                    }elseif($is->type_id == 3 && $size >= pow(10,6) && $size <= 5 * pow(10,6)){
                         $score_size = 1;
-                    }elseif($is->type_id == 4 && $investment_size >= 5 * pow(10,6) && $investment_size <= pow(10,7)){
+                    }elseif($is->type_id == 4 && $size >= 5 * pow(10,6) && $size <= pow(10,7)){
                         $score_size = 1;
-                    }elseif($is->type_id == 5 && $investment_size >= pow(10,7)){
+                    }elseif($is->type_id == 5 && $size >= pow(10,7)){
                         $score_size = 1;
                     }
                 }
@@ -332,7 +335,7 @@ class OpportunityController extends Controller
 
             $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
             $match_member_oppor = MemberOpportunityMatch::create([
-                'opportunity_id' => $mof->id,
+                'opportunity_id' => $id,
                 'matched_member_id' => $each->id,
                 'score' => $score,
                 'matched_structure' => $score_structure,

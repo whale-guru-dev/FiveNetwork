@@ -20,6 +20,7 @@ Route::get('/email-test2','EmailTestController@emailtest2');
 Route::get('/monthly','EmailTestController@monthly');
 Route::get('/viewtest', 'EmailTestController@viewtest');
 Route::post('/test',"EmailTestController@testpost");
+Route::get('/hightlight','EmailTestController@highlight');
 
 Route::get('/', 'HomeController@index')->name('home');
 

@@ -99,6 +99,42 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
+	                                    <label class="control-label text-right col-md-4">Investment Sector</label>
+	                                    <div class="col-md-8">
+	                                        <p class="form-control-static"> {{$request->investmentsector->type}} </p>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <!--/span-->
+	                        </div>
+
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group row">
+	                                    <label class="control-label text-right col-md-4">Investment Region</label>
+	                                    <div class="col-md-8">
+	                                        <p class="form-control-static"> {{$request->investmentregion->type}} </p>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <!--/span-->
+	                        </div>
+
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group row">
+	                                    <label class="control-label text-right col-md-4">Investment Structure</label>
+	                                    <div class="col-md-8">
+	                                        <p class="form-control-static"> {{$request->investmentstructure->type}} </p>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <!--/span-->
+	                        </div>
+
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group row">
 	                                    <label class="control-label text-right col-md-4">Amount they are investing</label>
 	                                    <div class="col-md-8">
 	                                        <p class="form-control-static"> {{$request->investing_amount}} </p>

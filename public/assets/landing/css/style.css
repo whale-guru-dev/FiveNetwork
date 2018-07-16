@@ -133,10 +133,10 @@ backdrop-filter: blur(5px);
 #loading-center-absolute {
     position: absolute;
     left: 50%;
-    top: 65%;
-    transform: translate(-50%,-65%);
+    top: 70%;
+    transform: translate(-50%,-70%);
     height: 50px;
-    width: 150px;
+    text-align: center;
 /*    margin-top: -25px;
     margin-left: -75px;*/
 
@@ -149,12 +149,15 @@ backdrop-filter: blur(5px);
     -webkit-animation: animate 1s infinite;
     animation: animate 1s infinite;
     float: left;
-    }
+}
 
 .object:last-child {
     margin-right: 0px;
     }
-
+.object:nth-child(11){
+    -webkit-animation-delay: 0.9s;
+    animation-delay: 0.9s;  
+    }
 .object:nth-child(10){
     -webkit-animation-delay: 0.9s;
     animation-delay: 0.9s;  

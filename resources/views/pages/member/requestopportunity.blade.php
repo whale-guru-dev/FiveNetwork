@@ -85,9 +85,9 @@ $invest_types = App\Model\InvestmentStructureType::all();
 
                                 <select name="company_stage" class="form-control">
                                     <option>Select</option>
-                                    <option value="0">Pre-Revenue/Seed</option>
-                                    <option value="1">Early Stage/Venture Capital</option>
-                                    <option value="2">Private Equity</option>
+                                    <option value="1">Pre-Revenue/Seed</option>
+                                    <option value="2">Early Stage/Venture Capital</option>
+                                    <option value="3">Private Equity</option>
                                 </select>
                             </div>
                         </div>
@@ -208,14 +208,15 @@ $invest_types = App\Model\InvestmentStructureType::all();
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="valuation">Available capacity for FIVE Network members</label>
+                            <label for="valuation_val">Available capacity for FIVE Network members</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mask-money" id="valuation" name="valuation" placeholder="Enter Available capacity for FIVE Network members">
+                                <input type="text" class="form-control mask-money" id="valuation_val" name="valuation_val" placeholder="Enter Available capacity for FIVE Network members">
+                                <input type="hidden" name="valuation" id="valuation">
                             </div>
                         </div>
 
@@ -250,10 +251,13 @@ $invest_types = App\Model\InvestmentStructureType::all();
         document.getElementById("request-form").reset();
     });
 
-    $('.mask-money').mask('000,000,000$', {reverse: true});
-    // $('#valuation').mask('000,000,000$', {reverse: true});
-    // $('#raising').mask('000,000,000$', {reverse: true});
-    
+    $('.mask-money').mask('$000,000,000,000', {reverse: false});
+
+    $("#request-form").submit(function(){
+        var valuation_cur = $("#valuation_val").val();
+        var valuation = Number(valuation_cur.replace(/[^0-9\.-]+/g,""));
+        $("#valuation").val(valuation);
+    });
     
 </script>
 @endsection 

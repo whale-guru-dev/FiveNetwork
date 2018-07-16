@@ -273,6 +273,19 @@ $('#usa').vectorMap({
     },
     enableZoom: true,
     hoverColor: '#009efb',
+    regions: [{
+        scale: {
+          red: '#ff0000',
+          green: '#00ff00'
+        },
+        attribute: 'fill',
+        values: {
+          "US-KS": 'red',
+          "US-MO": 'red',
+          "US-IA": 'green',
+          "US-NE": 'green'
+        }      
+    }],
     markers : [
     @foreach($markers as $marker)
     { latLng : [ {{$marker['lat']}}, {{$marker['long']}} ],name : '{{$marker['fName'].' '.$marker['lName']}}' },
