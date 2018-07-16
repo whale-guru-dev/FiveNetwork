@@ -23,17 +23,15 @@ class HomeController extends Controller
         $members = User::all();
         $map_markers = [];
         $map_regions = [];
-        $regions = MemberLogin::where('is_usa', 1)->get();
-        foreach ($regions as $region) {
-            $map_regions[] = 'US-'.$region->code;
-        }
+
         foreach($members as $member){
-            $login = MemberLogin::where('usid', $member->id)->orderBy('created_at','DESC')->first();
+            $login = MemberLogin::where('usid', $member->id)->orderBy('created_at','DESC')->where('is_usa', 1)->first();
             if($login){
                 $map_markers[$member->id]['lat'] = $login->lat;
                 $map_markers[$member->id]['long'] = $login->long;
                 $map_markers[$member->id]['fName'] = $login->member->fName;
                 $map_markers[$member->id]['lName'] = $login->member->lName;
+                $map_regions[] = 'US-'.$login->code;
             }
             
         }
