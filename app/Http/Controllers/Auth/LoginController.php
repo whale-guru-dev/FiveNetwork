@@ -80,7 +80,14 @@ class LoginController extends Controller
                 $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
                 $long = $this->ip_info_longlat($ip,"longitude");
                 $lat = $this->ip_info_longlat($ip,"latitude");
-                $code = $this->ip_info_region_code($ip);
+                
+                $busa = $this->ip_info_country_code($id) == 'US' ? 1 :0;
+
+                if($busa == 1) {
+                    $code = 'US'.$this->ip_info_region_code($ip);
+                }else{
+                    $code = $this->ip_info_region_code($ip);
+                }
 
                 $loc = "$ca";
 
@@ -92,7 +99,8 @@ class LoginController extends Controller
                     'is_active' => 1,
                     'long' => $long,
                     'lat'  => $lat,
-                    'code' => $code
+                    'code' => $code,
+                    'is_usa' => $busa;
                 ]);
                 return redirect()->route('member.dashboard');
                 // return $this->sendLoginResponse($request);
