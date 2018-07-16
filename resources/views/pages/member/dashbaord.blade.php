@@ -274,7 +274,7 @@ $('#usa').vectorMap({
       initial: {
         },
     },
-    selectedRegions:[{{json_encode($regions)}}],
+    selectedRegions:[{{$regions}}],
     enableZoom: true,
     hoverColor: '#009efb',
     // markers : [
