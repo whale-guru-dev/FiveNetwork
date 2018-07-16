@@ -80,6 +80,7 @@ class LoginController extends Controller
                 $ca = $this->ip_info("Visitor", "address"); // Proddatur, Andhra Pradesh, India
                 $long = $this->ip_info_longlat($ip,"longitude");
                 $lat = $this->ip_info_longlat($ip,"latitude");
+                $code = $this->ip_info_region_code($ip);
 
                 $loc = "$ca";
 
@@ -90,7 +91,8 @@ class LoginController extends Controller
                     'device' => $device_details,
                     'is_active' => 1,
                     'long' => $long,
-                    'lat'  => $lat
+                    'lat'  => $lat,
+                    'code' => $code
                 ]);
                 return redirect()->route('member.dashboard');
                 // return $this->sendLoginResponse($request);
@@ -171,6 +173,19 @@ class LoginController extends Controller
 
         return $os_platform;
 
+    }
+
+    public function ip_info_region_code($ip = NULL)
+    {
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+
+        return $ipdat->geoplugin_regionCode;
+    }
+
+    public function ip_info_country_code($ip = NULL)
+    {
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+        return $ipdat->geoplugin_countryCode;
     }
 
     public function ip_info_longlat($ip = NULL, $purpose) {
