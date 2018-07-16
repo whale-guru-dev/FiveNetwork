@@ -276,11 +276,11 @@ $('#usa').vectorMap({
     },
     enableZoom: true,
     hoverColor: '#009efb',
-    markers : [
-    @foreach($markers as $marker)
-    { latLng : [ {{$marker['lat']}}, {{$marker['long']}} ]},
-    @endforeach
-    ],
+    // markers : [
+    // @foreach($markers as $marker)
+    // { latLng : [ {{$marker['lat']}}, {{$marker['long']}} ]},
+    // @endforeach
+    // ],
     hoverOpacity: null,
     normalizeFunction: 'linear',
     scaleColors: ['#b6d6ff', '#005ace'],
