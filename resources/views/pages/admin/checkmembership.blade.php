@@ -37,7 +37,7 @@
                     <div class="table-responsive m-t-40">
                         <table id="allow-apply" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
-                                <tr>
+                                <tr role="row">
                                     <th width="5%">#</th>
                                     <th width="5%">Name</th>
                                     <th width="5%">Email</th>
@@ -67,7 +67,7 @@
                             <tbody>
                                 @if($users->count()>0)
                                 @foreach($users as $user)
-                                <tr>
+                                <tr role="row">
                                     <td>{{$i++}}</td>
                                     <td>{{$user->fName.' '.$user->lName}}</td>
                                     <td>{{$user->email}}</td>
