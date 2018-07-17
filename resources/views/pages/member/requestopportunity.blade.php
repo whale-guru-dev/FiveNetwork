@@ -193,7 +193,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-target"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mask-money" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing">
+                                <input type="text" class="form-control mask-money" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing" data-inputmask="'alias': 'currency'">
                             </div>
                         </div>
                         <div class="form-group">
@@ -204,7 +204,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mask-money" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise">
+                                <input type="text" class="form-control mask-money" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise" data-inputmask="'alias': 'currency'">
                             </div>
                         </div>
                         <div class="form-group">
@@ -215,7 +215,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mask-money" id="valuation_val" name="valuation_val" placeholder="Enter Available capacity for FIVE Network members">
+                                <input type="text" class="form-control mask-money" id="valuation_val" name="valuation_val" placeholder="Enter Available capacity for FIVE Network members" data-inputmask="'alias': 'currency'">
                                 <input type="hidden" name="valuation" id="valuation">
                             </div>
                         </div>
@@ -251,7 +251,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
         document.getElementById("request-form").reset();
     });
 
-    $('.mask-money').mask('$000,000,000,000', {reverse: false});
+    $('.mask-money').inputmask();
 
     $("#request-form").submit(function(){
         var valuation_cur = $("#valuation_val").val();
