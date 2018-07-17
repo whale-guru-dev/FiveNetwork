@@ -611,18 +611,19 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="invest_structure">Investment Structure :</label>
-                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_structure[]" id="invest_structure">
+                                                <select style="width: 100%" multiple name="invest_structure[]" id="invest_structure">
                                                     
                                                     @foreach($invest_types as $type)
                                                     <option value="{{$type->id}}" @php if(in_array($type->id, $user_struc)) echo "Selected" @endphp>{{$type->type}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="button-box m-t-20"> <a id="select-all-str" class="btn btn-success" href="#">select all</a> <a id="deselect-all-str" class="btn btn-info" href="#">deselect all</a> </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="invest_region">Investment Regions :</label>
-                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region">
+                                                <select style="width: 100%" multiple name="invest_region[]" id="invest_region">
                                                     @foreach($invest_region_types as $irt)
                                                         @if($irt->id < 14)
                                                         @if($loop->iteration == 1)
@@ -705,24 +706,26 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="average_investment_size">Typical Check Size :</label>
-                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size">
+                                                <select style="width: 100%" multiple name="average_investment_size[]" id="average_investment_size">
                                                     
                                                     @foreach($invest_size_types as $type)
                                                     <option value="{{$type->id}}"  @php if(in_array($type->id, $user_size)) echo "Selected"; @endphp>{{$type->type}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="button-box m-t-20"> <a id="select-all-size" class="btn btn-success" href="#">select all</a> <a id="deselect-all-size" class="btn btn-info" href="#">deselect all</a> </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="investment_stage">Investment Stage :</label>
-                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage">
+                                                <select style="width: 100%" multiple name="investment_stage[]" id="investment_stage">
                                                     
                                                     @foreach($invest_stage_types as $type)
                                                     <option value="{{$type->id}}"  @php if(in_array($type->id, $user_stage)) echo "Selected"; @endphp>{{$type->type}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="button-box m-t-20"> <a id="select-all-stage" class="btn btn-success" href="#">select all</a> <a id="deselect-all-stage" class="btn btn-info" href="#">deselect all</a> </div>
                                         </div>
                                     </div>
 
@@ -730,13 +733,14 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="investment_sector">Investment Sector Focus :</label>
-                                                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector">
+                                                <select style="width: 100%" multiple name="investment_sector[]" id="investment_sector">
                                                     
                                                     @foreach($invest_sector_types as $isrt)
                                                     <option value="{{$isrt->id}}"  @php if(in_array($isrt->id, $user_sector)) echo "Selected"; @endphp>{{$isrt->type}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="button-box m-t-20"> <a id="select-all-sector" class="btn btn-success" href="#">select all</a> <a id="deselect-all-sector" class="btn btn-info" href="#">deselect all</a> </div>
                                         </div>
                                     </div>
                                 </section>
@@ -836,6 +840,48 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
 
         //delete the row
         footable.removeRow(row);
+    });
+
+    $("#invest_region").multiSelect({
+        selectableOptgroup: true
+    });
+
+    $('#invest_structure, #average_investment_size, #investment_stage, #investment_sector').multiSelect();
+
+    $('#select-all-str').click(function() {
+        $('#invest_structure').multiSelect('select_all');
+        return false;
+    });
+    $('#deselect-all-str').click(function() {
+        $('#invest_structure').multiSelect('deselect_all');
+        return false;
+    });
+
+    $('#select-all-size').click(function() {
+        $('#average_investment_size').multiSelect('select_all');
+        return false;
+    });
+    $('#deselect-all-size').click(function() {
+        $('#average_investment_size').multiSelect('deselect_all');
+        return false;
+    });
+
+    $('#select-all-stage').click(function() {
+        $('#investment_stage').multiSelect('select_all');
+        return false;
+    });
+    $('#deselect-all-stage').click(function() {
+        $('#investment_stage').multiSelect('deselect_all');
+        return false;
+    });
+
+    $('#select-all-sector').click(function() {
+        $('#investment_sector').multiSelect('select_all');
+        return false;
+    });
+    $('#deselect-all-sector').click(function() {
+        $('#investment_sector').multiSelect('deselect_all');
+        return false;
     });
 </script>
 
