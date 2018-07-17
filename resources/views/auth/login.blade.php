@@ -129,6 +129,11 @@
                             </div>
                         </div>
 
+                        <div class="form-group m-b-0">
+                            <div class="col-sm-12 text-center">
+                                <div>Don't have an account? <a href="{{route('request-access')}}" class="text-info m-l-5"><b>Request Access</b></a></div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
