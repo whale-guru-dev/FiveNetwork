@@ -31,7 +31,7 @@ class HomeController extends Controller
                 $map_markers[$member->id]['long'] = $login->long;
                 $map_markers[$member->id]['fName'] = $login->member->fName;
                 $map_markers[$member->id]['lName'] = $login->member->lName;
-                $map_regions[] = 'US-'.$login->code;
+                $map_regions[] = $login->code;
             }
             
         }

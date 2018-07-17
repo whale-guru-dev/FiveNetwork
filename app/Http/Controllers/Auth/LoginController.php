@@ -84,7 +84,7 @@ class LoginController extends Controller
                 $busa = $this->ip_info_country_code($ip) == 'US' ? 1 :0;
 
                 if($busa == 1) {
-                    $code = 'US'.$this->ip_info_region_code($ip);
+                    $code = 'US-'.$this->ip_info_region_code($ip);
                 }else{
                     $code = $this->ip_info_region_code($ip);
                 }
