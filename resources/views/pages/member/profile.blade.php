@@ -828,19 +828,19 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
 
 <script type="text/javascript">
     $('.dropify').dropify();
-    $(".select2").select2();
-    var addrow = $('#demo-foo-addrow');
-        addrow.footable().on('click', '.delete-row-btn', function() {
 
-        //get the footable object
-        var footable = addrow.data('footable');
+    // var addrow = $('#demo-foo-addrow');
+    //     addrow.footable().on('click', '.delete-row-btn', function() {
 
-        //get the row we are wanting to delete
-        var row = $(this).parents('tr:first');
+    //     //get the footable object
+    //     var footable = addrow.data('footable');
 
-        //delete the row
-        footable.removeRow(row);
-    });
+    //     //get the row we are wanting to delete
+    //     var row = $(this).parents('tr:first');
+
+    //     //delete the row
+    //     footable.removeRow(row);
+    // });
 
     $("#invest_region").multiSelect({
         selectableOptgroup: true
