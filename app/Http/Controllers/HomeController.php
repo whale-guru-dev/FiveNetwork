@@ -148,8 +148,9 @@ class HomeController extends Controller
     {
         $referer = Preregister::where('code', $code)->first();
         $user = User::where('user_code', $code)->first();
-
-        if(($referer && !$user)||($referer && $user->is_allowed == 2)){
+        if(!$referer && !$user){
+            return redirect()->route('home');
+        }elseif(($referer && !$user)||($referer && $user->is_allowed == 2)){
             return view('auth.applymembership')->with(['user' => $referer, 'submitted' => 0]);
         }else{
             return view('auth.applymembership')->with(['user' => $user, 'submitted' => 1]);
