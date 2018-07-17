@@ -37,37 +37,37 @@
                     <div class="table-responsive m-t-40">
                         <table id="allow-apply" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
-                                <tr role="row">
-                                    <th width="5%">#</th>
-                                    <th width="5%">Name</th>
-                                    <th width="5%">Email</th>
-                                    <th width="20%">Region of focus</th>
-                                    <th width="20%">Sector of Focus</th>
-                                    <th width="20%">Typical Check Size</th>
-                                    <th width="15%">Area of Family/Investor Expertise</th>
-                                    <th width="5%">Net Worth</th>
-                                    <th width="5%">Applied Time</th>
-                                    <th width="5%">Action</th>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Region of focus</th>
+                                    <th>Sector of Focus</th>
+                                    <th>Typical Check Size</th>
+                                    <th>Area of Family/Investor Expertise</th>
+                                    <th>Net Worth</th>
+                                    <th>Applied Time</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th width="5%">#</th>
-                                    <th width="5%">Name</th>
-                                    <th width="5%">Email</th>
-                                    <th width="20%">Region of focus</th>
-                                    <th width="20%">Sector of Focus</th>
-                                    <th width="20%">Typical Check Size</th>
-                                    <th width="15%">Area of Family/Investor Expertise</th>
-                                    <th width="5%">Net Worth</th>
-                                    <th width="5%">Applied Time</th>
-                                    <th width="5%">Action</th>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Region of focus</th>
+                                    <th>Sector of Focus</th>
+                                    <th>Typical Check Size</th>
+                                    <th>Area of Family/Investor Expertise</th>
+                                    <th>Net Worth</th>
+                                    <th>Applied Time</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
                                 @if($users->count()>0)
                                 @foreach($users as $user)
-                                <tr role="row">
+                                <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$user->fName.' '.$user->lName}}</td>
                                     <td>{{$user->email}}</td>
