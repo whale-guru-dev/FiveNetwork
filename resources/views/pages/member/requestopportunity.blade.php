@@ -49,7 +49,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-pencil"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Enter Contact name">
+                                <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Enter Contact name" required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -60,7 +60,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-email"></i>
                                     </span>
                                 </div>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -71,7 +71,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-mobile"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone number">
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone number" required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -83,7 +83,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                     </span>
                                 </div>
 
-                                <select name="company_stage" class="form-control">
+                                <select name="company_stage" class="form-control" required="">
                                     <option>Select</option>
                                     <option value="1">Pre-Revenue/Seed</option>
                                     <option value="2">Early Stage/Venture Capital</option>
@@ -193,7 +193,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-target"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mask-money" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing" data-inputmask="'alias': 'currency'">
+                                <input type="text" class="form-control mask-money" id="investing_amount" name="investing_amount" placeholder="Enter Amount You are Investing" data-inputmask="'alias': 'currency'"  required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -204,7 +204,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mask-money" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise" data-inputmask="'alias': 'currency'">
+                                <input type="text" class="form-control mask-money" id="raising" name="raising" placeholder="Total Amount Company is Looking to Raise" data-inputmask="'alias': 'currency'"  required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -215,8 +215,8 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                         <i class="ti-flag-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control mask-money" id="valuation_val" name="valuation_val" placeholder="Enter Available capacity for FIVE Network members" data-inputmask="'alias': 'currency'">
-                                <input type="hidden" name="valuation" id="valuation">
+                                <input type="text" class="form-control mask-money" id="valuation_val" name="valuation_val" placeholder="Enter Available capacity for FIVE Network members" data-inputmask="'alias': 'currency'"  required="">
+                                <input type="hidden" name="valuation" id="valuation" >
                             </div>
                         </div>
 
