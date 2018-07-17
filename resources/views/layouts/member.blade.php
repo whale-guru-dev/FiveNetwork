@@ -271,7 +271,8 @@ color: #797979;
     <script src="{{asset('assets/dashboard/plugins/sweetalert/jquery.sweet-alert.custom.js')}}"></script>
     <!--Custom JavaScript -->
     <script src="{{asset('assets/dashboard/member/js/custom.min.js')}}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script> -->
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <!-- ============================================================== -->
 
     <!-- <script src="{{asset('assets/dashboard/plugins/session-timeout/jquery.sessionTimeout.min.js')}}"></script> -->

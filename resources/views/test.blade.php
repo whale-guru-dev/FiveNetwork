@@ -23,14 +23,16 @@
 
     <link href="{{asset('assets/dashboard/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
 
-    <link href="{{asset('assets/dashboard/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{asset('assets/dashboard/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" /> -->
 
-    <link href="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
+    <!-- <link href="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" /> -->
     <link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
 
-    <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{asset('assets/dashboard/plugins/multiselect1/multiselect.css')}}" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" /> -->
     <!-- <link href="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/css/jquery.multiselect.css')}}" rel="stylesheet" type="text/css" /> -->
-
+    <link rel="stylesheet" type="text/css" href="//cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css">
+    <script type="text/javascript" src="//cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
 
     <link href="{{asset('assets/dashboard/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
@@ -57,12 +59,7 @@
     .hidden {
          visibility:hidden;
     }
-    select{
-        margin-top: 500px;
-    }
-    input{
-        margin-top: 500px;
-    }
+
 </style>
 @php
     $invest_types = App\Model\InvestmentStructureType::all();
@@ -99,7 +96,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="invest_structure">Investment Structure :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_structure[]" id="invest_structure" >
+                                                <select class="required form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_structure[]" id="invest_structure" >
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_types as $type)
                                                     <option value="{{$type->id}}">{{$type->type}}</option>
@@ -110,7 +107,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="invest_region">Investment Regions :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region" >
+                                                <select class="required form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="invest_region[]" id="invest_region" >
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_region_types as $irt)
                                                         @if($irt->id < 14)
@@ -194,7 +191,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="average_investment_size">Typical Check Size :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size" >
+                                                <select class="required form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size" >
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_size_types as $type)
                                                     <option value="{{$type->id}}">{{$type->type}}</option>
@@ -205,7 +202,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="investment_stage">Investment Stage :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage" >
+                                                <select class="required form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage" >
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_stage_types as $type)
                                                     <option value="{{$type->id}}">{{$type->type}}</option>
@@ -219,7 +216,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="investment_sector">Investment Sector Focus :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector" >
+                                                <select class="required form-control" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector" >
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_sector_types as $isrt)
                                                     <option value="{{$isrt->id}}">{{$isrt->type}}</option>
@@ -232,9 +229,25 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label>Mask Test</label>
-                                            <input type="text" name="mask" class="form-control mask-money required" id="mask" >
+                                            <input type="text" name="mask-val" data-inputmask="'alias': 'percentage'"  class="form-control mask-money required" id="mask-val" value="90%">
+                                            <input type="hidden" name="mask" id="mask">
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label>Mask Test</label>
+                                            <input type="number" name="mask-val" class="form-control required" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label>Mask Test</label>
+                                            <textarea class="form-control" cols="3">xxxs</textarea>
+                                        </div>
+                                    </div>
+
                                 </section>
                                 
                                 <button type="button" id="sub-btn">submit</button>
@@ -262,16 +275,16 @@
     <script src="{{asset('assets/dashboard/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!--Custom JavaScript -->
 
-    <script src="{{asset('assets/dashboard/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+    <!-- <script src="{{asset('assets/dashboard/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script> -->
+    <!-- <script src="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script> -->
+    <!-- <script src="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script> -->
 
-    <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
-
+    <!-- <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script> -->
+    <!-- <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect1/multiselect.min.js')}}"></script> -->
     <!-- <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script> -->
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script> -->
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <!-- ============================================================== -->
     <!-- Wizard -->
     <script src="{{asset('assets/dashboard/plugins/wizard/jquery.steps.min.js')}}"></script>
@@ -303,8 +316,8 @@
 
     <script type="text/javascript">
 
-        $(".mask-money").mask('$000,000,000', {reverse: false});
-
+        // $(".mask-money").mask('$000,000,000,000', {reverse: false, numericInput:true});
+        $(".mask-money").inputmask();
         $(document).on("click","#sub-btn",function(){
 
             var emptyfields = $('.required').filter(function() { return this.value === ""; });
@@ -319,7 +332,7 @@
         });
 
         $("#apply-form").submit(function(){
-            var investsite = $("#mask").val();
+            var investsite = $("#mask-val").val();
             var number = Number(investsite.replace(/[^0-9\.-]+/g,""));
             $("#mask").val(number);
         });
@@ -328,9 +341,28 @@
     </script>
 
     <script type="text/javascript">
-        // $("#invest_region, #invest_structure, #private_investment_number, #additional_capacity, #average_investment_size, #investment_stage, #investment_sector").multiselect({
-        //     addSearchBox:false
-        // });
+        $("#invest_region, #invest_structure, #private_investment_number, #additional_capacity, #average_investment_size, #investment_stage, #investment_sector").multiselect({ 
+            buttonText: function(options, select) {
+                console.log(select[0].length);
+                if (options.length === 0) {
+                    return 'None selected';
+                }
+                if (options.length === select[0].length) {
+                    return 'All selected ('+select[0].length+')';
+                }
+                else {
+                    var labels = [];
+                    console.log(options);
+                    options.each(function() {
+                        labels.push($(this).val());
+                    });
+                    return labels.join(', ') + '';
+                }
+            }
+        
+        });
+
+        // document.multiselect('#invest_region, #invest_structure, #private_investment_number, #additional_capacity, #average_investment_size, #investment_stage, #investment_sector');
     $(document).ready(function(){
         var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
         $('#company_website').on('keypress keydown keyup',function(){

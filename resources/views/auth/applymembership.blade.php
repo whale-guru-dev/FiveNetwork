@@ -743,7 +743,7 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="networth_aum">Approximate Networth/AUM : </label>
-                                                    <input type="text" class="form-control mask-money" id="networth_aum" name="networth_aum" > 
+                                                    <input type="text" class="form-control mask-money" data-inputmask="'alias': 'currency'" id="networth_aum" name="networth_aum" > 
                                                 </div>
                                             </div>
                                         </div>
@@ -1051,7 +1051,8 @@ The information on the Site is intended to enable investors to understand the na
 
     <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script> -->
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
 
     <!-- ============================================================== -->
     <!-- Wizard -->
@@ -1102,7 +1103,7 @@ The information on the Site is intended to enable investors to understand the na
             $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
         });
 
-        $('.mask-money').mask('$000,000,000,000', {reverse: false});
+        $('.mask-money').inputmask();
 
         $(document).ready(function(){
             var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;

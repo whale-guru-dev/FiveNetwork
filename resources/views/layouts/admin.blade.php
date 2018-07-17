@@ -137,7 +137,7 @@
                                                 <img src="{{asset('assets/dashboard/profile/propic/'.Auth::user()->propic)}}" alt="user">
                                             </div>
                                             <div class="u-text">
-                                                <h4>{{Auth::user()->fName.' '.AUth::user()->lName}}</h4>
+                                                <h4>{{Auth::user()->fName.' '.Auth::user()->lName}}</h4>
                                                 <p class="text-muted">{{Auth::user()->email}}</p>
                                                 <a href="{{route('admin.staff-account')}}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                                             </div>
@@ -193,7 +193,7 @@
                                 <i class="mdi mdi-widgets"></i>
                                 <span class="hide-menu">Membership</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse" style="">
+                            <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('admin.allow-apply-membership')}}">Access Requested</a></li>
                                 <li><a href="{{route('admin.check-membership')}}">Pending Membership Applications</a></li>
                                 <li><a href="{{route('admin.check.membership')}}">Membership Database</a></li>
@@ -202,10 +202,10 @@
 
                         <li> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                                <i class="ti-harddrives"></i>
+                                <i class="mdi mdi-book-open"></i>
                                 <span class="hide-menu">Opportunity</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse" style="">
+                            <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('admin.check-request-opportunity')}}">Approve Co-Investment Opportunity</a></li>
                                 <li><a href="{{route('admin.check-allrequest-opportunity')}}">Co-Investment Database</a></li>
                                 <li><a href="{{route('admin.opportunity-analytics')}}">Opportunity Analytics</a></li>
@@ -226,7 +226,7 @@
                                 <i class="mdi mdi-account-key"></i>
                                 <span class="hide-menu">Staff</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse" style="">
+                            <ul aria-expanded="false" class="collapse">
                                 @if(Auth::user()->role == 1)
                                 <li><a href="{{route('admin.staff-management')}}">Management</a></li>
                                 @endif

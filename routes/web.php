@@ -42,6 +42,10 @@ Route::get('/follow-me/{link}','HomeController@Referral');
 Route::get('/monthly-email/{year}/{month}/{memberid}/{code}','MonthlyEmailController@gatherview')->name('monthly-email');
 Route::post('monthly-email','MonthlyEmailController@gatherinfo')->name('answer-monthly-email');
 
+Route::get('investment-questionnaire-form/{code}','InvestmentOpportunityFormController@submitopportunityformview')->name('investment-questionnaire-form');
+Route::post('submit-opportunity-form','InvestmentOpportunityFormController@submitopportunityform')->name('submit-coinvestment-opportunity');
+Route::post('investment-questionnaire-form-save-link','InvestmentOpportunityFormController@sendemail')->name('investment-questionnaire-form-save-link');
+
 Route::group(['prefix'=>'member','namespace'=>'member'],function(){
 	Route::get('/','HomeController@index');
 	Route::get('dashboard','HomeController@index')->name('member.dashboard');
@@ -59,8 +63,7 @@ Route::group(['prefix'=>'member','namespace'=>'member'],function(){
 	Route::get('submit-opportunity','OpportunityController@requestview')->name('member.submit-opportunity');
 	Route::post('request-opportunity','OpportunityController@request')->name('member.requestopportunity');
 
-	Route::get('investment-questionnaire-form/{code}','OpportunityController@submitopportunityformview')->name('member.investment-questionnaire-form');
-	Route::post('submit-opportunity-form','OpportunityController@submitopportunityform')->name('member.submit-coinvestment-opportunity');
+	
 	Route::get('verified-opportunity','OpportunityController@verifiedopportunityview')->name('member.verified-opportunity');
 	Route::get('opportunity-detail/{id}','OpportunityController@detailopportunity')->name('member.opportunity-detail');
 	Route::post('interest-opportunity','OpportunityController@interestopportunity')->name('member.interest-opportunity');

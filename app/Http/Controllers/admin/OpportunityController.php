@@ -43,11 +43,13 @@ class OpportunityController extends Controller
     	$requestopportuniy->is_accepted = 1;
     	$requestopportuniy->save();
 
-    	$to = $requestopportuniy->user->email;
+    	// $to = $requestopportuniy->user->email;
+        $to = $requestopportuniy->email;
         $subtitle = 'The Family Investment Exchange is interested in your opportunity!';
         $subject = 'The Family Investment Exchange is interested in your opportunity!';
         $content = 'A member of the Family Investment Exchange has requested we contact you to request additional information on your investment opportunity. Please complete the Investment Questionnaire in this email to share this opportunity with families throughout the US who are looking for opportunities like yours.<br>Best,<br>The Five Network Team.';
-        $link = route('member.investment-questionnaire-form',['code' => $requestopportuniy->code]);
+        // $link = route('member.investment-questionnaire-form',['code' => $requestopportuniy->code]);
+        $link = route('investment-questionnaire-form',['code' => $requestopportuniy->code]);
         $link_name = 'Fill out the forms';
 
         Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
