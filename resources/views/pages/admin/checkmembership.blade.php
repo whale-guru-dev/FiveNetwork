@@ -38,30 +38,30 @@
                         <table id="allow-apply" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Region of focus</th>
-                                    <th>Sector of Focus</th>
-                                    <th>Typical Check Size</th>
-                                    <th>Area of Family/Investor Expertise</th>
-                                    <th>Net Worth</th>
-                                    <th>Applied Time</th>
-                                    <th>Action</th>
+                                    <th width="5%">#</th>
+                                    <th width="5%">Name</th>
+                                    <th width="5%">Email</th>
+                                    <th width="20%">Region of focus</th>
+                                    <th width="20%">Sector of Focus</th>
+                                    <th width="20%">Typical Check Size</th>
+                                    <th width="15%">Area of Family/Investor Expertise</th>
+                                    <th width="5%">Net Worth</th>
+                                    <th width="5%">Applied Time</th>
+                                    <th width="5%">Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Region of focus</th>
-                                    <th>Sector of Focus</th>
-                                    <th>Typical Check Size</th>
-                                    <th>Area of Family/Investor Expertise</th>
-                                    <th>Net Worth</th>
-                                    <th>Applied Time</th>
-                                    <th>Action</th>
+                                    <th width="5%">#</th>
+                                    <th width="5%">Name</th>
+                                    <th width="5%">Email</th>
+                                    <th width="20%">Region of focus</th>
+                                    <th width="20%">Sector of Focus</th>
+                                    <th width="20%">Typical Check Size</th>
+                                    <th width="15%">Area of Family/Investor Expertise</th>
+                                    <th width="5%">Net Worth</th>
+                                    <th width="5%">Applied Time</th>
+                                    <th width="5%">Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
