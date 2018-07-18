@@ -563,14 +563,13 @@ class InvestmentOpportunityFormController extends Controller
 
     public function checkmatch(MemberRequestOpportunity $mof, $id)
     {
-        $score = 0;
-        $member = User::where('id', $mof->usid)->first();
+          $score = 0;
 
-        $state = $mof->investment_region;
-        $sector = $mof->investment_sector;
-        $stage = $mof->company_stage;
-        $structure = $mof->investment_structure;
-        $size = $mof->valuation;
+          $state = $mof->investment_region;
+          $sector = $mof->investment_sector;
+          $stage = $mof->company_stage;
+          $structure = $mof->investment_structure;
+          $size = $mof->valuation;
 
         $score_structure = 0;
         $score_stage = 0;
@@ -578,18 +577,18 @@ class InvestmentOpportunityFormController extends Controller
         $score_sector = 0;
         $score_size = 0;
 
-        $whole_member = User::where('id', '<>', $member->id)->get();
-        foreach($whole_member as $each)
+        $whole_member = User::where('id', '!=', $mof->usid)->get();
+        foreach($whole_member as $new_user)
         {
-            if($each->investmentstructure){
-                foreach($each->investmentstructure as $is){
+            if($new_user->investmentstructure){
+                foreach($new_user->investmentstructure as $is){
                     if($structure == $is->type_id)
                         $score_structure = 1;
                 }
             }
 
-            if($each->investmentstage){
-                foreach($each->investmentstage as $is){
+            if($new_user->investmentstage){
+                foreach($new_user->investmentstage as $is){
                     if($is->type_id > 2 && $stage == 3) 
                         $score_stage = 1;
                     if($is->type_id <= 2 && $stage == $is->type_id)
@@ -597,23 +596,23 @@ class InvestmentOpportunityFormController extends Controller
                 }
             }
 
-            if($each->investmentregion){
-                foreach($each->investmentregion as $is){
+            if($new_user->investmentregion){
+                foreach($new_user->investmentregion as $is){
                     if($state == $is->type_id)
                         $score_state = 1;
                 }
             }
 
-            if($each->investmentsector){
-                foreach($each->investmentsector as $is){
+            if($new_user->investmentsector){
+                foreach($new_user->investmentsector as $is){
                     if($sector == $is->type_id)
                         $score_sector = 1;
                 }
             }
 
 
-            if($each->investmentsize){
-                foreach($each->investmentsize as $is){
+            if($new_user->investmentsize){
+                foreach($new_user->investmentsize as $is){
                     if($is->type_id == 1 && $size < 5 * pow(10,5)){
                         $score_size = 1;
                     }elseif($is->type_id == 2 && $size >= 5 * pow(10,5) && $size <= pow(10,6)){
@@ -631,7 +630,7 @@ class InvestmentOpportunityFormController extends Controller
             $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
             $match_member_oppor = MemberOpportunityMatch::create([
                 'opportunity_id' => $id,
-                'matched_member_id' => $each->id,
+                'matched_member_id' => $new_user->id,
                 'score' => $score,
                 'matched_structure' => $score_structure,
                 'matched_stage' => $score_stage,

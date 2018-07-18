@@ -81,7 +81,7 @@ class OpportunityController extends Controller
     public function analyticsview()
     {
         $oppors = [];
-        $requests = MemberRequestOpportunity::where('is_submitted', 1)->get();
+        $requests = MemberRequestOpportunity::where('is_submitted', 1)->orderBy('created_at','DESC')->get();
 
         if($requests->count() > 0)
             foreach($requests as $request){
