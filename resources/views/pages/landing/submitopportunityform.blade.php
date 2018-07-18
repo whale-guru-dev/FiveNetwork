@@ -199,7 +199,7 @@ color: #797979;
                                                 <label for="fName"> First Name
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="fName" name="fName" required value="@php if(isset($form)) echo $form->fName; @endphp">
+                                                <input type="text" class="form-control required" id="fName" name="fName" required value="@php if(isset($form)) echo $form->fName; @endphp" maxlength="255">
                                             </div>
                                         </div>
 
@@ -208,7 +208,7 @@ color: #797979;
                                                 <label for="lName"> Last Name
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="lName" name="lName" required value="@php if(isset($form)) echo $form->lName; @endphp">
+                                                <input type="text" class="form-control required" id="lName" name="lName" required value="@php if(isset($form)) echo $form->lName; @endphp" maxlength="255">
                                             </div>
                                         </div>
                                     </div>
@@ -239,7 +239,7 @@ color: #797979;
                                                 <label for="company_name"> Company Name
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="company_name" name="company_name" required value="@php if(isset($form)) echo $form->company_name; @endphp">
+                                                <input type="text" class="form-control required" id="company_name" name="company_name" required value="@php if(isset($form)) echo $form->company_name; @endphp" maxlength="255">
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +250,7 @@ color: #797979;
                                                 <label for="company_website"> Company Website
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="company_website" name="company_website" required value="@php if(isset($form)) echo $form->company_website; @endphp">
+                                                <input type="text" class="form-control required" id="company_website" name="company_website" required value="@php if(isset($form)) echo $form->company_website; @endphp" maxlength="255">
                                                 <p><span class="emsg hidden">Please Enter a Valid Name</span></p>
                                             </div>
                                         </div>
@@ -262,7 +262,7 @@ color: #797979;
                                                 <label for="address"> Address
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="address" name="address" required value="@php if(isset($form)) echo $form->address; @endphp">
+                                                <input type="text" class="form-control required" id="address" name="address" required value="@php if(isset($form)) echo $form->address; @endphp" maxlength="255">
                                             </div>
                                         </div>
                                     </div>
@@ -273,7 +273,7 @@ color: #797979;
                                                 <label for="city"> City
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="city" name="city" required  value="@php if(isset($form)) echo $form->city; @endphp">
+                                                <input type="text" class="form-control required" id="city" name="city" required  value="@php if(isset($form)) echo $form->city; @endphp" maxlength="255">
                                             </div>
                                         </div>
 
@@ -688,7 +688,7 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="products_service"> Products/Services : <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="products_service" name="products_service" required value="@php if(isset($form)) echo $form->products_service; @endphp"> 
+                                                <input type="text" class="form-control required" id="products_service" name="products_service" required value="@php if(isset($form)) echo $form->products_service; @endphp" maxlength="255"> 
                                             </div>
                                         </div>
                                     </div>
@@ -770,7 +770,7 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="length_time"> Length of Time in Industry : <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="length_time" name="length_time" required value="@php if(isset($form)) echo $form->length_time; @endphp"> 
+                                                <input type="text" class="form-control required" id="length_time" name="length_time" required value="@php if(isset($form)) echo $form->length_time; @endphp" maxlength="255"> 
                                             </div>
                                         </div>
                                     </div>
@@ -780,7 +780,7 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="prior_company_role"> Prior Companies and Roles : <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="prior_company_role" name="prior_company_role" required value="@php if(isset($form)) echo $form->prior_company_role; @endphp"> 
+                                                <input type="text" class="form-control required" id="prior_company_role" name="prior_company_role" required value="@php if(isset($form)) echo $form->prior_company_role; @endphp" maxlength="255"> 
                                             </div>
                                         </div>
                                     </div>
@@ -815,7 +815,7 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="additional_member_name"> Name : <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control" id="additional_member_name" name="additional_member_name" value="@php if(isset($form)) echo $form->additional_member_name; @endphp"> 
+                                                <input type="text" class="form-control" id="additional_member_name" name="additional_member_name" value="@php if(isset($form)) echo $form->additional_member_name; @endphp" maxlength="255"> 
                                             </div>
                                         </div>
 
@@ -1020,7 +1020,7 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="percent_cur_revenue">What percent of current revenue is contractually recurring (vs. non-recurring)? <span class="danger">*</span></label>
-                                                <input type="text" name="percent_cur_revenue" class="form-control required mask-percent" id="percent_cur_revenue" data-inputmask="'alias': 'percentage'" required value="@php if(isset($form)) echo $form->percent_cur_revenue; @endphp">
+                                                <input type="text" name="percent_cur_revenue" class="form-control required mask-percent" id="percent_cur_revenue" data-inputmask="'alias': 'percentage'" required value="@php if(isset($form)) echo $form->percent_cur_revenue; @endphp" maxlength="255">
                                             </div>
                                         </div>
 
@@ -1050,7 +1050,7 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="debt_creditor">Creditor</label>
-                                                        <input type="text" name="debt_creditor" class="form-control" id="debt_creditor" value="@php if(isset($form)) echo $form->debt_creditor; @endphp">
+                                                        <input type="text" name="debt_creditor" class="form-control" id="debt_creditor" value="@php if(isset($form)) echo $form->debt_creditor; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
 
@@ -1066,7 +1066,7 @@ color: #797979;
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="type_debt_rate_maturity_term">Type of Debt, Rate, Maturity, & Payment Terms</label>
-                                                        <input type="text" name="type_debt_rate_maturity_term" class="form-control" id="type_debt_rate_maturity_term" value="@php if(isset($form)) echo $form->type_debt_rate_maturity_term; @endphp">
+                                                        <input type="text" name="type_debt_rate_maturity_term" class="form-control" id="type_debt_rate_maturity_term" value="@php if(isset($form)) echo $form->type_debt_rate_maturity_term; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1311,7 +1311,7 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="debt_creditor">Creditor</label>
-                                                        <input type="text" name="debt_creditor" class="form-control" id="debt_creditor" value="@php if(isset($form)) echo $form->debt_creditor; @endphp">
+                                                        <input type="text" name="debt_creditor" class="form-control" id="debt_creditor" value="@php if(isset($form)) echo $form->debt_creditor; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
 
@@ -1327,7 +1327,7 @@ color: #797979;
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="type_debt_rate_maturity_term">Type of Debt, Rate, Maturity, & Payment Terms</label>
-                                                        <input type="text" name="type_debt_rate_maturity_term" class="form-control" id="type_debt_rate_maturity_term" value="@php if(isset($form)) echo $form->type_debt_rate_maturity_term; @endphp">
+                                                        <input type="text" name="type_debt_rate_maturity_term" class="form-control" id="type_debt_rate_maturity_term" value="@php if(isset($form)) echo $form->type_debt_rate_maturity_term; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1341,7 +1341,7 @@ color: #797979;
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="primary_competitor">Primary Competitors :  <span class="danger">*</span></label>
-                                                <input type="text" name="primary_competitor" class="form-control required" id="primary_competitor" required value="@php if(isset($form)) echo $form->primary_competitor; @endphp">
+                                                <input type="text" name="primary_competitor" class="form-control required" id="primary_competitor" required value="@php if(isset($form)) echo $form->primary_competitor; @endphp" maxlength="255">
                                             </div>
                                         </div> 
 
@@ -1392,7 +1392,7 @@ color: #797979;
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="customer_name_1">Customer Name</label>
-                                                                <input type="text" name="customer_name_1" class="form-control" id="customer_name_1" value="@php if(isset($form)) echo $form->customer_name_1; @endphp">
+                                                                <input type="text" name="customer_name_1" class="form-control" id="customer_name_1" value="@php if(isset($form)) echo $form->customer_name_1; @endphp" maxlength="255">
                                                             </div>
                                                         </div>
 
@@ -1408,7 +1408,7 @@ color: #797979;
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="customer_name_2">Customer Name</label>
-                                                                <input type="text" name="customer_name_2" class="form-control" id="customer_name_2" value="@php if(isset($form)) echo $form->customer_name_2; @endphp">
+                                                                <input type="text" name="customer_name_2" class="form-control" id="customer_name_2" value="@php if(isset($form)) echo $form->customer_name_2; @endphp" maxlength="255">
                                                             </div>
                                                         </div>
 
@@ -1424,7 +1424,7 @@ color: #797979;
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="customer_name_3">Customer Name</label>
-                                                                <input type="text" name="customer_name_3" class="form-control" id="customer_name_3" value="@php if(isset($form)) echo $form->customer_name_3; @endphp">
+                                                                <input type="text" name="customer_name_3" class="form-control" id="customer_name_3" value="@php if(isset($form)) echo $form->customer_name_3; @endphp" maxlength="255">
                                                             </div>
                                                         </div>
 
@@ -1440,7 +1440,7 @@ color: #797979;
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="customer_name_4">Customer Name</label>
-                                                                <input type="text" name="customer_name_4" class="form-control" id="customer_name_4" value="@php if(isset($form)) echo $form->customer_name_4; @endphp">
+                                                                <input type="text" name="customer_name_4" class="form-control" id="customer_name_4" value="@php if(isset($form)) echo $form->customer_name_4; @endphp" maxlength="255">
                                                             </div>
                                                         </div>
 
@@ -1455,7 +1455,7 @@ color: #797979;
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="customer_name_5">Customer Name</label>
-                                                                <input type="text" name="customer_name_5" class="form-control" id="customer_name_5" value="@php if(isset($form)) echo $form->customer_name_5; @endphp">
+                                                                <input type="text" name="customer_name_5" class="form-control" id="customer_name_5" value="@php if(isset($form)) echo $form->customer_name_5; @endphp" maxlength="255">
                                                             </div>
                                                         </div>
 
@@ -1475,14 +1475,14 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="contract_duration">How long are contracts?  <span class="danger">*</span></label>
-                                                <input type="text" name="contract_duration" class="form-control required" id="contract_duration" required value="@php if(isset($form)) echo $form->contract_duration; @endphp">
+                                                <input type="text" name="contract_duration" class="form-control required" id="contract_duration" required value="@php if(isset($form)) echo $form->contract_duration; @endphp" maxlength="255">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cancellation_fee">Cancellation Fee :  <span class="danger">*</span></label>
-                                                <input type="text" name="cancellation_fee" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cancellation_fee" required value="@php if(isset($form)) echo $form->cancellation_fee; @endphp">
+                                                <input type="text" name="cancellation_fee" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cancellation_fee" required value="@php if(isset($form)) echo $form->cancellation_fee; @endphp" >
                                             </div>
                                         </div>
                                     </div>
@@ -1502,7 +1502,7 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projected_num_client">Projected number of clients/contracts for the year :  <span class="danger">*</span></label>
-                                                <input type="text" name="projected_num_client" class="form-control required" id="projected_num_client" required value="@php if(isset($form)) echo $form->projected_num_client; @endphp">
+                                                <input type="text" name="projected_num_client" class="form-control required" id="projected_num_client" required value="@php if(isset($form)) echo $form->projected_num_client; @endphp" maxlength="255">
                                             </div>
                                         </div>
                                     </div>
@@ -1552,7 +1552,7 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="capital_raise_timing">What is the timing of this capital raise?  <span class="danger">*</span></label>
-                                                <input type="text" name="capital_raise_timing" class="form-control required" id="capital_raise_timing" required value="@php if(isset($form)) echo $form->capital_raise_timing; @endphp">
+                                                <input type="text" name="capital_raise_timing" class="form-control required" id="capital_raise_timing" required value="@php if(isset($form)) echo $form->capital_raise_timing; @endphp" maxlength="255">
                                             </div>
                                         </div>
                                     </div>
@@ -1568,7 +1568,7 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="capital_used_for">What will the capital be used for?  <span class="danger">*</span></label>
-                                                <input type="text" name="capital_used_for" class="form-control required" id="capital_used_for" required value="@php if(isset($form)) echo $form->capital_used_for; @endphp">
+                                                <input type="text" name="capital_used_for" class="form-control required" id="capital_used_for" required value="@php if(isset($form)) echo $form->capital_used_for; @endphp" maxlength="255">
                                             </div>
                                         </div>
                                     </div>
@@ -1609,7 +1609,7 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="prior_investors">Previous Investors</label>
-                                                        <input type="text" name="prior_investors" class="form-control" id="prior_investors" value="@php if(isset($form)) echo $form->prior_investors; @endphp">
+                                                        <input type="text" name="prior_investors" class="form-control" id="prior_investors" value="@php if(isset($form)) echo $form->prior_investors; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
 
@@ -1675,14 +1675,14 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="estimated_timing_future_capital">Estimated timing of future capital raises :  <span class="danger">*</span></label>
-                                                        <input type="text" name="estimated_timing_future_capital" class="form-control required" id="estimated_timing_future_capital" required value="@php if(isset($form)) echo $form->estimated_timing_future_capital; @endphp">
+                                                        <input type="text" name="estimated_timing_future_capital" class="form-control required" id="estimated_timing_future_capital" required value="@php if(isset($form)) echo $form->estimated_timing_future_capital; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="use_additional_fund">Use of additional funds :  <span class="danger">*</span></label>
-                                                        <input type="text" name="use_additional_fund" class="form-control required" id="use_additional_fund" required value="@php if(isset($form)) echo $form->use_additional_fund; @endphp">
+                                                        <input type="text" name="use_additional_fund" class="form-control required" id="use_additional_fund" required value="@php if(isset($form)) echo $form->use_additional_fund; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1698,7 +1698,7 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="name_investor">Name of Investor :  <span class="danger">*</span></label>
-                                                        <input type="text" name="name_investor" class="form-control required" id="name_investor" required value="@php if(isset($form)) echo $form->name_investor; @endphp">
+                                                        <input type="text" name="name_investor" class="form-control required" id="name_investor" required value="@php if(isset($form)) echo $form->name_investor; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
 
@@ -1727,7 +1727,7 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="explanation_valuation">Explanation of Valuation :  <span class="danger">*</span></label>
-                                                        <input type="text" name="explanation_valuation" class="form-control required" id="explanation_valuation" required value="@php if(isset($form)) echo $form->explanation_valuation; @endphp">
+                                                        <input type="text" name="explanation_valuation" class="form-control required" id="explanation_valuation" required value="@php if(isset($form)) echo $form->explanation_valuation; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1742,7 +1742,7 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="plan_for_growth">What are your plans for growth?  <span class="danger">*</span></label>
-                                                        <input type="text" name="plan_for_growth" class="form-control required" id="plan_for_growth" required value="@php if(isset($form)) echo $form->plan_for_growth; @endphp">
+                                                        <input type="text" name="plan_for_growth" class="form-control required" id="plan_for_growth" required value="@php if(isset($form)) echo $form->plan_for_growth; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1786,7 +1786,7 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="top_potential_acqu">Top Potential Acquirers :  <span class="danger">*</span></label>
-                                                        <input type="text" name="top_potential_acqu" class="form-control required" id="top_potential_acqu" required value="@php if(isset($form)) echo $form->top_potential_acqu; @endphp">
+                                                        <input type="text" name="top_potential_acqu" class="form-control required" id="top_potential_acqu" required value="@php if(isset($form)) echo $form->top_potential_acqu; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
 
