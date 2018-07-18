@@ -1968,6 +1968,9 @@ color: #797979;
 
         //     }
         // });
+        $(document).on("click","#submit-btn",function(){
+            $("#identity").val("submit");
+        });
 
 
         $(document).on("click","#save-btn",function(){
