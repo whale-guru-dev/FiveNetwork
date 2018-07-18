@@ -80,10 +80,10 @@ class OpportunityController extends Controller
 
     public function analyticsview()
     {
-        // $oppors = MemberRequestOpportunity::where('is_submitted', 1)->oppor_form()->orderBy('created_at','DESC')->get();
-        $oppors = MemberOpportunityForm::whereHas('tb_member_request_opportunity', function ($query) {
-            $query->where('is_submitted', 1);
-        })->orderBy('created_at','DESC')->get();
+        $oppors = [];
+        $requests = MemberRequestOpportunity::where('is_submitted', 1)->get();
+        foreach($requests as $each)
+            $oppors[] = MemberOpportunityFormf::where('code', $each->code)->first();
         return view('pages.admin.opportunityanalytics')->with(['oppors' => $oppors]);
     }
 
