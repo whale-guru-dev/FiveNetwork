@@ -1027,7 +1027,7 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cash_balance">Cash Balance of Company today :  <span class="danger">*</span></label>
-                                                <input type="text" name="cash_balance" class="form-control required  mask-money data-inputmask="'alias': 'currency'"" id="cash_balance" required value="@php if(isset($form)) echo $form->cash_balance; @endphp">
+                                                <input type="text" name="cash_balance" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="cash_balance" required value="@php if(isset($form)) echo $form->cash_balance; @endphp">
                                             </div>
                                         </div>
                                     </div>
