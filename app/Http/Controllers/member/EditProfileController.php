@@ -11,6 +11,7 @@ use App\Model\MemberInvestmentSize;
 use App\Model\MemberInvestmentStage;
 use App\Model\MemberInvestmentRegion;
 use App\Model\MemberInvestmentSector;
+use App\Model\MemberRequestOpportunity;
 use App\Model\MemberOpportunityForm;
 use App\Model\MemberOpportunityMatch;
 use App\User;
