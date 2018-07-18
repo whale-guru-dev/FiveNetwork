@@ -29,8 +29,8 @@ class InvestmentOpportunityFormController extends Controller
     {
           $opportunity = MemberRequestOpportunity::where('code',$request['code'])->first();
           $form = MemberOpportunityForm::where('code', $request['code'])->first();
-          // $msg = [];
-          // $status = '';
+          $msg = [];
+          $status = '';
           if($request['identity'] == 'submit'){
             
                if($form){
