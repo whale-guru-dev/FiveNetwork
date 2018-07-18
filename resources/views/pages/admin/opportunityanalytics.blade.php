@@ -55,7 +55,7 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @if($oppors->count()>0)
+                                @if(count($oppors)>0)
                                 	@foreach($oppors as $each)
                                     <tr>
     									<td>{{$i++}}</td>

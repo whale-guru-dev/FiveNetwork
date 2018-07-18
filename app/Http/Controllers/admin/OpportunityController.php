@@ -81,7 +81,7 @@ class OpportunityController extends Controller
     public function analyticsview()
     {
         $oppors = [];
-        $requests = MemberRequestOpportunity::where('is_submitted', 1)->get();
+        $requests = MemberRequestOpportunity::where('is_submitted', 1)->first();
         foreach($requests as $each)
             $oppors[] = MemberOpportunityForm::where('code', $each->code)->first();
         return view('pages.admin.opportunityanalytics')->with(['oppors' => $oppors]);
