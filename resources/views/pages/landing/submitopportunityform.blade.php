@@ -188,7 +188,7 @@ color: #797979;
                                 <form class="form p-t-20" action="{{route('submit-coinvestment-opportunity')}}" method="POST" id="submit-form">
                                     @csrf
                                     <input type="hidden" name="code" value="{{$opportunitymember->code}}">
-                                    <input type="hidden" name="identity" id="identity" value="">
+                                    <input type="hidden" name="identity" id="identity" value="submit">
                                     <h4>GENERAL INFORMATION</h4>
                                     <hr>
                                     
@@ -1968,9 +1968,9 @@ color: #797979;
 
         //     }
         // });
-        $(document).on("click","#submit-btn",function(){
-            $("#identity").val("submit");
-        });
+        // $(document).on("click","#submit-btn",function(){
+        //     $("#identity").val("submit");
+        // });
 
 
         $(document).on("click","#save-btn",function(){
