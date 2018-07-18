@@ -29,4 +29,9 @@ class MemberRequestOpportunity extends Model
     {
         return $this->belongsTo('App\Model\MemberInvestmentSectorType','investment_sector');
     }
+
+    public function oppor_form()
+    {
+        return $this->hasOne('App\Model\MemberOpportunityForm', 'code');
+    }
 }
