@@ -199,7 +199,7 @@ color: #797979;
                                                 <label for="fName"> First Name
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="fName" name="fName" required value="@php if(isset($form)) echo $form->fName; @endphp" maxlength="255">
+                                                <input type="text" class="form-control required" id="fName" name="fName" required value="@php if(isset($form)) echo $form->fName; @endphp" maxlength="55">
                                             </div>
                                         </div>
 
@@ -208,7 +208,7 @@ color: #797979;
                                                 <label for="lName"> Last Name
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="lName" name="lName" required value="@php if(isset($form)) echo $form->lName; @endphp" maxlength="255">
+                                                <input type="text" class="form-control required" id="lName" name="lName" required value="@php if(isset($form)) echo $form->lName; @endphp" maxlength="55">
                                             </div>
                                         </div>
                                     </div>
@@ -219,7 +219,7 @@ color: #797979;
                                                 <label for="phone"> Phone
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="tel" class="form-control required" id="phone" name="phone" required value="@php if(isset($form)) echo $form->phone; @endphp">
+                                                <input type="tel" class="form-control required" id="phone" name="phone" required value="@php if(isset($form)) echo $form->phone; @endphp" maxlength="55">
                                             </div>
                                         </div>
 
@@ -228,7 +228,7 @@ color: #797979;
                                                 <label for="email"> Email
                                                     <span class="danger">*</span> 
                                                 </label>
-                                                <input type="email" class="form-control required" id="email" name="email" required value="@php if(isset($form)) echo $form->email; @endphp">
+                                                <input type="email" class="form-control required" id="email" name="email" required value="@php if(isset($form)) echo $form->email; @endphp" maxlength="55">
                                             </div>
                                         </div>
                                     </div>
@@ -1311,7 +1311,7 @@ color: #797979;
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="debt_creditor">Creditor</label>
-                                                        <input type="text" name="debt_creditor" class="form-control" id="debt_creditor" value="@php if(isset($form)) echo $form->debt_creditor; @endphp" maxlength="255">
+                                                        <input type="text" name="debt_creditor" class="form-control" id="debt_creditor" value="@php if(isset($form)) echo $form->debt_creditor; @endphp" maxlength="55">
                                                     </div>
                                                 </div>
 
