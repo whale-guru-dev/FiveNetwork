@@ -134,7 +134,7 @@
                                         <div class="form-group row">
                                             <label class="control-label text-right col-md-4">Available capacity for FIVE Network members:</label>
                                             <div class="col-md-8">
-                                                <p class="form-control-static"> {{'$'.number_format($request->valuation, 0, '.',',')}} </p>
+                                                <p class="form-control-static"> {{'$ '.number_format($request->valuation, 0, '.',',')}} </p>
                                             </div>
                                         </div>
                                     </div>
