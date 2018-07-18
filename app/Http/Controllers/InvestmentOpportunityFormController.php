@@ -557,7 +557,7 @@ class InvestmentOpportunityFormController extends Controller
         }
 
         
-        return redirect()->route('investment-questionnaire-form',['code' => $form->code])->with(['msg' => $msg,'status' => $status]);
+        return redirect()->route('investment-questionnaire-form',['code' => $opportunity->code])->with(['msg' => $msg,'status' => $status]);
     }
 
     public function checkmatch(MemberRequestOpportunity $mof, $id)
