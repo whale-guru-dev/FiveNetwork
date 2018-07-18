@@ -578,7 +578,7 @@ class InvestmentOpportunityFormController extends Controller
         $score_size = 0;
 
         $whole_member = User::where('id', '!=', $mof->usid)->get();
-        dd($whole_member);exit;
+
         foreach($whole_member as $new_user)
         {
             if($new_user->investmentstructure){
