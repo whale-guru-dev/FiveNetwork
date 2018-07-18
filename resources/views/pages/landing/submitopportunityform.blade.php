@@ -1020,7 +1020,7 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="percent_cur_revenue">What percent of current revenue is contractually recurring (vs. non-recurring)? <span class="danger">*</span></label>
-                                                <input type="text" name="percent_cur_revenue " class="form-control required mask-percent" id="percent_cur_revenue" data-inputmask="'alias': 'percentage'" required value="@php if(isset($form)) echo $form->percent_cur_revenue; @endphp">
+                                                <input type="text" name="percent_cur_revenue" class="form-control required mask-percent" id="percent_cur_revenue" data-inputmask="'alias': 'percentage'" required value="@php if(isset($form)) echo $form->percent_cur_revenue; @endphp">
                                             </div>
                                         </div>
 
