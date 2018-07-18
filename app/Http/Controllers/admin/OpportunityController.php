@@ -85,7 +85,6 @@ class OpportunityController extends Controller
 
         if($requests->count() > 0)
             foreach($requests as $request){
-                dd($request);exit;
                 $oppors[] = MemberOpportunityForm::where('code', $request->code)->first();
             }
         return view('pages.admin.opportunityanalytics')->with(['oppors' => $oppors]);
