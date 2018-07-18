@@ -206,5 +206,8 @@
         closeOnConfirm: false 
     });
 </script>
+@php
+Session::forget('msg')
+@endphp
 @endif
 @endsection
