@@ -32,6 +32,6 @@ class MemberRequestOpportunity extends Model
 
     public function oppor_form()
     {
-        return $this->hasOne('App\Model\MemberOpportunityForm', 'code');
+        return $this->belongsTo('App\Model\MemberOpportunityForm', 'code');
     }
 }
