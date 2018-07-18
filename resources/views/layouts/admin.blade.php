@@ -302,7 +302,8 @@
 
     @yield('admin-js')
     <script type="text/javascript">
-        $(document).on("click","#back-btn",function(){
+        $(document).on("click","#back-btn",function(e){
+            e.preventDefault();
             window.history.back();
         });
     </script>
