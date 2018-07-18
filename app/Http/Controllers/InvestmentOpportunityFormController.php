@@ -280,7 +280,11 @@ class InvestmentOpportunityFormController extends Controller
 
             $opportunity->update(['is_submitted' => 1]);
 
-            $this->checkmatch($opportunity,$form->id);
+            $whole_member = User::where('id', '!=', $opportunity->usid)->get();
+
+            foreach($whole_member as $each_member)
+               $this->checkmatch($opportunity, $each_member);
+            // $this->checkmatch($opportunity,$form->id);
 
             $to = $form->user->email;
             $subtitle = 'Thank you for completing the Investment Questionnaire';
@@ -561,26 +565,24 @@ class InvestmentOpportunityFormController extends Controller
         return redirect()->route('investment-questionnaire-form',['code' => $form->code])->with(['msg' => $msg,'status' => $status]);
     }
 
-    public function checkmatch(MemberRequestOpportunity $mof, $id)
+
+    public function checkmatch(MemberRequestOpportunity $mof, User $new_user)
     {
-          $score = 0;
+        if($mof){
+            $score = 0;
 
-          $state = $mof->investment_region;
-          $sector = $mof->investment_sector;
-          $stage = $mof->company_stage;
-          $structure = $mof->investment_structure;
-          $size = $mof->valuation;
+            $state = $mof->investment_region;
+            $sector = $mof->investment_sector;
+            $stage = $mof->company_stage;
+            $structure = $mof->investment_structure;
+            $size = $mof->valuation;
 
-        $score_structure = 0;
-        $score_stage = 0;
-        $score_state = 0;
-        $score_sector = 0;
-        $score_size = 0;
+            $score_structure = 0;
+            $score_stage = 0;
+            $score_state = 0;
+            $score_sector = 0;
+            $score_size = 0;
 
-        $whole_member = User::where('id', '!=', $mof->usid)->get();
-
-        foreach($whole_member as $new_user)
-        {
             if($new_user->investmentstructure){
                 foreach($new_user->investmentstructure as $is){
                     if($structure == $is->type_id)
@@ -628,17 +630,31 @@ class InvestmentOpportunityFormController extends Controller
                 }
             }
 
+            $oppor_id = MemberOpportunityForm::where('code', $mof->code)->first()->id;
+
             $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
-            $match_member_oppor = MemberOpportunityMatch::create([
-                'opportunity_id' => $id,
-                'matched_member_id' => $new_user->id,
-                'score' => $score,
-                'matched_structure' => $score_structure,
-                'matched_stage' => $score_stage,
-                'matched_state' => $score_state,
-                'matched_sector' => $score_sector,
-                'matched_size' => $score_size
-            ]);
+            $match_member_oppor = MemberOpportunityMatch::where('opportunity_id',$oppor_id)->where('matched_member_id',$new_user->id)->first();
+            if($match_member_oppor){
+                $match_member_oppor->update([
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }else{
+                $match_member_oppor = MemberOpportunityMatch::create([
+                    'opportunity_id' => $oppor_id,
+                    'matched_member_id' => $new_user->id,
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }
         }
     }
 

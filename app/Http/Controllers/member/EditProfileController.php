@@ -283,9 +283,6 @@ class EditProfileController extends Controller
                     'matched_size' => $score_size
                 ]);
             }
-            
-
         }
-        
     }
 }
