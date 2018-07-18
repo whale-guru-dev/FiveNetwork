@@ -175,7 +175,7 @@ class EditProfileController extends Controller
             }
         }
 
-        $mofs = MemberOpportunityForm::all();
+        $mofs = MemberRequestOpportunity::where('is_accepted', 1)->where('is_submitted', 1)->get();
         foreach($mofs as $mof)
             $this->checkmatch($mof,$user);
 
@@ -193,7 +193,7 @@ class EditProfileController extends Controller
         return $randomString;
     }
 
-    public function checkmatch(MemberOpportunityForm $mof, User $new_user)
+    public function checkmatch(MemberRequestOpportunity $mof, User $new_user)
     {
         if($mof){
             $score = 0;
