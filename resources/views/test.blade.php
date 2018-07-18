@@ -85,16 +85,16 @@
                         <div class="card-body">
                             <h4 class="card-title">Apply for Membership</h4>
 
-                            <form action="{{url('/test')}}" class="form-inline" id="apply-form" method="POST">
+                            <form action="{{url('/test')}}" class="form" id="apply-form" method="POST">
                                 @csrf
                                 <h6>Step</h6>
-                                <section>
+                                
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="invest_structure">Investment Structure :</label>
-                                                <select class="required" style="width: 100%" multiple  name="invest_structure[]" id="invest_structure" >
-                                                    <option value="" selected="">Select</option>
+                                                <select class="required" style="width: 100%" multiple  name="invest_structure[]" id="invest_structure" required>
+                                                    
                                                     @foreach($invest_types as $type)
                                                     <option value="{{$type->id}}">{{$type->type}}</option>
                                                     @endforeach
@@ -105,8 +105,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="invest_region">Investment Regions :</label>
-                                                <select class="required" style="width: 100%" multiple  name="invest_region[]" id="invest_region" >
-                                                    <option value="" selected="">Select</option>
+                                                <select class="required" style="width: 100%" multiple  name="invest_region[]" id="invest_region" required>
+                                                    
                                                     @foreach($invest_region_types as $irt)
                                                         @if($irt->id < 14)
                                                         @if($loop->iteration == 1)
@@ -160,7 +160,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
-                                                <select class="custom-select form-control required" id="private_investment_number" name="private_investment_number" >
+                                                <select class="custom-select form-control required" id="private_investment_number" name="private_investment_number" required="">
                                                     <option value="" selected="">Select</option>
                                                     <option value="0">1-2</option>
                                                     <option value="1">3-4</option>
@@ -173,7 +173,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
-                                                <select class="custom-select form-control required" id="additional_capacity" name="additional_capacity" >
+                                                <select class="custom-select form-control required" id="additional_capacity" name="additional_capacity" required="">
                                                     <option value="" selected="">Select</option>
                                                     <option value="20">20%</option>
                                                     <option value="40">40%</option>
@@ -189,7 +189,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="average_investment_size">Typical Check Size :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size" >
+                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size" required="">
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_size_types as $type)
                                                     <option value="{{$type->id}}">{{$type->type}}</option>
@@ -200,7 +200,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="investment_stage">Investment Stage :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage" >
+                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage" required="">
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_stage_types as $type)
                                                     <option value="{{$type->id}}">{{$type->type}}</option>
@@ -214,7 +214,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="investment_sector">Investment Sector Focus :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector" >
+                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector" required="">
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_sector_types as $isrt)
                                                     <option value="{{$isrt->id}}">{{$isrt->type}}</option>
@@ -227,7 +227,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label>Mask Test</label>
-                                            <input type="text" name="mask-val" data-inputmask="'alias': 'percentage'"  class="form-control mask-money required" id="mask-val" value="90%">
+                                            <input type="text" name="mask-val" data-inputmask="'alias': 'percentage'"  class="form-control mask-money required" id="mask-val" value="90%" required="">
                                             <input type="hidden" name="mask" id="mask">
                                         </div>
                                     </div>
@@ -235,13 +235,13 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label>Mask Test</label>
-                                            <input type="number" name="mask-val" class="form-control required" >
+                                            <input type="number" name="mask-val" class="form-control required" required="">
                                         </div>
                                     </div>
 
-                                </section>
                                 
-                                <button type="button" id="sub-btn">submit</button>
+                                
+                                <button type="submit" class="form-control" id="sub-btn">submit</button>
                             </form>
                         </div>
                     </div>
@@ -309,18 +309,18 @@
 
         // $(".mask-money").mask('$000,000,000,000', {reverse: false, numericInput:true});
         $(".mask-money").inputmask();
-        $(document).on("click","#sub-btn",function(){
+        // $(document).on("click","#sub-btn",function(){
 
-            var emptyfields = $('.required').filter(function() { return this.value === ""; });
-            if(emptyfields.length == 0){
-                console.log('empty')
-                $("#apply-form").submit();
-            }else{
-                console.log($("#"+emptyfields[0].id).offset().top)
-                $('html, body').scrollTop($("#"+emptyfields[0].id).offset().top);
-            }
+        //     var emptyfields = $('.required').filter(function() { return this.value === ""; });
+        //     if(emptyfields.length == 0){
+        //         console.log('empty')
+        //         $("#apply-form").submit();
+        //     }else{
+        //         console.log($("#"+emptyfields[0].id).offset().top)
+        //         $('html, body').scrollTop($("#"+emptyfields[0].id).offset().top);
+        //     }
             
-        });
+        // });
 
         $("#apply-form").submit(function(){
             var investsite = $("#mask-val").val();

@@ -1817,7 +1817,7 @@ color: #797979;
                                         </div>
                                     </div>
 
-                                    <button type="button" class="btn btn-success waves-effect waves-light m-r-10" id="submit-btn">Submit</button>
+                                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" id="submit-btn">Submit</button>
                                     <button type="button" class="btn btn-info waves-effect waves-light" id="save-btn">Save</button>
                                 </form>
                             </div>
@@ -1950,24 +1950,24 @@ color: #797979;
         $(".mask-money").inputmask();
         $(".mask-percent").inputmask();
 
-        $(document).on("click","#submit-btn",function(){
-            // $("#submit-form").validate();
-            var emptyfields = $('.required').filter(function() { return this.value === ""; });
-            if(emptyfields.length == 0){
-                $(".error").remove();
-                $("#identity").val("submit");
-                $("#submit-form").submit();
-            }else{ 
-                $('html, body').animate({
-                    scrollTop: $("#"+emptyfields[0].id).offset().top
-                }, 800);
+        // $(document).on("click","#submit-btn",function(){
+        //     // $("#submit-form").validate();
+        //     var emptyfields = $('.required').filter(function() { return this.value === ""; });
+        //     if(emptyfields.length == 0){
+        //         $(".error").remove();
+        //         $("#identity").val("submit");
+        //         $("#submit-form").submit();
+        //     }else{ 
+        //         $('html, body').animate({
+        //             scrollTop: $("#"+emptyfields[0].id).offset().top
+        //         }, 800);
                 
-                $(".error").remove();
-                for(var i = 0; i< emptyfields.length; i++)
-                    $("#"+emptyfields[i].id).after('<span class="error">This field is required</span>');
+        //         $(".error").remove();
+        //         for(var i = 0; i< emptyfields.length; i++)
+        //             $("#"+emptyfields[i].id).after('<span class="error">This field is required</span>');
 
-            }
-        });
+        //     }
+        // });
 
 
         $(document).on("click","#save-btn",function(){
