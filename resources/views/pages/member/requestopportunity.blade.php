@@ -251,7 +251,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
         document.getElementById("request-form").reset();
     });
 
-    $('.mask-money').inputmask();
+    $('.mask-money').inputmask({digits:0});
 
     $("#request-form").submit(function(){
         var valuation_cur = $("#valuation_val").val();
