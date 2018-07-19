@@ -90,7 +90,7 @@ class HomeController extends Controller
     {
         session(['refer_by'=>$link]);
 
-        return redirect('/'); 
+        return redirect()->route('request-access'); 
     }
 
 

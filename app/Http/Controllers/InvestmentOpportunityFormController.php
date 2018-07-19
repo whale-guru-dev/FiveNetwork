@@ -300,13 +300,12 @@ class InvestmentOpportunityFormController extends Controller
                 $to = $admin->email;
                 $subtitle = 'A Member Submitted an Investment Questionnaire!';
                 $subject = 'A Member Submitted an Investment Questionnaire!';
-                $content = 'Member '.$opportunity->user->fName.' '.$opportunity->user->lName.' submitted an Investment Questionnaire.';
+                $content = $form->fName.' '.$form->lName.'\'s opportunity, submitted by '.$opportunity->user->fName.' '.$opportunity->user->lName.' is completed and an Investment Questionnaire is available for review.';
                 $link = route('admin.opportunity-detail',['id' => $form->id]);
                 $link_name = 'Go To Dashboard';
 
                 Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
             }
-
 
             $msg = ['Success','Successfully Submitted Your Investment Questionnaire','success'];
             $status = 'created';

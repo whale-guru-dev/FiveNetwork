@@ -1106,7 +1106,7 @@ The information on the Site is intended to enable investors to understand the na
             $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
         });
 
-        $('.mask-money').inputmask();
+        $('.mask-money').inputmask({digits:0});
 
         $(document).ready(function(){
             var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;

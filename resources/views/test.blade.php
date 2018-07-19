@@ -227,7 +227,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label>Mask Test</label>
-                                            <input type="text" name="mask-val" data-inputmask="'alias': 'percentage'"  class="form-control mask-money required" id="mask-val" value="90%" required="">
+                                            <input type="text" name="mask-val" data-inputmask="'alias': 'currency'"  class="form-control mask-money required" id="mask-val" required="">
                                             <input type="hidden" name="mask" id="mask">
                                         </div>
                                     </div>
@@ -308,7 +308,7 @@
     <script type="text/javascript">
 
         // $(".mask-money").mask('$000,000,000,000', {reverse: false, numericInput:true});
-        $(".mask-money").inputmask();
+        $(".mask-money").inputmask({digits:0});
         // $(document).on("click","#sub-btn",function(){
 
         //     var emptyfields = $('.required').filter(function() { return this.value === ""; });

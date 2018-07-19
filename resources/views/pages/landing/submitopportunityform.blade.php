@@ -1947,7 +1947,7 @@ color: #797979;
     <script type="text/javascript">
         $(".select2").select2();
 
-        $(".mask-money").inputmask();
+        $(".mask-money").inputmask({digits:0});
         $(".mask-percent").inputmask();
 
         // $(document).on("click","#submit-btn",function(){
