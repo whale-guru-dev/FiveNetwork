@@ -37,7 +37,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Check Opportunity Match</h4>
+                    <h4 class="card-title">Check Opportunity Match - {{$name}}</h4>
                     <h6 class="card-subtitle">You can check opportunity matching info and approve it to send email with highlight.</h6>
                     <div class="table-responsive m-t-40">
                         <table id="allow-apply" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -53,6 +53,11 @@
                                     <th>Sector Match</th>
                                     <th>Size Match</th>
                                     <th>Interested</th>
+                                    <th>Member met with this opportunity</th>
+                                    <th>Member evaluating with this opportunity</th>
+                                    <th>Member no longer evaluating with this opportunity</th>
+                                    <th>Member open to discuss with this opportunity</th>
+                                    <th>Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -68,6 +73,11 @@
                                     <th>Sector Match</th>
                                     <th>Size Match</th>
                                     <th>Interested</th>
+                                    <th>Member met with this opportunity</th>
+                                    <th>Member evaluating with this opportunity</th>
+                                    <th>Member no longer evaluating with this opportunity</th>
+                                    <th>Member open to discuss with this opportunity</th>
+                                    <th>Date</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -143,6 +153,35 @@
                                     	<span class="badge badge-warning ml-auto">Not Interested</span>
                                     	@endif
                                     </td>
+                                    <td>
+                                        @if($each->bmet == 0)
+                                        <span class="badge badge-warning ml-auto">No</span>
+                                        @else
+                                        <span class="badge badge-success ml-auto">Yes</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($each->bevaluat == 0)
+                                        <span class="badge badge-warning ml-auto">No</span>
+                                        @else
+                                        <span class="badge badge-success ml-auto">Yes</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($each->bnoevaluate == 0)
+                                        <span class="badge badge-warning ml-auto">No</span>
+                                        @else
+                                        <span class="badge badge-success ml-auto">Yes</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($each->bopen == 0)
+                                        <span class="badge badge-warning ml-auto">No</span>
+                                        @else
+                                        <span class="badge badge-success ml-auto">Yes</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$each->express_date}}</td>
                                     <td>
                                     	@if($each->is_allowed == 0)
                                     	<button class="btn waves-effect waves-light btn-sm btn-success" data-id="{{$each->id}}" id="approve-btn">Approve to Send Email</button>

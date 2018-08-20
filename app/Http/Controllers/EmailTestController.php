@@ -62,8 +62,30 @@ class EmailTestController extends Controller
     }
 
     public function testpost(Request $request)
-    {
-
-        echo number_format($request['mask'], 0, '.',',').' $';
+    {   
+        // $i = 1;
+        // dd($request->request);exit;
+        // if($request->hasFile('prior_year_monthly_finacial'))
+        // {
+        //     $file = $request->file('prior_year_monthly_finacial');
+        //     echo $file->getClientOriginalName();
+        //     foreach($file as $each){
+        //         echo $each->getClientOriginalName();
+        //     }
+        // }
+        // $test = $request['testfield'];
+        // $form = MemberRequestOpportunity::where('code', $test)->first();
+        // if(isset($form)){
+        //     echo "yes, there is";
+        // }else{
+        //     echo "no, there isn't";
+        // }
+        // $money = $request['money'];
+        // if($money > "$ ".number_format(1000, 0, '.',',')) {echo "yes";exit;}
+        // elseif($money < "$ ".number_format(1000, 0, '.',',')) {echo "no";exit;}
+        foreach($request['connected_member_ids'] as $id)
+            echo $id;
+        // print_r($request['connected_member_ids']);exit;
+        // echo number_format($request['mask'], 0, '.',',').' $';
     }
 }

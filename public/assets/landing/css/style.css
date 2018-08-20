@@ -105,10 +105,10 @@ select:-webkit-autofill:focus {
     z-index: 1;
 }*/
 
-.container{
+/*.container{
 -webkit-backdrop-filter: blur(5px);
 backdrop-filter: blur(5px);
-}
+}*/
 #logo-img-loading{
     position: absolute;
     top: 50%;
@@ -133,8 +133,8 @@ backdrop-filter: blur(5px);
 #loading-center-absolute {
     position: absolute;
     left: 50%;
-    top: 70%;
-    transform: translate(-50%,-70%);
+    top: 65%;
+    transform: translate(-50%,-65%);
     height: 50px;
     text-align: center;
 /*    margin-top: -25px;
@@ -211,4 +211,8 @@ backdrop-filter: blur(5px);
     -webkit-transform: scaleY(0);
     transform: scaleY(0);
       }
+}
+
+.brand-heading {
+    text-shadow: 6px 9px 4px #000000;
 }

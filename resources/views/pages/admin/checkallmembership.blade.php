@@ -43,10 +43,11 @@
                                     <th>Email</th>
                                     <th>Region of focus</th>
                                     <th>Sector of Focus</th>
-                                    <th>How much capacity is left this round</th>
+                                    <th>Average Investment Size</th>
                                     <th>Area of Family/Investor Expertise</th>
                                     <th>Net Worth</th>
                                     <th>Applied Time</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -57,10 +58,11 @@
                                     <th>Email</th>
                                     <th>Region of focus</th>
                                     <th>Sector of Focus</th>
-                                    <th>Typical Check Size</th>
+                                    <th>Average Investment Size</th>
                                     <th>Area of Family/Investor Expertise</th>
                                     <th>Net Worth</th>
                                     <th>Applied Time</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -95,6 +97,17 @@
                                     <td>{{$user->area_family_investor_expertise}}</td>
                                     <td>{{$user->networth_aum}}</td>
                                     <td>{{$user->updated_at}}</td>
+                                    <td>
+                                        @if($user->is_allowed == 0)
+                                        <span class="badge badge-success">Not Checked</span>
+                                        @elseif($user->is_allowed == 1)
+                                        <span class="badge badge-info">Allowed</span>
+                                        @elseif($user->is_allowed == 2)
+                                        <span class="badge badge-warning">Denied</span>
+                                        @elseif($user->is_allowed == 3)
+                                        <span class="badge badge-danger">Removed</span>
+                                        @endif
+                                    </td>
                                     <td><a  href="{{route('admin.membership-detail',['id'=>$user->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
                                 </tr>
                                 @endforeach

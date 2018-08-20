@@ -42,6 +42,11 @@
                                     <th>Company Name</th>
                                     <th>Submitted Member</th>
                                     <th>Submitted Time</th>
+                                    <th>Status</th>
+                                    <th>FIVE Network members that have met with this company</th>
+                                    <th>FIVE Network members that are currently evaluating this opportunity</th>
+                                    <th>FIVE Network members that are no longer evaluating this opportunity</th>
+                                    <th>FIVE Network members that are open to discussing this opportunity</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -51,6 +56,11 @@
                                     <th>Company Name</th>
                                     <th>Submitted Member</th>
                                     <th>Submitted Time</th>
+                                    <th>Status</th>
+                                    <th>FIVE Network members that have met with this company</th>
+                                    <th>FIVE Network members that are currently evaluating this opportunity</th>
+                                    <th>FIVE Network members that are no longer evaluating this opportunity</th>
+                                    <th>FIVE Network members that are open to discussing this opportunity</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -68,6 +78,25 @@
                                             </a>
                                         </td>
                                         <td>{{$each->created_at}}</td>
+                                        <td>
+                                            @if($each->is_active == 0)
+                                            <span class="badge badge-danger">Closed</span>
+                                            @else
+                                            <span class="badge badge-info">Active</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{$nums[$each->code]['num_met']}}
+                                        </td>
+                                        <td>
+                                            {{$nums[$each->code]['num_evaluate']}}
+                                        </td>
+                                        <td>
+                                            {{$nums[$each->code]['num_noevaluate']}}
+                                        </td>
+                                        <td>
+                                            {{$nums[$each->code]['num_open']}}
+                                        </td>
                                         <td><a href="{{route('admin.check-member-opportunity-match',['id' => $each->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check Match</a></td>
                                     </tr>
                                 	@endforeach

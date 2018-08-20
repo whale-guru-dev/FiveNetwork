@@ -75,6 +75,10 @@ if(!isset($user))
     .sweet-alert .sa-icon.sa-success .sa-fix {
         background-color: white; 
     }
+
+    #logo-img {
+        width: 250px;
+      }
 </style>
 <body>
     <!-- ============================================================== -->
@@ -90,11 +94,11 @@ if(!isset($user))
     <section id="wrapper">
         <div class="login-register">
             <div>
-                <img src="{{asset('assets/landing/img/background.jpg')}}" class="background">
+                <img src="{{asset('assets/landing/img/intro-bg.jpg')}}" class="background">
             </div>
 
             <div class="row text-center">
-                <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('logo.png')}}" width="250" height="200"></a>
+                <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('landing-logo.png')}}" id="logo-img"></a>
             </div>
             <div class="card login-box">
                 <div class="card-body">

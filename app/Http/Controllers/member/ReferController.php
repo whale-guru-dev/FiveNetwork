@@ -30,8 +30,8 @@ class ReferController extends Controller
     	$email = $request['family_email'];
     	$link = url('/follow-me/'.Auth::user()->user_code);
         $link_name = 'Family Investment Exchange';
-        $content = 'You have been invited to be a member of the Family Investment Exchange (FIVE Network). To join the exclusive network of family office and private investors and access co-investment opportunities alongside high impact investors, Click below to request access to the FIVE Network';
-        $subtitle = 'You have been invited To Join Family Investment Exchange';
+        $content = 'You have been invited to become a member of the Family Investment Exchange (FIVE Network). Click below to request access to the exclusive network of family office and private investors and start accessing co-investment opportunities alongside high impact investors.';
+        $subtitle = 'You have been invited to join the Family Investment Exchange';
         $subject = 'Invitation To Join Family Investment Exchange';
 
         Mail::to($email)->send(new Follow($link, $link_name, $content, $subtitle, $subject));

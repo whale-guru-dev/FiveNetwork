@@ -1,10 +1,32 @@
 @extends('layouts.member')
 @section('member-css')
-
+<style type="text/css">
+    ul, li {
+      list-style-type: none;
+    }
+    .treeview li {
+        padding: 2px 10px;
+    }
+</style>
 @endsection
 
 
 @section('member-content')
+
+@php
+    $match = App\Model\MemberOpportunityMatch::where('opportunity_id', $oppor->id)->get();
+    $date_met = [];$date_eval = [];$date_noeval = [];$date_open = [];
+    foreach($match as $each){
+        if($each->bmet == 1) $date_met[] = $each->express_date;
+        if($each->bevaluat == 1) $date_eval[] = $each->express_date;
+        if($each->bnoevaluate == 1) $date_noeval[] = $each->express_date;
+        if($each->bopen == 1) $date_open[] = $each->express_date;
+    }
+    $num_met = $match->sum('bmet');
+    $num_evaluate = $match->sum('bevaluat');
+    $num_noevaluate = $match->sum('bnoevaluate');
+    $num_open = $match->sum('bopen');
+@endphp
 
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
@@ -39,6 +61,12 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-info" id="back-btn"><i class="ti-back-left">Back</i></button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
         <div class="col-12">
             <div class="card card-outline-info">
                 <div class="card-header">
@@ -49,6 +77,80 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if($matched_oppor != 'no')
+                    <form class="form-horizontal" role="form" action="{{route('member.express-opportunity')}}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Allow members to know if you have met with this company, are evaluating the company, or if you are open to discussing this opportunity.</label><br><br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="hidden" name="code" value="{{$oppor->code}}">
+                                            <label for="treeview1">FIVE Member Feedback.</label>
+                                            <ul class="treeview" id="treeview1">
+                                                <li>
+                                                    <i class="fa fa-minus"></i>
+                                                    <label>
+                                                        <div class="checkbox checkbox-success">
+                                                            <input id="xnode-0" data-id="custom-0" type="checkbox">
+                                                            <label for="xnode-0" id="selectall"> Select All  </label>
+                                                        </div>
+                                                    </label>
+                                                    <ul>
+                                                        <li>
+                                                            <label>
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input class="hummingbirdNoParent" id="xnode-0-1" data-id="custom-0-1" type="checkbox" name="express_oppor[]" value="0" @if($matched_oppor->bmet == 1) checked @endif>
+                                                                    <label for="xnode-0-1"> I have met with this opportunity </label>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input class="hummingbirdNoParent" id="xnode-0-2" data-id="custom-0-2" type="checkbox" name="express_oppor[]" value="1" @if($matched_oppor->bevaluat == 1) checked @endif>
+                                                                    <label for="xnode-0-2"> I am actively evaluating this opportunity </label>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input class="hummingbirdNoParent" id="xnode-0-3" data-id="custom-0-3" type="checkbox" name="express_oppor[]" value="2" @if($matched_oppor->bnoevaluate == 1) checked @endif>
+                                                                    <label for="xnode-0-3"> I am no longer evaluating this opportunity </label>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input class="hummingbirdNoParent" id="xnode-0-4" data-id="custom-0-4" type="checkbox" name="express_oppor[]" value="3" @if($matched_oppor->bopen == 1) checked @endif>
+                                                                    <label for="xnode-0-4"> I am open to discussing this opportunity with network members </label>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Date</label>
+                                            <input type="date" name="express_date" class="form-control" value="{{$matched_oppor->express_date}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-info">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    @endif
+                    <hr>
+                    <br>
                     <form class="form-horizontal" role="form" >
                         <div class="form-body">
                             <h3 class="box-title">Submitted Investment Questionnaire</h3>
@@ -248,17 +350,6 @@
                                 <!--/span-->
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Brief description of company and the problem the company aims to solve</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->company_desc}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -457,105 +548,12 @@
                             <h4>FINANCIAL INFORMATION</h4>
                             <hr>
 
-                            @if($oppor->company_stage == 2)
-                            <h6>2014</h6>
+                            @if($oppor->company_stage == 3)
+                            <h6>Previous Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2017 Revenue</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev4_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2017 Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev4_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev4_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>2015</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2015 Revenue</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev3_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2015 Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev3_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev3_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>2016</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2016 Revenue</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev2_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2016 Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev2_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev2_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>2017</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2017 Revenue</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Revenue</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_total_revenue}} </p>
                                         </div>
@@ -564,7 +562,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2015 Expenses</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_total_expense}} </p>
                                         </div>
@@ -573,7 +571,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Revenue - Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_revenue_expense}} </p>
                                         </div>
@@ -582,11 +580,11 @@
                                 <!--/span-->
                             </div>
 
-                            <h6>Projection - 2018</h6>
+                            <h6>Current Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Revenue</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Revenue</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_total_revenue}} </p>
                                         </div>
@@ -595,7 +593,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_total_expense}} </p>
                                         </div>
@@ -604,9 +602,40 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Revenue - Total Expense</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Revenue - Total Expense</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_revenue_expense}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+                            <h6>Next Year</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Next Year Total Revenue</label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static"> {{$oppor->next_total_revenue}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Next Year Total Expenses</label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static"> {{$oppor->next_total_expense}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Next Year Total Revenue - Total Expenses</label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static"> {{$oppor->next_revenue_expense}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -698,11 +727,11 @@
                             @endif
 
                             @else
-                            <h6>2017</h6>
+                            <h6>Previous Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2017 Revenue</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Revenue</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_total_revenue}} </p>
                                         </div>
@@ -711,7 +740,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2015 Expenses</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_total_expense}} </p>
                                         </div>
@@ -720,7 +749,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Revenue - Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_revenue_expense}} </p>
                                         </div>
@@ -729,73 +758,11 @@
                                 <!--/span-->
                             </div>
 
-                            <h6>Previous Quarter</h6>
+                            <h6>Current Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue Last 3 months</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_quater_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Expenses Last 3 months</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_quater_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_quater_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>Previous Month</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue Last Month</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_month_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Expenses Last Month</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_month_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_month_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>Projection - 2018</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Revenue</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Revenue</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_total_revenue}} </p>
                                         </div>
@@ -804,7 +771,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_total_expense}} </p>
                                         </div>
@@ -813,7 +780,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Revenue - Total Expense</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Revenue - Total Expense</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_revenue_expense}} </p>
                                         </div>
@@ -822,62 +789,31 @@
                                 <!--/span-->
                             </div>
 
-                            <h6>Projection - Current Quarter</h6>
+                            <h6>Next Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Revenue Next 3 months</label>
+                                        <label class="control-label text-right col-md-4">Next Year Total Revenue</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->next3month_total_revenue}} </p>
+                                            <p class="form-control-static"> {{$oppor->next_total_revenue}} </p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Expenses Next 3 Months</label>
+                                        <label class="control-label text-right col-md-4">Next Year Total Expenses</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->next3month_total_expense}} </p>
+                                            <p class="form-control-static"> {{$oppor->next_total_expense}} </p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Revenue - Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Next Year Total Revenue - Total Expenses</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->next3month_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>Projection - Current Month</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Revenue This Month</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->cur_month_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Expenses This Month</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->cur_month_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Revenue - Total Expense</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->cur_month_revenue_expense}} </p>
+                                            <p class="form-control-static"> {{$oppor->next_revenue_expense}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1406,11 +1342,21 @@
                                 <!--/span-->
                             </div>
 
-                            @if($oppor->company_stage == 1)
-                            <h6>Did previous investors reinvest this round?</h6>
-                            <br>
-                            <h6>Previous investors reinvesting this round</h6>
+                            @if($oppor->company_stage == 2)
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Did previous investors reinvest this round?</label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static"> {{$oppor->bprevious_investor_reinvest==0?'No':'Yes'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if($oppor->bprevious_investor_reinvest==1)
+                            
+                            <div class="row">
+                                <h6>Previous investors reinvesting this round</h6>
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">Name of Investor</label>
@@ -1430,6 +1376,7 @@
                                 </div>
                                 <!--/span-->
                             </div>
+                            @endif
                             @endif
 
                             <h4>VALUATION</h4>
@@ -1548,6 +1495,62 @@
                             @endif
 
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Prior Year Monthly Financials:</label>
+                                        <div class="col-md-3">
+                                            @if($oppor->prior_year_monthly_finacial)
+                                            <a href="{{route('opportunity.file',['name' => $oppor->prior_year_monthly_finacial])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Investor Deck:</label>
+                                        <div class="col-md-3">
+                                            @if($oppor->investor_deck)
+                                            <a href="{{route('opportunity.file',['name' => $oppor->investor_deck])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">3 Year Proforma Projections:</label>
+                                        <div class="col-md-3">
+                                            @if($oppor->proforma_projections)
+                                            <a href="{{route('opportunity.file',['name' => $oppor->proforma_projections])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Detailed Cap Table:</label>
+                                        <div class="col-md-3">
+                                            @if($oppor->detailed_cap_table)
+                                            <a href="{{route('opportunity.file',['name' => $oppor->detailed_cap_table])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">Submitted Time:</label>
@@ -1558,9 +1561,46 @@
                                 </div>
                                 <!--/span-->
                             </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-6">FIVE Network members that have met with this company :</label>
+                                        <div class="col-md-6">
+                                            <a href="#" data-toggle="modal" data-target="#date-modal" id="met_btn">{{$num_met}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-6">FIVE Network members that are currently evaluating this opportunity :</label>
+                                        <div class="col-md-6">
+                                            <a href="#" data-toggle="modal" data-target="#date-modal" id="eval_btn">{{$num_evaluate}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-6">FIVE Network members that are no longer evaluating this opportunity :</label>
+                                        <div class="col-md-6">
+                                            <a href="#" data-toggle="modal" data-target="#date-modal" id="noeval_btn">{{$num_noevaluate}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-6">FIVE Network members that are open to discussing this opportunity :</label>
+                                        <div class="col-md-6">
+                                            <a href="#" data-toggle="modal" data-target="#date-modal" id="open_btn">{{$num_open}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
-
+                        @if($matched_oppor != 'no')
+                        @if($matched_oppor->is_allowed == 1)
+                        <hr>
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-12">
@@ -1587,6 +1627,27 @@
                                 <div class="col-md-6"> </div>
                             </div>
                         </div>
+                        @endif
+                        @else
+                        <hr>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        @if($oppor->is_active == 0)
+                                        <div class="col-md-offset-6 col-md-6">
+                                            <span class="badge badge-danger ml-auto"><i class="fa fa-pencil"></i>Closed</span>
+                                        </div>
+                                        @else
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="button" class="btn btn-info" id="close-btn"> <i class="fa fa-pencil"></i> Set Status as Closed</button>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                     </form>
                 </div>
             </div>
@@ -1599,7 +1660,26 @@
     <!-- ============================================================== -->
 
 </div>
-
+<div id="date-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">FIVE Member Feedback</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row"  id="date-modal-content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if($matched_oppor != 'no')
 <form action="{{route('member.interest-opportunity')}}" method="POST" id="interest-form">
     @csrf
     <input type="hidden" name="id" value="{{$matched_oppor->id}}">
@@ -1608,6 +1688,13 @@
     @csrf
     <input type="hidden" name="id" value="{{$matched_oppor->id}}">
 </form>
+@else
+<form action="{{route('member.close-coinveset')}}" method="POST" id="close-request-form">
+    @csrf
+    <input type="hidden" name="id" value="{{$oppor->id}}">
+</form>
+@endif
+
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
@@ -1622,13 +1709,77 @@
 @endsection
 
 @section('member-js')
+<script src="{{asset('assets/dashboard/plugins/checkbox-tree/hummingbird-treeview.js')}}"></script>
+
 <script type="text/javascript">
+    $(".treeview").hummingbird();
+
+    $(document).on("click","#back-btn",function(e){
+        e.preventDefault();
+        window.history.back();
+    });
+
     $(document).on("click","#interest-btn",function(){
         $("#interest-form").submit();
     });
 
     $(document).on("click","#nointerest-btn",function(){
         $("#no-interest-form").submit();
+    });
+
+    $(document).on("click","#close-btn",function(){
+        $("#close-request-form").submit();
+    });
+
+    $(document).on("click", "#met_btn", function(){
+        var content = "";
+        @if(count($date_met)>0)
+        @foreach($date_met as $date)
+        content = content + "<label class=\"control-label text-right col-md-6\">Five Network member met with this company : </label><div class=\"col-md-6\"><p class=\"form-control-static\">" + "{{$date}}" +"</p></div>";
+        @endforeach
+        @else
+        content = "No Date";
+        @endif
+        $("#date-modal-content").html(content);
+    });
+
+    $(document).on("click", "#eval_btn", function(){
+        
+        var content = "";
+        @if(count($date_eval)>0)
+        @foreach($date_eval as $date)
+        content = content + "<label class=\"control-label text-right col-md-6\">FIVE Network member currently evaluating this opportunity : </label><div class=\"col-md-6\"><p class=\"form-control-static\">" + "{{$date}}" +"</p></div>";
+        @endforeach
+        @else
+        content = "No Date";
+        @endif
+        $("#date-modal-content").html(content);
+    });
+
+    $(document).on("click", "#noeval_btn", function(){
+        
+        var content = "";
+        @if(count($date_noeval)>0)
+        @foreach($date_noeval as $date)
+        content = content + "<label class=\"control-label text-right col-md-6\">FIVE Network member no longer evaluating this opportunity : </label><div class=\"col-md-6\"><p class=\"form-control-static\">" + "{{$date}}" +"</p></div>";
+        @endforeach
+        @else
+        content = "No Date";
+        @endif
+        $("#date-modal-content").html(content);
+    });
+
+    $(document).on("click", "#open_btn", function(){
+        
+        var content = "";
+        @if(count($date_open)>0)
+        @foreach($date_open as $date)
+        content = content + "<label class=\"control-label text-right col-md-6\">FIVE Network member is open to discussing this opportunity : </label><div class=\"col-md-6\"><p class=\"form-control-static\">" + "{{$date}}" +"</p></div>";
+        @endforeach
+        @else
+        content = "No Date";
+        @endif
+        $("#date-modal-content").html(content);
     });
 </script>
 @if(Session::get('msg'))

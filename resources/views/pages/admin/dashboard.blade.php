@@ -26,8 +26,10 @@ $month_syndicated2 = [];
 for($i = 1; $i <= 12; $i++){
 	$month_member[] = App\User::whereYear('created_at', '=', date('Y'))
               ->whereMonth('created_at', '=', $i)->get()->count();
-    $month_opportunity[] = App\Model\MemberRequestOpportunity::whereYear('created_at', '=', date('Y'))
-              ->whereMonth('created_at', '=', $i)->get()->count();
+    $month_opportunity[] = (App\Model\MemberRequestOpportunity::whereYear('created_at', '=', date('Y'))
+                  ->whereMonth('created_at', '=', $i)->get()->count() + App\Model\MemberSimpleOpportunity::whereYear('created_at', '=', date('Y'))
+                  ->whereMonth('created_at', '=', $i)->get()->count() + App\Model\InvestmentQuestionnaire::whereYear('created_at', '=', date('Y'))
+                  ->whereMonth('created_at', '=', $i)->get()->count());
     $month_login[] = App\Model\MemberLogin::whereYear('created_at', '=', date('Y'))
               ->whereMonth('created_at', '=', $i)->get()->count();
     $month_syndicated1[] = App\Model\MemberMonthlyEmail::where('year', date('Y'))->where('month', date('m'))->sum('capital') ;
@@ -44,10 +46,14 @@ $user_act = [];
 foreach(App\User::all() as $each){
 	$score_login = App\Model\MemberLogin::where('usid', $each->id)->count() * 10;
 	$score_oppor = App\Model\MemberRequestOpportunity::where('usid', $each->id)->count() *20;
-	$score_express = App\Model\MemberOpportunityMatch::where('matched_member_id', $each->id)->where('is_allowed', 1)->where('binterest','<>',0)->count() * 20;
+    $score_deal = App\Model\MemberSimpleOpportunity::where('usid', $each->id)->count() *20;
+	$score_express = App\Model\MemberOpportunityMatch::where('matched_member_id', $each->id)->where('is_allowed', 1)->where('binterest','!=',0)->count() * 20;
 	$score_referral = App\Model\MemberReferLog::where('usid', $each->id)->count() * 20;
-	$sum_score = $score_login + $score_oppor + $score_express + $score_referral;
-	$user_act[$each->id] = ['id' => $each->id, 'Name' => $each->fName.' '.$each->lName, 'score' => $sum_score];
+	$sum_score = $score_login + $score_oppor + $score_deal + $score_express + $score_referral;
+    
+    $status = $each->is_allowed;
+
+	$user_act[$each->id] = ['id' => $each->id, 'Name' => $each->fName.' '.$each->lName, 'score' => $sum_score, 'status' => $status];
 }
 
 
@@ -232,6 +238,7 @@ $admins = App\Model\Admin::all();
                                     <th>Rank</th>
                                     <th>Member Name</th>
                                     <th>Score</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -241,6 +248,17 @@ $admins = App\Model\Admin::all();
                                 	<td>{{$loop->iteration}}</td>
                                 	<td>{{$each['Name']}}</td>
                                 	<td>{{$each['score']}}</td>
+                                    <td>
+                                    @if($each['status'] == 0)
+                                    <span class="badge badge-success">Not Checked</span>
+                                    @elseif($each['status'] == 1)
+                                    <span class="badge badge-info">Allowed</span>
+                                    @elseif($each['status'] == 2)
+                                    <span class="badge badge-warning">Denied</span>
+                                    @elseif($each['status'] == 3)
+                                    <span class="badge badge-danger">Removed</span>
+                                    @endif
+                                    </td>
                                 	<td><a href="{{route('admin.member-activity-detail', ['id' => $each['id']])}}" class="btn btn-info btn-sm">More Info</a></td>
                                 </tr>
                                 @endforeach

@@ -28,8 +28,10 @@
     <link href="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
 
-    <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/plugins/multiple-select/multiple-select.css')}}" rel="stylesheet" type="text/css" />
     <!-- <link href="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/css/jquery.multiselect.css')}}" rel="stylesheet" type="text/css" /> -->
+
+    <link href="{{asset('assets/dashboard/plugins/checkbox-tree/hummingbird-treeview.css')}}" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
 
@@ -57,6 +59,69 @@
     .hidden {
          visibility:hidden;
     }
+
+    #star-check > #star-error {
+        display: none !important;
+    }
+
+    /*.ms-choice{
+        display: none;
+    }
+    #invest_structure ,#invest_region {
+        width: 100%;
+        position: absolute;
+        left: -9999px;
+    }*/
+
+    /*.ms-drop{
+        display: block !important;
+        background: #fff;
+        color: #555555;
+        float: left;
+        width: 45%;
+        border: 0px solid #aaa; 
+    }
+    .ms-drop ul{
+        webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+        transition: border linear 0.2s, box-shadow linear 0.2s;*/
+        /*border: 1px solid #ccc;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;*/
+        /*position: relative;
+        height: 200px;
+        overflow-y: auto;*/
+    /*}*/
+
+/*    .ms-drop [type=checkbox]:checked, [type=checkbox]:not(:checked) {
+        position: relative !important;
+        left: 0px !important;
+        opacity: 1 !important; 
+    }
+
+    .ms-drop ul > li {
+        list-style: none;
+        display: list-item;
+        background-image: none;
+        position: static;
+        border-bottom: 1px #eee solid;
+        padding: 2px 10px;
+        color: #555;
+        font-size: 14px;
+    }
+
+    .ms-drop span{
+        margin-left: 5px;
+    }*/
+    ul, li {
+      list-style-type: none;
+    }
 </style>
 @php
     $invest_types = App\Model\InvestmentStructureType::all();
@@ -64,192 +129,113 @@
     $invest_stage_types = App\Model\MemberInvestmentStageType::all();
     $invest_sector_types = App\Model\MemberInvestmentSectorType::all();
     $invest_region_types = App\Model\MemberInvestmentRegionType::all();
+
+
+
 @endphp
 <body>
-<div id="main-wrapper">
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-    <div class="page-wrapper" id="page-wrapper" style="margin-left: 0px !important;">
 
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
-        <div class="container">
+    <div id="main-wrapper">
+            <!-- Page wrapper  -->
             <!-- ============================================================== -->
-            <!-- Start Page Content -->
+        <div class="page-wrapper" id="page-wrapper" style="margin-left: 0px !important;">
+
             <!-- ============================================================== -->
-            <!-- Validation wizard -->
-            <div class="row" id="validation">
-                <div class="col-12">
-                    <div class="card wizard-content apply-box">
-                        <div class="card-body">
-                            <h4 class="card-title">Apply for Membership</h4>
-
-                            <form action="{{url('/test')}}" class="form" id="apply-form" method="POST">
-                                @csrf
-                                <h6>Step</h6>
-                                
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="invest_structure">Investment Structure :</label>
-                                                <select class="required" style="width: 100%" multiple  name="invest_structure[]" id="invest_structure" required>
-                                                    
-                                                    @foreach($invest_types as $type)
-                                                    <option value="{{$type->id}}">{{$type->type}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="button-box m-t-20"> <a id="select-all" class="btn btn-danger" href="#">select all</a> <a id="deselect-all" class="btn btn-info" href="#">deselect all</a> </div>
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Validation wizard -->
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="deal-room-table">
+                            <thead>
+                                <tr>
+                                    <th title="Hooray!"><i class="fa fa-thumbs-up"></i></th>
+                                    <th title="Hooray!"><i class="fa fa-thumbs-down"></i></th>
+                                    <th title="Hooray!"><i class="fa fa-handshake-o"></i></th>
+                                    <th title="Hooray!"><i class="fa fa-link"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" id="connected_member_1" name="connected_member[]" value="1" class="filled-in" >
+                                            <label for="connected_member_1"></label>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="invest_region">Investment Regions :</label>
-                                                <select class="required" style="width: 100%" multiple  name="invest_region[]" id="invest_region" required>
-                                                    
-                                                    @foreach($invest_region_types as $irt)
-                                                        @if($irt->id < 14)
-                                                        @if($loop->iteration == 1)
-                                                        <optgroup label="Southeast">
-                                                        @endif
-                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                        @if($loop->iteration == 13)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 13 && $irt->id < 18)
-                                                        @if($loop->iteration == 14)
-                                                        <optgroup label="Southwest">
-                                                        @endif
-                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                        @if($loop->iteration == 17)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 17 && $irt->id < 30)
-                                                        @if($loop->iteration == 18)
-                                                        <optgroup label="Midwest">
-                                                        @endif
-                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                        @if($loop->iteration == 29)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 29 && $irt->id < 41)
-                                                        @if($loop->iteration == 30)
-                                                        <optgroup label="West">
-                                                        @endif
-                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                        @if($loop->iteration == 40)
-                                                        </optgroup>
-                                                        @endif
-                                                        @else
-                                                        @if($loop->iteration == 41)
-                                                        <optgroup label="Northeast">
-                                                        @endif
-                                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                                        @if($loop->iteration == 50)
-                                                        </optgroup>
-                                                        @endif
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-
-                                            </div>
+                                    </td>
+                                    <td>
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" id="connected_member_2" name="connected_member[]" value="2" class="filled-in" >
+                                            <label for="connected_member_2"></label>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" id="connected_member_3" name="connected_member[]" value="3" class="filled-in" >
+                                            <label for="connected_member_3"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="checkbox checkbox-success">
+                                            <input type="checkbox" id="connected_member_4" name="connected_member[]" value="4" class="filled-in" >
+                                            <label for="connected_member_4"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>Previous Year</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="prev1_total_revenue"> Previous Year Total Revenue :  <span class="danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_revenue" name="prev1_total_revenue"  value="@php if(isset($form)) echo $form->prev1_total_revenue; @endphp"> 
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
-                                                <select class="custom-select form-control required" id="private_investment_number" name="private_investment_number" required="">
-                                                    <option value="" selected="">Select</option>
-                                                    <option value="0">1-2</option>
-                                                    <option value="1">3-4</option>
-                                                    <option value="2">5-7</option>
-                                                    <option value="3">8-10</option>
-                                                    <option value="4"> >10 </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
-                                                <select class="custom-select form-control required" id="additional_capacity" name="additional_capacity" required="">
-                                                    <option value="" selected="">Select</option>
-                                                    <option value="20">20%</option>
-                                                    <option value="40">40%</option>
-                                                    <option value="60">60%</option>
-                                                    <option value="80">80%</option>
-                                                    <option value="100">100%</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="prev1_total_expense"> Previous Year Total Expenses :  <span class="danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_expense" name="prev1_total_expense"  value="@php if(isset($form)) echo $form->prev1_total_expense; @endphp"> 
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="average_investment_size">Typical Check Size :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="average_investment_size[]" id="average_investment_size" required="">
-                                                    <option value="" selected="">Select</option>
-                                                    @foreach($invest_size_types as $type)
-                                                    <option value="{{$type->id}}">{{$type->type}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="investment_stage">Investment Stage :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_stage[]" id="investment_stage" required="">
-                                                    <option value="" selected="">Select</option>
-                                                    @foreach($invest_stage_types as $type)
-                                                    <option value="{{$type->id}}">{{$type->type}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="prev1_revenue_expense"> Previous Year Total Revenue  - Total Expenses :  <span class="danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_revenue_expense" name="prev1_revenue_expense" readonly="" value="@php if(isset($form)) echo $form->prev1_revenue_expense; @endphp"> 
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="investment_sector">Investment Sector Focus :</label>
-                                                <select class="select2 m-b-10 select2-multiple required" style="width: 100%" multiple="multiple" data-placeholder="Choose" name="investment_sector[]" id="investment_sector" required="">
-                                                    <option value="" selected="">Select</option>
-                                                    @foreach($invest_sector_types as $isrt)
-                                                    <option value="{{$isrt->id}}">{{$isrt->type}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>Mask Test</label>
-                                            <input type="text" name="mask-val" data-inputmask="'alias': 'currency'"  class="form-control mask-money required" id="mask-val" required="">
-                                            <input type="hidden" name="mask" id="mask">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label>Mask Test</label>
-                                            <input type="number" name="mask-val" class="form-control required" required="">
-                                        </div>
-                                    </div>
-
-                                
-                                
-                                <button type="submit" class="form-control" id="sub-btn">submit</button>
-                            </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="form-group">
+                                <button class="btn btn-info" id="connect-btn">Connect Interested Members</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-</div>
+    <form action="{{url('/test')}}" method="POST" id="connect-form">
+        @csrf
+        <input type="hidden" name="connected_member_ids[]" id="connect-member-ids">
+    </form>
+
     <script src="{{asset('assets/dashboard/plugins/jquery/jquery.min.js')}}"></script>
     <!-- <script src="{{asset('assets/dashboard/plugins/jqueryui/jquery-ui.min.js')}}"></script> -->
     <!-- Bootstrap tether Core JavaScript -->
@@ -270,9 +256,13 @@
     <script src="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
 
-    <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
-
+    <!-- <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script> -->
+    <!-- <link rel="stylesheet"  href="{{asset('assets/dashboard/plugins/bootstrap-multiselect/dist/css/bootstrap-multiselect.css')}}"> -->
+    <!-- <script src="{{asset('assets/dashboard/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js')}}" type="text/javascript"></script> -->
     <!-- <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script> -->
+    <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiple-select/multiple-select.js')}}"></script>
+
+    <script type="text/javascript" src="{{asset('assets/dashboard/plugins/checkbox-tree/hummingbird-treeview.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script> -->
     <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
@@ -290,6 +280,9 @@
 
     <script src="{{asset('assets/dashboard/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script>
 
+    <script src="{{asset('assets/dashboard/plugins/icheck/icheck.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/plugins/icheck/icheck.init.js')}}"></script>
+
 
     <script src="{{asset('assets/dashboard/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
 
@@ -301,69 +294,95 @@
     <script src="{{asset('assets/dashboard/admin/js/self-custom.js')}}"></script>  
 
     <script src="{{asset('assets/dashboard/member/js/particles.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="{{asset('assets/dashboard/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="{{asset('assets/dashboard/plugins/wizard/jquery.validate.min.js')}}"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <!-- end - This is for export functionality only -->
     <script type="text/javascript">
         // particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
     </script>
 
     <script type="text/javascript">
-
-        // $(".mask-money").mask('$000,000,000,000', {reverse: false, numericInput:true});
-        $(".mask-money").inputmask({digits:0});
-        // $(document).on("click","#sub-btn",function(){
-
-        //     var emptyfields = $('.required').filter(function() { return this.value === ""; });
-        //     if(emptyfields.length == 0){
-        //         console.log('empty')
-        //         $("#apply-form").submit();
-        //     }else{
-        //         console.log($("#"+emptyfields[0].id).offset().top)
-        //         $('html, body').scrollTop($("#"+emptyfields[0].id).offset().top);
-        //     }
+        $('#deal-room-table').DataTable();
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+        $('.dropify').dropify();
+        $("#invest_region").multipleSelect({
             
-        // });
-
-        $("#apply-form").submit(function(){
-            var investsite = $("#mask-val").val();
-            var number = Number(investsite.replace(/[^0-9\.-]+/g,""));
-            $("#mask").val(number);
         });
 
+        $('#invest_structure').multipleSelect({
+            
+        });
+
+        $("#treeview").hummingbird();
+
+        $(".mask-money").inputmask({digits:0, rightAlign:false});
         
+        function check(){
+            $("#m3").val( Math.abs(Number($("#m1").val().replace(/[^0-9\.-]+/g,"")) - Number($("#m2").val().replace(/[^0-9\.-]+/g,"")) ))
+        }
+
+        $(".mask-money").bind("paste keyup",function (event) {
+           var _this = this;
+            // Short pause to wait for paste to complete
+            setTimeout( function() {
+               $("#prev1_revenue_expense").val( Math.abs(Number($("#prev1_total_revenue").val().replace(/[^0-9\.-]+/g,"")) - Number($("#prev1_total_expense").val().replace(/[^0-9\.-]+/g,"")) ));
+            }, 100);
+        });
+
+        $(document).on("click","#connect-btn", function(){
+            var ids = new Array();
+            $.each($("input[name='connected_member[]']:checked"), function() {
+              ids.push($(this).val());
+            });
+
+            $("#connect-member-ids").val(ids);
+            $("#connect-form").submit();
+
+        });
+        
+        $("#form").validate({
+            ignore: "input[type=hidden]"
+            , errorClass: "text-danger"
+            , successClass: "text-success"
+            , highlight: function (element, errorClass) {
+                $(element).removeClass(errorClass)
+            }
+            , unhighlight: function (element, errorClass) {
+                $(element).removeClass(errorClass)
+            }
+            , errorPlacement: function (error, element) {
+                if(element[0].id == "bprivacy")
+                    error.insertAfter(element[0].parentElement)
+                else error.insertAfter(element)
+            }
+            , rules: {
+                star: {
+                    required : true
+                }
+            }
+        });
+
+        $('#form').on('keyup keypress', function(e) {
+          var keyCode = e.keyCode || e.which;
+          if (keyCode === 13) { 
+            e.preventDefault();
+            return false;
+          }
+        });
     </script>
 
-    <script type="text/javascript">
-        // $("#invest_region, #invest_structure, #private_investment_number, #additional_capacity, #average_investment_size, #investment_stage, #investment_sector").multiselect({
-        //     addSearchBox:false
-        // });
-
-        $("#invest_region").multiSelect({
-            selectableOptgroup: true
-        });
-
-        $('#invest_structure').multiSelect();
-        $('#select-all').click(function() {
-            $('#invest_structure').multiSelect('select_all');
-            return false;
-        });
-        $('#deselect-all').click(function() {
-            $('#invest_structure').multiSelect('deselect_all');
-            return false;
-        });
-    $(document).ready(function(){
-        var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
-        $('#company_website').on('keypress keydown keyup',function(){
-            if (!$(this).val().match($regexname)) {
-              // there is a mismatch, hence show the error message
-                $('.emsg').removeClass('hidden');
-                $('.emsg').show();
-            }
-            else{
-                // else, do not display message
-                $('.emsg').addClass('hidden');
-            }
-        });
-    });
-    </script>
 </body>
 
 </html>

@@ -1,13 +1,13 @@
 @extends('layouts.member')
 @section('member-css')
-
+<link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
 @endsection
 
 
 @section('member-content')
 @php
-$invest_region_types = App\Model\MemberInvestmentRegionType::all();
-$invest_sector_types = App\Model\MemberInvestmentSectorType::all();
+$invest_region_types = App\Model\MemberInvestmentRegionType::orderBy('type','ASC')->get();
+$invest_sector_types = App\Model\MemberInvestmentSectorType::orderBy('type','ASC')->get();
 $invest_types = App\Model\InvestmentStructureType::all();
 @endphp
 <!-- ============================================================== -->
@@ -39,8 +39,19 @@ $invest_types = App\Model\InvestmentStructureType::all();
                 <div class="card-body">
                     <h4 class="card-title">Submit an opportunity</h4>
                     <h6 class="card-subtitle">Please fill these input to submit an opportunity.</h6>
-                    <form class="form p-t-20" action="{{route('member.requestopportunity')}}" method="POST" id="request-form">
+                    <form class="form p-t-20" action="{{route('member.requestopportunity')}}" method="POST" id="request-form" enctype="multipart/form-data">
                         @csrf
+                        <div class="form-group">
+                            <label for="contact_name">Company name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="ti-server"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Enter Company name" required="">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="contact_name">Contact name</label>
                             <div class="input-group">
@@ -84,7 +95,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                 </div>
 
                                 <select name="company_stage" class="form-control" required="">
-                                    <option>Select</option>
+                                    <option value="" selected>Select</option>
                                     <option value="1">Pre-Revenue/Seed</option>
                                     <option value="2">Early Stage/Venture Capital</option>
                                     <option value="3">Private Equity</option>
@@ -111,7 +122,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
                         </div>
 
                         <div class="form-group">
-                            <label for="investment_region">Investment Region</label>
+                            <label for="investment_region">Investment State</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">
@@ -120,48 +131,9 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                 </div>
 
                                 <select class="form-control custom-select required" name="investment_region" id="investment_region" required>
+                                    <option value="" selected>Select</option>
                                     @foreach($invest_region_types as $irt)
-                                        @if($irt->id < 14)
-                                        @if($loop->iteration == 1)
-                                        <optgroup label="Southeast">
-                                        @endif
-                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                        @if($loop->iteration == 13)
-                                        </optgroup>
-                                        @endif
-                                        @elseif($irt->id > 13 && $irt->id < 18)
-                                        @if($loop->iteration == 14)
-                                        <optgroup label="Southwest">
-                                        @endif
-                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                        @if($loop->iteration == 17)
-                                        </optgroup>
-                                        @endif
-                                        @elseif($irt->id > 17 && $irt->id < 30)
-                                        @if($loop->iteration == 18)
-                                        <optgroup label="Midwest">
-                                        @endif
-                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                        @if($loop->iteration == 29)
-                                        </optgroup>
-                                        @endif
-                                        @elseif($irt->id > 29 && $irt->id < 41)
-                                        @if($loop->iteration == 30)
-                                        <optgroup label="West">
-                                        @endif
-                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                        @if($loop->iteration == 40)
-                                        </optgroup>
-                                        @endif
-                                        @else
-                                        @if($loop->iteration == 41)
-                                        <optgroup label="Northeast">
-                                        @endif
-                                            <option value="{{$irt->id}}">{{$irt->type}}</option>
-                                        @if($loop->iteration == 50)
-                                        </optgroup>
-                                        @endif
-                                        @endif
+                                        <option value="{{$irt->id}}">{{$irt->type}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -219,7 +191,35 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                 <input type="hidden" name="valuation" id="valuation" >
                             </div>
                         </div>
+                        <h6>Upload Files</h6>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="prior_year_monthly_finacial">Prior Year Monthly Financials</label>
+                                        <input type="file" id="prior_year_monthly_finacial" class="dropify" name="prior_year_monthly_finacial" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" / >
+                                    </div>
 
+                                    <div class="col-md-6">
+                                        <label for="investor_deck">Investor Deck</label>
+                                        <input type="file" id="investor_deck" class="dropify" name="investor_deck" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" / >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="proforma_projections">3 Year Proforma Projections</label>
+                                        <input type="file" id="proforma_projections" class="dropify" name="proforma_projections" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" / >
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="detailed_cap_table">Detailed Cap Table</label>
+                                        <input type="file" id="detailed_cap_table" class="dropify" name="detailed_cap_table" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" / >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                         <button type="button" class="btn btn-inverse waves-effect waves-light" id="cancel-btn">Cancel</button>
                     </form>
@@ -231,6 +231,7 @@ $invest_types = App\Model\InvestmentStructureType::all();
 @endsection
 
 @section('member-js')
+<script src="{{asset('assets/dashboard/plugins/dropify/dist/js/dropify.min.js')}}"></script>
 
     @if(Session::get('msg'))
     <script type="text/javascript">
@@ -247,11 +248,12 @@ $invest_types = App\Model\InvestmentStructureType::all();
     @endif
 
 <script type="text/javascript">
+    $('.dropify').dropify();
     $(document).on("click","#cancel-btn",function(){
         document.getElementById("request-form").reset();
     });
 
-    $('.mask-money').inputmask({digits:0});
+    $('.mask-money').inputmask({digits:0, rightAlign:false});
 
     $("#request-form").submit(function(){
         var valuation_cur = $("#valuation_val").val();
@@ -259,5 +261,12 @@ $invest_types = App\Model\InvestmentStructureType::all();
         $("#valuation").val(valuation);
     });
     
+    $('#request-form').on('keyup keypress', function(e) {
+      var keyCode = e.keyCode || e.which;
+      if (keyCode === 13) { 
+        e.preventDefault();
+        return false;
+      }
+    });
 </script>
 @endsection 

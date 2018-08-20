@@ -26,10 +26,11 @@
 @php
 $num_logins = App\Model\MemberLogin::where('usid', $member->id)->count();
 $num_oppors = App\Model\MemberRequestOpportunity::where('usid', $member->id)->count();
-$num_expresss = App\Model\MemberOpportunityMatch::where('matched_member_id', $member->id)->where('is_allowed', 1)->where('binterest','<>',0)->count();
+$num_expresss = App\Model\MemberOpportunityMatch::where('matched_member_id', $member->id)->where('is_allowed', 1)->where('binterest','!=',0)->count();
 $num_refers = App\Model\MemberReferLog::where('usid', $member->id)->count();
 $refers = App\User::where('refer_by',$member->user_code)->latest()->get();
-$preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->where('applied',0)->latest()->get();    
+$preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->where('applied',0)->latest()->get(); 
+$num_deals = App\Model\MemberSimpleOpportunity::where('usid', $member->id)->count();   
 @endphp
 <div class="container-fluid">
     <!-- ============================================================== -->
@@ -57,6 +58,8 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
                             <h3 class="m-b-0 font-light"><small>Opportunities : {{$num_oppors}}</small></h3></div>
                         <div class="col-lg-12 col-md-12 m-t-20">
                             <h3 class="m-b-0 font-light"><small>Express Interests : {{$num_expresss}}</small></h3></div>
+                        <div class="col-lg-12 col-md-12 m-t-20">
+                            <h3 class="m-b-0 font-light"><small>Deal Room Opportunities : {{$num_deals}}</small></h3></div>
                         <div class="col-md-12 m-b-10"></div>
                     </div>
                 </div>
@@ -136,6 +139,52 @@ $preregisters = App\Model\Preregister::where('refer_by',$member->user_code)->whe
                                         </td>
                                         <td>{{$oppor->created_at->format('Y/m/d')}}</td>
                                         <td><a href="{{route('admin.requestopportunity-detail',['id' => $oppor->id])}}" class="btn btn-info btn-sm">More</a></td>
+                                    </tr>
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+                            @else
+                            <h6>There is no submitted opportunity.</h6>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <label for="basic-url">List of Deal Room Opportunities</label>
+                        <div class="table-responsive m-t-10">
+                            @if($deals->count()>0)
+                            <table id="myTable1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Contact Name</th>
+                                        <th>Amount you are investing</th>
+                                        <th>Company Stage</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    @foreach($deals as $deal)
+                                    <tr style="line-height: 1em;">
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$deal->fName.' '.$deal->lName}}</td>
+                                        <td>{{$deal->investing_amount}}</td>
+                                        <td>
+                                            @if($deal->company_stage == 1)
+                                            <span class="badge badge-success">Seed/Pre-Revenue</span>
+                                            @elseif($deal->company_stage == 2)
+                                            <span class="badge badge-info">Early Stage/Venture Capital</span>
+                                            @elseif($deal->company_stage == 3)
+                                            <span class="badge badge-warning">Private Equity</span>
+                                            @endif
+                                        </td>
+                                        <td>{{$deal->created_at->format('Y/m/d')}}</td>
+                                        <td><a href="{{route('admin.check-simple-deal',['id' => $deal->id])}}" class="btn btn-info btn-sm">More</a></td>
                                     </tr>
                                     @endforeach
                                     

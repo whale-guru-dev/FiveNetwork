@@ -24,13 +24,18 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('assets/landing/css/grayscale.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/landing/css/style.css')}}">
+    <style type="text/css">
+      #logo-img-loading {
+        width: 250px;
+      }
+    </style>
   </head>
 
   <body id="page-top">
     <div id="loading">
       <div id="loading-center">
         <!-- <div> -->
-          <img src="{{asset('landing-logo.png')}}"  id="logo-img-loading" width="250" height="200">
+          <img src="{{asset('landing-logo.png')}}"  id="logo-img-loading" >
         <!-- </div> -->
         <div id="loading-center-absolute">
           <div class="object"></div>
@@ -80,9 +85,9 @@
       <div class="intro-body">
         <div class="container">
           <div class="row">
-            <div class="col-lg-8 mx-auto">
+            <div class="col-lg-12 mx-auto">
               <h1 class="brand-heading">Family Investment Exchange</h1>
-              <p class="intro-text">Connecting Like-Minded Family Offices to World Class Investment Opportunities.</p>
+              <p class="intro-text typewrite" data-period="2000" data-type='["Connecting Like-Minded Family Offices to World Class Investment Opportunities." ]'>Connecting Like-Minded Family Offices to World Class Investment Opportunities.</p>
             </div>
           </div> 
         </div>

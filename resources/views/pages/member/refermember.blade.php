@@ -36,7 +36,7 @@
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
-    <div class="row">
+<!--     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="row">
         <div class="col-12">
@@ -86,7 +86,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <label for="basic-url">Your Followers</label>
+                    <label for="basic-url">Your Referrals</label>
                     <div class="row">
                         <div class="col-md-12 text-center">
                             @if($preregisters->count()==0 && $referers->count()==0)

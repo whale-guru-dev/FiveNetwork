@@ -13,6 +13,10 @@ use App\Model\MemberOpportunityMatch;
 use App\Model\MemberLogin;
 use App\Model\MemberRequestOpportunity;
 use App\Model\MemberReferLog;
+use App\Model\InvestmentQuestionnaire;
+use App\Model\MemberDealMatch;
+use App\Model\MemberSimpleOpportunity;
+use App\Model\MemberSimpleOpportunityMatch;
 
 class HomeController extends Controller
 {
@@ -43,6 +47,7 @@ class HomeController extends Controller
         return view('pages.admin.detailmembership')->with(['user'=>$user]);
     }
 
+
     public function allowusermembership(Request $request)
     {
         $user = User::find($request['usid']);
@@ -61,6 +66,13 @@ class HomeController extends Controller
         foreach($mofs as $mof)
             $this->checkmatch($mof,$user);
 
+        $niqs = InvestmentQuestionnaire::where('is_allowed', 1)->get();
+        foreach($niqs as $niq)
+            $this->checkmatchAlgo($niq, $user);
+
+        $msds = MemberSimpleOpportunity::where('is_allowed', 1)->get();
+        foreach($msds as $msd)
+            $this->checkmatchAlgoSimple($msd, $user);
         // return new Follow($link, $content, $subtitle, $subject);
         // return (new App\Mail\InvoicePaid($link, $content, $subtitle, $subject))->render();
 
@@ -74,8 +86,8 @@ class HomeController extends Controller
         $user->update(['is_allowed'=>2]);
         //Mail Function
         $to = $user->email;
-        $subtitle = 'Your membership application was denied!';
-        $subject = 'Your membership application was denied!';
+        $subtitle = 'Your membership application was denied';
+        $subject = 'Your membership application was denied';
         $content = 'Unfortunately , your apply membership request has been declined. Please follow this link to request again';
         $link = route('apply-membership',['code'=>$user->user_code]);
         $link_name = 'Go To Apply Membership';
@@ -107,8 +119,8 @@ class HomeController extends Controller
             
             //Mail Function
             $to = $user->email;
-            $subtitle = 'Access Granted to Family Investment Exchange!';
-            $subject = 'Access Granted to Family Investment Exchange!';
+            $subtitle = 'Access granted to the Family Investment Exchange';
+            $subject = 'Access granted to the Family Investment Exchange';
             $content = 'You have been granted access to apply for membership to Family Investment Exchange';
             $link = route('apply-membership',['code'=>$user->code]);
             $link_name = 'Begin Application';
@@ -135,7 +147,7 @@ class HomeController extends Controller
             
             //Mail Function
             $to = $user->email;
-            $subtitle = 'You are denied to apply membership!';
+            $subtitle = 'You are denied to apply membership';
             $subject = 'Denied Reqeust!';
             $content = 'You are denied by administrator to apply membership, you can\'t apply right now!';
             $link = url('/');
@@ -157,6 +169,28 @@ class HomeController extends Controller
     {
         $members = User::all();
         return view('pages.admin.checkallmembership')->with(['members' => $members]);
+    }
+
+    public function removememberview()
+    {
+        $members = User::where('is_allowed', '!=', 3)->get();
+        return view('pages.admin.removememberview')->with(['members' => $members]);
+    }
+
+    public function removemember(Request $request)
+    {
+        $id = $request['id'];
+        $user = User::find($id);
+        $user->is_allowed = 3;
+        $user->save();
+        $msg = ['Success','Successfully Removed User.','success'];
+        return redirect()->route('admin.remove.member')->with(['msg'=>$msg]);
+    }
+
+    public function removedmember()
+    {
+        $members = User::where('is_allowed', 3)->get();
+        return view('pages.admin.removedmemberview')->with(['users' => $members]);
     }
 
     public function generateRandomString($length = 6) {
@@ -251,6 +285,188 @@ class HomeController extends Controller
         
     }
 
+    public function checkmatchAlgo(InvestmentQuestionnaire $mof, User $new_user)
+    {
+        if($mof){
+            $score = 0;
+
+            $state = $mof->state;
+            $sector = $mof->sector;
+            $stage = $mof->company_stage;
+            $structure = $mof->current_capital_raise_structure;
+            $size = $mof->investment_size;
+
+            $score_structure = 0;
+            $score_stage = 0;
+            $score_state = 0;
+            $score_sector = 0;
+            $score_size = 0;
+
+            if($new_user->investmentstructure){
+                foreach($new_user->investmentstructure as $is){
+                    if($structure == $is->type_id)
+                        $score_structure = 1;
+                }
+            }
+
+            if($new_user->investmentstage){
+                foreach($new_user->investmentstage as $is){
+                    if($is->type_id > 2 && $stage == 3) 
+                        $score_stage = 1;
+                    if($is->type_id <= 2 && $stage == $is->type_id)
+                        $score_stage = 1;
+                }
+            }
+
+            if($new_user->investmentregion){
+                foreach($new_user->investmentregion as $is){
+                    if($state == $is->type_id)
+                        $score_state = 1;
+                }
+            }
+
+            if($new_user->investmentsector){
+                foreach($new_user->investmentsector as $is){
+                    if($sector == $is->type_id)
+                        $score_sector = 1;
+                }
+            }
+
+
+            if($new_user->investmentsize){
+                foreach($new_user->investmentsize as $is){
+                    if($is->type_id == 1 && $size < 5 * pow(10,5)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 2 && $size >= 5 * pow(10,5) && $size <= pow(10,6)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 3 && $size >= pow(10,6) && $size <= 5 * pow(10,6)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 4 && $size >= 5 * pow(10,6) && $size <= pow(10,7)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 5 && $size >= pow(10,7)){
+                        $score_size = 1;
+                    }
+                }
+            }
+
+
+            $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
+            $match_member_oppor = MemberDealMatch::where('opportunity_id',$mof->id)->where('matched_member_id',$new_user->id)->first();
+            if($match_member_oppor){
+                $match_member_oppor->update([
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }else{
+                $match_member_oppor = MemberDealMatch::create([
+                    'opportunity_id' => $mof->id,
+                    'matched_member_id' => $new_user->id,
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }
+        }
+    }
+
+    public function checkmatchAlgoSimple(MemberSimpleOpportunity $mof, User $new_user)
+    {
+        if($mof){
+            $score = 0;
+
+            $state = $mof->investment_region;
+            $sector = $mof->investment_sector;
+            $stage = $mof->company_stage;
+            $structure = $mof->current_capital_raise_structure;
+            $size = $mof->investment_size;
+
+            $score_structure = 0;
+            $score_stage = 0;
+            $score_state = 0;
+            $score_sector = 0;
+            $score_size = 0;
+
+            if($new_user->investmentstructure){
+                foreach($new_user->investmentstructure as $is){
+                    if($structure == $is->type_id)
+                        $score_structure = 1;
+                }
+            }
+
+            if($new_user->investmentstage){
+                foreach($new_user->investmentstage as $is){
+                    if($is->type_id > 2 && $stage == 3) 
+                        $score_stage = 1;
+                    if($is->type_id <= 2 && $stage == $is->type_id)
+                        $score_stage = 1;
+                }
+            }
+
+            if($new_user->investmentregion){
+                foreach($new_user->investmentregion as $is){
+                    if($state == $is->type_id)
+                        $score_state = 1;
+                }
+            }
+
+            if($new_user->investmentsector){
+                foreach($new_user->investmentsector as $is){
+                    if($sector == $is->type_id)
+                        $score_sector = 1;
+                }
+            }
+
+
+            if($new_user->investmentsize){
+                foreach($new_user->investmentsize as $is){
+                    if($is->type_id == 1 && $size < 5 * pow(10,5)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 2 && $size >= 5 * pow(10,5) && $size <= pow(10,6)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 3 && $size >= pow(10,6) && $size <= 5 * pow(10,6)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 4 && $size >= 5 * pow(10,6) && $size <= pow(10,7)){
+                        $score_size = 1;
+                    }elseif($is->type_id == 5 && $size >= pow(10,7)){
+                        $score_size = 1;
+                    }
+                }
+            }
+
+
+            $score = ($score_structure + $score_stage + $score_state + $score_sector + $score_size) * 20;
+            $match_member_oppor = MemberSimpleOpportunityMatch::where('opportunity_id',$mof->id)->where('matched_member_id',$new_user->id)->first();
+            if($match_member_oppor){
+                $match_member_oppor->update([
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }else{
+                $match_member_oppor = MemberSimpleOpportunityMatch::create([
+                    'opportunity_id' => $mof->id,
+                    'matched_member_id' => $new_user->id,
+                    'score' => $score,
+                    'matched_structure' => $score_structure,
+                    'matched_stage' => $score_stage,
+                    'matched_state' => $score_state,
+                    'matched_sector' => $score_sector,
+                    'matched_size' => $score_size
+                ]);
+            }
+        }
+    }
+
     public function visitdetail($date)
     {
         if($date == 'total'){
@@ -276,8 +492,9 @@ class HomeController extends Controller
         $oppors = MemberRequestOpportunity::where('usid', $id)->orderBy('created_at', 'DESC')->get();
         $referlog = MemberReferLog::where('usid', $id)->orderBy('created_at', 'DESC')->get();
         $matchs = MemberOpportunityMatch::where('matched_member_id', $id)->get();
+        $deals = MemberSimpleOpportunity::where('usid', $id)->orderBy('created_at', 'DESC')->get();
 
-        return view('pages.admin.memberactivity')->with(['member' => $member, 'logins' => $logins, 'oppors' => $oppors, 'referlog' => $referlog, 'matchs' => $matchs]);
+        return view('pages.admin.memberactivity')->with(['member' => $member, 'logins' => $logins, 'oppors' => $oppors, 'referlog' => $referlog, 'matchs' => $matchs, 'deals' => $deals]);
     }
 }
  

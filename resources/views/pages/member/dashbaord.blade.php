@@ -89,7 +89,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">United States Member Location Interactive Map</h4>
+                    <h4 class="card-title">The FIVE Network has representation from the below states</h4>
                     <div id="usa" style="height: 600px"></div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                 <div class="card-body" id="link-board">
                     <div class="row  button-group">
                         <div class="col-md-6 col-lg-6">
-                            <a href="{{route('member.submit-opportunity')}}" class="btn btn-block btn-outline-info">Submit co-investment opportunity</a>
+                            <a href="{{route('member.submit-opportunity')}}" class="btn btn-block btn-outline-info">Submit Co-Investment Opportunity</a>
                         </div>
 
                         <div class="col-md-6 col-lg-6">
@@ -117,7 +117,7 @@
                         </div>
                         
                         <div class="col-md-6 col-lg-6">
-                            <a href="{{route('member.verified-opportunity')}}" class="btn btn-block btn-outline-info">My FIVE Verified Opportunities</a>
+                            <a href="{{route('member.verified-opportunity')}}" class="btn btn-block btn-outline-info">FIVE Network Matched Opportunities</a>
                         </div>
                     </div>
                     <br>
@@ -127,7 +127,7 @@
                         </div>
                         
                         <div class="col-md-6 col-lg-6">
-                            <a href="{{route('member.dealroom')}}" class="btn btn-block btn-outline-info">Dealroom</a>
+                            <a href="{{route('member.dealroom')}}" class="btn btn-block btn-outline-info">Deal Room</a>
                         </div>
                     </div>
                 </div>
@@ -139,6 +139,7 @@ $num_total_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user(
 $num_allow_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)->where('is_accepted',1)->count();
 $num_referrals = App\Model\MemberReferLog::where('usid', Auth::user()->id)->count();
 $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
+$num_deals = App\Model\MemberSimpleOpportunity::where('usid', Auth::user()->id)->count();
 @endphp
     <div class="row">
         <div class="col-12">
@@ -152,16 +153,16 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
                             <div class="card card-inverse card-info">
                                 <div class="box bg-info text-center">
                                     <h1 class="font-light text-white">{{$num_total_oppor}}</h1>
-                                    <h6 class="text-white">Co-Investment Opportunities submitted</h6>
+                                    <h6 class="text-white">Co-Investment Opportunities Submitted</h6>
                                 </div>
                             </div>
                         </div>
                         <!-- Column -->
                         <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-success card-inverse">
+                            <div class="card card-inverse card-primary">
                                 <div class="box text-center">
-                                    <h1 class="font-light text-white">{{$num_allow_oppor}}</h1>
-                                    <h6 class="text-white">Investment Questionnaires Completed</h6>
+                                    <h1 class="font-light text-white">{{$num_deals}}</h1>
+                                    <h6 class="text-white">Deal Room Submissions</h6>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +177,7 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
                         </div>
                         <!-- Column -->
                         <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-inverse card-dark">
+                            <div class="card card-inverse card-success">
                                 <div class="box text-center">
                                     <h1 class="font-light text-white">{{$num_logins}}</h1>
                                     <h6 class="text-white">Logins</h6>
@@ -184,43 +185,9 @@ $num_logins = App\Model\MemberLogin::where('usid', Auth::user()->id)->count();
                             </div>
                         </div>
                         <!-- Column -->
+                        
                     </div>
-                    <!-- <hr>
-                    <h6 class="card-subtitle">List of Login Information</h6>
-                    <div class="table-responsive">
-                        <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list" data-page-size="10">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>IP Address</th>
-                                    <th>Location</th>
-                                    <th>Device</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($logins as $login)
-                                <tr>
-                                    <td>{{$i++}}</td>
-                                    <td>{{$login->ip_addr}}</td>
-                                    <td>{{$login->location}}</td>
-                                    <td>{{$login->device}}</td>
-                                    <td>{{$login->created_at}}</td>
-                                </tr>
-                                @endforeach
-
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="6">
-                                        <div class="text-right">
-                                            <ul class="pagination"> </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div> -->
+                    
                 </div>
             </div>
         </div>

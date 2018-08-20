@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class MemberRequestOpportunity extends Model
 {
     protected $table = 'tb_member_request_opportunity';
-    protected $fillable = ['usid', 'contact_name', 'email', 'phone', 'opportunity_name', 'investing_amount', 'raising', 'valuation', 'is_accepted', 'code','is_submitted','company_stage','investment_sector','investment_region','investment_structure'];
+    protected $fillable = ['usid', 'company_name', 'contact_name', 'email', 'phone', 'investing_amount', 'raising', 'valuation', 'is_accepted', 'code','is_submitted','company_stage','investment_sector','investment_region','investment_structure','prior_year_monthly_finacial',
+        'investor_deck','proforma_projections','detailed_cap_table','is_active'];
 
     public function user()
     {

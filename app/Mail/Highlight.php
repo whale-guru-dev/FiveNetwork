@@ -23,11 +23,17 @@ class Highlight extends Mailable
 
     public $subject;
 
-    public function __construct($_link, $_content, $_subject)
+    public $subtitle;
+
+    public $files;
+
+    public function __construct($_link, $_content, $_subject, $_subtitle, $_files)
     {
         $this->link = $_link;
         $this->content = $_content;
         $this->subject = $_subject;
+        $this->subtitle = $_subtitle;
+        $this->files = $_files;
     }
 
     /**
@@ -37,6 +43,10 @@ class Highlight extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.highlight')->with(['content' => $this->content, 'link' => $this->link, 'subject' => $this->subject]);
+        $message = $this->view('emails.highlight')->with(['content' => $this->content, 'link' => $this->link, 'subject' => $this->subject, 'subtitle' => $this->subtitle]);
+        foreach($this->files as $file)
+            $message->attach($file);
+
+        return $message;
     }
 }

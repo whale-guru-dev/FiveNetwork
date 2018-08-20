@@ -26,13 +26,16 @@ class Follow extends Mailable
 
     public $subject;
 
-    public function __construct($_link, $_link_name, $_content, $_subtitle, $_subject)
+    public $files;
+
+    public function __construct($_link, $_link_name, $_content, $_subtitle, $_subject, $_files = [])
     {
         $this->link = $_link;
         $this->link_name = $_link_name;
         $this->content = $_content;
         $this->subject = $_subject;
         $this->subtitle = $_subtitle;
+        $this->files = $_files;
     }
 
     /**
@@ -42,6 +45,12 @@ class Follow extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.follow')->with(['link'=>$this->link, 'link_name'=>$this->link_name, 'content'=>$this->content, 'subtitle' => $this->subtitle, 'subject'=>$this->subject]);
+        if(count($this->files) > 0){
+            $message = $this->view('emails.follow')->with(['link'=>$this->link, 'link_name'=>$this->link_name, 'content'=>$this->content, 'subtitle' => $this->subtitle, 'subject'=>$this->subject]);
+            foreach($this->files as $file)
+                $message->attach($file);
+            return $message;
+        }else
+            return $this->view('emails.follow')->with(['link'=>$this->link, 'link_name'=>$this->link_name, 'content'=>$this->content, 'subtitle' => $this->subtitle, 'subject'=>$this->subject]);
     }
 }

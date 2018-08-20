@@ -112,8 +112,14 @@ class LoginController extends Controller
             $this->incrementLoginAttempts($request);
 
             return $this->sendFailedLoginResponse($request);
-        }else{
+        }elseif($user && $user->is_allowed != 3){
             return $this->sendFailedLoginResponseNotAllowed($request);
+        }elseif($user && $user->is_allowed == 3){
+            return $this->sendFailedLoginResponseRemoved($request);
+        }else{
+            $this->incrementLoginAttempts($request);
+
+            return $this->sendFailedLoginResponse($request);
         }
 
     }
@@ -122,6 +128,13 @@ class LoginController extends Controller
     {
         throw ValidationException::withMessages([
             $this->username() => ['You are not allowed as a member'],
+        ]);
+    }
+
+    public function sendFailedLoginResponseRemoved(Request $request)
+    {
+        throw ValidationException::withMessages([
+            $this->username() => ['You were removed from this platform'],
         ]);
     }
 

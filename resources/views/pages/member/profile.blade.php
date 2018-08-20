@@ -8,8 +8,37 @@
 <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/css/jquery.multiselect.css')}}" rel="stylesheet" type="text/css" />
 
+<link href="{{asset('assets/dashboard/plugins/checkbox-tree/hummingbird-treeview.css')}}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
+<style type="text/css">
+.treeview {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    position: relative;
+    height: 200px;
+    padding: 0;
+    overflow-y: auto;
+}
 
+.treeview li {
+    padding: 2px 10px;
+}
+
+#region-type ,#selectall{
+    color: #08c !important;
+    font-weight: bold;
+}
+</style>
 @endsection
 
 
@@ -71,7 +100,7 @@
 <!-- ============================================================== -->
 @php
 $num_refer = App\Model\MemberReferLog::where('usid', Auth::user()->id)->count();
-$num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)->count();
+$num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)->count() + App\Model\MemberSimpleOpportunity::where('usid', Auth::user()->id)->count();
 @endphp
 <div class="container-fluid">
     <!-- ============================================================== -->
@@ -610,72 +639,6 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="invest_structure">Investment Structure :</label>
-                                                <select style="width: 100%" multiple name="invest_structure[]" id="invest_structure">
-                                                    
-                                                    @foreach($invest_types as $type)
-                                                    <option value="{{$type->id}}" @php if(in_array($type->id, $user_struc)) echo "Selected" @endphp>{{$type->type}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="button-box m-t-20"> <a id="select-all-str" class="btn btn-success" href="#">select all</a> <a id="deselect-all-str" class="btn btn-info" href="#">deselect all</a> </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="invest_region">Investment Regions :</label>
-                                                <select style="width: 100%" multiple name="invest_region[]" id="invest_region">
-                                                    @foreach($invest_region_types as $irt)
-                                                        @if($irt->id < 14)
-                                                        @if($loop->iteration == 1)
-                                                        <optgroup label="Southeast">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 13)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 13 && $irt->id < 18)
-                                                        @if($loop->iteration == 14)
-                                                        <optgroup label="Southwest">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 17)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 17 && $irt->id < 30)
-                                                        @if($loop->iteration == 18)
-                                                        <optgroup label="Midwest">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 29)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 29 && $irt->id < 41)
-                                                        @if($loop->iteration == 30)
-                                                        <optgroup label="West">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 40)
-                                                        </optgroup>
-                                                        @endif
-                                                        @else
-                                                        @if($loop->iteration == 41)
-                                                        <optgroup label="Northeast">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "Selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 50)
-                                                        </optgroup>
-                                                        @endif
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
                                                 <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
                                                 <select class="custom-select form-control " id="private_investment_number" name="private_investment_number">
                                                     
@@ -705,27 +668,229 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="average_investment_size">Typical Check Size :</label>
-                                                <select style="width: 100%" multiple name="average_investment_size[]" id="average_investment_size">
-                                                    
-                                                    @foreach($invest_size_types as $type)
-                                                    <option value="{{$type->id}}"  @php if(in_array($type->id, $user_size)) echo "Selected"; @endphp>{{$type->type}}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="invest_structure">Investment Structure :</label>
+
+                                                <ul class="treeview" id="treeview1">
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-1-1" data-id="custom-1-1" type="checkbox">
+                                                                <label for="xnode-1-1" id="selectall"> Select All  </label>
+                                                            </div>
+                                                        </label>
+                                                        <ul>
+                                                            @foreach($invest_types as $type)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-1-1-{{$type->id}}" data-id="custom-1-1-{{$type->id}}" type="checkbox" name="invest_structure[]" value="{{$type->id}}" @php if(in_array($type->id, $user_struc)) echo "checked" @endphp>
+                                                                        <label for="xnode-1-1-{{$type->id}}"> {{$type->type}} </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="button-box m-t-20"> <a id="select-all-size" class="btn btn-success" href="#">select all</a> <a id="deselect-all-size" class="btn btn-info" href="#">deselect all</a> </div>
+                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="invest_region">Investment Regions :</label>
+
+                                                <ul id="treeview2" class="treeview">
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-0-1" data-id="custom-0-1" type="checkbox">
+                                                                <label for="xnode-0-1" id="region-type"> Southeast  </label>
+                                                            </div>
+                                                        </label>
+                                                        
+                                                        <ul>
+                                                            @foreach($invest_region_types as $irt)
+                                                            @if($irt->id < 14)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-0-1-{{$irt->id}}" data-id="custom-0-1-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "checked" @endphp>
+                                                                        <label for="xnode-0-1-{{$irt->id}}"> {{$irt->type}}   </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                            @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-0-2" data-id="custom-0-2" type="checkbox">
+                                                                <label for="xnode-0-2" id="region-type"> Southwest  </label>
+                                                            </div>
+                                                        </label>
+                                                        
+                                                        <ul>
+                                                            @foreach($invest_region_types as $irt)
+                                                            @if($irt->id > 13 && $irt->id < 18)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-0-2-{{$irt->id}}" data-id="custom-0-2-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "checked" @endphp>
+                                                                        <label for="xnode-0-2-{{$irt->id}}"> {{$irt->type}}   </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                            @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-0-3" data-id="custom-0-3" type="checkbox">
+                                                                <label for="xnode-0-3" id="region-type"> Midwest  </label>
+                                                            </div>
+                                                        </label>
+                                                        
+                                                        <ul>
+                                                            @foreach($invest_region_types as $irt)
+                                                            @if($irt->id > 17 && $irt->id < 30)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-0-4-{{$irt->id}}" data-id="custom-0-4-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "checked" @endphp>
+                                                                        <label for="xnode-0-4-{{$irt->id}}"> {{$irt->type}}   </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                            @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-0-5" data-id="custom-0-5" type="checkbox">
+                                                                <label for="xnode-0-5" id="region-type"> West  </label>
+                                                            </div>
+                                                        </label>
+                                                        
+                                                        <ul>
+                                                            @foreach($invest_region_types as $irt)
+                                                            @if($irt->id > 29 && $irt->id < 41)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-0-5-{{$irt->id}}" data-id="custom-0-5-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "checked" @endphp>
+                                                                        <label for="xnode-0-5-{{$irt->id}}"> {{$irt->type}}   </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                            @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-0-6" data-id="custom-0-6" type="checkbox">
+                                                                <label for="xnode-0-6" id="region-type"> Northeast  </label>
+                                                            </div>
+                                                        </label>
+                                                        
+                                                        <ul>
+                                                            @foreach($invest_region_types as $irt)
+                                                            @if($irt->id > 40)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-0-6-{{$irt->id}}" data-id="custom-0-6-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" @php if(in_array($irt->id, $user_region)) echo "checked" @endphp>
+                                                                        <label for="xnode-0-6-{{$irt->id}}"> {{$irt->type}}   </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                            @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="average_investment_size">Typical Check Size :</label>
+                                                
+                                                <ul class="treeview" id="treeview1">
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-2-1" data-id="custom-2-1" type="checkbox">
+                                                                <label for="xnode-2-1" id="selectall"> Select All  </label>
+                                                            </div>
+                                                        </label>
+                                                        <ul>
+                                                            @foreach($invest_size_types as $type)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-2-1-{{$type->id}}" data-id="custom-2-1-{{$type->id}}" type="checkbox" name="average_investment_size[]" value="{{$type->id}}" @php if(in_array($type->id, $user_size)) echo "checked"; @endphp>
+                                                                        <label for="xnode-2-1-{{$type->id}}"> {{$type->type}} </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                           @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="investment_stage">Investment Stage :</label>
-                                                <select style="width: 100%" multiple name="investment_stage[]" id="investment_stage">
-                                                    
-                                                    @foreach($invest_stage_types as $type)
-                                                    <option value="{{$type->id}}"  @php if(in_array($type->id, $user_stage)) echo "Selected"; @endphp>{{$type->type}}</option>
-                                                    @endforeach
-                                                </select>
+                                                
+                                                <ul class="treeview" id="treeview1">
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-3-1" data-id="custom-3-1" type="checkbox">
+                                                                <label for="xnode-3-1" id="selectall"> Select All  </label>
+                                                            </div>
+                                                        </label>
+                                                        <ul>
+                                                            @foreach($invest_stage_types as $type)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-3-1-{{$type->id}}" data-id="custom-3-1-{{$type->id}}" type="checkbox" name="investment_stage[]" value="{{$type->id}}" @php if(in_array($type->id, $user_stage)) echo "checked"; @endphp>
+                                                                        <label for="xnode-3-1-{{$type->id}}"> {{$type->type}} </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                           @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="button-box m-t-20"> <a id="select-all-stage" class="btn btn-success" href="#">select all</a> <a id="deselect-all-stage" class="btn btn-info" href="#">deselect all</a> </div>
+                                            
                                         </div>
                                     </div>
 
@@ -733,14 +898,32 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="investment_sector">Investment Sector Focus :</label>
-                                                <select style="width: 100%" multiple name="investment_sector[]" id="investment_sector">
-                                                    
-                                                    @foreach($invest_sector_types as $isrt)
-                                                    <option value="{{$isrt->id}}"  @php if(in_array($isrt->id, $user_sector)) echo "Selected"; @endphp>{{$isrt->type}}</option>
-                                                    @endforeach
-                                                </select>
+
+                                                <ul class="treeview" id="treeview1">
+                                                    <li> 
+                                                        <i class="fa fa-minus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-4-1" data-id="custom-4-1" type="checkbox">
+                                                                <label for="xnode-4-1" id="selectall"> Select All  </label>
+                                                            </div>
+                                                        </label>
+                                                        <ul>
+                                                            @foreach($invest_sector_types as $isrt)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-4-1-{{$isrt->id}}" data-id="custom-4-1-{{$isrt->id}}" type="checkbox" name="investment_sector[]" value="{{$isrt->id}}" @php if(in_array($isrt->id, $user_sector)) echo "checked"; @endphp>
+                                                                        <label for="xnode-4-1-{{$isrt->id}}" > {{$isrt->type}} </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                           @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="button-box m-t-20"> <a id="select-all-sector" class="btn btn-success" href="#">select all</a> <a id="deselect-all-sector" class="btn btn-info" href="#">deselect all</a> </div>
+                                            
                                         </div>
                                     </div>
                                 </section>
@@ -818,6 +1001,9 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
 
 <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script>
 
+<script src="{{asset('assets/dashboard/plugins/checkbox-tree/hummingbird-treeview.js')}}"></script>
+<script src="{{asset('assets/dashboard/plugins/icheck/icheck.min.js')}}"></script>
+<script src="{{asset('assets/dashboard/plugins/icheck/icheck.init.js')}}"></script>
 <!-- ============================================================== -->
 <!-- Wizard -->
 <script src="{{asset('assets/dashboard/plugins/wizard/jquery.steps.min.js')}}"></script>
@@ -827,6 +1013,7 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
 <script src="{{asset('assets/dashboard/plugins/dropify/dist/js/dropify.min.js')}}"></script>
 
 <script type="text/javascript">
+    $(".treeview").hummingbird();
     $('.dropify').dropify();
 
     // var addrow = $('#demo-foo-addrow');
@@ -842,47 +1029,7 @@ $num_oppor = App\Model\MemberRequestOpportunity::where('usid', Auth::user()->id)
     //     footable.removeRow(row);
     // });
 
-    $("#invest_region").multiSelect({
-        selectableOptgroup: true
-    });
-
-    $('#invest_structure, #average_investment_size, #investment_stage, #investment_sector').multiSelect();
-
-    $('#select-all-str').click(function() {
-        $('#invest_structure').multiSelect('select_all');
-        return false;
-    });
-    $('#deselect-all-str').click(function() {
-        $('#invest_structure').multiSelect('deselect_all');
-        return false;
-    });
-
-    $('#select-all-size').click(function() {
-        $('#average_investment_size').multiSelect('select_all');
-        return false;
-    });
-    $('#deselect-all-size').click(function() {
-        $('#average_investment_size').multiSelect('deselect_all');
-        return false;
-    });
-
-    $('#select-all-stage').click(function() {
-        $('#investment_stage').multiSelect('select_all');
-        return false;
-    });
-    $('#deselect-all-stage').click(function() {
-        $('#investment_stage').multiSelect('deselect_all');
-        return false;
-    });
-
-    $('#select-all-sector').click(function() {
-        $('#investment_sector').multiSelect('select_all');
-        return false;
-    });
-    $('#deselect-all-sector').click(function() {
-        $('#investment_sector').multiSelect('deselect_all');
-        return false;
-    });
+    
 </script>
 
 

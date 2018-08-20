@@ -54,34 +54,6 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                         </div>
                     </div>
                 </div>
-        		<div class="card-body">
-        			<form class="form-horizontal" role="form">
-                        <div class="form-body">
-                            <h3 class="box-title"></h3>
-                            <hr class="m-t-0 m-b-40">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <label class="control-label text-left col-md-6">Is this user applying for a Family Office or Individual Membership?</label>
-                                        <div class="col-md-3">
-                                            <p class="form-control-static"> {{$user->apply_type == 0? 'Family Office':'Individual'}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                                <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <label class="control-label text-left col-md-6">Is this user a Principle of the Family Office?</label>
-                                        <div class="col-md-3">
-                                            <p class="form-control-static"> {{$user->bprinciple==0?'No':'Yes'}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-                    	</div>
-                    </form>
-        		</div>
         	</div>
         </div>
     </div>
@@ -232,6 +204,31 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                                         </div>
                                     </div>
                                 </div>
+                                <!--/span-->
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-6">Is this user applying for a Family Office or Individual Membership?</label>
+                                        <div class="col-md-3">
+                                            <p class="form-control-static"> {{$user->apply_type == 0? 'Family Office':'Individual'}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+
+                                @if($user->bprinciple != null)
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-6">Is this user a Principle of the Family Office?</label>
+                                        <div class="col-md-3">
+                                            <p class="form-control-static"> {{$user->bprinciple==0?'No':'Yes'}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                                 <!--/span-->
                             </div>
 
@@ -506,8 +503,7 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
         		<div class="card-body">
         			<h4>Step 4</h4>
         			<h6 class="card-subtitle">Investor Accreditation.</h6>
-        			<div class="row">
-                        <!--/span-->
+        			<!-- <div class="row">
                         <div class="col-md-12">
                             <div class="row el-element-overlay">
                                 <label class="control-label text-right col-md-3">Copy of a Government Issued Photo ID:</label>
@@ -528,6 +524,18 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
 			                                </div>
 			                            </div>
 		                        	</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                        <!--/span-->
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="control-label text-left col-md-9">I attest and understand that by applying for membership, I permit the Family Investment Exchange to run a background check on myself and any executive members of our family office/investment entity that plans to use the platform:</label>
+                                <div class="col-md-3">
+                                    <p class="form-control-static"> {{$user->check_back_attest==0?'No':'Yes'}} </p>
                                 </div>
                             </div>
                         </div>
@@ -589,6 +597,17 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
                         </div>
                     </div>
 
+                    <div class="row">
+                        <!--/span-->
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="control-label text-left col-md-9">You understand that members can be removed from the Family Investment Exchange at any time at the sole and exclusive discretion of the membership committee.:</label>
+                                <div class="col-md-3">
+                                    <p class="form-control-static"> Yes </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
         		</div>
         	</div>
@@ -614,10 +633,16 @@ $pref_contact_form = ['Office','Mobile','Email','Administrative Assistant / Asso
 	                        <span class="badge badge-success ml-auto">Allowed</span>
 	                    </div>
         			</div>
-        			@else
+        			@elseif($user->is_allowed == 2)
                     <div class="row">
                         <div class="col-sm-2 col-md-4 offset-md-4">
                             <span class="badge badge-warning ml-auto">Denied</span>
+                        </div>
+                    </div>
+                    @elseif($user->is_allowed == 3)
+                    <div class="row">
+                        <div class="col-sm-2 col-md-4 offset-md-4">
+                            <span class="badge badge-danger ml-auto">Removed</span>
                         </div>
                     </div>
         			@endif

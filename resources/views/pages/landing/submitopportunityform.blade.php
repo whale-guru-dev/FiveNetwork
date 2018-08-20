@@ -25,6 +25,8 @@
     <link href="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
 
+    <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
+
     <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
     <style type="text/css">
     .emsg{
@@ -149,9 +151,9 @@ color: #797979;
             <!-- ============================================================== -->
             @php
                 $invest_types = App\Model\InvestmentStructureType::all();
-                $invest_region_types = App\Model\MemberInvestmentRegionType::all();
-                $invest_sector_types = App\Model\MemberInvestmentSectorType::all();
                 $invest_stage_types = App\Model\MemberInvestmentStageType::all();
+                $invest_region_types = App\Model\MemberInvestmentRegionType::orderBy('type','ASC')->get();
+                $invest_sector_types = App\Model\MemberInvestmentSectorType::orderBy('type','ASC')->get();
                 if(App\Model\MemberOpportunityForm::where('code', $opportunitymember->code)->first() && App\Model\MemberRequestOpportunity::where('code', $opportunitymember->code)->where('is_submitted', 0)->first())
                 {
                     $form = App\Model\MemberOpportunityForm::where('code', $opportunitymember->code)->first();
@@ -185,7 +187,7 @@ color: #797979;
                             <div class="card-body">
                                 <h4 class="card-title">Investment Questionnaire</h4>
                                 <h6 class="card-subtitle">Please fill Investment Questionnaire.</h6>
-                                <form class="form p-t-20" action="{{route('submit-coinvestment-opportunity')}}" method="POST" id="submit-form">
+                                <form class="form p-t-20" action="{{route('submit-coinvestment-opportunity')}}" method="POST" id="submit-form" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="code" value="{{$opportunitymember->code}}">
                                     <input type="hidden" name="identity" id="identity" value="submit">
@@ -251,7 +253,7 @@ color: #797979;
                                                     <span class="danger">*</span> 
                                                 </label>
                                                 <input type="text" class="form-control required" id="company_website" name="company_website" required value="@php if(isset($form)) echo $form->company_website; @endphp" maxlength="255">
-                                                <p><span class="emsg hidden">Please Enter a Valid Name</span></p>
+                                                <p><span class="emsg hidden">Please Enter a Valid URL</span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -285,47 +287,7 @@ color: #797979;
                                                 <select class="form-control required" style="width: 100%" name="state" id="state" required>
                                                     <option value="" selected="">Select</option>
                                                     @foreach($invest_region_types as $irt)
-                                                        @if($irt->id < 14)
-                                                        @if($loop->iteration == 1)
-                                                        <optgroup label="Southeast">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(isset($form) && $form->state == $irt->id) echo "selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 13)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 13 && $irt->id < 18)
-                                                        @if($loop->iteration == 14)
-                                                        <optgroup label="Southwest">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(isset($form) && $form->state == $irt->id) echo "selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 17)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 17 && $irt->id < 30)
-                                                        @if($loop->iteration == 18)
-                                                        <optgroup label="Midwest">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(isset($form) && $form->state == $irt->id) echo "selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 29)
-                                                        </optgroup>
-                                                        @endif
-                                                        @elseif($irt->id > 29 && $irt->id < 41)
-                                                        @if($loop->iteration == 30)
-                                                        <optgroup label="West">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(isset($form) && $form->state == $irt->id) echo "selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 40)
-                                                        </optgroup>
-                                                        @endif
-                                                        @else
-                                                        @if($loop->iteration == 41)
-                                                        <optgroup label="Northeast">
-                                                        @endif
-                                                            <option value="{{$irt->id}}" @php if(isset($form) && $form->state == $irt->id) echo "selected" @endphp>{{$irt->type}}</option>
-                                                        @if($loop->iteration == 50)
-                                                        </optgroup>
-                                                        @endif
-                                                        @endif
+                                                        <option value="{{$irt->id}}" @php if(isset($form) && $form->state == $irt->id) echo "selected" @endphp>{{$irt->type}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -639,12 +601,12 @@ color: #797979;
                                     
                                     </div>
 
-                                    <h4>How much capacity is left this round</h4>
+                                    <h4>How much capacity is available currently?</h4>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="raising_capital"> How much capital are you raising this round? <span class="danger">*</span> 
+                                                <label for="raising_capital"> How much capital are you raising currently? <span class="danger">*</span> 
                                                 </label>
                                                 <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="raising_capital" name="raising_capital" required  value="@php if(isset($form)) echo $form->raising_capital; @endphp">  
                                             </div>
@@ -652,7 +614,7 @@ color: #797979;
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="investment_size"> How much capacity is left this round <span class="danger">*</span></label>
+                                                <label for="investment_size"> How much capacity is available currently? <span class="danger">*</span></label>
                                                 
                                                 <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" name="investment_size" id="investment_size" required value="@php if(isset($form)) echo $form->investment_size; @endphp">
                                                 
@@ -713,9 +675,9 @@ color: #797979;
                                                     <span class="danger">*</span> 
                                                 </label>
                                                 <select class="custom-select form-control required" id="bpatent" name="bpatent" required>
-                                                    <option value="" selected >Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->bpatent =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->bpatent == "1") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->bpatent)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->bpatent =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->bpatent =="1") echo "selected"; @endphp>Yes</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -757,40 +719,40 @@ color: #797979;
                                                 <label for="prior_exp"> Does the Owner have prior experience in the industry? <span class="danger">*</span> 
                                                 </label>
                                                 <select name="prior_exp" class="form-control required" id="prior_exp" required>
-                                                    <option value="" selected>Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->prior_exp =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->prior_exp =="1") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->prior_exp)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->prior_exp =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->prior_exp =="1") echo "selected"; @endphp>Yes</option>
                                                 </select> 
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" id="prior_exp_div" style="display: none;">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="length_time"> Length of Time in Industry : <span class="danger">*</span> 
+                                                <label for="length_time"> Length of Time in Industry : 
                                                 </label>
-                                                <input type="text" class="form-control required" id="length_time" name="length_time" required value="@php if(isset($form)) echo $form->length_time; @endphp" maxlength="255"> 
+                                                <input type="text" class="form-control" id="length_time" name="length_time" value="@php if(isset($form)) echo $form->length_time; @endphp" maxlength="255"> 
                                             </div>
                                         </div>
-                                    </div>
+                                    
 
-                                    <div class="row">
+                                    
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="prior_company_role"> Prior Companies and Roles : <span class="danger">*</span> 
+                                                <label for="prior_company_role"> Prior Companies and Roles : 
                                                 </label>
-                                                <input type="text" class="form-control required" id="prior_company_role" name="prior_company_role" required value="@php if(isset($form)) echo $form->prior_company_role; @endphp" maxlength="255"> 
+                                                <input type="text" class="form-control" id="prior_company_role" name="prior_company_role" value="@php if(isset($form)) echo $form->prior_company_role; @endphp" maxlength="255"> 
                                             </div>
                                         </div>
-                                    </div>
+                                    
 
-                                    <div class="row">
+                                    
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="outcome_detail"> Please provide details of outcome :  <span class="danger">*</span>
+                                                <label for="outcome_detail"> Please provide details of outcome :  
                                                 </label>
-                                                <textarea name="outcome_detail" id="outcome_detail" class="form-control required" cols=3>@php if(isset($form)) echo $form->outcome_detail; @endphp</textarea required> 
+                                                <textarea name="outcome_detail" id="outcome_detail" class="form-control " cols=3>@php if(isset($form)) echo $form->outcome_detail; @endphp</textarea> 
                                             </div>
                                         </div>
                                     </div>
@@ -801,9 +763,9 @@ color: #797979;
                                                 <label for="additional_member"> Are there additional members of the Management Team? <span class="danger">*</span> 
                                                 </label>
                                                 <select name="additional_member" class="form-control required" id="additional_member" required>
-                                                    <option value="" selected>Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->additional_member =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->additional_member =="1") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->additional_member)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->additional_member =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->additional_member =="1") echo "selected"; @endphp>Yes</option>
                                                 </select> 
                                             </div>
                                         </div>
@@ -832,9 +794,9 @@ color: #797979;
                                                 <label for="brestrict_convenant"> Are restrictive covenants in place to prevent management team from joining competitor, soliciting clients, etc? <span class="danger">*</span> 
                                                 </label>
                                                 <select name="brestrict_convenant" class="form-control" id="brestrict_convenant">
-                                                    <option value="" selected>Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->brestrict_convenant =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->brestrict_convenant =="1") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->brestrict_convenant)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->brestrict_convenant =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->brestrict_convenant =="1") echo "selected"; @endphp>Yes</option>
                                                 </select> 
                                             </div>
                                         </div>
@@ -851,32 +813,32 @@ color: #797979;
                                     <h4>FINANCIAL INFORMATION</h4>
                                     <hr>
 
-                                    @if($opportunitymember->company_stage == 2)
+                                    @if($opportunitymember->company_stage == 3)
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h6>2014</h6>
+                                            <h6>Previous Year</h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev4_total_revenue"> Total 2014 Revenue :  <span class="danger">*</span>
+                                                        <label for="prev1_total_revenue"> Previous Year Total Revenue :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev4_total_revenue" name="prev4_total_revenue" required value="@php if(isset($form)) echo $form->prev4_total_revenue; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_revenue" name="prev1_total_revenue"  value="@php if(isset($form)) echo $form->prev1_total_revenue; @endphp"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev4_total_expense"> Total 2014 Expenses :  <span class="danger">*</span>
+                                                        <label for="prev1_total_expense"> Previous Year Total Expenses :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev4_total_expense" name="prev4_total_expense" required value="@php if(isset($form)) echo $form->prev4_total_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_expense" name="prev1_total_expense"  value="@php if(isset($form)) echo $form->prev1_total_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="prev4_revenue_expense"> Total Revenue - Total Expenses :  <span class="danger">*</span>
+                                                        <label for="prev1_revenue_expense"> Previous Year Total Revenue  - Total Expenses :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required  mask-money" id="prev4_revenue_expense" name="prev4_revenue_expense" data-inputmask="'alias': 'currency'" required value="@php if(isset($form)) echo $form->prev4_revenue_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_revenue_expense" name="prev1_revenue_expense" readonly="" value="@php if(isset($form)) echo $form->prev1_revenue_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -885,29 +847,29 @@ color: #797979;
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h6>2015</h6>
+                                            <h6>Current Year</h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev3_total_revenue"> Total 2015 Revenue :  <span class="danger">*</span>
+                                                        <label for="cur_total_revenue"> Current Year Total Revenue :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev3_total_revenue" name="prev3_total_revenue" required value="@php if(isset($form)) echo $form->prev3_total_revenue; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="cur_total_revenue" name="cur_total_revenue"  value="@php if(isset($form)) echo $form->cur_total_revenue; @endphp"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev3_total_expense"> Total 2015 Expenses :  <span class="danger">*</span>
+                                                        <label for="cur_total_expense"> Current Year Total Expenses :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev3_total_expense" name="prev3_total_expense" required value="@php if(isset($form)) echo $form->prev3_total_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="cur_total_expense" name="cur_total_expense"  value="@php if(isset($form)) echo $form->cur_total_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="prev3_revenue_expense"> Total Revenue - Total Expenses :  <span class="danger">*</span>
+                                                        <label for="cur_revenue_expense"> Current Year Total Revenue - Total Expense :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev3_revenue_expense" name="prev3_revenue_expense" required value="@php if(isset($form)) echo $form->prev3_revenue_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="cur_revenue_expense" name="cur_revenue_expense" readonly="" value="@php if(isset($form)) echo $form->cur_revenue_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -916,105 +878,35 @@ color: #797979;
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h6>2016</h6>
+                                            <h6>Next Year</h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev2_total_revenue"> Total 2016 Revenue :  <span class="danger">*</span>
+                                                        <label for="next_total_revenue"> Next Year Projected Total Revenue :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev2_total_revenue" name="prev2_total_revenue" required value="@php if(isset($form)) echo $form->prev2_total_revenue; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="next_total_revenue" name="next_total_revenue"  value="@php if(isset($form)) echo $form->next_total_revenue; @endphp"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev2_total_expense"> Total 2016 Expenses :  <span class="danger">*</span>
+                                                        <label for="next_total_expense"> Next Year Projected Total Expenses :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev2_total_expense" name="prev2_total_expense" required value="@php if(isset($form)) echo $form->prev2_total_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="prev2_revenue_expense"> Total Revenue - Total Expenses :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev2_revenue_expense" name="prev2_revenue_expense" required value="@php if(isset($form)) echo $form->prev2_revenue_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h6>2017</h6>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="prev1_total_revenue"> Total 2017 Revenue :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_revenue" name="prev1_total_revenue" required value="@php if(isset($form)) echo $form->prev1_total_revenue; @endphp"> 
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="prev1_total_expense"> Total 2017 Expenses :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_expense" name="prev1_total_expense" required value="@php if(isset($form)) echo $form->prev1_total_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="next_total_expense" name="next_total_expense"  value="@php if(isset($form)) echo $form->next_total_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="prev1_revenue_expense"> Total Revenue - Total Expenses :  <span class="danger">*</span>
+                                                        <label for="next_revenue_expense"> Next Year Total Revenue - Total Expense :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required  mask-money" data-inputmask="'alias': 'currency'" id="prev1_revenue_expense" name="prev1_revenue_expense" required value="@php if(isset($form)) echo $form->prev1_revenue_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="next_revenue_expense" name="next_revenue_expense" readonly="" value="@php if(isset($form)) echo $form->next_revenue_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h6>Projection - 2018</h6>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="cur_total_revenue"> Projected 2018 Total Revenue :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_total_revenue" name="cur_total_revenue" required value="@php if(isset($form)) echo $form->cur_total_revenue; @endphp"> 
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="cur_total_expense"> Projected 2018 Total Expenses :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_total_expense" name="cur_total_expense" required value="@php if(isset($form)) echo $form->cur_total_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="cur_revenue_expense"> Projected 2018 Total Revenue - Total Expense :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_revenue_expense" name="cur_revenue_expense" required value="@php if(isset($form)) echo $form->cur_revenue_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="expect_change_over">How do you expect this structure to change over time? Please describe :  <span class="danger">*</span></label>
-                                                <textarea class="form-control required" name="expect_change_over" id="expect_change_over" required>@php if(isset($form)) echo $form->expect_change_over; @endphp</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -1035,11 +927,20 @@ color: #797979;
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                                <label for="expect_change_over">How do you expect this structure to change over time? Please describe :  <span class="danger">*</span></label>
+                                                <textarea class="form-control required" name="expect_change_over" id="expect_change_over" required>@php if(isset($form)) echo $form->expect_change_over; @endphp</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
                                                 <label for="bhave_debt">Do you currently have debt?  <span class="danger">*</span></label>
                                                 <select class="form-control required" name="bhave_debt" id="bhave_debt" required>
-                                                    <option value="" selected>Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->bhave_debt =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->bhave_debt =="1") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->bhave_debt)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->bhave_debt =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->bhave_debt =="1") echo "selected"; @endphp>Yes</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -1075,29 +976,29 @@ color: #797979;
                                     @else
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h6>2017</h6>
+                                            <h6>Previous Year</h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev1_total_revenue"> Total 2017 Revenue :  <span class="danger">*</span>
+                                                        <label for="prev1_total_revenue"> Previous Year Total Revenue :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_revenue" name="prev1_total_revenue" required value="@php if(isset($form)) echo $form->prev1_total_revenue; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_revenue" name="prev1_total_revenue"  value="@php if(isset($form)) echo $form->prev1_total_revenue; @endphp"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev1_total_expense"> Total 2017 Expenses :  <span class="danger">*</span>
+                                                        <label for="prev1_total_expense"> Previous Year Total Expenses :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_expense" name="prev1_total_expense" required value="@php if(isset($form)) echo $form->prev1_total_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_total_expense" name="prev1_total_expense"  value="@php if(isset($form)) echo $form->prev1_total_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="prev1_revenue_expense"> Total Revenue - Total Expenses :  <span class="danger">*</span>
+                                                        <label for="prev1_revenue_expense"> Previous Year Total Revenue  - Total Expenses :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev1_revenue_expense" name="prev1_revenue_expense" required value="@php if(isset($form)) echo $form->prev1_revenue_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="prev1_revenue_expense" name="prev1_revenue_expense" readonly="" value="@php if(isset($form)) echo $form->prev1_revenue_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -1106,29 +1007,29 @@ color: #797979;
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h6>Previous Quarter</h6>
+                                            <h6>Current Year</h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev_quater_total_revenue"> Total Revenue Last 3 months :  <span class="danger">*</span>
+                                                        <label for="cur_total_revenue"> Current Year Total Revenue :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev_quater_total_revenue" name="prev_quater_total_revenue" required value="@php if(isset($form)) echo $form->prev_quater_total_revenue; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="cur_total_revenue" name="cur_total_revenue"  value="@php if(isset($form)) echo $form->cur_total_revenue; @endphp"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev_quater_total_expense"> Total Expenses Last 3 months :  <span class="danger">*</span>
+                                                        <label for="cur_total_expense"> Current Year Total Expenses :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev_quater_total_expense" name="prev_quater_total_expense" required value="@php if(isset($form)) echo $form->prev_quater_total_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="cur_total_expense" name="cur_total_expense"  value="@php if(isset($form)) echo $form->cur_total_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="prev_quater_revenue_expense"> Total Revenue - Total Expenses :  <span class="danger">*</span>
+                                                        <label for="cur_revenue_expense"> Current Year Total Revenue - Total Expense :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev_quater_revenue_expense" name="prev_quater_revenue_expense" required value="@php if(isset($form)) echo $form->prev_quater_revenue_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="cur_revenue_expense" name="cur_revenue_expense" readonly="" value="@php if(isset($form)) echo $form->cur_revenue_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -1137,122 +1038,29 @@ color: #797979;
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h6>Previous Month</h6>
+                                            <h6>Next Year</h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev_month_total_revenue"> Total Revenue Last Month :  <span class="danger">*</span>
+                                                        <label for="next_total_revenue"> Next Year Projected Total Revenue :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev_month_total_revenue" name="prev_month_total_revenue" required value="@php if(isset($form)) echo $form->prev_month_total_revenue; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="next_total_revenue" name="next_total_revenue"  value="@php if(isset($form)) echo $form->next_total_revenue; @endphp"> 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="prev_month_total_expense"> Total Expenses Last Month :  <span class="danger">*</span>
+                                                        <label for="next_total_expense"> Next Year Projected Total Expenses :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev_month_total_expense" name="prev_month_total_expense" required value="@php if(isset($form)) echo $form->prev_month_total_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="next_total_expense" name="next_total_expense"  value="@php if(isset($form)) echo $form->next_total_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="prev_month_revenue_expense"> Total Revenue - Total Expenses :  <span class="danger">*</span>
+                                                        <label for="next_revenue_expense"> Next Year Total Revenue - Total Expense :  <span class="danger">*</span>
                                                         </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="prev_month_revenue_expense" name="prev_month_revenue_expense" required value="@php if(isset($form)) echo $form->prev_month_revenue_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h6>Projection - 2018</h6>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="cur_total_revenue"> Projected 2018 Total Revenue :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_total_revenue" name="cur_total_revenue" required value="@php if(isset($form)) echo $form->cur_total_revenue; @endphp"> 
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="cur_total_expense"> Projected 2018 Total Expenses :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_total_expense" name="cur_total_expense" required value="@php if(isset($form)) echo $form->cur_total_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="cur_revenue_expense"> Projected 2018 Total Revenue - Total Expense :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_revenue_expense" name="cur_revenue_expense" required value="@php if(isset($form)) echo $form->cur_revenue_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h6>Projection - Current Quarter</h6>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="next3month_total_revenue"> Projected Total Revenue Next 3 months :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="next3month_total_revenue" name="next3month_total_revenue" required value="@php if(isset($form)) echo $form->next3month_total_revenue; @endphp"> 
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="next3month_total_expense"> Projected Total Expenses Next 3 Months :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="next3month_total_expense" name="next3month_total_expense" required value="@php if(isset($form)) echo $form->next3month_total_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="next3month_revenue_expense"> Projected Total Revenue - Total Expenses :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="next3month_revenue_expense" name="next3month_revenue_expense" required value="@php if(isset($form)) echo $form->next3month_revenue_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h6>Projection - Current Month</h6>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="cur_month_total_revenue"> Projected Total Revenue This Month :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_month_total_revenue" name="cur_month_total_revenue" required value="@php if(isset($form)) echo $form->cur_month_total_revenue; @endphp"> 
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="cur_month_total_expense"> Projected Total Expenses This Month :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_month_total_expense" name="cur_month_total_expense" required value="@php if(isset($form)) echo $form->cur_month_total_expense; @endphp"> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="cur_month_revenue_expense"> Projected Total Revenue - Total Expense :  <span class="danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="cur_month_revenue_expense" name="cur_month_revenue_expense" required value="@php if(isset($form)) echo $form->cur_month_revenue_expense; @endphp"> 
+                                                        <input type="text" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="next_revenue_expense" name="next_revenue_expense" readonly="" value="@php if(isset($form)) echo $form->next_revenue_expense; @endphp"> 
                                                     </div>
                                                 </div>
                                             </div>
@@ -1298,9 +1106,9 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="bhave_debt">Do you currently have debt?  <span class="danger">*</span></label>
                                                 <select class="form-control required" name="bhave_debt" id="bhave_debt" required>
-                                                    <option value="" selected>Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->bhave_debt =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->bhave_debt ==" ") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->bhave_debt)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->bhave_debt =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->bhave_debt =="1") echo "selected"; @endphp>Yes</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -1360,9 +1168,9 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="bcur_contracts_customer">Are current contracts in place with customers?  <span class="danger">*</span></label>
                                                 <select name="bcur_contracts_customer" class="form-control required" id="bcur_contracts_customer" required>
-                                                    <option value="" selected>Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->bcur_contracts_customer =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->bcur_contracts_customer =="1") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->bcur_contracts_customer)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->bcur_contracts_customer =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->bcur_contracts_customer =="1") echo "selected"; @endphp>Yes</option>
                                                 </select> 
                                             </div>
                                         </div> 
@@ -1492,9 +1300,9 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="bcontract_autonew">Do the contracts auto-renew?  <span class="danger">*</span></label>
                                                 <select name="bcontract_autonew" class="form-control required" id="bcontract_autonew" required>
-                                                    <option value="" selected>Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->bcontract_autonew =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->bcontract_autonew =="1") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->bcontract_autonew)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->bcontract_autonew =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->bcontract_autonew =="1") echo "selected"; @endphp>Yes</option>
                                                 </select> 
                                             </div>
                                         </div>
@@ -1578,9 +1386,9 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="bprevious_capital_raise">Have you had previous capital raises?  <span class="danger">*</span></label>
                                                 <select name="bprevious_capital_raise" class="form-control required" id="bprevious_capital_raise" required>
-                                                    <option value="" selected>Select</option>
-                                                    <option value="0" @php if(isset($form) && $form->bprevious_capital_raise =="0") echo "selected" @endphp>No</option>
-                                                    <option value="1" @php if(isset($form) && $form->bprevious_capital_raise =="0") echo "selected" @endphp>Yes</option>
+                                                    <option value="" @php if(!isset($form) || !isset($form->bprevious_capital_raise)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->bprevious_capital_raise =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->bprevious_capital_raise =="1") echo "selected"; @endphp>Yes</option>
                                                 </select> 
                                             </div>
                                         </div>
@@ -1622,18 +1430,18 @@ color: #797979;
                                             </div>
                                         </div>
                                     </div>
-
+                                    <h6>Founder Capital Committed</h6>
                                     <div class="row">
-                                        <h6>Founder Capital Committed</h6>
+                                        
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="bfounder_capital_commit">Does the founder have personal capital committed?  <span class="danger">*</span></label>
                                                         <select name="bfounder_capital_commit" id="bfounder_capital_commit" class="form-control required" required>
-                                                            <option value="" selected>Select</option>
-                                                            <option value="0" @php if(isset($form) && $form->bfounder_capital_commit =="0") echo "selected" @endphp>No</option>
-                                                            <option value="1" @php if(isset($form) && $form->bfounder_capital_commit =="1") echo "selected" @endphp>Yes</option>
+                                                            <option value="" @php if(!isset($form) || !isset($form->bfounder_capital_commit)) echo "selected"; @endphp>Select</option>
+                                                            <option value="0" @php if(isset($form) && $form->bfounder_capital_commit =="0") echo "selected"; @endphp>No</option>
+                                                            <option value="1" @php if(isset($form) && $form->bfounder_capital_commit =="1") echo "selected"; @endphp>Yes</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -1648,64 +1456,83 @@ color: #797979;
                                         </div>
                                     </div>
 
+                                    <h6>Future Capital Needs</h6>
                                     <div class="row">
-                                        <h6>Future Capital Needs</h6>
+                                        
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="bexpect_future_raise">Do you expect any future capital raises?  <span class="danger">*</span></label>
                                                         <select name="bexpect_future_raise" id="bexpect_future_raise" class="form-control required" required>
-                                                            <option value="" selected>Select</option>
-                                                            <option value="0" @php if(isset($form) && $form->bexpect_future_raise =="0") echo "selected" @endphp>No</option>
-                                                            <option value="1" @php if(isset($form) && $form->bexpect_future_raise =="1") echo "selected" @endphp>Yes</option>
+                                                            <option value="" @php if(!isset($form) || !isset($form->bexpect_future_raise)) echo "selected"; @endphp>Select</option>
+                                                            <option value="0" @php if(isset($form) && $form->bexpect_future_raise =="0") echo "selected"; @endphp>No</option>
+                                                            <option value="1" @php if(isset($form) && $form->bexpect_future_raise =="1") echo "selected"; @endphp>Yes</option>
                                                         </select>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-6" id="expect_future_raise_div" style="display: none;">
-                                                    <div class="form-group">
-                                                        <label for="expect_future_raise_amount">How much</label>
-                                                        <input type="text" name="expect_future_raise_amount" class="form-control mask-money" data-inputmask="'alias': 'currency'" id="expect_future_raise_amount" value="@php if(isset($form)) echo $form->expect_future_raise_amount; @endphp">
-                                                    </div>
-                                                </div>
                                             </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="estimated_timing_future_capital">Estimated timing of future capital raises :  <span class="danger">*</span></label>
-                                                        <input type="text" name="estimated_timing_future_capital" class="form-control required" id="estimated_timing_future_capital" required value="@php if(isset($form)) echo $form->estimated_timing_future_capital; @endphp" maxlength="255">
+                                            <div id="expect_future_raise_div" style="display: none;">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="expect_future_raise_amount">How much</label>
+                                                            <input type="text" name="expect_future_raise_amount" class="form-control mask-money" data-inputmask="'alias': 'currency'" id="expect_future_raise_amount" value="@php if(isset($form)) echo $form->expect_future_raise_amount; @endphp">
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="use_additional_fund">Use of additional funds :  <span class="danger">*</span></label>
-                                                        <input type="text" name="use_additional_fund" class="form-control required" id="use_additional_fund" required value="@php if(isset($form)) echo $form->use_additional_fund; @endphp" maxlength="255">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="estimated_timing_future_capital">Estimated timing of future capital raises :  </label>
+                                                            <input type="text" name="estimated_timing_future_capital" class="form-control " id="estimated_timing_future_capital"  value="@php if(isset($form)) echo $form->estimated_timing_future_capital; @endphp" maxlength="255">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="use_additional_fund">Use of additional funds :  </label>
+                                                            <input type="text" name="use_additional_fund" class="form-control " id="use_additional_fund"  value="@php if(isset($form)) echo $form->use_additional_fund; @endphp" maxlength="255">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    @if($opportunitymember->company_stage == 1)
-                                    <h4>Did previous investors reinvest this round?</h4>
+                                    @if($opportunitymember->company_stage == 2)
+
                                     <div class="row">
-                                        <h6>Previous investors reinvesting this round</h6>
                                         <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="bprevious_investor_reinvest">Did previous investors reinvest this round?  <span class="danger">*</span></label>
+                                                <select name="bprevious_investor_reinvest" id="bprevious_investor_reinvest" class="form-control required" required>
+                                                    <option value="" @php if(!isset($form) || !isset($form->bprevious_investor_reinvest)) echo "selected"; @endphp>Select</option>
+                                                    <option value="0" @php if(isset($form) && $form->bprevious_investor_reinvest =="0") echo "selected"; @endphp>No</option>
+                                                    <option value="1" @php if(isset($form) && $form->bprevious_investor_reinvest =="1") echo "selected"; @endphp>Yes</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="row" id="previous_investor_div" style="display: none;">
+                                        
+                                        <div class="col-md-12">
+                                            <h6>Previous investors reinvesting this round</h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="name_investor">Name of Investor :  <span class="danger">*</span></label>
-                                                        <input type="text" name="name_investor" class="form-control required" id="name_investor" required value="@php if(isset($form)) echo $form->name_investor; @endphp" maxlength="255">
+                                                        <input type="text" name="name_investor" class="form-control " id="name_investor"  value="@php if(isset($form)) echo $form->name_investor; @endphp" maxlength="255">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="amount_committed">Amount Committed :  <span class="danger">*</span></label>
-                                                        <input type="text" name="amount_committed" class="form-control required mask-money" data-inputmask="'alias': 'currency'" id="amount_committed" required value="@php if(isset($form)) echo $form->amount_committed; @endphp">
+                                                        <input type="text" name="amount_committed" class="form-control  mask-money" data-inputmask="'alias': 'currency'" id="amount_committed"  value="@php if(isset($form)) echo $form->amount_committed; @endphp">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1713,8 +1540,9 @@ color: #797979;
                                     </div>
                                     @endif
 
+                                    <h6>VALUATION</h6>
                                     <div class="row">
-                                        <h6>VALUATION</h6>
+                                        
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -1751,9 +1579,9 @@ color: #797979;
                                                     <div class="form-group">
                                                         <label for="bhave_plan_exit_business">Do you plan to exit the business in the future?  <span class="danger">*</span></label>
                                                         <select name="bhave_plan_exit_business" id="bhave_plan_exit_business" class="form-control required" required>
-                                                            <option value="" selected>Select</option>
-                                                            <option value="0" @php if(isset($form) && $form->bhave_plan_exit_business == "0") echo "selected" @endphp>No</option>
-                                                            <option value="1" @php if(isset($form) && $form->bhave_plan_exit_business == "1") echo "selected" @endphp>Yes</option>
+                                                            <option value="" @php if(!isset($form) || !isset($form->bhave_plan_exit_business)) echo "selected"; @endphp>Select</option>
+                                                            <option value="0" @php if(isset($form) && $form->bhave_plan_exit_business =="0") echo "selected"; @endphp>No</option>
+                                                            <option value="1" @php if(isset($form) && $form->bhave_plan_exit_business =="1") echo "selected"; @endphp>Yes</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -1768,9 +1596,9 @@ color: #797979;
                                         </div>
                                     </div>
 
-
+                                    <h6>Exit Strategy</h6>
                                     <div class="row">
-                                        <h6>Exit Strategy</h6>
+                                        
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -1815,7 +1643,39 @@ color: #797979;
                                             </div>
 
                                         </div>
+
                                     </div>
+
+                                    <h6>Upload Files</h6>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="prior_year_monthly_finacial">Prior Year Monthly Financials</label>
+                                                    <input type="file" id="prior_year_monthly_finacial" class="dropify" name="prior_year_monthly_finacial" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" @if(isset($form) && $form->prior_year_monthly_finacial) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->prior_year_monthly_finacial)}}" @endif/ >
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="investor_deck">Investor Deck</label>
+                                                    <input type="file" id="investor_deck" class="dropify" name="investor_deck" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" @if(isset($form) && $form->investor_deck) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->investor_deck)}}" @endif/ >
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="proforma_projections">3 Year Proforma Projections</label>
+                                                    <input type="file" id="proforma_projections" class="dropify" name="proforma_projections" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" @if(isset($form) && $form->proforma_projections) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->proforma_projections)}}" @endif/ >
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="detailed_cap_table">Detailed Cap Table</label>
+                                                    <input type="file" id="detailed_cap_table" class="dropify" name="detailed_cap_table" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" @if(isset($form) && $form->detailed_cap_table) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->detailed_cap_table)}}" @endif/ >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br>
 
                                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" id="submit-btn">Submit</button>
                                     <button type="button" class="btn btn-info waves-effect waves-light" id="save-btn">Save</button>
@@ -1913,6 +1773,8 @@ color: #797979;
     <script src="{{asset('assets/dashboard/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/dashboard/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
 
+    <script src="{{asset('assets/dashboard/plugins/dropify/dist/js/dropify.min.js')}}"></script>
+
     <script type="text/javascript" src="{{asset('assets/dashboard/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
     @if(Session::get('msg') && Session::get('status') != 'saved')
@@ -1946,32 +1808,9 @@ color: #797979;
 
     <script type="text/javascript">
         $(".select2").select2();
-
-        $(".mask-money").inputmask({digits:0});
-        $(".mask-percent").inputmask();
-
-        // $(document).on("click","#submit-btn",function(){
-        //     // $("#submit-form").validate();
-        //     var emptyfields = $('.required').filter(function() { return this.value === ""; });
-        //     if(emptyfields.length == 0){
-        //         $(".error").remove();
-        //         $("#identity").val("submit");
-        //         $("#submit-form").submit();
-        //     }else{ 
-        //         $('html, body').animate({
-        //             scrollTop: $("#"+emptyfields[0].id).offset().top
-        //         }, 800);
-                
-        //         $(".error").remove();
-        //         for(var i = 0; i< emptyfields.length; i++)
-        //             $("#"+emptyfields[i].id).after('<span class="error">This field is required</span>');
-
-        //     }
-        // });
-        // $(document).on("click","#submit-btn",function(){
-        //     $("#identity").val("submit");
-        // });
-
+        $('.dropify').dropify();
+        $(".mask-money").inputmask({digits:0, rightAlign:false});
+        $(".mask-percent").inputmask({rightAlign:false});
 
         $(document).on("click","#save-btn",function(){
             $("#identity").val("save");
@@ -2040,6 +1879,20 @@ color: #797979;
             else $("#debt_detail_div").hide();
         });
 
+        $("#prior_exp").change(function(){
+            if($( "#prior_exp" ).val() == 1)
+                $("#prior_exp_div").show();
+            else $("#prior_exp_div").hide();
+        });
+
+        
+
+        $("#bprevious_investor_reinvest").change(function(){
+            if($( "#bprevious_investor_reinvest" ).val() == 1)
+                $("#previous_investor_div").show();
+            else $("#previous_investor_div").hide();
+        });
+
         $(document).ready(function(){
             var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
             $('#company_website').on('keypress keydown keyup',function(){
@@ -2053,6 +1906,16 @@ color: #797979;
                     $('.emsg').addClass('hidden');
                 }
             });
+        });
+
+        $(".mask-money").bind("paste keyup",function (event) {
+           var _this = this;
+            // Short pause to wait for paste to complete
+            setTimeout( function() {
+               $("#prev1_revenue_expense").val( Number($("#prev1_total_revenue").val().replace(/[^0-9\.-]+/g,"")) - Number($("#prev1_total_expense").val().replace(/[^0-9\.-]+/g,"")) );
+               $("#cur_revenue_expense").val( Number($("#cur_total_revenue").val().replace(/[^0-9\.-]+/g,"")) - Number($("#cur_total_expense").val().replace(/[^0-9\.-]+/g,"")) );
+               $("#next_revenue_expense").val( Number($("#next_total_revenue").val().replace(/[^0-9\.-]+/g,"")) - Number($("#next_total_expense").val().replace(/[^0-9\.-]+/g,"")) );
+            }, 100);
         });
 
     </script>
@@ -2072,26 +1935,35 @@ color: #797979;
         $(document).on("click","#send-btn",function(){
             var sendemail = $("#linkemail").val();
             $.ajax({
-                    url: '{{route('investment-questionnaire-form-save-link')}}',
-                    type: 'POST',
-                    data: {
-                        '_token' : '{{csrf_token()}}',
-                        'email' : sendemail,
-                        'code' : '{{$opportunitymember->code}}'
-                    },
-                    dataType: 'html',
-                    success: function (data) {
-                       data= jQuery.parseJSON(data);
-                        if(data['status']=='ok'){
-                            $("#status-span").html(data['content']);
-                        }else{
-                            $("#status-span").html(data['content']);
-                        }
-                    },
-                    error: function () {
-                        alert("Something went wrong!");
+                url: '{{route('investment-questionnaire-form-save-link')}}',
+                type: 'POST',
+                data: {
+                    '_token' : '{{csrf_token()}}',
+                    'email' : sendemail,
+                    'type' : 0,
+                    'code' : '{{$opportunitymember->code}}'
+                },
+                dataType: 'html',
+                success: function (data) {
+                   data= jQuery.parseJSON(data);
+                    if(data['status']=='ok'){
+                        $("#status-span").html(data['content']);
+                    }else{
+                        $("#status-span").html(data['content']);
                     }
-                });
+                },
+                error: function () {
+                    alert("Something went wrong!");
+                }
+            });
+        });
+
+        $('#submit-form').on('keyup keypress', function(e) {
+          var keyCode = e.keyCode || e.which;
+          if (keyCode === 13) { 
+            e.preventDefault();
+            return false;
+          }
         });
     </script>
 </body>

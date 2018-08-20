@@ -44,6 +44,7 @@
                                     <th>Last Name</th>
                                     <th>Email</th>
                                     <th>Requested Time</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -55,6 +56,7 @@
                                     <th>Last Name</th>
                                     <th>Email</th>
                                     <th>Applied Time</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -68,6 +70,13 @@
                                     <td>{{$request->user->lName}}</td>
                                     <td>{{$request->user->email}}</td>
                                     <td>{{$request->created_at}}</td>
+                                    <td>
+                                        @if($request->is_active == 1)
+                                        <span class="badge badge-success">Active</span>
+                                        @else
+                                        <span class="badge badge-danger">Closed</span>
+                                        @endif
+                                    </td>
                                     <td><a  href="{{route('admin.requestopportunity-detail',['id'=>$request->id])}}" class="btn btn-info btn-sm btn-block text-uppercase waves-effect waves-light">Check</a></td>
                                 </tr>
                                 @endforeach

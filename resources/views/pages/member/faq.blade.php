@@ -51,7 +51,7 @@
                                 <div class="card-header" role="tab" id="{{'headingOne'.$i}}">
                                     <h5 class="mb-0">
                                     <a class="link" data-toggle="collapse" data-parent="#accordion2" href="{{'#collapseOne'.$i}}" aria-expanded="true" aria-controls="{{'collapseOne'.$i}}">
-                                      {{'Q'.$i}} {{$faq->question}}
+                                      <h4 class="card-title text-info" style="font-weight: bold;">{{'Q'.$i}} . {{$faq->question}}</h4>
                                     </a>
                                   </h5>
                                 </div>

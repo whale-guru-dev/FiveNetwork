@@ -9,6 +9,7 @@ use App\User;
 use App\Model\Faq;
 use App\Model\MemberLogin;
 use App\Model\MemberReferLog;
+use App\Model\MemberFeedback;
 
 class HomeController extends Controller
 {
@@ -20,19 +21,20 @@ class HomeController extends Controller
     public function index()
     {
         $logins = MemberLogin::where('usid', Auth::user()->id)->orderBy('created_at','DESC')->get();
-        $members = User::all();
+        $members = User::where('is_allowed', 1)->get();
         $map_markers = [];
         $map_regions = [];
 
         foreach($members as $member){
-            $login = MemberLogin::where('usid', $member->id)->where('is_usa', 1)->first();
-            if($login){
-                $map_markers[$member->id]['lat'] = $login->lat;
-                $map_markers[$member->id]['long'] = $login->long;
-                $map_markers[$member->id]['fName'] = $login->member->fName;
-                $map_markers[$member->id]['lName'] = $login->member->lName;
-                $map_regions[] = $login->code;
-            }
+            // $login = MemberLogin::where('usid', $member->id)->where('is_usa', 1)->first();
+
+            // if($login){
+                // $map_markers[$member->id]['lat'] = $login->lat;
+                // $map_markers[$member->id]['long'] = $login->long;
+                // $map_markers[$member->id]['fName'] = $login->member->fName;
+                // $map_markers[$member->id]['lName'] = $login->member->lName;
+                $map_regions[] = $member->state;
+            // }
             
         }
 
@@ -69,5 +71,20 @@ class HomeController extends Controller
     //     $user = Auth::user();
     // }
 
+    public function feedback(Request $request)
+    {
+        $usid = Auth::user()->id;
+        $text = $request->feedback;
+
+        $feedback = MemberFeedback::create([
+            'usid' => $usid,
+            'feedback' => $text
+        ]);
+
+        if($feedback)
+            return response()->json(['status' => 'ok']);
+        else 
+            return response()->json(['status' => 'no']);
+    }
 
 }

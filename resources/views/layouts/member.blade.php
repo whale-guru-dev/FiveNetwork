@@ -20,6 +20,8 @@
     <!-- You can change the theme colors from here -->
     <link href="{{asset('assets/dashboard/member/css/colors/blue.css')}}" id="theme" rel="stylesheet">
     <link href="{{asset('assets/dashboard/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('assets/dashboard/plugins/toast-master/css/jquery.toast.css')}}" rel="stylesheet">
+
     @yield('member-css')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,6 +66,9 @@ color: #797979;
         font-size: 15px;
     }
 }
+.jq-icon-info {
+  background-color: #1e88e5;
+  color: #ffffff; }
 </style>
 
 <body class="fix-header card-no-border logo-center">
@@ -188,7 +193,7 @@ color: #797979;
                         <li> 
                             <a class="waves-effect waves-dark" href="{{route('member.verified-opportunity')}}" aria-expanded="false">
                                 <i class="mdi mdi-verified"></i>
-                                <span class="hide-menu">My Verified Opportunity</span>
+                                <span class="hide-menu">FIVE Network Matched Opportunities</span>
                             </a>
                         </li>
 
@@ -235,8 +240,17 @@ color: #797979;
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
+            <!-- <div class="row text-center">
+                <div class="col-md-12">
+                    <h1>Are you available to spend your 1 minute time to improve our portal?</h1>
+                    <h3>Please put your valuable recommendation</h3>
+                    <button class="btn btn-info">Leave a feedback</button>
+                </div>
+            </div> -->
             <footer class="footer">
-                © {{date('Y')}} Family Investment Exchange. All Rights Reserved.
+
+                © {{date('Y')}} Family Investment Exchange. All Rights Reserved. &nbsp;&nbsp;
+                <button class="btn btn-outline-info" data-toggle="modal" data-target="#feedback-modal">Give us your feedback</button>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -246,6 +260,43 @@ color: #797979;
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
+
+    <div id="feedback-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h4 class="modal-title text-white">Feedback Request</h4>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                      <i class="fa fa-file-text-o fa-4x mb-3 animated rotateIn text-info"></i>
+                      <p>
+                        <strong>Your feedback</strong>
+                      </p>
+                      <p>Are you available to spend your 1 minute time to improve our portal?
+                        <strong></strong>Please put your valuable recommendation.
+                      </p>
+                    </div>
+                    <hr>
+                    <form class="floating-labels m-t-40">
+                        <h4></h4>
+                        <div class="form-group m-b-5">
+                            <label for="message-text">Your message</label>
+                            <span class="bar"></span>
+                            <textarea class="form-control" id="message-text" rows="4"></textarea>
+                        </div>
+                        <span style='color:red;display: none;' id='error1'>This field is required.</span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info waves-effect waves-light" id="feedback-send-btn">SEND <i class="fa fa-paper-plane"></i></button>
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -269,6 +320,11 @@ color: #797979;
     <!-- Sweet-Alert  -->
     <script src="{{asset('assets/dashboard/plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{asset('assets/dashboard/plugins/sweetalert/jquery.sweet-alert.custom.js')}}"></script>
+
+    <!--Toastr Alert -->
+
+    <script src="{{asset('assets/dashboard/plugins/toast-master/js/jquery.toast.js')}}"></script>
+
     <!--Custom JavaScript -->
     <script src="{{asset('assets/dashboard/member/js/custom.min.js')}}"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script> -->
@@ -306,6 +362,64 @@ color: #797979;
             SessionTimeout.init()
         });
     </script> -->
+    <script type="text/javascript">
+
+        $(document).on("click","#feedback-send-btn", function(){
+            if($("#message-text").val() == ''){
+                $("#error1").show();
+            }else{
+                $("#error1").hide();
+                $.ajax({
+                    url: '{{route('member.feedback')}}',
+                    type: 'POST',
+                    data: {
+                        '_token' : '{{csrf_token()}}',
+                        'feedback' : $("#message-text").val()
+                    },
+                    dataType: 'html',
+                    success: function (data) {
+                        $("#feedback-modal").modal('hide');
+                        $("#message-text").val('');
+                       data= jQuery.parseJSON(data);
+                        if(data['status']=='ok'){
+                            $.toast({
+                                heading: 'Thank you for your feedback.',
+                                text: 'We have sent your feedback to the FIVE Network support team.',
+                                position: 'bottom-right',
+                                loaderBg:'#ff6849',
+                                icon: 'info',
+                                hideAfter: 3000, 
+                                stack: 6
+                              });
+                        }else{
+                            $("#feedback-modal").modal('hide');
+                            $.toast({
+                                heading: 'There was an error while sending your feedback.',
+                                text: 'Please try again later.',
+                                position: 'bottom-right',
+                                loaderBg:'#ff6849',
+                                icon: 'warning',
+                                hideAfter: 3000, 
+                                stack: 6
+                              });
+                        }
+                    },
+                    error: function () {
+                        $("#feedback-modal").modal('hide');
+                        $.toast({
+                            heading: 'Something went wrong.',
+                            text: 'Please try again later.',
+                            position: 'bottom-right',
+                            loaderBg:'#ff6849',
+                            icon: 'warning',
+                            hideAfter: 3000, 
+                            stack: 6
+                          });
+                    }
+                });
+            }
+        });
+    </script>
     @yield('member-js')
 </body>
 

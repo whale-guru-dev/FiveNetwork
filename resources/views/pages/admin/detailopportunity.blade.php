@@ -450,105 +450,12 @@
                             <h4>FINANCIAL INFORMATION</h4>
                             <hr>
 
-                            @if($oppor->company_stage == 2)
-                            <h6>2014</h6>
+                            @if($oppor->company_stage == 3)
+                            <h6>Previous Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2017 Revenue</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev4_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2017 Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev4_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev4_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>2015</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2015 Revenue</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev3_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2015 Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev3_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev3_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>2016</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2016 Revenue</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev2_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2016 Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev2_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev2_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>2017</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2017 Revenue</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Revenue</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_total_revenue}} </p>
                                         </div>
@@ -557,7 +464,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2015 Expenses</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_total_expense}} </p>
                                         </div>
@@ -566,7 +473,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Revenue - Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_revenue_expense}} </p>
                                         </div>
@@ -575,11 +482,11 @@
                                 <!--/span-->
                             </div>
 
-                            <h6>Projection - 2018</h6>
+                            <h6>Current Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Revenue</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Revenue</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_total_revenue}} </p>
                                         </div>
@@ -588,7 +495,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_total_expense}} </p>
                                         </div>
@@ -597,9 +504,40 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Revenue - Total Expense</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Revenue - Total Expense</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_revenue_expense}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+                            <h6>Next Year</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Next Year Total Revenue</label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static"> {{$oppor->next_total_revenue}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Next Year Total Expenses</label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static"> {{$oppor->next_total_expense}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Next Year Total Revenue - Total Expenses</label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static"> {{$oppor->next_revenue_expense}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -691,11 +629,11 @@
                             @endif
 
                             @else
-                            <h6>2017</h6>
+                            <h6>Previous Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2017 Revenue</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Revenue</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_total_revenue}} </p>
                                         </div>
@@ -704,7 +642,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total 2015 Expenses</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_total_expense}} </p>
                                         </div>
@@ -713,7 +651,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Previous Year Total Revenue - Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->prev1_revenue_expense}} </p>
                                         </div>
@@ -722,73 +660,11 @@
                                 <!--/span-->
                             </div>
 
-                            <h6>Previous Quarter</h6>
+                            <h6>Current Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue Last 3 months</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_quater_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Expenses Last 3 months</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_quater_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_quater_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>Previous Month</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue Last Month</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_month_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Expenses Last Month</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_month_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Total Revenue - Total Expenses</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->prev_month_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>Projection - 2018</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Revenue</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Revenue</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_total_revenue}} </p>
                                         </div>
@@ -797,7 +673,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Expenses</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_total_expense}} </p>
                                         </div>
@@ -806,7 +682,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected 2018 Total Revenue - Total Expense</label>
+                                        <label class="control-label text-right col-md-4">Current Year Total Revenue - Total Expense</label>
                                         <div class="col-md-8">
                                             <p class="form-control-static"> {{$oppor->cur_revenue_expense}} </p>
                                         </div>
@@ -815,62 +691,31 @@
                                 <!--/span-->
                             </div>
 
-                            <h6>Projection - Current Quarter</h6>
+                            <h6>Next Year</h6>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Revenue Next 3 months</label>
+                                        <label class="control-label text-right col-md-4">Next Year Total Revenue</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->next3month_total_revenue}} </p>
+                                            <p class="form-control-static"> {{$oppor->next_total_revenue}} </p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Expenses Next 3 Months</label>
+                                        <label class="control-label text-right col-md-4">Next Year Total Expenses</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->next3month_total_expense}} </p>
+                                            <p class="form-control-static"> {{$oppor->next_total_expense}} </p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Revenue - Total Expenses</label>
+                                        <label class="control-label text-right col-md-4">Next Year Total Revenue - Total Expenses</label>
                                         <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->next3month_revenue_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-                            <h6>Projection - Current Month</h6>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Revenue This Month</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->cur_month_total_revenue}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Expenses This Month</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->cur_month_total_expense}} </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-4">Projected Total Revenue - Total Expense</label>
-                                        <div class="col-md-8">
-                                            <p class="form-control-static"> {{$oppor->cur_month_revenue_expense}} </p>
+                                            <p class="form-control-static"> {{$oppor->next_revenue_expense}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -1399,11 +1244,21 @@
                                 <!--/span-->
                             </div>
 
-                            @if($oppor->company_stage == 1)
-                            <h6>Did previous investors reinvest this round?</h6>
-                            <br>
-                            <h6>Previous investors reinvesting this round</h6>
+                            @if($oppor->company_stage == 2)
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-4">Did previous investors reinvest this round?</label>
+                                        <div class="col-md-8">
+                                            <p class="form-control-static"> {{$oppor->bprevious_investor_reinvest==0?'No':'Yes'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if($oppor->bprevious_investor_reinvest==1)
+                            
+                            <div class="row">
+                                <h6>Previous investors reinvesting this round</h6>
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-4">Name of Investor</label>
@@ -1423,6 +1278,7 @@
                                 </div>
                                 <!--/span-->
                             </div>
+                            @endif
                             @endif
 
                             <h4>VALUATION</h4>
@@ -1539,6 +1395,62 @@
                                 <!--/span-->
                             </div>
 	                        @endif
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Prior Year Monthly Financials:</label>
+                                        <div class="col-md-3">
+                                            @if($oppor->prior_year_monthly_finacial)
+                                            <a href="{{route('opportunity.file',['name' => $oppor->prior_year_monthly_finacial])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Investor Deck:</label>
+                                        <div class="col-md-3">
+                                            @if($oppor->investor_deck)
+                                            <a href="{{route('opportunity.file',['name' => $oppor->investor_deck])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">3 Year Proforma Projections:</label>
+                                        <div class="col-md-3">
+                                            @if($oppor->proforma_projections)
+                                            <a href="{{route('opportunity.file',['name' => $oppor->proforma_projections])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Detailed Cap Table:</label>
+                                        <div class="col-md-3">
+                                            @if($oppor->detailed_cap_table)
+                                            <a href="{{route('opportunity.file',['name' => $oppor->detailed_cap_table])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 	                        <div class="row">
 	                            <div class="col-md-12">

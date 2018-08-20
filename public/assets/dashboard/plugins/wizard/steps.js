@@ -55,7 +55,9 @@ $(".validation-wizard").steps({
         $(element).removeClass(errorClass)
     }
     , errorPlacement: function (error, element) {
-        error.insertAfter(element)
+        if(element[0].id == "bprivacy")
+            error.insertAfter(element[0].parentElement)
+        else error.insertAfter(element)
     }
     , rules: {
         email: {

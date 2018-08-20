@@ -194,8 +194,26 @@
                                 <span class="hide-menu">Membership</span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{route('admin.allow-apply-membership')}}">Access Requested</a></li>
-                                <li><a href="{{route('admin.check-membership')}}">Pending Membership Applications</a></li>
+                                <li>
+                                    <a href="{{route('admin.allow-apply-membership')}}">Access Requested 
+                                    @if(App\Model\Preregister::where('allowed', 0)->count()>0)
+                                    <span class="label label-rounded label-danger" id="num-requested">
+                                    {{App\Model\Preregister::where('allowed', 0)->count()}}
+                                    </span>
+                                    @endif
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('admin.check-membership')}}">Pending Membership Applications 
+                                        @if(App\User::where('is_allowed', 0)->count()>0)
+                                        <span class="label label-rounded label-danger" id="num-requested">
+                                        {{App\User::where('is_allowed', 0)->count()}}
+                                        </span>
+                                        @endif
+                                    </a>
+                                </li>
+                                <li><a href="{{route('admin.remove.member')}}">Remove Member</a></li>
+                                <li><a href="{{route('admin.removed.member')}}">Removed Members</a></li>
                                 <li><a href="{{route('admin.check.membership')}}">Membership Database</a></li>
                             </ul>
                         </li>
@@ -206,10 +224,30 @@
                                 <span class="hide-menu">Opportunity</span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{route('admin.check-request-opportunity')}}">Approve Co-Investment Opportunity</a></li>
+                                <li><a href="{{route('admin.check-request-opportunity')}}">Approve Co-Investment Opportunity 
+                                    @if(App\Model\MemberRequestOpportunity::where('is_accepted', 0)->count()>0)
+                                    <span class="label label-rounded label-danger" id="num-requested">
+                                    {{App\Model\MemberRequestOpportunity::where('is_accepted', 0)->count()}}
+                                    </span>
+                                    @endif</a></li>
                                 <li><a href="{{route('admin.check-allrequest-opportunity')}}">Co-Investment Database</a></li>
                                 <li><a href="{{route('admin.opportunity-analytics')}}">Opportunity Analytics</a></li>
+                                <li><a href="{{route('admin.check-investment-questionnaire')}}">Approve Deal Room Opportunity 
+                                    @if((App\Model\MemberSimpleOpportunity::where('is_allowed', 0)->count() + App\Model\InvestmentQuestionnaire::where('is_allowed', 0)->where('is_upload_deal', 1)->where('is_completed', 1)->count())>0)
+                                    <span class="label label-rounded label-danger" id="num-requested">
+                                    {{App\Model\MemberSimpleOpportunity::where('is_allowed', 0)->count() + App\Model\InvestmentQuestionnaire::where('is_allowed', 0)->where('is_upload_deal', 1)->where('is_completed', 1)->count()}}
+                                    </span>
+                                    @endif</a></li>
+                                <li><a href="{{route('admin.check-all-investment-questionnaire')}}">Deal Room opportunity Database</a></li>
+                                <li><a href="{{route('admin.dealroom-analytics')}}">Deal Room opportunity Analytics</a></li>
                             </ul>
+                        </li>
+
+                        <li>
+                            <a  href="{{route('admin.check-feedback')}}" aria-expanded="false">
+                                <i class="mdi mdi-comment-text"></i>
+                                <span class="hide-menu">Feedback</span>
+                            </a>
                         </li>
 
                         <li>

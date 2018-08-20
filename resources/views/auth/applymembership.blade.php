@@ -2,8 +2,9 @@
     $invest_types = App\Model\InvestmentStructureType::all();
     $invest_size_types = App\Model\MemberInvestmentSizeType::all();
     $invest_stage_types = App\Model\MemberInvestmentStageType::all();
-    $invest_sector_types = App\Model\MemberInvestmentSectorType::all();
+    $invest_sector_types = App\Model\MemberInvestmentSectorType::orderBy('type','ASC')->get();
     $invest_region_types = App\Model\MemberInvestmentRegionType::all();
+    $invest_state = App\Model\MemberState::all();
 @endphp
 
 <!DOCTYPE html>
@@ -38,6 +39,8 @@
 
     <link href="{{asset('assets/dashboard/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/css/jquery.multiselect.css')}}" rel="stylesheet" type="text/css" />
+
+    <link href="{{asset('assets/dashboard/plugins/checkbox-tree/hummingbird-treeview.css')}}" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="{{asset('assets/dashboard/plugins/dropify/dist/css/dropify.min.css')}}">
 
@@ -84,6 +87,41 @@ color: #797979;
 .hidden {
      visibility:hidden;
 }
+
+
+ul, li {
+  list-style-type: none;
+}
+
+/*.treeview {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    position: relative;
+    height: 200px;
+    padding: 0;
+    overflow-y: auto;
+}*/
+
+.treeview li {
+    padding: 2px 10px;
+}
+
+#region-type ,#selectall{
+    color: #08c !important;
+    font-weight: bold;
+}
+
+
 </style>
 <body>
     <!-- ============================================================== -->
@@ -126,38 +164,12 @@ color: #797979;
 
                                 <form action="{{url('/applymembership')}}" class="validation-wizard wizard-circle" id="apply-form" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <h6></h6>
-                                    <section>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="apply_type"> Are you applying for a Family Office or Individual Membership?
-                                                        <span class="danger">*</span> 
-                                                    </label>
-                                                    <select class="custom-select form-control required" id="apply_type" name="apply_type">
-                                                        <option value="">Select</option>
-                                                        <option value="0">Family Office</option>
-                                                        <option value="1">Individual</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="bprinciple"> Are you a Principle of the Family Office? 
-                                                        <span class="danger">*</span> 
-                                                    </label>
-                                                    <select class="custom-select form-control required" id="bprinciple" name="bprinciple">
-                                                        <option value="">Select</option>
-                                                        <option value="0">No</option>
-                                                        <option value="1">Yes</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <!-- Step 1 -->
                                     <h6>Applicant Information</h6>
                                     <section>
+                                    <!-- </section> -->
+                                    <!-- Step 1 -->
+                                    
+                                    <!-- <section> -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -189,6 +201,33 @@ color: #797979;
                                         </div>
 
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="apply_type"> Are you applying for a Family Office or Individual Membership?
+                                                        <span class="danger">*</span> 
+                                                    </label>
+                                                    <select class="custom-select form-control required" id="apply_type" name="apply_type">
+                                                        <option value="">Select</option>
+                                                        <option value="0">Family Office</option>
+                                                        <option value="1">Individual</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" id="family_office" style="display: none;">
+                                                <div class="form-group">
+                                                    <label for="bprinciple"> Are you a Principle of the Family Office? 
+                                                        <span class="danger">*</span> 
+                                                    </label>
+                                                    <select class="custom-select form-control" id="bprinciple" name="bprinciple">
+                                                        <option value="">Select</option>
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="aware_method"> How did you hear about Family Investment Exchange?
@@ -205,7 +244,7 @@ color: #797979;
                                                 <div class="form-group collapse" id="aware_who" style="display: none;">
                                                     <label for="aware_method_desc_who"> Who : <span class="danger">*</span> 
                                                     </label>
-                                                    <input type="email" class="form-control" id="aware_method_desc_who" name="aware_method_desc_who"> 
+                                                    <input type="text" class="form-control" id="aware_method_desc_who" name="aware_method_desc_who"> 
                                                 </div>
                                                 <div class="form-group collapse" id="aware_how" style="display: none;">
                                                     <label for="aware_method_desc_how"> How : <span class="danger">*</span> 
@@ -218,7 +257,7 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="family_office_name"> Family Office Name : <span class="danger">*</span> 
+                                                    <label for="family_office_name"> <span id="name_type">Family Office Name</span> : <span class="danger">*</span> 
                                                     </label>
                                                     <input type="text" class="form-control required" id="family_office_name" name="family_office_name"> 
                                                 </div>
@@ -277,7 +316,12 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="state"> State : <span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="state"  name="state" > 
+                                                    <select class="custom-select form-control required" style="width: 100%" name="state" id="state" required >
+                                                        <option value="" selected="">Select</option>
+                                                        @foreach($invest_state as $istate)
+                                                            <option value="{{$istate->code}}">{{$istate->state}}</option>
+                                                        @endforeach
+                                                    </select> 
                                                 </div>
                                             </div>
                                         </div>
@@ -552,7 +596,8 @@ color: #797979;
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="phone_office">Office Phone : <span class="danger">*</span></label>
-                                                    <input type="tel" class="form-control required" id="phone_office" name="phone_office"> 
+                                                    <input type="tel" class="form-control required" id="phone_officex" name="phone_officex" placeholder="000-000-0000"> 
+                                                    <input id="phone_office" type="hidden" name="phone_office">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -580,74 +625,8 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="invest_structure">Investment Structure :</label>
-                                                    <select style="width: 100%" multiple  name="invest_structure[]" id="invest_structure">
-                                                        
-                                                        @foreach($invest_types as $type)
-                                                        <option value="{{$type->id}}" selected="">{{$type->type}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="button-box m-t-20"> <a id="select-all-str" class="btn btn-success" href="#">select all</a> <a id="deselect-all-str" class="btn btn-info" href="#">deselect all</a> </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="invest_region">Investment Regions :</label>
-                                                    <select style="width: 100%" multiple  name="invest_region[]" id="invest_region">
-                                                        @foreach($invest_region_types as $irt)
-                                                            @if($irt->id < 14)
-                                                            @if($loop->iteration == 1)
-                                                            <optgroup label="Southeast">
-                                                            @endif
-                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 13)
-                                                            </optgroup>
-                                                            @endif
-                                                            @elseif($irt->id > 13 && $irt->id < 18)
-                                                            @if($loop->iteration == 14)
-                                                            <optgroup label="Southwest">
-                                                            @endif
-                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 17)
-                                                            </optgroup>
-                                                            @endif
-                                                            @elseif($irt->id > 17 && $irt->id < 30)
-                                                            @if($loop->iteration == 18)
-                                                            <optgroup label="Midwest">
-                                                            @endif
-                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 29)
-                                                            </optgroup>
-                                                            @endif
-                                                            @elseif($irt->id > 29 && $irt->id < 41)
-                                                            @if($loop->iteration == 30)
-                                                            <optgroup label="West">
-                                                            @endif
-                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 40)
-                                                            </optgroup>
-                                                            @endif
-                                                            @else
-                                                            @if($loop->iteration == 41)
-                                                            <optgroup label="Northeast">
-                                                            @endif
-                                                                <option value="{{$irt->id}}" selected="">{{$irt->type}}</option>
-                                                            @if($loop->iteration == 50)
-                                                            </optgroup>
-                                                            @endif
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="private_investment_number">Approximately How many Private Investments do you/your family invest in annually? </label>
-                                                    <select class="custom-select form-control " id="private_investment_number" name="private_investment_number">
+                                                    <label for="private_investment_number">Approximately how many private investments do you/your family invest in annually? <span class="danger">*</span></label>
+                                                    <select class="custom-select form-control required" id="private_investment_number" name="private_investment_number">
                                                         <option value="" selected="">Select</option>
                                                         <option value="0">1-2</option>
                                                         <option value="1">3-4</option>
@@ -659,8 +638,8 @@ color: #797979;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation ?</label>
-                                                    <select class="custom-select form-control " id="additional_capacity" name="additional_capacity">
+                                                    <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation? <span class="danger">*</span></label>
+                                                    <select class="custom-select form-control required" id="additional_capacity" name="additional_capacity">
                                                         <option value="" selected="">Select</option>
                                                         <option value="20">20%</option>
                                                         <option value="40">40%</option>
@@ -671,46 +650,273 @@ color: #797979;
                                                 </div>
                                             </div>
                                         </div>
-
+                                        
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="average_investment_size">Typical Check Size :</label>
-                                                    <select style="width: 100%" multiple name="average_investment_size[]" id="average_investment_size">
-                                                        
-                                                        @foreach($invest_size_types as $type)
-                                                        <option value="{{$type->id}}"  selected="">{{$type->type}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <label for="invest_structure">Investment Structure :</label>
+                                                    <ul class="treeview" id="treeview1">
+                                                        <li> 
+                                                            <i class="fa fa-plus"></i>
+                                                            <label>
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input id="xnode-1-1" data-id="custom-1-1" type="checkbox">
+                                                                    <label for="xnode-1-1" id="selectall"> Select All  </label>
+                                                                </div>
+                                                            </label>
+                                                            <ul>
+                                                                @foreach($invest_types as $type)
+                                                                <li>
+                                                                    <label>
+                                                                        <div class="checkbox checkbox-success">
+                                                                            <input class="hummingbirdNoParent" id="xnode-1-1-{{$type->id}}" data-id="custom-1-1-{{$type->id}}" type="checkbox" name="invest_structure[]" value="{{$type->id}}">
+                                                                            <label for="xnode-1-1-{{$type->id}}"> {{$type->type}} </label>
+                                                                        </div>
+                                                                    </label>
+                                                                </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                    
                                                 </div>
-                                                <div class="button-box m-t-20"> <a id="select-all-size" class="btn btn-success" href="#">select all</a> <a id="deselect-all-size" class="btn btn-info" href="#">deselect all</a> </div>
+                                                
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="investment_stage">Investment Stage :</label>
-                                                    <select style="width: 100%" multiple name="investment_stage[]" id="investment_stage">
-                                                        
-                                                        @foreach($invest_stage_types as $type)
-                                                        <option value="{{$type->id}}"  selected="">{{$type->type}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <label for="invest_region">Investment Regions :</label>
+                                                    <ul id="treeview2" class="treeview">
+                                                        <li> 
+                                                            <i class="fa fa-plus"></i>
+                                                            <label>
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input id="xnode-0-0" data-id="custom-0-0" type="checkbox" >
+                                                                    <label for="xnode-0-0" id="selectall"> Select All  </label>
+                                                                </div>
+                                                            </label>
+                                                            <ul>
+                                                                <li> 
+                                                                    <i class="fa fa-plus"></i>
+                                                                    <label>
+                                                                        <div class="checkbox checkbox-success">
+                                                                            <input id="xnode-0-6" data-id="custom-0-6" type="checkbox">
+                                                                            <label for="xnode-0-6" id="region-type"> Northeast  </label>
+                                                                        </div>
+                                                                    </label>
+                                                                    
+                                                                    <ul style="display: none;">
+                                                                        @foreach($invest_region_types as $irt)
+                                                                        @if($irt->id > 40)
+                                                                        <li>
+                                                                            <label>
+                                                                                <div class="checkbox checkbox-success">
+                                                                                    <input class="hummingbirdNoParent" id="xnode-0-6-{{$irt->id}}" data-id="custom-0-6-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" >
+                                                                                    <label for="xnode-0-6-{{$irt->id}}"> {{$irt->type}}   </label>
+                                                                                </div>
+                                                                            </label>
+                                                                        </li>
+                                                                        @endif
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+
+                                                                <li> 
+                                                                    <i class="fa fa-plus"></i>
+                                                                    <label>
+                                                                        <div class="checkbox checkbox-success">
+                                                                            <input id="xnode-0-3" data-id="custom-0-3" type="checkbox">
+                                                                            <label for="xnode-0-3" id="region-type"> Midwest  </label>
+                                                                        </div>
+                                                                    </label>
+                                                                    
+                                                                    <ul style="display: none;">
+                                                                        @foreach($invest_region_types as $irt)
+                                                                        @if($irt->id > 17 && $irt->id < 30)
+                                                                        <li>
+                                                                            <label>
+                                                                                <div class="checkbox checkbox-success">
+                                                                                    <input class="hummingbirdNoParent" id="xnode-0-4-{{$irt->id}}" data-id="custom-0-4-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" >
+                                                                                    <label for="xnode-0-4-{{$irt->id}}"> {{$irt->type}}   </label>
+                                                                                </div>
+                                                                            </label>
+                                                                        </li>
+                                                                        @endif
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+
+                                                                <li> 
+                                                                    <i class="fa fa-plus"></i>
+                                                                    <label>
+                                                                        <div class="checkbox checkbox-success">
+                                                                            <input id="xnode-0-1" data-id="custom-0-1" type="checkbox" >
+                                                                            <label for="xnode-0-1" id="region-type"> Southeast  </label>
+                                                                        </div>
+                                                                    </label>
+                                                                    
+                                                                    <ul style="display: none;">
+                                                                        @foreach($invest_region_types as $irt)
+                                                                        @if($irt->id < 14)
+                                                                        <li>
+                                                                            <label>
+                                                                                <div class="checkbox checkbox-success">
+                                                                                    <input class="hummingbirdNoParent" id="xnode-0-1-{{$irt->id}}" data-id="custom-0-1-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" >
+                                                                                    <label for="xnode-0-1-{{$irt->id}}" > {{$irt->type}}   </label>
+                                                                                </div>
+                                                                            </label>
+                                                                        </li>
+                                                                        @endif
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+
+                                                                <li> 
+                                                                    <i class="fa fa-plus"></i>
+                                                                    <label>
+                                                                        <div class="checkbox checkbox-success">
+                                                                            <input id="xnode-0-2" data-id="custom-0-2" type="checkbox" >
+                                                                            <label for="xnode-0-2" id="region-type"> Southwest  </label>
+                                                                        </div>
+                                                                    </label>
+                                                                    
+                                                                    <ul style="display: none;">
+                                                                        @foreach($invest_region_types as $irt)
+                                                                        @if($irt->id > 13 && $irt->id < 18)
+                                                                        <li>
+                                                                            <label>
+                                                                                <div class="checkbox checkbox-success">
+                                                                                    <input class="hummingbirdNoParent" id="xnode-0-2-{{$irt->id}}" data-id="custom-0-2-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" >
+                                                                                    <label for="xnode-0-2-{{$irt->id}}" > {{$irt->type}}   </label>
+                                                                                </div>
+                                                                            </label>
+                                                                        </li>
+                                                                        @endif
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+                                                                
+                                                                <li> 
+                                                                    <i class="fa fa-plus"></i>
+                                                                    <label>
+                                                                        <div class="checkbox checkbox-success">
+                                                                            <input id="xnode-0-5" data-id="custom-0-5" type="checkbox" >
+                                                                            <label for="xnode-0-5" id="region-type"> West  </label>
+                                                                        </div>
+                                                                    </label>
+                                                                    
+                                                                    <ul style="display: none;">
+                                                                        @foreach($invest_region_types as $irt)
+                                                                        @if($irt->id > 29 && $irt->id < 41)
+                                                                        <li>
+                                                                            <label>
+                                                                                <div class="checkbox checkbox-success">
+                                                                                    <input class="hummingbirdNoParent" id="xnode-0-5-{{$irt->id}}" data-id="custom-0-5-{{$irt->id}}" type="checkbox" name="invest_region[]" value="{{$irt->id}}" >
+                                                                                    <label for="xnode-0-5-{{$irt->id}}"> {{$irt->type}}   </label>
+                                                                                </div>
+                                                                            </label>
+                                                                        </li>
+                                                                        @endif
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <div class="button-box m-t-20"> <a id="select-all-stage" class="btn btn-success" href="#">select all</a> <a id="deselect-all-stage" class="btn btn-info" href="#">deselect all</a> </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="investment_sector">Investment Sector Focus :</label>
-                                                    <select style="width: 100%" multiple name="investment_sector[]" id="investment_sector">
-                                                        
-                                                        @foreach($invest_sector_types as $isrt)
-                                                        <option value="{{$isrt->id}}"  selected="">{{$isrt->type}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <label for="average_investment_size">Typical Check Size :</label>
+                                                    
+                                                    <ul class="treeview" id="treeview1">
+                                                        <li> 
+                                                            <i class="fa fa-plus"></i>
+                                                            <label>
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input id="xnode-2-1" data-id="custom-2-1" type="checkbox">
+                                                                    <label for="xnode-2-1" id="selectall"> Select All  </label>
+                                                                </div>
+                                                            </label>
+                                                            <ul>
+                                                                @foreach($invest_size_types as $type)
+                                                                <li>
+                                                                    <label>
+                                                                        <div class="checkbox checkbox-success">
+                                                                            <input class="hummingbirdNoParent" id="xnode-2-1-{{$type->id}}" data-id="custom-2-1-{{$type->id}}" type="checkbox" name="average_investment_size[]" value="{{$type->id}}">
+                                                                            <label for="xnode-2-1-{{$type->id}}"> {{$type->type}} </label>
+                                                                        </div>
+                                                                    </label>
+                                                                </li>
+                                                               @endforeach
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <div class="button-box m-t-20"> <a id="select-all-sector" class="btn btn-success" href="#">select all</a> <a id="deselect-all-sector" class="btn btn-info" href="#">deselect all</a> </div>
+                                                
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="investment_stage">Investment Stage :</label>
+                                                    
+                                                    <ul class="treeview" id="treeview1">
+                                                        <li> 
+                                                            <i class="fa fa-plus"></i>
+                                                            <label>
+                                                                <div class="checkbox checkbox-success">
+                                                                    <input id="xnode-3-1" data-id="custom-3-1" type="checkbox">
+                                                                    <label for="xnode-3-1" id="selectall"> Select All  </label>
+                                                                </div>
+                                                            </label>
+                                                            <ul>
+                                                                @foreach($invest_stage_types as $type)
+                                                                <li>
+                                                                    <label>
+                                                                        <div class="checkbox checkbox-success">
+                                                                            <input class="hummingbirdNoParent" id="xnode-3-1-{{$type->id}}" data-id="custom-3-1-{{$type->id}}" type="checkbox" name="investment_stage[]" value="{{$type->id}}">
+                                                                            <label for="xnode-3-1-{{$type->id}}"> {{$type->type}} </label>
+                                                                        </div>
+                                                                    </label>
+                                                                </li>
+                                                               @endforeach
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                
+                                                <label for="investment_sector">Investment Sector Focus :</label>
+                                                <ul class="treeview" id="treeview1">
+                                                    <li> 
+                                                        <i class="fa fa-plus"></i>
+                                                        <label>
+                                                            <div class="checkbox checkbox-success">
+                                                                <input id="xnode-4-1" data-id="custom-4-1" type="checkbox">
+                                                                <label for="xnode-4-1" id="selectall"> Select All  </label>
+                                                            </div>
+                                                        </label>
+                                                        <ul>
+                                                            @foreach($invest_sector_types as $isrt)
+                                                            <li>
+                                                                <label>
+                                                                    <div class="checkbox checkbox-success">
+                                                                        <input class="hummingbirdNoParent" id="xnode-4-1-{{$isrt->id}}" data-id="custom-4-1-{{$isrt->id}}" type="checkbox" name="investment_sector[]" value="{{$isrt->id}}">
+                                                                        <label for="xnode-4-1-{{$isrt->id}}"> {{$isrt->type}} </label>
+                                                                    </div>
+                                                                </label>
+                                                            </li>
+                                                           @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </section>
@@ -728,7 +934,7 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="family_office_investment_entity">About Family Office / Investment Entity : <span class="danger">*</span></label>
+                                                    <label for="family_office_investment_entity">About Family Office/Investment Entity : <span class="danger">*</span></label>
                                                     <textarea name="family_office_investment_entity" id="family_office_investment_entity" rows="3" class="form-control required"></textarea>
                                                 </div>
                                             </div>
@@ -737,17 +943,17 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="area_family_investor_expertise">Area of Family/Investor Expertise : </label>
-                                                    <textarea name="area_family_investor_expertise" id="area_family_investor_expertise" rows="3" class="form-control"></textarea>
+                                                    <label for="area_family_investor_expertise">Area of Family/Investor Expertise : <span class="danger">*</span></label>
+                                                    <textarea name="area_family_investor_expertise" id="area_family_investor_expertise" rows="3" class="form-control required"></textarea>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="networth_aum">Approximate Networth/AUM : </label>
-                                                    <input type="text" class="form-control mask-money" data-inputmask="'alias': 'currency'" id="networth_aum" name="networth_aum" > 
+                                                    <label for="networth_aum">Approximate Networth/AUM : <span class="danger">*</span></label>
+                                                    <input type="text" class="form-control mask-money required" data-inputmask="'alias': 'currency'" id="networth_aum" name="networth_aum" > 
                                                 </div>
                                             </div>
                                         </div>
@@ -755,9 +961,9 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="company_website">Company Website : </label>
+                                                    <label for="company_website">Company Website : <span class="danger">*</span></label>
                                                     
-                                                    <input type="text" class="form-control" id="company_website" name="company_website" > 
+                                                    <input type="text" class="form-control required" id="company_website" name="company_website" > 
                                                     <p><span class="emsg hidden">Please Enter a Valid URL</span></p>
                                                     
                                                     
@@ -768,8 +974,8 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="linkedIn">LinkedIn : </label>
-                                                    <input type="text" class="form-control" id="linkedIn" name="linkedIn"> 
+                                                    <label for="linkedIn">LinkedIn : <span class="danger">*</span></label>
+                                                    <input type="text" class="form-control required" id="linkedIn" name="linkedIn"> 
                                                     <p><span class="emsg1 hidden">Please Enter a Valid URL</span></p>
                                                 </div>
                                             </div>
@@ -778,8 +984,8 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="corporate_board">Corporate Boards : </label>
-                                                    <input type="text" class="form-control" id="corporate_board" name="corporate_board"> 
+                                                    <label for="corporate_board">Corporate Boards : <span class="danger">*</span></label>
+                                                    <input type="text" class="form-control required" id="corporate_board" name="corporate_board"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -787,8 +993,8 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="civic_non_profit_board">Civic/Non-Profit Boards : </label>
-                                                    <input type="text" class="form-control" id="civic_non_profit_board" name="civic_non_profit_board"> 
+                                                    <label for="civic_non_profit_board">Civic/Non-Profit Boards : <span class="danger">*</span></label>
+                                                    <input type="text" class="form-control required" id="civic_non_profit_board" name="civic_non_profit_board"> 
                                                 </div>
                                             </div>
                                         </div>
@@ -796,8 +1002,8 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="education">Education (Please include, High School, College, and Post Graduate if applicable): </label>
-                                                    <textarea class="form-control" id="education" name="education" cols="3"></textarea> 
+                                                    <label for="education">Education (Please include, High School, College, and Post Graduate if applicable): <span class="danger">*</span></label>
+                                                    <textarea class="form-control required" id="education" name="education" cols="3"></textarea> 
                                                 </div>
                                             </div>
                                         </div>
@@ -807,8 +1013,8 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="desc_notable_past_investment">Description of Notable Past/Current Investments (If applicable) : </label>
-                                                    <textarea name="desc_notable_past_investment" id="desc_notable_past_investment" rows="3" class="form-control"></textarea>
+                                                    <label for="desc_notable_past_investment">Description of Notable Past/Current Investments (If applicable) : <span class="danger">*</span></label>
+                                                    <textarea name="desc_notable_past_investment" id="desc_notable_past_investment" rows="3" class="form-control required"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -896,34 +1102,13 @@ color: #797979;
                                     <section>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <label for="input-file-now">Please attach a copy of a government issued photo ID </label>
-                                                <input type="file" id="input-file-now" class="dropify" name="govern_photo_id" accept="image/*"/ data-default-file="{{asset('assets/dashboard/profile/id.png')}}">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="attest_ai_qp"> Please attest you are Accredited Investor/Qualified Purchaser.
+                                                    <label for="check_back_attest"> I attest and understand that by applying for membership, I permit the Family Investment Exchange to run a background check on myself and any executive members of our family office/investment entity that plans to use the platform. <span class="danger">*</span>
                                                     </label>
-                                                    <select class="custom-select form-control" id="attest_ai_qp" name="attest_ai_qp">
-                                                        <option value="" selected>Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="0">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="platform_use_case"> Please attest you will not use this platform to circumvent or attempt to interfere with an investment opportunity made available to you through the FIVE Network, and you understand if this activity takes place you will be removed from the network indefinitely.
-                                                    </label>
-                                                    <select class="custom-select form-control" id="platform_use_case" name="platform_use_case">
-                                                        <option value="" selected>Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="0">No</option>
+                                                    <select class="custom-select form-control required" id="check_back_attest" name="check_back_attest">
+                                                        <option value="" selected="">Select</option>
+                                                        <option value="1">Yes, I attest.</option>
+                                                        <option value="0">No, I do not attest.</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -936,8 +1121,8 @@ color: #797979;
                                                     </label>
                                                     <select class="custom-select form-control required" id="plan_use_network" name="plan_use_network">
                                                         <option value="" selected="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="0">No</option>
+                                                        <option value="1">Yes, I attest.</option>
+                                                        <option value="0">No, I do not attest.</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -955,27 +1140,70 @@ color: #797979;
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
+                                                    <label for="platform_use_case"> Please attest you will not use this platform to circumvent or attempt to interfere with an investment opportunity made available to you through the FIVE Network, and you understand if this activity takes place you will be removed from the network indefinitely.
+                                                    </label>
+                                                    <select class="custom-select form-control" id="platform_use_case" name="platform_use_case">
+                                                        <option value="" selected>Select</option>
+                                                        <option value="1">Yes, I attest.</option>
+                                                        <option value="0">No, I do not attest.</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
                                                     <label for="understand_agree"> Please attest you understand and agree this network is not a recommendation for investment and isn’t responsible for any investment performance that is learned about through the platform.
                                                     </label>
                                                     <select class="custom-select form-control" id="understand_agree" name="understand_agree">
                                                         <option value="" selected="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="0">No</option>
+                                                        <option value="1">Yes, I attest.</option>
+                                                        <option value="0">No, I do not attest.</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="attest_ai_qp"> Please attest you are Accredited Investor/Qualified Purchaser.
+                                                    </label>
+                                                    <select class="custom-select form-control" id="attest_ai_qp" name="attest_ai_qp">
+                                                        <option value="" selected>Select</option>
+                                                        <option value="1">Yes, I attest.</option>
+                                                        <option value="0">No, I do not attest.</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="c-inputs-stacked">
+                                                        <label class="custom-control custom-checkbox block">
+                                                            <input type="checkbox" class="custom-control-input required" name="bprivacy" id="bprivacy" required=""><span class="custom-control-label ml-0">By checking this box, you understand that members can be removed from the Family Investment Exchange at any time at the sole and exclusive discretion of the membership committee.</span> 
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </section>
 
-                                    <h6> Disclaimers Tab </h6>
-                                    <section>
+                                    <h6> Disclaimers </h6>
+                                    <section style="text-align: justify;">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: bold;">Personal and Noncommercial Use :</label>
-                                                    <p class="form-control-static">PERSONAL AND NON-COMMERCIAL USE LIMITATION <br>
-The Site is for your personal and non-commercial use, and FIVE Network grants you a non-exclusive, non-transferable and limited personal license to access and use the Site, conditioned on your continued compliance with these Terms of Use. You may not modify, copy (except as set forth below), distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information, products or services obtained from the Site. You may not link other websites to the Site without the prior written permission of FIVE Network. You may print one hardcopy of the information and download one temporary copy of the information into one single computer’s memory solely for your own personal, non-commercial use and not for distribution, provided that all relevant copyright, trademark and other proprietary notices are kept intact. You are prohibited from using the Site to advertise or perform any commercial solicitation. You also are prohibited from using any robot, spider, scraper or other automated means to access the Site for any purpose without the prior written permission of FIVE Network. You may not take any action that imposes, or may impose, in our sole discretion, an unreasonable or disproportionately large load on our infrastructure, interfere or attempt to interfere with the proper working of the Site or any activities conducted on the Site, or bypass any measures we may use to prevent or restrict access to the Site. Any rights not expressly granted herein are reserved.</p>
+                                                    <label>This website (“Site”) is being made available as a platform for accredited investors to interact with entrepreneurs and entities with a business plan that are seeking funding.
+<br>
+You should read the following Disclaimers carefully before you access or use the Site.  You are agreeing to such Disclaimers and, if you do not wish to be bound by such Disclaimers, you should not use the Site.<br>FIVE Network reserves the right to modify these Disclaimers and such Disclaimers, as modified, will be effective immediately upon being uploaded on the Site. FIVE Network may, but is not required to, send you any separate notice of any such modification, and you agree that you will periodically review these Disclaimers in connection with your access to, and use of, the Site.<br>
+
+You are accessing and using this Site on the terms and subject to the conditions contained in the User Agreement, as in effect from time to time (“User Agreement”). Nothing contained in these Disclaimers affects such terms and such conditions, all of which remain in full force and effect.</label>
+                                                    <p class="form-control-static">FIVE NETWORK IS NOT ACTING AS EITHER A BROKER-DEALER OR INVESTMENT ADVISOR IN ITS OWNERSHIP AND ITS OPERATION OF THE SITE.  FIVE NETWORK IS NOT A REGISTERED BROKER-DEALER OR A REGISTERED INVESTMENT ADVISOR AND IS NOT ACTING AS A FIDUCIARY OR IN ANY OTHER CAPACITY FOR ANY PERSON OR ENTITY ACCESSING OR USING THIS SITE.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -983,9 +1211,13 @@ The Site is for your personal and non-commercial use, and FIVE Network grants yo
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: bold;">This is not a recommendation :</label>
-                                                    <p class="form-control-static">NO INVESTMENT ADVICE<br>
-The information on the Site is intended to enable investors to understand the nature of FIVE Network’s services. It is not intended as and does not constitute investment advice or legal or tax advice or an offer to sell any securities to any person or a solicitation of any person of any offer to purchase any securities. The information in the Site should not be construed as any endorsement, recommendation or sponsorship of any company or security by FIVE Network. There are inherent risks in relying on, using or retrieving any information found on the Site, and FIVE Network urges you to make sure you understand these risks before relying on, using or retrieving any information on the Site. You should evaluate the information made available through the Site, and you should seek the advice of professionals, as appropriate, to evaluate any opinion, advice, product, service or other information.</p>
+                                                    <label>You expressly acknowledge that: <br>
+                                                    (1)  FIVE Network is not engaged in the business of buying or selling securities, providing investment advice to others or issuing reports or analyses regarding securities.<br>(2)  FIVE Network is not currently receiving any compensation in connection with your access to, and your use of, the Site.  In particular, without limiting the generality of the foregoing, FIVE Network is not receiving any commission in connection with the offer, the purchase or the sale of a security.<br>(3)  FIVE Network is not and will not be taking possession of any funds or securities, including, without limitation, in connection with the offer, the purchase or the sale of a security.</label>
+                                                    <p class="form-control-static">THE CONTENT ON THIS SITE IS FOR INFORMATION PURPOSES ONLY, FIVE NETWORK IS NOT PROVIDING, THROUGH THIS SITE OR OTHERWISE, ANY INVESTMENT ADVICE OR MAKING ANY INVESTMENT RECOMMENDATION.  
+<br>
+THE CONTENT ON THIS SITE IS GENERAL IN NATURE AND IS NOT TAILORED FOR YOUR INDIVIDUAL SITUATION.
+<br>
+FIVE NETWORK IS NOT PROVIDING ANY ACCOUNTING, BUSINESS OR TAX ADVICE.  YOU SHOULD SEEK ANY SUCH ADVICE FROM YOUR OWN PROFESSIONAL ADVISORS.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -993,8 +1225,10 @@ The information on the Site is intended to enable investors to understand the na
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: bold;">We are not a broker dealer :</label>
-                                                    <p class="form-control-static">The FIVE Network is not a registered broker-dealer or a registered investment adviser. You understand that the Product is furnished for your personal, noncommercial, informational purposes only, and that no mention of a particular security in the Product constitutes a recommendation to buy, sell, or hold that or any other security, or that any particular security, portfolio of securities, transaction or investment strategy is suitable for any specific person. You further understand that FIVE Network will not advise you personally concerning the nature, potential, value or suitability of any particular security, portfolio of securities, transaction, investment strategy or other matter. To the extent any of the information contained in the Product may be deemed to be investment advice, such information is impersonal and not tailored to the investment needs of any specific person. You acknowledge that you are responsible for your own financial decisions.</p>
+                                                    <label>There are inherent risks in relying on, using or retrieving any information found on the Site and FIVE Network urges you to make sure you understand these risks before relying on, using or retrieving any information on the Site. You should carefully evaluate the information made available through the Site and you should seek the advice of professionals, as appropriate.</label>
+                                                    <p class="form-control-static">THE CONTENT PROVIDED ON THIS SITE HAS BEEN PROVIDED BY THIRD PARTIES. FIVE NETWORK HAS NOT INDEPENDENTLY VERIFIED THE ACCURACY OR THE COMPLETENESS OF SUCH INFORMATION AND SUCH INFORMATION IS PROVIDED ON AN “AS IS, WHERE-IS BASIS.”  FIVE NETWORK IS NOT RESPONSIBLE AND SHALL NOT BE HELD LIABLE FOR ANY INACCURACY, DEFECT, DELAY, OMISSION, TRANSMISSION OR DELIVERY OF ANY THIRD PARTY DATA OR ANY LOSS OR DAMAGE ARISING FROM: (A) ANY INACCURACY, ERROR, DELAY OR OMISSION OF TRANSMISSION OF INFORMATION; (B) NON-PERFORMANCE BY ANY THIRD PARTY; OR (C) INTERRUPTION CAUSED DUE TO ANY THIRD PARTY’S NEGLIGENT ACT OR OMISSION OR ANY OTHER CAUSE BEYOND THE REASONABLE CONTROL OF US.
+<br>
+ACCESS TO, AND USE OF, THIS SITE AND THE CONTENT IS SOLELY AT YOUR RISK.  YOU AGREE AND UNDERSTAND THAT THE SITE IS BEING MADE AVAILABLE TO YOU ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT PROVIDING ANY WARRANTIES, GUARANTIES OR CONDITIONS AS TO THE USAGE BEING FREE FROM ANY FAULTS, DEFECTS, INTERRUPTIONS, ERRORS, VIRUSES OR TO THE ACCURACY, RELIABILITY, AVAILABILITY OF THE CONTENTS OF THE SITE. </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1002,11 +1236,22 @@ The information on the Site is intended to enable investors to understand the na
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: bold;">No Liability :</label>
-                                                    <p class="form-control-static">USE OF THIS SITE AND CONTENT IS SOLELY AT YOUR RISK. FIVE NETWORK AND ITS AFFILIATES, SHAREHOLDERS, DIRECTORS, OFFICERS, EMPLOYEES AND LICENSORS WILL NOT BE LIABLE (JOINTLY OR SEVERALLY) TO YOU OR ANY OTHER PERSON AS A RESULT OF YOUR USE OF, OR RELIANCE ON, OR INABILITY TO USE FAMILYINVESTMENTEXCHANGE.COM FOR INDIRECT, CONSEQUENTIAL, SPECIAL, INCIDENTAL, PUNITIVE, OR EXEMPLARY DAMAGES, INCLUDING, WITHOUT LIMITATION, LOST PROFITS, LOST SAVINGS AND LOST REVENUES (COLLECTIVELY, “THE EXCLUDED DAMAGES”), WHETHER OR NOT CHARACTERIZED IN NEGLIGENCE, TORT, CONTRACT, OR OTHER THEORY OF LIABILITY, EVEN IF ANY OF THE FIVE NETWORK PARTIES HAVE BEEN ADVISED OF THE POSSIBILITY OF OR COULD HAVE FORESEEN ANY OF THE EXCLUDED DAMAGES, AND IRRESPECTIVE OF ANY FAILURE OF AN ESSENTIAL PURPOSE OF A LIMITED REMEDY. IF ANY APPLICABLE AUTHORITY HOLDS ANY PORTION OF THIS SECTION TO BE UNENFORCEABLE, THEN THE FIVE NETWORK PARTIES' LIABILITY WILL BE LIMITED TO THE FULLEST POSSIBLE EXTENT PERMITTED BY APPLICABLE LAW.</p>
+                                                    <label>You are making your own decision with respect to any investment that you make in connection with this Site.  You are solely responsible for making your own investigation with respect to any such investment and such information and the accuracy and the completeness of such information.  You are solely relying on your investigation.<br>
+
+You are responsible for your compliance with applicable limitations on the use of confidential and/or proprietary information, including, without limitation, compliance with any confidentiality, non-disclosure or other similar contractual limitations, and your own contractual obligations.  You are also responsible for the protection of your own copyrights, patents, trademarks and other intellectual property.</label>
+                                                    <p class="form-control-static">YOU AGREE AND UNDERSTAND THAT FIVE NETWORK IS NOT RESPONSIBLE FOR ANY INTERFERENCE OR DAMAGE THAT MAY BE CAUSED TO YOUR COMPUTER RESOURCE THAT ARISES IN CONNECTION WITH YOUR ACCESS TO THE SITE.
+<br>
+FIVE NETWORK SPECIFICALLY DISCLAIMS ANY AND ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, AND WARRANTIES IMPLIED BY ANY COURSE OF DEALING, ANY COURSE OF PERFORAMNCE OR USAGE OF TRADE.<br>
+
+YOU FURTHER ACKNOWLEDGE AND AGREE THAT FIVE NETWORK WILL NOT BE RESPONSIBLE FOR ANY DEFAMATORY, OFFENSIVE OR ILLEGAL CONDUCT OF ANY PERSON OR ENTITY ON THE SITE. <br>
+
+FIVE NETWORK AND ITS AFFILIATES, SHAREHOLDERS, DIRECTORS, OFFICERS, EMPLOYEES AND LICENSORS WILL NOT BE LIABLE,  JOINTLY OR SEVERALLY, TO YOU OR ANY OTHER PERSON AS A RESULT OF YOUR ACCESS TO, RELIANCE ON, AND USE OF, OR INABILITY TO USE, THE SITE FOR INDIRECT, CONSEQUENTIAL, SPECIAL, INCIDENTAL, PUNITIVE, OR EXEMPLARY DAMAGES, INCLUDING, WITHOUT LIMITATION, LOST PROFITS, LOST SAVINGS AND LOST REVENUES (COLLECTIVELY, “EXCLUDED DAMAGES”), WHETHER OR NOT CHARACTERIZED IN NEGLIGENCE, TORT, CONTRACT, OR OTHER THEORY OF LIABILITY, EVEN IF ANY OF SUCH PARTIES HAVE BEEN ADVISED OF THE POSSIBILITY OF OR COULD HAVE FORESEEN ANY OF THE EXCLUDED DAMAGES AND IRRESPECTIVE OF ANY FAILURE OF AN ESSENTIAL PURPOSE OF A LIMITED REMEDY. <br>
+THE MAXIMUM LIABILITY OF FIVE NETWORK SHALL NEVER EXCEED, UNDER ANY CIRCUMSTANCES, THE AMOUNT, IF ANY, PAID BY A PERSON OR ENTITY FOR ACCESS TO THE SITE DURING THE THEN CURRENT CALENDAR YEAR.<br>
+IF ANY PORTION OF THESE DISCLAIMERS IS DETERMINED TO BE UNENFORCEABLE, IT SHALL NOT AFFECT ANY OTHER PORTION OF THESE DISCLAIMERS AND THE FIVE NETWORK PARTIES' LIABILITY SHALL BE LIMITED TO THE FULLEST POSSIBLE EXTENT PERMITTED BY APPLICABLE LAW.</p>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </section>
                                 </form>
                             </div>
@@ -1055,6 +1300,9 @@ The information on the Site is intended to enable investors to understand the na
 
     <script type="text/javascript" src="{{asset('assets/dashboard/plugins/jQuery-Multi-Select-Checboxes-multiselect/js/jquery.multiselect.js')}}"></script>
     <script src="{{asset('assets/dashboard/admin/js/custom.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/plugins/checkbox-tree/hummingbird-treeview.js')}}"></script>
+    <script src="{{asset('assets/dashboard/plugins/icheck/icheck.min.js')}}"></script>
+    <script src="{{asset('assets/dashboard/plugins/icheck/icheck.init.js')}}"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script> -->
     <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
 
@@ -1087,8 +1335,8 @@ The information on the Site is intended to enable investors to understand the na
         // particlesJS.load('particles-js', "{{asset('assets/dashboard/member/particles.json')}}", function() {});
     </script>
     <script type="text/javascript">
-
-        $("#phone_mobile").intlTelInput({
+        $(".treeview").hummingbird();
+        $("#phone_mobile, #phone_officex").intlTelInput({
             geoIpLookup: function(callback) {
                $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
                  var countryCode = (resp && resp.country) ? resp.country : "";
@@ -1104,9 +1352,10 @@ The information on the Site is intended to enable investors to understand the na
 
         $("#apply-form").submit(function() {
             $("#mobilex").val($("#phone_mobile").intlTelInput("getNumber"));
+            $("#phone_office").val($("#phone_officex").intlTelInput("getNumber"));
         });
 
-        $('.mask-money').inputmask({digits:0});
+        $('.mask-money').inputmask({digits:0, rightAlign:false});
 
         $(document).ready(function(){
             var $regexname=/^((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*/;
@@ -1134,51 +1383,7 @@ The information on the Site is intended to enable investors to understand the na
             });
         });
 
-        // $("#invest_region, #invest_structure, #average_investment_size, #investment_stage, #investment_sector").multiselect({
-        //     addSearchBox:false
-        // });
 
-        $("#invest_region").multiSelect({
-            selectableOptgroup: true
-        });
-
-        $('#invest_structure, #average_investment_size, #investment_stage, #investment_sector').multiSelect();
-
-        $('#select-all-str').click(function() {
-            $('#invest_structure').multiSelect('select_all');
-            return false;
-        });
-        $('#deselect-all-str').click(function() {
-            $('#invest_structure').multiSelect('deselect_all');
-            return false;
-        });
-
-        $('#select-all-size').click(function() {
-            $('#average_investment_size').multiSelect('select_all');
-            return false;
-        });
-        $('#deselect-all-size').click(function() {
-            $('#average_investment_size').multiSelect('deselect_all');
-            return false;
-        });
-
-        $('#select-all-stage').click(function() {
-            $('#investment_stage').multiSelect('select_all');
-            return false;
-        });
-        $('#deselect-all-stage').click(function() {
-            $('#investment_stage').multiSelect('deselect_all');
-            return false;
-        });
-
-        $('#select-all-sector').click(function() {
-            $('#investment_sector').multiSelect('select_all');
-            return false;
-        });
-        $('#deselect-all-sector').click(function() {
-            $('#investment_sector').multiSelect('deselect_all');
-            return false;
-        });
     </script>
 
 

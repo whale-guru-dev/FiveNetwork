@@ -11,12 +11,13 @@ use Mail;
 use App\Mail\Follow;
 use App\User;
 use App\Model\Admin;
+use App\Model\TotalForms;
 
 class InvestmentOpportunityFormController extends Controller
 {
     public function submitopportunityformview($code)
     {
-    	$opportunitymember = MemberRequestOpportunity::where('code',$code)->where('is_submitted',0)->first();
+     $opportunitymember = MemberRequestOpportunity::where('code',$code)->where('is_submitted',0)->first();
         if($opportunitymember){
             return view('pages.landing.submitopportunityform')->with(['opportunitymember' => $opportunitymember,'submitted' => 0]);
         }else{
@@ -31,6 +32,101 @@ class InvestmentOpportunityFormController extends Controller
           $form = MemberOpportunityForm::where('code', $request['code'])->first();
           // $msg = [];
           // $status = '';
+          if($form && isset($form->prior_year_monthly_finacial))
+               $prior_year_monthly_finacial_name = $form->prior_year_monthly_finacial;
+          else $prior_year_monthly_finacial_name='';
+          
+          if($form && isset($form->investor_deck))
+               $investor_deck_name = $form->investor_deck;
+          else $investor_deck_name='';
+
+          if($form && isset($form->proforma_projections))
+               $proforma_projections_name = $form->proforma_projections;
+          else $proforma_projections_name='';
+
+          if($form && isset($form->detailed_cap_table))
+               $detailed_cap_table_name = $form->detailed_cap_table;
+          else $detailed_cap_table_name='';
+
+          if($request->hasFile('prior_year_monthly_finacial')){
+
+               $prior_year_monthly_finacial = $request->file('prior_year_monthly_finacial');
+
+               $prior_year_monthly_finacial_name = 'prior-year-monthly-finacial-'.$request['code'].'.'.$prior_year_monthly_finacial->getClientOriginalExtension();
+
+               $destinationPath = public_path('assets/dashboard/profile/file');
+
+               if($prior_year_monthly_finacial->move($destinationPath, $prior_year_monthly_finacial_name)){
+                    $error3 = 0;
+               }else{
+                    $error3 = 1;
+                    $msg = ['Error','There was an error on uploading your file for Prior Year Monthly Financials! Pleae try again.','error'];
+                    $status = 'upload';
+
+                    return redirect()->route('investment-questionnaire-form',['code' => $form->code])->with(['msg' => $msg,'status' => $status]);
+               }
+          }
+
+          if($request->hasFile('investor_deck')){
+
+               $investor_deck = $request->file('investor_deck');
+
+               $investor_deck_name = 'investor-deck-'.$request['code'].'.'.$investor_deck->getClientOriginalExtension();
+
+               $destinationPath = public_path('assets/dashboard/profile/file');
+
+               if($investor_deck->move($destinationPath, $investor_deck_name)){
+                    $error4 = 0;
+               }else{
+                    $error4 = 1;
+                    $msg = ['Error','There was an error on uploading your file for Investor Deck! Pleae try again.','error'];
+                    $status = 'upload';
+
+                    return redirect()->route('investment-questionnaire-form',['code' => $form->code])->with(['msg' => $msg,'status' => $status]);
+               }
+          }
+          
+
+          if($request->hasFile('proforma_projections')){
+
+               $proforma_projections = $request->file('proforma_projections');
+
+               $proforma_projections_name = 'proforma-projections-'.$request['code'].'.'.$proforma_projections->getClientOriginalExtension();
+
+               $destinationPath = public_path('assets/dashboard/profile/file');
+
+               if($proforma_projections->move($destinationPath, $proforma_projections_name)){
+                    $error5 = 0;
+               }else{
+                    $error5 = 1;
+                    $msg = ['Error','There was an error on uploading your file for 3 Year Proforma Projections! Pleae try again.','error'];
+                    $status = 'upload';
+
+                    return redirect()->route('investment-questionnaire-form',['code' => $form->code])->with(['msg' => $msg,'status' => $status]);
+               }
+          }
+          
+
+          if($request->hasFile('detailed_cap_table')){
+
+               $detailed_cap_table = $request->file('detailed_cap_table');
+
+               $detailed_cap_table_name = 'detailed-cap-table-'.$request['code'].'.'.$detailed_cap_table->getClientOriginalExtension();
+
+               $destinationPath = public_path('assets/dashboard/profile/file');
+
+               if($detailed_cap_table->move($destinationPath, $detailed_cap_table_name)){
+                    $error6 = 0;
+               }else{
+                    $error6 = 1;
+                    $msg = ['Error','There was an error on uploading your file for Detailed Cap Table! Pleae try again.','error'];
+                    $status = 'upload';
+
+                    return redirect()->route('investment-questionnaire-form',['code' => $form->code])->with(['msg' => $msg,'status' => $status]);
+               }
+          }
+          
+
           if($request['identity'] == 'submit'){
             
                if($form){
@@ -67,15 +163,9 @@ class InvestmentOpportunityFormController extends Controller
                          'members_bio_pior_exp' => $request['members_bio_pior_exp'],
                          'brestrict_convenant' => $request['brestrict_convenant'],
                          'restrict_convenant_desc' => $request['restrict_convenant_desc'],
-                         'prev4_total_revenue' => $request['prev4_total_revenue']?$request['prev4_total_revenue']:0,
-                         'prev4_total_expense' => $request['prev4_total_expense']?$request['prev4_total_expense']:0,
-                         'prev4_revenue_expense' => $request['prev4_revenue_expense']?$request['prev4_revenue_expense']:0,
-                         'prev3_total_revenue' => $request['prev3_total_revenue']?$request['prev3_total_revenue']:0,
-                         'prev3_total_expense' => $request['prev3_total_expense']?$request['prev3_total_expense']:0,
-                         'prev3_revenue_expense' => $request['prev3_revenue_expense']?$request['prev3_revenue_expense']:0,
-                         'prev2_total_revenue' => $request['prev2_total_revenue']?$request['prev2_total_revenue']:0,
-                         'prev2_total_expense' => $request['prev2_total_expense']?$request['prev2_total_expense']:0,
-                         'prev2_revenue_expense' => $request['prev2_revenue_expense']?$request['prev2_revenue_expense']:0,
+                         'next_total_revenue' => $request['next_total_revenue']?$request['next_total_revenue']:0,
+                         'next_total_expense' => $request['next_total_expense']?$request['next_total_expense']:0,
+                         'next_revenue_expense' => $request['next_revenue_expense']?$request['next_revenue_expense']:0,
                          'prev1_total_revenue' => $request['prev1_total_revenue']?$request['prev1_total_revenue']:0,
                          'prev1_total_expense' => $request['prev1_total_expense']?$request['prev1_total_expense']:0,
                          'prev1_revenue_expense' => $request['prev1_revenue_expense']?$request['prev1_revenue_expense']:0,
@@ -89,18 +179,6 @@ class InvestmentOpportunityFormController extends Controller
                          'debt_creditor' => $request['debt_creditor'],
                          'debt_amount' => $request['debt_amount'],
                          'type_debt_rate_maturity_term' => $request['type_debt_rate_maturity_term'],
-                         'prev_quater_total_revenue' => $request['prev_quater_total_revenue']?$request['prev_quater_total_revenue']:0,
-                         'prev_quater_total_expense' => $request['prev_quater_total_expense']?$request['prev_quater_total_expense']:0,
-                         'prev_quater_revenue_expense' => $request['prev_quater_revenue_expense']?$request['prev_quater_revenue_expense']:0,
-                         'prev_month_total_revenue' => $request['prev_month_total_revenue']?$request['prev_month_total_revenue']:0,
-                         'prev_month_total_expense' => $request['prev_month_total_expense']?$request['prev_month_total_expense']:0,
-                         'prev_month_revenue_expense' => $request['prev_month_revenue_expense']?$request['prev_month_revenue_expense']:0,
-                         'next3month_total_revenue' => $request['next3month_total_revenue']?$request['next3month_total_revenue']:0,
-                         'next3month_total_expense' => $request['next3month_total_expense']?$request['next3month_total_expense']:0,
-                         'next3month_revenue_expense' => $request['next3month_revenue_expense']?$request['next3month_revenue_expense']:0,
-                         'cur_month_total_revenue' => $request['cur_month_total_revenue']?$request['cur_month_total_revenue']:0,
-                         'cur_month_total_expense' => $request['cur_month_total_expense']?$request['cur_month_total_expense']:0,
-                         'cur_month_revenue_expense' => $request['cur_month_revenue_expense']?$request['cur_month_revenue_expense']:0,
                          'expected_cash_flow_break_date' => $request['expected_cash_flow_break_date']?$request['expected_cash_flow_break_date']:0,
                          'primary_competitor' => $request['primary_competitor'],
                          'differ_desc_competitor' => $request['differ_desc_competitor'],
@@ -140,6 +218,7 @@ class InvestmentOpportunityFormController extends Controller
                          'expect_future_raise_amount' => $request['expect_future_raise_amount'],
                          'estimated_timing_future_capital' => $request['estimated_timing_future_capital'],
                          'use_additional_fund' => $request['use_additional_fund'],
+                         'bprevious_investor_reinvest' => $request['bprevious_investor_reinvest'],
                          'name_investor' => $request['name_investor'],
                          'amount_committed' => $request['amount_committed'],
                          'cur_postmoney_valuation' => $request['cur_postmoney_valuation'],
@@ -151,7 +230,11 @@ class InvestmentOpportunityFormController extends Controller
                          'top_potential_acqu' => $request['top_potential_acqu'],
                          'revenue_target' => $request['revenue_target'],
                          'net_income_target' => $request['net_income_target'],
-                         'exit_valuation' => $request['exit_valuation']
+                         'exit_valuation' => $request['exit_valuation'],
+                         'prior_year_monthly_finacial' => $prior_year_monthly_finacial_name,
+                         'investor_deck' => $investor_deck_name,
+                         'proforma_projections' => $proforma_projections_name,
+                         'detailed_cap_table' => $detailed_cap_table_name
                     ]);
                }else{
                     $form = MemberOpportunityForm::create([
@@ -190,15 +273,9 @@ class InvestmentOpportunityFormController extends Controller
                          'members_bio_pior_exp' => $request['members_bio_pior_exp'],
                          'brestrict_convenant' => $request['brestrict_convenant'],
                          'restrict_convenant_desc' => $request['restrict_convenant_desc'],
-                         'prev4_total_revenue' => $request['prev4_total_revenue']?$request['prev4_total_revenue']:0,
-                         'prev4_total_expense' => $request['prev4_total_expense']?$request['prev4_total_expense']:0,
-                         'prev4_revenue_expense' => $request['prev4_revenue_expense']?$request['prev4_revenue_expense']:0,
-                         'prev3_total_revenue' => $request['prev3_total_revenue']?$request['prev3_total_revenue']:0,
-                         'prev3_total_expense' => $request['prev3_total_expense']?$request['prev3_total_expense']:0,
-                         'prev3_revenue_expense' => $request['prev3_revenue_expense']?$request['prev3_revenue_expense']:0,
-                         'prev2_total_revenue' => $request['prev2_total_revenue']?$request['prev2_total_revenue']:0,
-                         'prev2_total_expense' => $request['prev2_total_expense']?$request['prev2_total_expense']:0,
-                         'prev2_revenue_expense' => $request['prev2_revenue_expense']?$request['prev2_revenue_expense']:0,
+                         'next_total_revenue' => $request['next_total_revenue']?$request['next_total_revenue']:0,
+                         'next_total_expense' => $request['next_total_expense']?$request['next_total_expense']:0,
+                         'next_revenue_expense' => $request['next_revenue_expense']?$request['next_revenue_expense']:0,
                          'prev1_total_revenue' => $request['prev1_total_revenue']?$request['prev1_total_revenue']:0,
                          'prev1_total_expense' => $request['prev1_total_expense']?$request['prev1_total_expense']:0,
                          'prev1_revenue_expense' => $request['prev1_revenue_expense']?$request['prev1_revenue_expense']:0,
@@ -212,18 +289,6 @@ class InvestmentOpportunityFormController extends Controller
                          'debt_creditor' => $request['debt_creditor'],
                          'debt_amount' => $request['debt_amount'],
                          'type_debt_rate_maturity_term' => $request['type_debt_rate_maturity_term'],
-                         'prev_quater_total_revenue' => $request['prev_quater_total_revenue']?$request['prev_quater_total_revenue']:0,
-                         'prev_quater_total_expense' => $request['prev_quater_total_expense']?$request['prev_quater_total_expense']:0,
-                         'prev_quater_revenue_expense' => $request['prev_quater_revenue_expense']?$request['prev_quater_revenue_expense']:0,
-                         'prev_month_total_revenue' => $request['prev_month_total_revenue']?$request['prev_month_total_revenue']:0,
-                         'prev_month_total_expense' => $request['prev_month_total_expense']?$request['prev_month_total_expense']:0,
-                         'prev_month_revenue_expense' => $request['prev_month_revenue_expense']?$request['prev_month_revenue_expense']:0,
-                         'next3month_total_revenue' => $request['next3month_total_revenue']?$request['next3month_total_revenue']:0,
-                         'next3month_total_expense' => $request['next3month_total_expense']?$request['next3month_total_expense']:0,
-                         'next3month_revenue_expense' => $request['next3month_revenue_expense']?$request['next3month_revenue_expense']:0,
-                         'cur_month_total_revenue' => $request['cur_month_total_revenue']?$request['cur_month_total_revenue']:0,
-                         'cur_month_total_expense' => $request['cur_month_total_expense']?$request['cur_month_total_expense']:0,
-                         'cur_month_revenue_expense' => $request['cur_month_revenue_expense']?$request['cur_month_revenue_expense']:0,
                          'expected_cash_flow_break_date' => $request['expected_cash_flow_break_date']?$request['expected_cash_flow_break_date']:0,
                          'primary_competitor' => $request['primary_competitor'],
                          'differ_desc_competitor' => $request['differ_desc_competitor'],
@@ -263,6 +328,7 @@ class InvestmentOpportunityFormController extends Controller
                          'expect_future_raise_amount' => $request['expect_future_raise_amount'],
                          'estimated_timing_future_capital' => $request['estimated_timing_future_capital'],
                          'use_additional_fund' => $request['use_additional_fund'],
+                         'bprevious_investor_reinvest' => $request['bprevious_investor_reinvest'],
                          'name_investor' => $request['name_investor'],
                          'amount_committed' => $request['amount_committed'],
                          'cur_postmoney_valuation' => $request['cur_postmoney_valuation'],
@@ -274,11 +340,17 @@ class InvestmentOpportunityFormController extends Controller
                          'top_potential_acqu' => $request['top_potential_acqu'],
                          'revenue_target' => $request['revenue_target'],
                          'net_income_target' => $request['net_income_target'],
-                         'exit_valuation' => $request['exit_valuation']
+                         'exit_valuation' => $request['exit_valuation'],
+                         'prior_year_monthly_finacial' => $prior_year_monthly_finacial_name,
+                         'investor_deck' => $investor_deck_name,
+                         'proforma_projections' => $proforma_projections_name,
+                         'detailed_cap_table' => $detailed_cap_table_name
                     ]);
                }
 
             $opportunity->update(['is_submitted' => 1]);
+
+            TotalForms::create(['type' => 0, 'form_id' => $form->id]);
 
             $whole_member = User::where('id', '!=', $opportunity->usid)->get();
 
@@ -286,9 +358,10 @@ class InvestmentOpportunityFormController extends Controller
                $this->checkmatch($opportunity, $each_member);
             // $this->checkmatch($opportunity,$form->id);
 
-            $to = $form->user->email;
+            // $to = $form->user->email;
+            $to = $opportunity->email;
             $subtitle = 'Thank you for completing the Investment Questionnaire';
-            $subject = 'Submitted Your Co-Investment Questionnaire!';
+            $subject = 'Submitted your Co-Investment Questionnaire!';
             $content = 'Thank you for submitting your investment opportunity to the Family Investment Exchange. We will reach out to you if a member of the Family Investment Exchange has an interest in investing in this opportunity.';
             $link = route('home');
             $link_name = 'Go To Dashboard';
@@ -298,8 +371,8 @@ class InvestmentOpportunityFormController extends Controller
             foreach(Admin::all() as $admin)
             {
                 $to = $admin->email;
-                $subtitle = 'A Member Submitted an Investment Questionnaire!';
-                $subject = 'A Member Submitted an Investment Questionnaire!';
+                $subtitle = 'A member submitted an Investment Questionnaire!';
+                $subject = 'A member submitted an Investment Questionnaire!';
                 $content = $form->fName.' '.$form->lName.'\'s opportunity, submitted by '.$opportunity->user->fName.' '.$opportunity->user->lName.' is completed and an Investment Questionnaire is available for review.';
                 $link = route('admin.opportunity-detail',['id' => $form->id]);
                 $link_name = 'Go To Dashboard';
@@ -345,15 +418,9 @@ class InvestmentOpportunityFormController extends Controller
                          'members_bio_pior_exp' => $request['members_bio_pior_exp'],
                          'brestrict_convenant' => $request['brestrict_convenant'],
                          'restrict_convenant_desc' => $request['restrict_convenant_desc'],
-                         'prev4_total_revenue' => $request['prev4_total_revenue']?$request['prev4_total_revenue']:0,
-                         'prev4_total_expense' => $request['prev4_total_expense']?$request['prev4_total_expense']:0,
-                         'prev4_revenue_expense' => $request['prev4_revenue_expense']?$request['prev4_revenue_expense']:0,
-                         'prev3_total_revenue' => $request['prev3_total_revenue']?$request['prev3_total_revenue']:0,
-                         'prev3_total_expense' => $request['prev3_total_expense']?$request['prev3_total_expense']:0,
-                         'prev3_revenue_expense' => $request['prev3_revenue_expense']?$request['prev3_revenue_expense']:0,
-                         'prev2_total_revenue' => $request['prev2_total_revenue']?$request['prev2_total_revenue']:0,
-                         'prev2_total_expense' => $request['prev2_total_expense']?$request['prev2_total_expense']:0,
-                         'prev2_revenue_expense' => $request['prev2_revenue_expense']?$request['prev2_revenue_expense']:0,
+                         'next_total_revenue' => $request['next_total_revenue']?$request['next_total_revenue']:0,
+                         'next_total_expense' => $request['next_total_expense']?$request['next_total_expense']:0,
+                         'next_revenue_expense' => $request['next_revenue_expense']?$request['next_revenue_expense']:0,
                          'prev1_total_revenue' => $request['prev1_total_revenue']?$request['prev1_total_revenue']:0,
                          'prev1_total_expense' => $request['prev1_total_expense']?$request['prev1_total_expense']:0,
                          'prev1_revenue_expense' => $request['prev1_revenue_expense']?$request['prev1_revenue_expense']:0,
@@ -367,18 +434,6 @@ class InvestmentOpportunityFormController extends Controller
                          'debt_creditor' => $request['debt_creditor'],
                          'debt_amount' => $request['debt_amount'],
                          'type_debt_rate_maturity_term' => $request['type_debt_rate_maturity_term'],
-                         'prev_quater_total_revenue' => $request['prev_quater_total_revenue']?$request['prev_quater_total_revenue']:0,
-                         'prev_quater_total_expense' => $request['prev_quater_total_expense']?$request['prev_quater_total_expense']:0,
-                         'prev_quater_revenue_expense' => $request['prev_quater_revenue_expense']?$request['prev_quater_revenue_expense']:0,
-                         'prev_month_total_revenue' => $request['prev_month_total_revenue']?$request['prev_month_total_revenue']:0,
-                         'prev_month_total_expense' => $request['prev_month_total_expense']?$request['prev_month_total_expense']:0,
-                         'prev_month_revenue_expense' => $request['prev_month_revenue_expense']?$request['prev_month_revenue_expense']:0,
-                         'next3month_total_revenue' => $request['next3month_total_revenue']?$request['next3month_total_revenue']:0,
-                         'next3month_total_expense' => $request['next3month_total_expense']?$request['next3month_total_expense']:0,
-                         'next3month_revenue_expense' => $request['next3month_revenue_expense']?$request['next3month_revenue_expense']:0,
-                         'cur_month_total_revenue' => $request['cur_month_total_revenue']?$request['cur_month_total_revenue']:0,
-                         'cur_month_total_expense' => $request['cur_month_total_expense']?$request['cur_month_total_expense']:0,
-                         'cur_month_revenue_expense' => $request['cur_month_revenue_expense']?$request['cur_month_revenue_expense']:0,
                          'expected_cash_flow_break_date' => $request['expected_cash_flow_break_date']?$request['expected_cash_flow_break_date']:0,
                          'primary_competitor' => $request['primary_competitor'],
                          'differ_desc_competitor' => $request['differ_desc_competitor'],
@@ -418,6 +473,7 @@ class InvestmentOpportunityFormController extends Controller
                          'expect_future_raise_amount' => $request['expect_future_raise_amount'],
                          'estimated_timing_future_capital' => $request['estimated_timing_future_capital'],
                          'use_additional_fund' => $request['use_additional_fund'],
+                         'bprevious_investor_reinvest' => $request['bprevious_investor_reinvest'],
                          'name_investor' => $request['name_investor'],
                          'amount_committed' => $request['amount_committed'],
                          'cur_postmoney_valuation' => $request['cur_postmoney_valuation'],
@@ -429,7 +485,11 @@ class InvestmentOpportunityFormController extends Controller
                          'top_potential_acqu' => $request['top_potential_acqu'],
                          'revenue_target' => $request['revenue_target'],
                          'net_income_target' => $request['net_income_target'],
-                         'exit_valuation' => $request['exit_valuation']
+                         'exit_valuation' => $request['exit_valuation'],
+                         'prior_year_monthly_finacial' => $prior_year_monthly_finacial_name,
+                         'investor_deck' => $investor_deck_name,
+                         'proforma_projections' => $proforma_projections_name,
+                         'detailed_cap_table' => $detailed_cap_table_name
                     ]);
                }else{
                     $form = MemberOpportunityForm::create([
@@ -468,15 +528,9 @@ class InvestmentOpportunityFormController extends Controller
                          'members_bio_pior_exp' => $request['members_bio_pior_exp'],
                          'brestrict_convenant' => $request['brestrict_convenant'],
                          'restrict_convenant_desc' => $request['restrict_convenant_desc'],
-                         'prev4_total_revenue' => $request['prev4_total_revenue']?$request['prev4_total_revenue']:0,
-                         'prev4_total_expense' => $request['prev4_total_expense']?$request['prev4_total_expense']:0,
-                         'prev4_revenue_expense' => $request['prev4_revenue_expense']?$request['prev4_revenue_expense']:0,
-                         'prev3_total_revenue' => $request['prev3_total_revenue']?$request['prev3_total_revenue']:0,
-                         'prev3_total_expense' => $request['prev3_total_expense']?$request['prev3_total_expense']:0,
-                         'prev3_revenue_expense' => $request['prev3_revenue_expense']?$request['prev3_revenue_expense']:0,
-                         'prev2_total_revenue' => $request['prev2_total_revenue']?$request['prev2_total_revenue']:0,
-                         'prev2_total_expense' => $request['prev2_total_expense']?$request['prev2_total_expense']:0,
-                         'prev2_revenue_expense' => $request['prev2_revenue_expense']?$request['prev2_revenue_expense']:0,
+                         'next_total_revenue' => $request['next_total_revenue']?$request['next_total_revenue']:0,
+                         'next_total_expense' => $request['next_total_expense']?$request['next_total_expense']:0,
+                         'next_revenue_expense' => $request['next_revenue_expense']?$request['next_revenue_expense']:0,
                          'prev1_total_revenue' => $request['prev1_total_revenue']?$request['prev1_total_revenue']:0,
                          'prev1_total_expense' => $request['prev1_total_expense']?$request['prev1_total_expense']:0,
                          'prev1_revenue_expense' => $request['prev1_revenue_expense']?$request['prev1_revenue_expense']:0,
@@ -490,18 +544,6 @@ class InvestmentOpportunityFormController extends Controller
                          'debt_creditor' => $request['debt_creditor'],
                          'debt_amount' => $request['debt_amount'],
                          'type_debt_rate_maturity_term' => $request['type_debt_rate_maturity_term'],
-                         'prev_quater_total_revenue' => $request['prev_quater_total_revenue']?$request['prev_quater_total_revenue']:0,
-                         'prev_quater_total_expense' => $request['prev_quater_total_expense']?$request['prev_quater_total_expense']:0,
-                         'prev_quater_revenue_expense' => $request['prev_quater_revenue_expense']?$request['prev_quater_revenue_expense']:0,
-                         'prev_month_total_revenue' => $request['prev_month_total_revenue']?$request['prev_month_total_revenue']:0,
-                         'prev_month_total_expense' => $request['prev_month_total_expense']?$request['prev_month_total_expense']:0,
-                         'prev_month_revenue_expense' => $request['prev_month_revenue_expense']?$request['prev_month_revenue_expense']:0,
-                         'next3month_total_revenue' => $request['next3month_total_revenue']?$request['next3month_total_revenue']:0,
-                         'next3month_total_expense' => $request['next3month_total_expense']?$request['next3month_total_expense']:0,
-                         'next3month_revenue_expense' => $request['next3month_revenue_expense']?$request['next3month_revenue_expense']:0,
-                         'cur_month_total_revenue' => $request['cur_month_total_revenue']?$request['cur_month_total_revenue']:0,
-                         'cur_month_total_expense' => $request['cur_month_total_expense']?$request['cur_month_total_expense']:0,
-                         'cur_month_revenue_expense' => $request['cur_month_revenue_expense']?$request['cur_month_revenue_expense']:0,
                          'expected_cash_flow_break_date' => $request['expected_cash_flow_break_date']?$request['expected_cash_flow_break_date']:0,
                          'primary_competitor' => $request['primary_competitor'],
                          'differ_desc_competitor' => $request['differ_desc_competitor'],
@@ -541,6 +583,7 @@ class InvestmentOpportunityFormController extends Controller
                          'expect_future_raise_amount' => $request['expect_future_raise_amount'],
                          'estimated_timing_future_capital' => $request['estimated_timing_future_capital'],
                          'use_additional_fund' => $request['use_additional_fund'],
+                         'bprevious_investor_reinvest' => $request['bprevious_investor_reinvest'],
                          'name_investor' => $request['name_investor'],
                          'amount_committed' => $request['amount_committed'],
                          'cur_postmoney_valuation' => $request['cur_postmoney_valuation'],
@@ -552,7 +595,11 @@ class InvestmentOpportunityFormController extends Controller
                          'top_potential_acqu' => $request['top_potential_acqu'],
                          'revenue_target' => $request['revenue_target'],
                          'net_income_target' => $request['net_income_target'],
-                         'exit_valuation' => $request['exit_valuation']
+                         'exit_valuation' => $request['exit_valuation'],
+                         'prior_year_monthly_finacial' => $prior_year_monthly_finacial_name,
+                         'investor_deck' => $investor_deck_name,
+                         'proforma_projections' => $proforma_projections_name,
+                         'detailed_cap_table' => $detailed_cap_table_name
                     ]);
                }
 
@@ -661,12 +708,23 @@ class InvestmentOpportunityFormController extends Controller
     {
         $email = $request['email'];
         $code = $request['code'];
+        $type = $request['type'];
         if($email){
             $to = $email;
             $subtitle = 'Family Investment Exchange Investment Questionnaire Form Link!';
             $subject = 'Family Investment Exchange Investment Questionnaire Form Link!';
-            $content = 'You can use this link '.route('investment-questionnaire-form',['code' => $code]).' to continue your progress';
-            $link = route('investment-questionnaire-form',['code' => $code]);
+
+            
+            if($type == 0){
+               $content = 'You can use this link '.route('investment-questionnaire-form',['code' => $code]).' to continue your progress';
+               $link = route('investment-questionnaire-form',['code' => $code]);
+            }
+               
+           elseif($type == 1){
+               $content = 'You can use this link '.route('saved-investment-questionnaire',['code' => $code]).' to continue your progress';
+               $link = route('saved-investment-questionnaire',['code' => $code]);
+           }
+               
             $link_name = 'Continue your progress';
 
             Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
@@ -674,5 +732,12 @@ class InvestmentOpportunityFormController extends Controller
             return response()->json(['status' => 'ok', 'content' => 'The email has been sent.']);
         }else
             return response()->json(['status' => 'error','content' => 'You have to input email.']);
+    }
+
+    public function filedownload($name)
+    {
+        $path = public_path('assets/dashboard/profile/file/').$name;
+
+        return response()->file($path);
     }
 }

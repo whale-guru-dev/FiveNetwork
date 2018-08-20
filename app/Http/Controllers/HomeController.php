@@ -62,7 +62,7 @@ class HomeController extends Controller
         if($user){
             $email = $user['email'];
             $link = route('home');
-            $link_name = 'Go to Family Investment Exchange';
+            $link_name = 'no';
             $content = 'Thank you for requesting access to the Family Investment Exchange. A member of the FIVE Network will reach out to request additional information in the coming days.';
             $subtitle = 'Access Requested!';
             $subject = 'Access Requested';
@@ -127,7 +127,7 @@ class HomeController extends Controller
         foreach ($emails as $email) {
             if($email != null){
                 $link = $refer_link;
-                $link_name = 'Family Investment Exchange';
+                $link_name = 'Request Access';
                 $content = 'You have been invited to be a member of the Family Investment Exchange (FIVE Network). To join the exclusive network of family office and private investors and access co-investment opportunities alongside high impact investors, please click here to pre-register, or respond to this email with “Please Pre-register me"';
                 $subtitle = 'Invitation To Join Family Investment Exchange';
                 $subject = 'Invitation To Join Family Investment Exchange';
@@ -160,7 +160,8 @@ class HomeController extends Controller
     public function applymembership(Request $request)
     {
 
-        $error1 = 0; $error2 = 0;
+
+        $error1 = 0;
 
         $preregister = Preregister::where('email',$request['email'])->first();
 
@@ -189,25 +190,7 @@ class HomeController extends Controller
                 return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
             }else
                 $error1 = 0;
-            if($request->hasFile('govern_photo_id')){
-                
-                $govern_photo_id = $request->file('govern_photo_id');
 
-                $govern_photo_id_name = $this->generateRandomString().'.'.$govern_photo_id->getClientOriginalExtension();
-                
-                $destinationPath = public_path('assets/dashboard/profile/id');
-                
-                if($govern_photo_id->move($destinationPath, $govern_photo_id_name)){
-                    $error2 = 0;
-                }else{
-                    $error2 = 1;
-                    $msg = ['Error','There was an error on uploading your government ID photo! Pleae try again.','error'];
-                    return redirect()->route('apply-membership',['user' => $preregister['code']])->with(['msg' => $msg]);
-                }
-            }
-            else{
-                $govern_photo_id_name = '';
-            }
             if($request['aware_method_desc_how'])
                 $aware_method_desc = $request['aware_method_desc_how'];
             elseif($request['aware_method_desc_who'])
@@ -248,17 +231,18 @@ class HomeController extends Controller
                 'rank_see_deals'  => $request['rank_see_deals'],
                 'rank_leverage_due_diligence_capability' => $request['rank_leverage_due_diligence_capability'],
                 'rank_network_with_other_family_offices' => $request['rank_network_with_other_family_offices'],
-                'govern_photo_id' => $govern_photo_id_name,
                 'pref_contact_form' => $request['pref_contact_form'] ? $request['pref_contact_form']:0,
                 'attest_ai_qp'  => $request['attest_ai_qp'] ? $request['attest_ai_qp']:0,
                 'platform_use_case' => $request['platform_use_case'] ? $request['platform_use_case']:0,
                 'plan_use_network'  => $request['plan_use_network'],
+                'check_back_attest' => $request['check_back_attest'],
                 'explain_plan_use_network_no' => $request['explain_plan_use_network_no'] ? $request['explain_plan_use_network_no']: '',
                 'understand_agree' => $request['understand_agree'] ? $request['understand_agree']:0,
                 'user_code'  => $preregister->code,
                 'pre_register_id' => $preregister->id,
                 'refer_by' => $preregister->refer_by
             ]);
+
 
             if(isset($request['invest_structure'])){
                 foreach ($request['invest_structure'] as $is) {
@@ -330,24 +314,7 @@ class HomeController extends Controller
                 return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
             }else
                 $error1 = 0;
-            if($request->hasFile('govern_photo_id')){
-                
-                $govern_photo_id = $request->file('govern_photo_id');
-
-                $govern_photo_id_name = $this->generateRandomString().'.'.$govern_photo_id->getClientOriginalExtension();
-                
-                $destinationPath = public_path('assets/dashboard/profile/id');
-                
-                if($govern_photo_id->move($destinationPath, $govern_photo_id_name)){
-                    $error2 = 0;
-                }else{
-                    $error2 = 1;
-                    $msg = ['Error','There was an error on uploading your government ID photo! Pleae try again.','error'];
-                    return redirect()->route('apply-membership',['user' => $user['user_code']])->with(['msg' => $msg]);
-                }
-            }else{
-                $govern_photo_id_name = '';
-            }
+            
 
             if($request['aware_method_desc_how'])
                 $aware_method_desc = $request['aware_method_desc_how'];
@@ -390,11 +357,11 @@ class HomeController extends Controller
                 'rank_see_deals'  => $request['rank_see_deals'],
                 'rank_leverage_due_diligence_capability' => $request['rank_leverage_due_diligence_capability'],
                 'rank_network_with_other_family_offices' => $request['rank_network_with_other_family_offices'],
-                'govern_photo_id' => $govern_photo_id_name,
                 'pref_contact_form' => $request['pref_contact_form'] ? $request['pref_contact_form']:0,
                 'attest_ai_qp'  => $request['attest_ai_qp'] ? $request['attest_ai_qp']:0,
                 'platform_use_case' => $request['platform_use_case'] ? $request['platform_use_case']:0,
                 'plan_use_network'  => $request['plan_use_network'],
+                'check_back_attest' => $request['check_back_attest'],
                 'explain_plan_use_network_no' => $request['explain_plan_use_network_no'] ? $request['explain_plan_use_network_no']: '',
                 'understand_agree' => $request['understand_agree'] ? $request['understand_agree']:0,
                 'is_allowed' => 0
@@ -476,13 +443,13 @@ class HomeController extends Controller
             }
         }
 
-        if($error1 == 0 && $error2 == 0){
+        if($error1 == 0){
             // $msg = ['Success','We have sent your membership application to administrator, please wait to be allowed by administrator!','success'];
             $preregister->update(['applied'=>1]);
 
             $email = $user['email'];
             $link = url('/');
-            $link_name = 'Go to Family Inveestment Exchange';
+            $link_name = 'no';
             $content = 'Thank you for applying to join the Family Investment Exchange. The FIVE Network membership committee will review your application and upon review you will receive an email with a status of your application. We appreciate your interest and look forward to speaking with you soon.';
             $subtitle = 'Thank you for applying to join the Family Investment Exchange!';
             $subject = 'Thank you for applying to join the Family Investment Exchange';
@@ -492,7 +459,7 @@ class HomeController extends Controller
             foreach(Admin::all() as $admin)
             {
                 $to = $admin->email;
-                $subtitle = 'A Member Submitted a membership application!';
+                $subtitle = 'A Member submitted a membership application!';
                 $subject = 'Membership Application – Submitted';
                 $content = $user->email.' has submitted application for membership.';
                 $link = route('admin.membership-detail',['id' => $user->id]);
@@ -505,9 +472,9 @@ class HomeController extends Controller
             return redirect()->route('apply-membership',['user' => $preregister['code']]);
         }
 
-        
 
     }
+
 
     public function generateRandomString($length = 6) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

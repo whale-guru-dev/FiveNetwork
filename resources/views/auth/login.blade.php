@@ -56,6 +56,10 @@
         margin : 0 auto;
         z-index: 1;
     }
+
+    #logo-img {
+        width: 250px;
+      }
 </style>
 <body>
     <!-- ============================================================== -->
@@ -72,12 +76,12 @@
     <section id="wrapper">
         <div class="login-register">
             <div>
-                <img src="{{asset('assets/landing/img/background.jpg')}}" class="background">
+                <img src="{{asset('assets/landing/img/intro-bg.jpg')}}"  class="background">
             </div>
             
             <!-- <div class="row"> -->
                 <div class="row text-center">
-                    <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('logo.png')}}" width="250" height="200"></a>
+                    <a href="{{url('/')}}"  id="logo-box"><img src="{{asset('landing-logo.png')}}" id="logo-img"></a>
                 </div>
             
             <!-- </div> -->

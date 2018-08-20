@@ -49,6 +49,20 @@ $(function () {
 
      });
 
+    $("#apply_type").change(function() {    
+
+         if($(this).val() == 0){
+            $("#name_type").html("Family Office Name");
+            $("#family_office").show();
+            $("#bprinciple").addClass("required");
+         }else{
+            $("#name_type").html("Investment Entity name");
+            $("#family_office").hide();
+            $("#bprinciple").removeClass("required");
+         }
+
+     });
+
     // $("#aware_method").on('click', function () {
     //     if ($("body").hasClass("mini-sidebar")) {
     //         $("body").trigger("resize");

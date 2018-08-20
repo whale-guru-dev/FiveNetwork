@@ -43,6 +43,17 @@
 	                        <div class="row">
 	                            <div class="col-md-12">
 	                                <div class="form-group row">
+	                                    <label class="control-label text-right col-md-4">Company name:</label>
+	                                    <div class="col-md-8">
+	                                        <p class="form-control-static"> {{$request->company_name}} </p>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <!--/span-->
+	                        </div>
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group row">
 	                                    <label class="control-label text-right col-md-4">Contact name:</label>
 	                                    <div class="col-md-8">
 	                                        <p class="form-control-static"> {{$request->contact_name}} </p>
@@ -167,6 +178,62 @@
 	                            </div>
 	                            <!--/span-->
 	                        </div>
+
+	                        <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Prior Year Monthly Financials:</label>
+                                        <div class="col-md-3">
+                                            @if($request->prior_year_monthly_finacial)
+                                            <a href="{{route('opportunity.file',['name' => $request->prior_year_monthly_finacial])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Investor Deck:</label>
+                                        <div class="col-md-3">
+                                            @if($request->investor_deck)
+                                            <a href="{{route('opportunity.file',['name' => $request->investor_deck])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">3 Year Proforma Projections:</label>
+                                        <div class="col-md-3">
+                                            @if($request->proforma_projections)
+                                            <a href="{{route('opportunity.file',['name' => $request->proforma_projections])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-left col-md-9">Detailed Cap Table:</label>
+                                        <div class="col-md-3">
+                                            @if($request->detailed_cap_table)
+                                            <a href="{{route('opportunity.file',['name' => $request->detailed_cap_table])}}">Check</a>
+                                            @else
+                                            <p class="form-control-static">No File</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 	                    </div>
 	                    <div class="form-actions">
 	                        <div class="row">
@@ -192,6 +259,21 @@
 	                            </div>
 	                            <div class="col-md-6"> </div>
 	                        </div>
+	                        <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        @if($request->is_active == 0)
+                                        <div class="col-md-offset-6 col-md-6">
+                                            <span class="badge badge-danger ml-auto"><i class="fa fa-pencil"></i>Closed</span>
+                                        </div>
+                                        @else
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="button" class="btn btn-info" id="close-btn"> <i class="fa fa-pencil"></i> Set Status as Closed</button>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
 	                    </div>
 	                </form>
 	            </div>
@@ -207,6 +289,10 @@
 	@csrf
 	<input type="hidden" name="id" value="{{$request->id}}">
 </form>
+<form action="{{route('admin.close-submit-opportunity')}}" method="POST" id="close-request-form">
+    @csrf
+    <input type="hidden" name="id" value="{{$request->id}}">
+</form>
 @endsection
 
 @section('admin-js')
@@ -219,6 +305,9 @@
 		$("#deny-request-form").submit();
 	});
 
+	$(document).on("click","#close-btn",function(){
+        $("#close-request-form").submit();
+    });
 
 </script>
 @if(Session::get('msg'))
