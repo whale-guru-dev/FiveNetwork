@@ -235,7 +235,14 @@
                                 @foreach($oppors as $oppor)
                                 <tr>
                                     <td class="cell-full cell-ellipsis">{{$loop->iteration}}</td>
-                                    <td><span class="badge badge-success">{{$types[$oppor->code]}}</span></td>
+                                    <td>
+                                        @if($types[$oppor->code] == 'Co-Invest')
+                                        <span class="badge badge-danger">{{$types[$oppor->code]}}</span>
+                                        @else
+                                        <span class="badge badge-success">{{$types[$oppor->code]}}</span>
+                                        @endif
+                                        
+                                    </td>
                                     <td>
                                         @if($oppor->is_active == 1)
                                         <span class="badge badge-success">Active</span>

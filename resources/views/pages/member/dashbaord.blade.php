@@ -150,39 +150,51 @@ $num_deals = App\Model\MemberSimpleOpportunity::where('usid', Auth::user()->id)-
                     <div class="row m-t-40">
                         <!-- Column -->
                         <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-inverse card-info">
-                                <div class="box bg-info text-center">
-                                    <h1 class="font-light text-white">{{$num_total_oppor}}</h1>
-                                    <h6 class="text-white">Co-Investment Opportunities Submitted</h6>
+                            <a href="{{route('member.view-opportunities')}}">
+                                <div class="card card-inverse card-info">
+                                    <div class="box bg-info text-center">
+                                        <h1 class="font-light text-white">{{$num_total_oppor}}</h1>
+                                        <h6 class="text-white">Co-Investment Opportunities Submitted</h6>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
+                            
                         </div>
                         <!-- Column -->
                         <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-inverse card-primary">
-                                <div class="box text-center">
-                                    <h1 class="font-light text-white">{{$num_deals}}</h1>
-                                    <h6 class="text-white">Deal Room Submissions</h6>
+                            <a href="{{route('member.view-opportunities')}}">
+                                <div class="card card-inverse card-primary">
+                                    <div class="box text-center">
+                                        <h1 class="font-light text-white">{{$num_deals}}</h1>
+                                        <h6 class="text-white">Deal Room Submissions</h6>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
+                            
                         </div>
                         <!-- Column -->
                         <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-inverse card-danger">
-                                <div class="box text-center">
-                                    <h1 class="font-light text-white">{{$num_referrals}}</h1>
-                                    <h6 class="text-white">Referrals</h6>
+                            <a href="{{route('member.view-referrals')}}">
+                                <div class="card card-inverse card-danger">
+                                    <div class="box text-center">
+                                        <h1 class="font-light text-white">{{$num_referrals}}</h1>
+                                        <h6 class="text-white">Referrals</h6>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
+                            
                         </div>
                         <!-- Column -->
                         <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-inverse card-success">
-                                <div class="box text-center">
-                                    <h1 class="font-light text-white">{{$num_logins}}</h1>
-                                    <h6 class="text-white">Logins</h6>
+                            <a href="{{route('member.view-logins')}}">
+                                <div class="card card-inverse card-success">
+                                    <div class="box text-center">
+                                        <h1 class="font-light text-white">{{$num_logins}}</h1>
+                                        <h6 class="text-white">Logins</h6>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
+                            
                         </div>
                         <!-- Column -->
                         

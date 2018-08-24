@@ -191,30 +191,30 @@ $invest_types = App\Model\InvestmentStructureType::all();
                                 <input type="hidden" name="valuation" id="valuation" >
                             </div>
                         </div>
-                        <h6>Upload Files</h6>
+                        <h6>Please upload all applicable files</h6>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="prior_year_monthly_finacial">Prior Year Monthly Financials</label>
-                                        <input type="file" id="prior_year_monthly_finacial" class="dropify" name="prior_year_monthly_finacial" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" / >
+                                        <input type="file" id="prior_year_monthly_finacial" class="dropify" name="prior_year_monthly_finacial" accept="*" data-max-file-size="40M" required=""/ >
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="investor_deck">Investor Deck</label>
-                                        <input type="file" id="investor_deck" class="dropify" name="investor_deck" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" / >
+                                        <input type="file" id="investor_deck" class="dropify" name="investor_deck" accept=*" data-max-file-size="40M" required=""/ >
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="proforma_projections">3 Year Proforma Projections</label>
-                                        <input type="file" id="proforma_projections" class="dropify" name="proforma_projections" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" / >
+                                        <input type="file" id="proforma_projections" class="dropify" name="proforma_projections" accept="*" data-max-file-size="40M" required=""/ >
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="detailed_cap_table">Detailed Cap Table</label>
-                                        <input type="file" id="detailed_cap_table" class="dropify" name="detailed_cap_table" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" / >
+                                        <input type="file" id="detailed_cap_table" class="dropify" name="detailed_cap_table" accept="*" data-max-file-size="40M" required=""/ >
                                     </div>
                                 </div>
                             </div>

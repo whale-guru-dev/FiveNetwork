@@ -85,6 +85,7 @@ Route::group(['prefix'=>'member','namespace'=>'member'],function(){
 	Route::post('interest-opportunity','OpportunityController@interestopportunity')->name('member.interest-opportunity');
 	Route::post('no-interest-opportunity','OpportunityController@nointerestopportunity')->name('member.no-interest-opportunity');
 	Route::get('view-referrals','HomeController@viewreferral')->name('member.view-referrals');
+	Route::get('view-logins','HomeController@viewlogins')->name('member.view-logins');
 	Route::get('view-opportunities','OpportunityController@viewall')->name('member.view-opportunities');
 	Route::get('view-opportunity-detail/{id}','OpportunityController@detailrequestopportunity')->name('member.requestopportunity-detail');
 	Route::get('dealroomopportunity-detail/{id}','OpportunityController@detaildealroomopportunity')->name('member.dealroomopportunity-detail');

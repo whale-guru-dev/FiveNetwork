@@ -659,7 +659,8 @@ color: #797979;
                                             <div class="form-group">
                                                 <label for="products_service"> Products/Services : <span class="danger">*</span> 
                                                 </label>
-                                                <input type="text" class="form-control required" id="products_service" name="products_service" required value="@php if(isset($form)) echo $form->products_service; @endphp" maxlength="255"> 
+
+                                                <textarea name="products_service" id="products_service" class="form-control required" cols=3>@php if(isset($form)) echo $form->products_service; @endphp</textarea required>
                                             </div>
                                         </div>
                                     </div>
@@ -1041,7 +1042,7 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="percent_cur_revenue">What percent of current revenue is contractually recurring (vs. non-recurring)? <span class="danger">*</span></label>
-                                                <input type="text" name="percent_cur_revenue" class="form-control required mask-percent" id="percent_cur_revenue" data-inputmask="'alias': 'percentage'"  value="@php if(isset($form)) echo $form->percent_cur_revenue; @endphp" maxlength="255" required>
+                                                <input type="text" name="percent_cur_revenue" class="form-control required mask-percent" id="percent_cur_revenue" data-inputmask="'alias': 'percentage'"  value="@php if(isset($form)) echo $form->percent_cur_revenue; else echo '0'; @endphp" maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -1115,7 +1116,7 @@ color: #797979;
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="differ_desc_competitor">Describe how are you differentiated from your competitors :  <span class="danger">*</span></label>
+                                                <label for="differ_desc_competitor">Describe how you are differentiated from your competitors :  <span class="danger">*</span></label>
                                                 <textarea name="differ_desc_competitor" id="differ_desc_competitor" class="form-control required" cols=3 required>@php if(isset($form)) echo $form->differ_desc_competitor; @endphp</textarea>
                                             </div>
                                         </div>   
@@ -1270,7 +1271,7 @@ color: #797979;
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projected_num_client">Projected number of clients/contracts for the year :  <span class="danger">*</span></label>
-                                                <input type="text" name="projected_num_client" class="form-control required" id="projected_num_client" required value="@php if(isset($form)) echo $form->projected_num_client; @endphp" maxlength="255">
+                                                <input type="text" name="projected_num_client" class="form-control required mask-numeric"  id="projected_num_client" data-inputmask="'alias': 'numeric'"  required value="@php if(isset($form)) echo $form->projected_num_client; @endphp" maxlength="255">
                                             </div>
                                         </div>
                                     </div>
@@ -1607,30 +1608,30 @@ color: #797979;
                                         </div>
                                     </div>
 
-                                    <h6>Upload Files</h6>
+                                    <h6>Please upload all applicable files</h6>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="prior_year_monthly_finacial">Prior Year Monthly Financials</label>
-                                                    <input type="file" id="prior_year_monthly_finacial" class="dropify" name="prior_year_monthly_finacial" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" @if(isset($form) && $form->prior_year_monthly_finacial) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->prior_year_monthly_finacial)}}" @endif/ >
+                                                    <input type="file" id="prior_year_monthly_finacial" class="dropify" name="prior_year_monthly_finacial" accept="*" data-max-file-size="40M" required="" @if(isset($form) && $form->prior_year_monthly_finacial) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->prior_year_monthly_finacial)}}" @endif/ >
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <label for="investor_deck">Investor Deck</label>
-                                                    <input type="file" id="investor_deck" class="dropify" name="investor_deck" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" @if(isset($form) && $form->investor_deck) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->investor_deck)}}" @endif/ >
+                                                    <input type="file" id="investor_deck" class="dropify" name="investor_deck" accept="*" data-max-file-size="40M" required="" @if(isset($form) && $form->investor_deck) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->investor_deck)}}" @endif/ >
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="proforma_projections">3 Year Proforma Projections</label>
-                                                    <input type="file" id="proforma_projections" class="dropify" name="proforma_projections" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" @if(isset($form) && $form->proforma_projections) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->proforma_projections)}}" @endif/ >
+                                                    <input type="file" id="proforma_projections" class="dropify" name="proforma_projections" accept="*" data-max-file-size="40M" required="" @if(isset($form) && $form->proforma_projections) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->proforma_projections)}}" @endif/ >
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <label for="detailed_cap_table">Detailed Cap Table</label>
-                                                    <input type="file" id="detailed_cap_table" class="dropify" name="detailed_cap_table" accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" data-max-file-size="40M" @if(isset($form) && $form->detailed_cap_table) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->detailed_cap_table)}}" @endif/ >
+                                                    <input type="file" id="detailed_cap_table" class="dropify" name="detailed_cap_table" accept="*" data-max-file-size="40M" required="" @if(isset($form) && $form->detailed_cap_table) data-default-file="{{asset('assets/dashboard/profile/file/'.$form->detailed_cap_table)}}" @endif/ >
                                                 </div>
                                             </div>
                                         </div>
@@ -1807,11 +1808,30 @@ color: #797979;
     </script>
 
     <script type="text/javascript">
+        $('textarea').keypress(function(event) {
+          if (event.which == 13) {
+            event.preventDefault();
+              var s = $(this).val();
+              $(this).val(s+"\n");
+          }
+        });
+
         $(".select2").select2();
         $('.dropify').dropify();
         $(".mask-money").inputmask({digits:0, rightAlign:false});
         $(".mask-percent").inputmask({rightAlign:false});
-
+        $(".mask-numeric").inputmask({
+            alias: 'numeric',
+            digits: 0,
+            groupSeparator: '.',
+            radixPoint: ',',
+            autoGroup: true,
+            digits: 0,
+            digitsOptional: false,
+            placeholder: '0',
+            unmaskAsNumber: true,
+            autoUnmask: true,
+            rightAlign:false});
         $(document).on("click","#save-btn",function(){
             $("#identity").val("save");
             $("#submit-form").submit();

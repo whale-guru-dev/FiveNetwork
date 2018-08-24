@@ -361,10 +361,10 @@ class InvestmentOpportunityFormController extends Controller
             // $to = $form->user->email;
             $to = $opportunity->email;
             $subtitle = 'Thank you for completing the Investment Questionnaire';
-            $subject = 'Submitted your Co-Investment Questionnaire!';
+            $subject = 'Investment Questionnaire – Completed';
             $content = 'Thank you for submitting your investment opportunity to the Family Investment Exchange. We will reach out to you if a member of the Family Investment Exchange has an interest in investing in this opportunity.';
             $link = route('home');
-            $link_name = 'Go To Dashboard';
+            $link_name = 'no';
 
             Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject));
 

@@ -60,6 +60,12 @@ class HomeController extends Controller
         return view('pages.member.referrals')->with(['referlog' => $referlog]);
     }
 
+    public function viewlogins()
+    {
+        $logins = MemberLogin::where('usid', Auth::user()->id)->orderBy('created_at','DESC')->get();
+        return view('pages.member.logins')->with(['logins' => $logins]);
+    }
+
     // public function lockscreen()
     // {
     //     $user = Auth::user();

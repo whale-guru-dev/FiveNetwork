@@ -228,6 +228,16 @@ ul, li {
                                         </div>
 
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="title"> Title : <span class="danger">*</span> 
+                                                    </label>
+                                                    <input type="text" class="form-control required" id="title" name="title" > 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="aware_method"> How did you hear about Family Investment Exchange?
@@ -281,15 +291,7 @@ ul, li {
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="title"> Title : <span class="danger">*</span> 
-                                                    </label>
-                                                    <input type="text" class="form-control required" id="title" name="title" > 
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                         <div class="row">
                                             <div class="col-md-6">
@@ -623,7 +625,7 @@ ul, li {
                                     <h6>Investment Objectives</h6>
                                     <section>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="private_investment_number">Approximately how many private investments do you/your family invest in annually? <span class="danger">*</span></label>
                                                     <select class="custom-select form-control required" id="private_investment_number" name="private_investment_number">
@@ -636,9 +638,11 @@ ul, li {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="additional_capacity">Approximately what % of the investments you participate in have additional capacity after your participation? <span class="danger">*</span></label>
+                                                    <label for="additional_capacity">Approximately what % of the investments you participate in are you co-investing alongside others? <span class="danger">*</span></label>
                                                     <select class="custom-select form-control required" id="additional_capacity" name="additional_capacity">
                                                         <option value="" selected="">Select</option>
                                                         <option value="20">20%</option>
@@ -657,7 +661,7 @@ ul, li {
                                                     <label for="invest_structure">Investment Structure :</label>
                                                     <ul class="treeview" id="treeview1">
                                                         <li> 
-                                                            <i class="fa fa-plus"></i>
+                                                            <i class="fa fa-minus"></i>
                                                             <label>
                                                                 <div class="checkbox checkbox-success">
                                                                     <input id="xnode-1-1" data-id="custom-1-1" type="checkbox">
@@ -687,7 +691,7 @@ ul, li {
                                                     <label for="invest_region">Investment Regions :</label>
                                                     <ul id="treeview2" class="treeview">
                                                         <li> 
-                                                            <i class="fa fa-plus"></i>
+                                                            <i class="fa fa-minus"></i>
                                                             <label>
                                                                 <div class="checkbox checkbox-success">
                                                                     <input id="xnode-0-0" data-id="custom-0-0" type="checkbox" >
@@ -834,7 +838,7 @@ ul, li {
                                                     
                                                     <ul class="treeview" id="treeview1">
                                                         <li> 
-                                                            <i class="fa fa-plus"></i>
+                                                            <i class="fa fa-minus"></i>
                                                             <label>
                                                                 <div class="checkbox checkbox-success">
                                                                     <input id="xnode-2-1" data-id="custom-2-1" type="checkbox">
@@ -864,7 +868,7 @@ ul, li {
                                                     
                                                     <ul class="treeview" id="treeview1">
                                                         <li> 
-                                                            <i class="fa fa-plus"></i>
+                                                            <i class="fa fa-minus"></i>
                                                             <label>
                                                                 <div class="checkbox checkbox-success">
                                                                     <input id="xnode-3-1" data-id="custom-3-1" type="checkbox">
@@ -896,7 +900,7 @@ ul, li {
                                                 <label for="investment_sector">Investment Sector Focus :</label>
                                                 <ul class="treeview" id="treeview1">
                                                     <li> 
-                                                        <i class="fa fa-plus"></i>
+                                                        <i class="fa fa-minus"></i>
                                                         <label>
                                                             <div class="checkbox checkbox-success">
                                                                 <input id="xnode-4-1" data-id="custom-4-1" type="checkbox">
@@ -1022,7 +1026,7 @@ ul, li {
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="desc_notable_past_investment">What is your priority of use? Please rank in order of most important to least important : 
+                                                    <label for="desc_notable_past_investment">What is of most interest to you for using the FIVE Network? Please rank each below: (ex: 1 = Most Important, 4 = Least Important) : 
                                                     </label>
                                                     <div class="row">
                                                         <div class="col-md-6">

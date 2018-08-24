@@ -179,7 +179,7 @@ class DealRoomController extends Controller
     {
         $id = $request['id'];
         $usid = Auth::user()->id;
-        $matched_oppor = MemberSimpleOpportunityMatch::where('matched_member_id', $usid)->where('opportunity_id', $id)->first();
+        $matched_oppor = MemberSimpleOpportunityMatch::find($id);
         $matched_oppor->update(['binterest' => 2]);
         $msg = ['Success', 'Successfully Expressed your no interest','success'];
         return redirect()->route('member.detail-investment-questionnaire',['code' => $matched_oppor->opportunity->code])->with(['msg' => $msg]);

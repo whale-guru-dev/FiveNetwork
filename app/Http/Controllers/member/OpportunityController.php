@@ -198,7 +198,7 @@ class OpportunityController extends Controller
                 Mail::to($to)->send(new Follow($link, $link_name, $content, $subtitle, $subject, $files));
             }
 
-    		$msg = ['Success','Successfully Requested','success'];
+    		$msg = ['Co-Investment Opportunity was successfully submitted','Successfully Requested','success'];
     		return redirect()->route('member.submit-opportunity')->with(['msg' => $msg]);
     	}
     }
